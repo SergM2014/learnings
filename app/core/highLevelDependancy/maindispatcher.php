@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Upper;
+namespace App\Core\HihgLevelDependacy;
 
 use Lib\HelperService;
 /**

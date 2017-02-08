@@ -13,7 +13,7 @@ class DataBase {
 
 	protected $conn;
 
-    function __construct(){
+    public function __construct(){
 
      try{
            $this->conn = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER, PASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES\'UTF8\''));
@@ -29,6 +29,21 @@ class DataBase {
          $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
 	   }
 
+    }
+
+    public function getAccidentalItems(int $number, array $items)
+    {
+        $count = count($items);
+
+        //if number of items is less then 12 then take the given number of items
+        $takeAmount = $count >= $number? $number: $count;
+        $randomKeys = array_rand($items, $takeAmount);
+
+        $randomItems = array_filter($items, function ($key) use ($randomKeys){
+            if(in_array($key, $randomKeys)) return true;
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $randomItems;
     }
 
 }

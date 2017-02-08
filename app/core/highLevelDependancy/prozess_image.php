@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\HihgLevelDependacy;
 
 
 use function \restricted_file_type;
 use function \too_big_file;
 
-class Prozess_Image
+abstract class Prozess_Image
 {
     protected function resizeImage($file, $thumb_path, $height, $width = null)
     {

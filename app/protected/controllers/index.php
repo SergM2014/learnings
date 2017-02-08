@@ -5,11 +5,13 @@ namespace App\Controllers;
 
 
 use App\Core\BaseController;
-use App\Models\DB_Index;
+use App\Models\Index as DB;
+use App\Models\Category;
+use App\Models\Lesson;
+use App\Models\Testemonial;
+use Lib\HelperService;
 
-
-
-  class Index  extends BaseController
+class Index  extends BaseController
   {
 
 
@@ -20,15 +22,21 @@ use App\Models\DB_Index;
        */
     public function index()
 	{
+        $categories = (new Category())->getAll();
+        $randomLessons = (new Lesson())->getRandomItems();
+        $randomTestimonials = (new Testemonial())->getRandomItems();
 
-
-      return ['view'=>'views/index.php'];
+        $language = HelperService::getLanguageForPlanDescription();
+        $planDescription = (new DB)->getPlanDescription($language);
+//dd($planDescription);
+      return ['view'=>'views/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
+          'randomTestimonials'=> $randomTestimonials, 'planDescription'=>$planDescription];
     }
 
 
       public function refreshCaptcha()
       {
-          $builder = (new DB_Index)->printCaptcha();
+          $builder = (new DB)->printCaptcha();
           return ['view' => 'customer/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
       }
 

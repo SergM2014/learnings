@@ -21,7 +21,10 @@ $youAreInAdminL = "Адміністративна частина";
 $exitL = "Вихід";
 $registerL = "Зарееструватися";
 $mainTitleExplanationL = "Навчальний ресурс-центр";
-
+$testimonialsL = "Рекомендації";
+$lookThroughTestimonialsL = "Переглянути всі рекомендації";
+$serie = "cерія";
+$series = "cерій";
 
 //these functionare for translation in controllers and models
 function variableInController(){

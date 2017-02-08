@@ -2,7 +2,7 @@
 
 namespace  App\Core;
 
-use App\Core\Upper\MainDispatcher;
+use App\Core\HihgLevelDependacy\MainDispatcher;
 
 
 class Application extends MainDispatcher {

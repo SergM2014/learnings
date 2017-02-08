@@ -88,6 +88,26 @@ class HelperService {
     }
 
     /**
+     * get Language component for plan description
+     *
+     * @return int|string
+     */
+    public static function getLanguageForPlanDescription()
+    {
+        $langs = self::prozessLangArray();
+
+        $url = $_SERVER['REQUEST_URI'];
+        $url = trim($url, '/');
+        $url = trim($url);
+        foreach ($langs as $key => $value){
+            $position = strpos($url, $key);
+            if($position === 0) { return $key;}
+        }
+
+        return DEFAULT_LANG;
+    }
+
+    /**
      * get titles of languages in the header
      *
      * @return mixed|string

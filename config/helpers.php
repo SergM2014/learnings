@@ -18,6 +18,8 @@
 
     function dd($arg)
         {
-          var_dump($arg);
+            echo "<br>";
+            echo "<pre>";
+             var_dump($arg);
             exit();
         }

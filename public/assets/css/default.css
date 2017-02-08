@@ -203,4 +203,45 @@ html, body {
   .main-header__search-field-label {
     display: none; } }
 
-/*# sourceMappingURL=default.css.map */
+  .categories-block, .lessons-block, .testimonials-block, .subscription_block{
+      display:flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top:20px;
+  }
+  .categories-block__item{
+      margin-right:10px;
+      color: #206f0e;
+      border: 1px solid #3c8881;
+      padding: 5px;
+      border-radius: 5px;
+      text-align:center;
+  }
+  .lessons-block__item{
+      width: 110px;
+      height: 160px;
+      border: 1px solid #c58e8e;
+      border-radius: 5px;
+      padding: 3px;
+      margin-right: 10px;
+      text-align: center;
+      position: relative;
+  }
+  .testimonials-block__item{
+      background-color: #8abeb7;
+      border-radius:5px;
+      margin-top:10px;
+  }
+  .testimonials-block__further{
+      background-color: #c58383;
+      margin-top: 20px;
+      color: #2c50be;
+      padding: 5px;
+      border-radius: 5px
+  }
+  .lessons-block__item-icon{
+      width:100%;
+      position:absolute;
+      bottom: 10px;
+      left:0;
+  }

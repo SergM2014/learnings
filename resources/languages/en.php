@@ -23,7 +23,10 @@ $youAreInAdminL = "Admin zone";
 $exitL = "exit";
 $registerL = "Register";
 $mainTitleExplanationL = "This is the learning Resource Center";
-
+$testimonialsL = "Testimonials";
+$lookThroughTestimonialsL = "Read all testimonials";
+$serie = "serie";
+$series = "series";
 
 //these functionare for translation in controllers and models
 function variableInController(){
