@@ -28,7 +28,7 @@ class Index  extends BaseController
 
         $language = HelperService::getLanguageForPlanDescription();
         $planDescription = (new DB)->getPlanDescription($language);
-//dd($planDescription);
+
       return ['view'=>'views/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
           'randomTestimonials'=> $randomTestimonials, 'planDescription'=>$planDescription];
     }

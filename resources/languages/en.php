@@ -25,8 +25,15 @@ $registerL = "Register";
 $mainTitleExplanationL = "This is the learning Resource Center";
 $testimonialsL = "Testimonials";
 $lookThroughTestimonialsL = "Read all testimonials";
-$serie = "serie";
-$series = "series";
+$serieL = "serie";
+$seriesL = "series";
+$extraLessonL = "extra lesson";
+$extraLessonsL = "extraLessons";
+$level1L = "beginner";
+$level2L = "intermidiate";
+$level3L = "advanced";
+$lessonL = "lesson";
+$lessonsL = "lessons";
 
 //these functionare for translation in controllers and models
 function variableInController(){

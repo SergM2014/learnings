@@ -23,8 +23,15 @@ $registerL = "Зарееструватися";
 $mainTitleExplanationL = "Навчальний ресурс-центр";
 $testimonialsL = "Рекомендації";
 $lookThroughTestimonialsL = "Переглянути всі рекомендації";
-$serie = "cерія";
-$series = "cерій";
+$serieL = "cерія";
+$seriesL = "cерій";
+$extraLessonL = "додатковий урок";
+$extraLessonsL = "додаткових уроків";
+$level1L = "Початковий";
+$level2L = "Середній";
+$level3L = "Виший";
+$lessonL = "урок";
+$lessonsL = "уроків";
 
 //these functionare for translation in controllers and models
 function variableInController(){

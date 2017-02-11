@@ -19,7 +19,7 @@
             <?php if ($category->count_series): ?>
 
                 <?=  $category->count_series ?>
-                  <?=  $category->count_series == 1 ? $serie : $series; ?>
+                  <?=  $category->count_series == 1 ? $serieL : $seriesL; ?>
 
             <?php endif; ?>
         </div>
@@ -61,7 +61,7 @@
 
 </section>
 
-<section id="subscription_block" class="subscription_block">
+<section id="subscription-block" class="subscription-block">
     <?= $planDescription ?>
 </section>
 

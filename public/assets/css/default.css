@@ -26,17 +26,20 @@ html, body {
   max-width: 1200px;
   margin: 0 auto; }
 
-.content__slider {
-  float: right;
-  min-width: 80%; }
+
 
 .content-zone {
   float: right;
   width: 80%; }
 
 .content-zone__header {
+  margin:15px 0;
   text-align: center;
   color: #df1522; }
+
+.content-zone__subheader {
+  text-align: center;
+  color: #2c654d; }
 
 .content-zone__item {
   padding: 5px;
@@ -160,54 +163,16 @@ html, body {
 .warning {
   color: red; }
 
-@media screen and (max-width: 750px) {
-  .main-header__touch-button {
-    display: flex; }
-
-  .main-header__logo {
-    display: none; }
-
-  .main-header__menu {
-    position: absolute;
-    left: -1500px;
-    min-width: 300px;
-    min-height: 200px;
-    z-index: 100;
-    background-color: #00cc66;
-    border-radius: 0 10px 10px 0;
-    padding: 10px;
-    opacity: 0.9;
-    transition: 1.2s ease-out; }
-
-  .main-header__language-select {
-    width: 60px; }
-
-  .main-header__menu-item {
-    display: block;
-    font-size: 20px;
-    margin-top: 10px; }
-
-  .main-header__menu-item:first-of-type {
-    margin-top: 0; }
-
-  .sort-container {
-    margin-left: 10px; }
-
-  .content__slider {
-    width: 100%; }
-
-  .main-header__search-result-box {
-    left: 0;
-    /* width:285px;*/ }
-
-  .main-header__search-field-label {
-    display: none; } }
-
-  .categories-block, .lessons-block, .testimonials-block, .subscription_block{
+  .categories-block, .lessons-block, .testimonials-block, .subscription-block{
       display:flex;
       justify-content: center;
       flex-wrap: wrap;
       margin-top:20px;
+      border-radius:10px;
+      padding: 10px;
+  }
+  .categories-block{
+      background: #e6d4e4;
   }
   .categories-block__item{
       margin-right:10px;
@@ -217,18 +182,32 @@ html, body {
       border-radius: 5px;
       text-align:center;
   }
+
+  .lessons-block{
+      background: darkgray;
+      border-radius: 10px;
+
+  }
   .lessons-block__item{
       width: 110px;
       height: 160px;
       border: 1px solid #c58e8e;
       border-radius: 5px;
       padding: 3px;
-      margin-right: 10px;
+      margin: 10px;
       text-align: center;
       position: relative;
+      background:white;
+  }
+  .lessons-block__item-link{
+      text-decoration: none;
+  }
+
+  .testimonials-block{
+      background: #bcd2bc;
   }
   .testimonials-block__item{
-      background-color: #8abeb7;
+      background-color: rgba(138, 190, 183, 0.29);
       border-radius:5px;
       margin-top:10px;
   }
@@ -245,3 +224,104 @@ html, body {
       bottom: 10px;
       left:0;
   }
+
+  .series-block{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top:20px;
+    background: #d8d8ea;
+      padding:10px;
+      border-radius:10px;
+}
+  .series-block__item{
+    border:1px solid black;
+    border-radius:5px;
+    padding:2px;
+    position:relative;
+    width:200px;
+    height:190px;
+      background: white;
+  }
+  .series-block__item-level{
+      position:absolute;
+      top:7px;
+      left:7px;
+      color:red;
+      font-weight: bold;
+      background:#d3d3e0;
+  }
+  .series-block__item-bottom-lesson{
+      position:absolute;
+      bottom:7px;
+      right:7px;
+      color: #5564ff;
+      font-weight:bold;
+
+  }
+  .series-block__item-img{
+      width:100%;
+      height:100%;
+  }
+  .series-block__item-title{
+      position:absolute;
+      top:120px;
+      left:10px;
+      font-style: oblique;
+  }
+  .subscription-block{
+      background: lavender;
+      margin-bottom: 15px;
+  }
+
+
+
+
+
+
+
+
+@media screen and (max-width: 750px) {
+    .main-header__touch-button {
+        display: flex; }
+
+    .main-header__logo {
+        display: none; }
+
+    .main-header__menu {
+        position: absolute;
+        left: -1500px;
+        min-width: 300px;
+        min-height: 200px;
+        z-index: 100;
+        background-color: #00cc66;
+        border-radius: 0 10px 10px 0;
+        padding: 10px;
+        opacity: 0.9;
+        transition: 1.2s ease-out; }
+
+    .main-header__language-select {
+        width: 60px; }
+
+    .main-header__menu-item {
+        display: block;
+        font-size: 20px;
+        margin-top: 10px; }
+
+    .main-header__menu-item:first-of-type {
+        margin-top: 0; }
+
+    .sort-container {
+        margin-left: 10px; }
+
+    .content__slider {
+        width: 100%; }
+
+    .main-header__search-result-box {
+        left: 0;
+        /* width:285px;*/ }
+
+    .main-header__search-field-label {
+        display: none; }
+}
+
