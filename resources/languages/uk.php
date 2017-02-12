@@ -32,6 +32,8 @@ $level2L = "Середній";
 $level3L = "Виший";
 $lessonL = "урок";
 $lessonsL = "уроків";
+$seriesBeadcrumbsL = "Серії";
+$testemonialsL = "Відгуки та рекомендації";
 
 //these functionare for translation in controllers and models
 function variableInController(){

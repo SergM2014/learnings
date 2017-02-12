@@ -33,6 +33,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Controllers\\Category' => __DIR__ . '/../..' . '/app/protected/controllers/category.php',
         'App\\Controllers\\Error_404' => __DIR__ . '/../..' . '/app/protected/controllers/404.php',
         'App\\Controllers\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/index.php',
+        'App\\Controllers\\Testimonials' => __DIR__ . '/../..' . '/app/protected/controllers/testemonials.php',
         'App\\Core\\AdminController' => __DIR__ . '/../..' . '/app/core/admincontroller.php',
         'App\\Core\\Application' => __DIR__ . '/../..' . '/app/core/application.php',
         'App\\Core\\BaseController' => __DIR__ . '/../..' . '/app/core/basecontroller.php',

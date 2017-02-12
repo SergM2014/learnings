@@ -8,7 +8,7 @@ use App\Core\BaseController;
 
 use App\Models\Category as CatModel;
 
-use Lib\HelperService;
+
 
 class Category  extends BaseController
   {

@@ -132,10 +132,10 @@ html, body {
   text-transform: capitalize; }
 
 .breadcrumb__item {
-  font-style: italic;
-  font-weight: bold;
-  margin: 0 7px;
-  text-transform: capitalize; }
+  margin-right:10px;
+  text-transform: capitalize;
+  text-decoration:none;
+}
 
 /*this is technical classes*/
 .hidden {
@@ -206,11 +206,37 @@ html, body {
   .testimonials-block{
       background: #bcd2bc;
   }
+  .testimonials-block__all{
+      display:flex;
+      justify-content:flex-start;
+      flex-wrap: wrap;
+      margin-top:20px;
+      border-radius:10px;
+      padding: 10px;
+      background: #bcd2bc;
+  }
   .testimonials-block__item{
       background-color: rgba(138, 190, 183, 0.29);
       border-radius:5px;
       margin-top:10px;
   }
+
+.testimonials-block__all-item{
+    background-color: rgba(138, 190, 183, 0.29);
+    border-radius:5px;
+    margin-top:10px;
+    width:300px;
+    padding:5px;
+}
+.testimonials-block__all-item-time{
+    color:red;
+    text-align: right;
+}
+.testimonials-block__all-item-avatar{
+    float:left;
+    max-width:100px;
+    max-height:100px;
+}
   .testimonials-block__further{
       background-color: #c58383;
       margin-top: 20px;

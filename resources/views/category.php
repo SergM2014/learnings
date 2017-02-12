@@ -1,3 +1,10 @@
+<section class="breadcrumbs">
+
+    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <span class="breadcrumb__item--current"><?=  $seriesBeadcrumbsL ?></span>
+
+</section>
+
 <h2 class="content-zone__header"><?= $categoryWithSeries->title ?></h2>
 <h3 class="content-zone__subheader"><?php  if($categoryWithSeries->count_series): ?>
 

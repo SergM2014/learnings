@@ -34,6 +34,8 @@ $level2L = "intermidiate";
 $level3L = "advanced";
 $lessonL = "lesson";
 $lessonsL = "lessons";
+$seriesBeadcrumbsL = "Series";
+$testemonialsL= "Testemoials";
 
 //these functionare for translation in controllers and models
 function variableInController(){

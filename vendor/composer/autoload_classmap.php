@@ -10,6 +10,7 @@ return array(
     'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/category.php',
     'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/404.php',
     'App\\Controllers\\Index' => $baseDir . '/app/protected/controllers/index.php',
+    'App\\Controllers\\Testimonials' => $baseDir . '/app/protected/controllers/testemonials.php',
     'App\\Core\\AdminController' => $baseDir . '/app/core/admincontroller.php',
     'App\\Core\\Application' => $baseDir . '/app/core/application.php',
     'App\\Core\\BaseController' => $baseDir . '/app/core/basecontroller.php',
