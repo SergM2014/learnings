@@ -34,6 +34,8 @@ $lessonL = "урок";
 $lessonsL = "уроків";
 $seriesBeadcrumbsL = "Серії";
 $testemonialsL = "Відгуки та рекомендації";
+$underVideoLessonsL = "Уроки";
+$commentsL = "Коментарії";
 
 //these functionare for translation in controllers and models
 function variableInController(){

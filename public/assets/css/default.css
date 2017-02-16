@@ -299,6 +299,73 @@ html, body {
       background: lavender;
       margin-bottom: 15px;
   }
+  .view-container{
+      width:100%;
+      margin:20px 0;
+
+  }
+.view-container-video{
+     width:100%;
+    max-height:820px;
+  }
+
+.under-video__container{
+    margin-bottom:20px;
+   display:flex;
+    justify-content: center;
+
+}
+.under-video__container-h3{
+    text-align:center;
+}
+.lesson-comments{
+    width:49%;
+    min-height:200px;
+    border-right:1px solid black;
+
+}
+.related-lessons{
+    width:49%;
+    min-height:200px;
+
+
+}
+.lesson-comments__button{
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 70px;
+    cursor:pointer;
+}
+.lesson-comments__button-link{
+    text-decoration:none;
+    color:#000000;
+}
+
+.related-lessons__item{
+    height: 80px;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    position:relative;
+}
+.related-lessons__item:last-of-type{
+    border-bottom:none;
+    margin-bottom:20px;
+}
+
+.related-lessons__item-img{
+    width:100px;
+}
+.related-lessons__item-link{
+    text-decoration:none;
+    position:absolute;
+    bottom:5px;
+    left:5px;
+}
+.related-lessons__item-link-title{
+    margin: 0 0 20px 20px;
+    color: rgba(8, 8, 8, 0.97);
+}
+
 
 
 

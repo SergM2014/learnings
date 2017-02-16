@@ -36,6 +36,8 @@ $lessonL = "lesson";
 $lessonsL = "lessons";
 $seriesBeadcrumbsL = "Series";
 $testemonialsL= "Testemoials";
+$underVideoLessonsL = "Lessons";
+$commentsL = "Comments";
 
 //these functionare for translation in controllers and models
 function variableInController(){
