@@ -32,4 +32,8 @@ class Admin  extends BaseController
         return ['view'=>'views/notAdmin.php'];
     }
 
+    /*function index(){
+        return ['view'=>'/views/signUp.php'];
+    }*/
+
 }

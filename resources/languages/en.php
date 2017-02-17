@@ -38,6 +38,10 @@ $seriesBeadcrumbsL = "Series";
 $testemonialsL= "Testemoials";
 $underVideoLessonsL = "Lessons";
 $commentsL = "Comments";
+$registerL = "Sign UP";
+$enterNameL = "Enter name";
+$enterPasswordL = "Enter password";
+$enterEmailL = "Enter Email";
 
 //these functionare for translation in controllers and models
 function variableInController(){

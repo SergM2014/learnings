@@ -36,6 +36,11 @@ $seriesBeadcrumbsL = "Серії";
 $testemonialsL = "Відгуки та рекомендації";
 $underVideoLessonsL = "Уроки";
 $commentsL = "Коментарії";
+$registerL = "Зарееструватися";
+$enterNameL = "Введіть ваше Імя";
+$enterPasswordL = "введіть пароль";
+$enterEmailL = "Введіть Email";
+
 
 //these functionare for translation in controllers and models
 function variableInController(){

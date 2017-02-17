@@ -8,6 +8,24 @@ namespace Lib;
 trait CheckFieldsService {
 
     /**
+     * remove malicious tags
+     *
+     * @param array ...$fields
+     * @return array
+     */
+    public static function escapeInputs(...$fields){
+
+        $inputs = [];
+
+        foreach($fields as $field){
+            $inputs[$field] = htmlspecialchars($_POST[$field], ENT_QUOTES);
+        }
+
+        return $inputs;
+    }
+
+
+    /**
      *
      * strip malicious tags except harmless and closes the opened tags
      *

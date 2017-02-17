@@ -11,21 +11,7 @@ namespace Lib;
  * @package Lib
  */
 class HelperService {
-    /**
-     * make ininputs fields free from tags
-     *
-     * @param $arr
-     * @param null $esc
-     * @return mixed
-     */
-    public static function cleanInput($arr, $esc=null){
 
-        foreach($arr as $key=>$value){
-            if ($esc!= $key){$arr[$key]=htmlspecialchars($value, ENT_QUOTES);}
-            else{$arr[$key]=$value;}
-        }
-        return $arr;
-    }
 
     /**
      *
