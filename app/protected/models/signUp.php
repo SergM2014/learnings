@@ -6,6 +6,24 @@ use App\Core\DataBase;
 
 class SignUp extends DataBase
 {
+
+    public function storeUser()
+    {
+        $password= password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $sql = "INSERT INTO `users` (`login`, `password`,`email`, `role_title`, `upgrading_status`) VALUES (?, ?, ?, 'user', '1')";
+        $stmt =$this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['login'], \PDO::PARAM_STR);
+        $stmt->bindValue(2, $password, \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['email'], \PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $id = $this->conn->lastInsertId();
+        unset ($_SESSION['storeUser']);
+        return $id;
+    }
+
+
     public function getAdminUser()
     {
 
@@ -87,25 +105,7 @@ class SignUp extends DataBase
         return $users;
     }
 
-    public function storeUser()
-    {
-        $status = $this->getUserUpgradingStatus();
 
-        $password= password_hash($_POST['user_password'], PASSWORD_DEFAULT);
-
-
-        $sql = "INSERT INTO `users` (`login`, `password`, `role_title`, `upgrading_status`) VALUES (?, ?, ?, ?)";
-        $stmt =$this->conn->prepare($sql);
-        $stmt->bindValue(1, $_POST['user_name'], \PDO::PARAM_STR);
-        $stmt->bindValue(2, $password, \PDO::PARAM_STR);
-        $stmt->bindValue(3, $_POST['user_role'], \PDO::PARAM_STR);
-        $stmt->bindValue(4, $status, \PDO::PARAM_INT);
-        $stmt->execute();
-
-        $id = $this->conn->lastInsertId();
-        unset ($_SESSION['makeUser']);
-        return $id;
-    }
 
 
     public function getOneUser()

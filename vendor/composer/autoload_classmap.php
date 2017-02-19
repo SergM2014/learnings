@@ -22,7 +22,7 @@ return array(
     'App\\Models\\AdminModel' => $baseDir . '/app/protected/models/admin.php',
     'App\\Models\\Avatar' => $baseDir . '/app/protected/models/avatar.php',
     'App\\Models\\Category' => $baseDir . '/app/protected/models/categories.php',
-    'App\\Models\\CheckForm' => $baseDir . '/app/protected/models/check_form.php',
+    'App\\Models\\CheckForm' => $baseDir . '/app/protected/models/checkForm.php',
     'App\\Models\\Comment' => $baseDir . '/app/protected/models/comment.php',
     'App\\Models\\Images' => $baseDir . '/app/protected/models/images.php',
     'App\\Models\\Index' => $baseDir . '/app/protected/models/index.php',

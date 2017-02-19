@@ -4,19 +4,52 @@ namespace App\Controllers;
 
 use App\Core\BaseController;
 use Lib\CheckFieldsService;
+use App\Models\CheckForm;
+use App\Models\SignUp as SignUpModel;
+use Lib\TokenService;
+
 
 class SignUp extends BaseController
 {
-    function index(){
-        return ['view'=>'/views/signUp.php', 'noTemplate' =>true ];
+    function index($errors = null )
+    {
+        $_SESSION['storeUser'] = true;
+
+        return ['view'=>'/views/signUp.php', 'noTemplate' =>true, 'errors' =>$errors ];
     }
 
     public function register()
     {
+        TokenService::check('user');
+
+        $errors = new \stdClass();
+
+        $modelCheckform = new CheckForm();
 
         $cleanedInputs = CheckFieldsService::escapeInputs('login', 'password', 'password2', 'email');
-//chek whether fields corresponds to their fields type
-//save new user
-        return ['view'=>'/views/signUp.php'];
+
+        $modelCheckform->checkIfNotEmpty($cleanedInputs, $errors);
+
+        $modelCheckform->ifUniqueLogin($cleanedInputs, $errors);
+
+        $modelCheckform->comparePasswordFields($cleanedInputs['password'], $cleanedInputs['password2'], $errors);
+
+        $modelCheckform ->checkLength( $cleanedInputs, 6, $errors);
+
+        $modelCheckform->checkIfEmail($errors);
+
+
+        $errors = (array)$errors;
+
+
+
+        if(!empty($errors) ){ return $this->index($errors); }
+
+        if(!isset($_SESSION['storeUser']))  header('Location:/signUp');
+
+
+        (new SignUpModel())->storeUser();
+
+        return ['view'=>'/views/signUpSuccess.php'];
     }
 }

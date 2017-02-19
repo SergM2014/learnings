@@ -35,13 +35,15 @@ $level3L = "advanced";
 $lessonL = "lesson";
 $lessonsL = "lessons";
 $seriesBeadcrumbsL = "Series";
-$testemonialsL= "Testemoials";
+$testemonialsL= "Testemonials";
 $underVideoLessonsL = "Lessons";
 $commentsL = "Comments";
 $registerL = "Sign UP";
 $enterNameL = "Enter name";
 $enterPasswordL = "Enter password";
 $enterEmailL = "Enter Email";
+$repeatPasswordL = "Repeat password";
+$signUpSecceeded = "Greetings!!! You are signedUp!";
 
 //these functionare for translation in controllers and models
 function variableInController(){
@@ -50,4 +52,33 @@ function variableInController(){
 
 function repeatVariableInController(){
     return "Variable in controller again";
+}
+
+function emptyField()
+{
+    return "empty field!";
+}
+
+function notEqualRepeatedPassword()
+{
+    return 'Wrong repeated password!';
+}
+
+function notApropriateLength()
+{
+    return "Too short field";
+}
+
+function wrongEmail()
+{
+    return "Wrong email format";
+}
+
+function smthWentWrong()
+{
+    return "Something went wrong!";
+}
+function repeatedLogin()
+{
+    return "Логін вже занйнято";
 }

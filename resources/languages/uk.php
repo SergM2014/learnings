@@ -38,8 +38,12 @@ $underVideoLessonsL = "Уроки";
 $commentsL = "Коментарії";
 $registerL = "Зарееструватися";
 $enterNameL = "Введіть ваше Імя";
-$enterPasswordL = "введіть пароль";
+$enterPasswordL = "Bведіть пароль";
 $enterEmailL = "Введіть Email";
+$repeatPasswordL = "Повторіть пароль";
+$signUpSecceeded = "Поздоровляю Вас зареестровано";
+
+
 
 
 //these functionare for translation in controllers and models
@@ -51,4 +55,33 @@ function repeatVariableInController(){
     return "Знову Змінна що в контролері";
 }
 
+function emptyField()
+{
+    return "Пусте поле!";
+}
+
+function notEqualRepeatedPassword()
+{
+    return 'Невірно повторенний пароль!';
+}
+
+function notApropriateLength()
+{
+    return "Замало символів";
+}
+
+function wrongEmail()
+{
+    return "Неправильній формат email";
+}
+
+function smthWentWrong()
+{
+    return "Щось пішло не так!";
+}
+
+function repeatedLogin()
+{
+    return "Логін вже занйнято";
+}
 

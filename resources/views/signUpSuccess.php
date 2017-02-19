@@ -1,0 +1,1 @@
+<h2 class="signUp-success"><?= $signUpSecceeded ?></h2>

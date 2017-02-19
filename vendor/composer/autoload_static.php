@@ -45,7 +45,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Models\\AdminModel' => __DIR__ . '/../..' . '/app/protected/models/admin.php',
         'App\\Models\\Avatar' => __DIR__ . '/../..' . '/app/protected/models/avatar.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/protected/models/categories.php',
-        'App\\Models\\CheckForm' => __DIR__ . '/../..' . '/app/protected/models/check_form.php',
+        'App\\Models\\CheckForm' => __DIR__ . '/../..' . '/app/protected/models/checkForm.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/protected/models/comment.php',
         'App\\Models\\Images' => __DIR__ . '/../..' . '/app/protected/models/images.php',
         'App\\Models\\Index' => __DIR__ . '/../..' . '/app/protected/models/index.php',

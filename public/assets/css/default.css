@@ -162,6 +162,10 @@ html, body {
 
 .warning {
   color: red; }
+.error{
+    color:red;
+    border-bottom:1px dotted red;
+}
 
   .categories-block, .lessons-block, .testimonials-block, .subscription-block{
       display:flex;
@@ -383,6 +387,16 @@ html, body {
     padding: 1px;
     width: 100px;
     border-radius: 2px;
+    cursor:pointer;
+}
+.signUp-form__field-block{
+    margin-bottom:5px;
+}
+
+.signUp-success{
+    text-align:center;
+    margin-top: 30px;
+    color: #f34646;
 }
 
 
