@@ -7,6 +7,9 @@ use Lib\CheckFieldsService;
 use App\Models\CheckForm;
 use App\Models\SignUp as SignUpModel;
 use Lib\TokenService;
+use Lib\HelperService;
+
+use function \succededRegistrationMail;
 
 
 class SignUp extends BaseController
@@ -41,8 +44,6 @@ class SignUp extends BaseController
 
         $errors = (array)$errors;
 
-
-
         if(!empty($errors) ){ return $this->index($errors); }
 
         if(!isset($_SESSION['storeUser']))  header('Location:/signUp');
@@ -50,6 +51,10 @@ class SignUp extends BaseController
 
         (new SignUpModel())->storeUser();
 
+         HelperService::sendMail($cleanedInputs['email'], $cleanedInputs['login'], succededRegistrationMail($cleanedInputs['login'], $cleanedInputs['password']));
+
         return ['view'=>'/views/signUpSuccess.php'];
     }
+
+
 }

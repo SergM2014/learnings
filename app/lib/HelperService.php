@@ -14,22 +14,25 @@ class HelperService {
 
 
     /**
+     * send email
      *
-     * sending email
-     *
+     * @param $email
+     * @param $login
      * @param $message
-     * @param $from
-     * @param $name
-     * @param $phone
+     * @return bool
      */
-    public static function toMail( $message, $from, $name, $phone){
-         $time_now = LangService::rus_date("j F Y H:i ", time());
-         $to= ADMINEMAIL;
-         $title = $time_now. "\n Повидомлення з сайту Имя ".$name." Телефон ".$phone;
+    public static function sendMail($email, $login, $message){
 
-    //Возвращает TRUE, если письмо было принято для передачи, иначе FALSE.
-        $mail= mail($to, $title, $message, 'From '.$from);
-       
+         $time_now = LangService::rus_date("j F Y H:i ", time());
+         $to= $email;
+         $thema = $time_now. "\n Повидомлення з сайту Имя ".$login;
+
+         $header="Content-type: text/html; charset=\"utf-8\"";
+         $header.="From: <".ADMINEMAIL.">";
+         $header.="Subject: ".$thema;
+         $header.="Content-type: text/html; charset=\"utf-8\"";
+
+         return mail($to, $thema, $message/*, $header*/);
      }
 
     /**

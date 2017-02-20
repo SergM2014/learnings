@@ -82,3 +82,11 @@ function repeatedLogin()
 {
     return "Логін вже занйнято";
 }
+
+function succededRegistrationMail($login, $password)
+{
+    return "Прийміть поздлровлення ! \n 
+    Ваш логін - $login \n
+    пароль - $password";
+}
+
