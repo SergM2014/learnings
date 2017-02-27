@@ -79,4 +79,15 @@ class TokenService
             $_POST['login']= null; $_POST['password']= null;  }
     }
 
+
+
+    public static function setUserToken($login)
+    {
+        $random = uniqid(rand(), true);
+
+        $token = md5($login . $random);
+
+        return $token;
+    }
+
 }

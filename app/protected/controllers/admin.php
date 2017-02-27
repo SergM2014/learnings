@@ -29,6 +29,7 @@ class Admin  extends BaseController
     public function out()
     {
         unset($_SESSION['admin']);
+        unset($_SESSION['user']);
         return ['view'=>'views/notAdmin.php'];
     }
 

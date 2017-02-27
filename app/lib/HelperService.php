@@ -3,6 +3,7 @@
 namespace Lib;
 
 
+use function \succededRegistrationMail;
 /**
  *
  * the class provides many usefull helper function
@@ -16,23 +17,24 @@ class HelperService {
     /**
      * send email
      *
-     * @param $email
-     * @param $login
-     * @param $message
+     * @param array $inputs
      * @return bool
      */
-    public static function sendMail($email, $login, $message){
+    public static function sendMail(array $inputs){
 
+         extract($inputs);
          $time_now = LangService::rus_date("j F Y H:i ", time());
-         $to= $email;
+         $to = $email;
          $thema = $time_now. "\n Повидомлення з сайту Имя ".$login;
+            $message = succededRegistrationMail($login, $password );
+
 
          $header="Content-type: text/html; charset=\"utf-8\"";
          $header.="From: <".ADMINEMAIL.">";
          $header.="Subject: ".$thema;
          $header.="Content-type: text/html; charset=\"utf-8\"";
 
-         return mail($to, $thema, $message/*, $header*/);
+         return mail($to, $thema, $message, $header);
      }
 
     /**

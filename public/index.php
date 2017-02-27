@@ -2,6 +2,9 @@
 
 use App\Core\Application;
 
+
+
+
     require_once "./../config/settings.php";
 
     $router = new Application();
@@ -11,7 +14,6 @@ use App\Core\Application;
     $controller=$router->getController();
 
     extract($router->runController($controller), EXTR_OVERWRITE);
-
 
     require_once PATH_SITE."/resources/". $router->putTemplate()."/index.php";
 

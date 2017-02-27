@@ -3,34 +3,46 @@
 namespace Lib;
 
 
+use App\Models\Subscribtion;
+use Lib\TokenService;
+
 class CookieService {
 
-    public static function addCookies()
+    public static function addUserCookies($login, $token)
     {
         $expire_time = time()+1209600;
-        $value = @json_encode($_SESSION['busket']);
-        setcookie('busket', $value, $expire_time, '/');
-        setcookie('totalSum', (int)$_SESSION['total_sum'], $expire_time, '/');
-        setcookie('totalAmount', (int)$_SESSION['total_amount'], $expire_time, '/');
+
+        setcookie('login', $login, $expire_time, '/' );
+        setcookie('userToken', $token, $expire_time, '/');//here is an error tocken should be taken from the DB
     }
 
 
-    public static function getCookies()
+    /**
+     * get the user from cookies unless it's not the exit action of the controller
+     * 
+     * @param array $exitArray
+     */
+    public static function getUserCookies(array $exitActionArray= ['signOut', 'leave'])
     {
+        $url = explode('/',$_SERVER['REQUEST_URI']);
+        $url = array_map('strtolower', $url);
+        $exitActionArray = array_map('strtolower', $exitActionArray);
 
-        if(!isset($_SESSION['busket']) && isset($_COOKIE['busket'])){
-            $_SESSION['busket']= json_decode($_COOKIE['busket'], true);
+        $intersection = !! array_intersect($exitActionArray, $url);
+        if($intersection) return;
+
+        if(@!isset($_SESSION['user']['login']) && isset($_COOKIE['login']) && isset($_COOKIE['userToken']) ){
+
+            (new Subscribtion())->getCookiedUser();
         }
-
-        if(!isset($_SESSION['total_amount']) && isset($_COOKIE['totalAmount'])){
-            $_SESSION['total_amount'] = $_COOKIE['totalAmount'];
-        }
-
-        if(!isset($_SESSION['total_sum']) && isset($_COOKIE['totalSum'])){
-            $_SESSION['total_sum'] = $_COOKIE['totalSum'];
-        }
+    }
 
 
+
+    public static function destroyUserCookies()
+    {
+        setcookie('login', '', time() - 1, '/');
+        setcookie('userToken', '', time() - 1, '/');
     }
 
 

@@ -18,7 +18,9 @@
       <div class="container">
         <?php if(@!$noTemplate): ?>
             <header class="main-header ">
-
+<pre>
+    <?php var_dump($_COOKIE); ?>
+</pre>
                 <nav class="main-header__nav ">
 
                     <a href="/<?= \Lib\HelperService::currentLang() ?>#" class="main-header__logo "><?= $ourBrandL ?></a>
@@ -33,11 +35,22 @@
                          <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>"><?= $mainPageL ?></a></li>
 
                     </ul>
+                      <?php if(@!isset($_SESSION['user']['login'])): ?>
+                        <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signIn">
+                            <?= $enterAdminL  ?>
+                        </a>
+                    <?php else:?>
+                        <form action="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signOut"  method="post" class="main-header__admin">
+                            <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
+                            <button type="submit" class="main-header__admin-btn"> <?= $_SESSION['user']['login'].'/'.$exitL  ?></button>
+                        </form>
+
+                    <?php endif; ?>
 
 
-                    <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>signIn"><?php if(isset($_SESSION['admin']['login'])){echo $_SESSION['admin']['login'];}else {echo "$enterAdminL";};  ?></a>
-                    <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>signUp""><?= $registerL ?></a>
-
+                    <?php if(@!$_SESSION['user']['login']): ?>
+                         <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signUp""><?= $registerL ?></a>
+                    <?php endif; ?>
                     <?php //get the given languages array
                     $langs = \Lib\HelperService::prozessLangArray(); ?>
 

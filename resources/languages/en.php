@@ -43,7 +43,10 @@ $enterNameL = "Enter name";
 $enterPasswordL = "Enter password";
 $enterEmailL = "Enter Email";
 $repeatPasswordL = "Repeat password";
-$signUpSecceeded = "Greetings!!! You are signedUp!";
+$signUpSecceededL = "Greetings!!! You are signedUp!";
+$rememberMeL = "Remember me";
+$signInSecceededL = "Greetings!! You are signedIn!";
+$alreadySignedIn = "You are already signed in!";
 
 //these functionare for translation in controllers and models
 function variableInController(){

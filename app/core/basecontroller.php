@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use Lib\CookieService;
+
 /**
  *
  * the parent for all controllersd
@@ -18,8 +20,14 @@ namespace App\Core;
       */
      public function __construct()
      {
-         session_start();
+         @session_start();
 
+         CookieService::getUserCookies();
+     }
+
+     public function alreadySignedUser()
+     {
+         if(@isset($_SESSION['user']['login'])) {header("Location: /subscribtion/signed");}
      }
 
 

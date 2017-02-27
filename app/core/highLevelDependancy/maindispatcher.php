@@ -10,7 +10,7 @@ use Lib\HelperService;
 abstract class MainDispatcher
  {
 
-    protected $url;
+    public $url;
 
 
     public function __construct()

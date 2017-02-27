@@ -17,7 +17,7 @@ class CheckForm extends DataBase
     use CheckFieldsService;
 
 
-    public function checkIfNotEmpty($fields, $errors)
+    protected function checkIfNotEmpty($fields, $errors)
     {
         foreach ($fields as $key => $field ){
            if(empty($field)){
@@ -26,7 +26,7 @@ class CheckForm extends DataBase
         }
     }
 
-    public function comparePasswordFields($field1, $field2, $errors)
+    protected function comparePasswordFields($field1, $field2, $errors)
     {
         if($field1 != $field2) {
             $errors->password2 = $errors->password2 ?? notEqualRepeatedPassword();
@@ -34,7 +34,7 @@ class CheckForm extends DataBase
     }
 
 
-    public function checkLength(array $fields, $length, $errors)
+    protected function checkFieldsLength(array $fields, $length, $errors)
     {
         foreach ($fields as $key => $field){
             if($key == 'email') continue;
@@ -42,13 +42,13 @@ class CheckForm extends DataBase
         }
     }
 
-    public function checkIfEmail($errors)
+    protected function checkIfEmail($errors)
     {
         if(!filter_var(@$_POST['email'], FILTER_VALIDATE_EMAIL)) { $errors->email = $errors->email ?? wrongEmail();}
 
     }
 
-    public function ifUniqueLogin(array $income, $errors)
+    protected function ifUniqueLogin(array $income, $errors)
     {
         $sql = "SELECT `id` FROM `users` WHERE `login`=?";
         $stmt = $this->conn->prepare($sql);
@@ -57,6 +57,21 @@ class CheckForm extends DataBase
         $id = $stmt->fetchColumn();
         if($id)  $errors->login = $errors->login ?? repeatedLogin();
     }
+
+
+
+    public function checkSignUpErrors($inputs)
+    {
+        $errors = new \stdClass();
+
+        $this->checkIfNotEmpty($inputs, $errors);
+        $this->ifUniqueLogin($inputs, $errors);
+        $this->comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
+        $this->checkFieldsLength($inputs, 6, $errors);
+        $this->checkIfEmail($errors);
+
+        return (array)$errors;
+   }
 
 
 

@@ -46,7 +46,7 @@
 
 
                         <div class="main-header__right-side">
-                             <li class="main-header__admin"> <a href="/<?= \Lib\HelperService::currentLang() ?>admin/out" ><?= $_SESSION['admin']['login'].' / '. $exitL ?></a></li>
+                             <li class="main-header__admin"> <a href="/<?= \Lib\HelperService::currentLang() ?>admin/out" ><?= $_SESSION['user']['login'].' / '. $exitL ?></a></li>
 
                              <li class="main-header__language-select">
 

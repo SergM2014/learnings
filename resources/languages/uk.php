@@ -41,7 +41,10 @@ $enterNameL = "Введіть ваше Імя";
 $enterPasswordL = "Bведіть пароль";
 $enterEmailL = "Введіть Email";
 $repeatPasswordL = "Повторіть пароль";
-$signUpSecceeded = "Поздоровляю Вас зареестровано";
+$signUpSecceededL = "Поздоровляю Вас зареестровано";
+$signInSecceededL = "Поздоровляю Ви успішно ввійшли в акаунт";
+$rememberMeL = "Запамятати мене";
+$alreadySignedIn = "Вас вже зареестровано на сайті!";
 
 
 

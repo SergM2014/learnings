@@ -1,0 +1,1 @@
+<h2 class="subscribtion-success"><?= $signInSecceededL ?></h2>

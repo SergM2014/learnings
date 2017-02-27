@@ -1,0 +1,1 @@
+<h1 class="subscribtion-success"><?= $alreadySignedIn ?></h1>

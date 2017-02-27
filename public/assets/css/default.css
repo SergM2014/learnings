@@ -99,6 +99,11 @@ html, body {
 .main-header__admin, .main-header__language-select, .main-header__search-container {
   float: right;
   margin-left: 10px; }
+.main-header__admin-btn{
+    padding:0 2px;
+    cursor:pointer;
+    text-transform: capitalize;
+}
 
 .main-header__search-container {
   font-size: 15px;
@@ -369,7 +374,7 @@ html, body {
     margin: 0 0 20px 20px;
     color: rgba(8, 8, 8, 0.97);
 }
-.signUp-form{
+.subscribtion-form{
     width:360px;
     margin:200px auto;
    padding:15px;
@@ -377,23 +382,23 @@ html, body {
     border-radius:10px;
 
 }
-.signUp-form__titel{
+.subscribtion-form__titel{
     text-align:center;
     margin-bottom:15px;
     color: #35aa23;
     font-style: italic;
 }
-.signUp-form__button{
+.subscribtion-form__button{
     padding: 1px;
     width: 100px;
     border-radius: 2px;
     cursor:pointer;
 }
-.signUp-form__field-block{
+.subscribtion-form__field-block{
     margin-bottom:5px;
 }
 
-.signUp-success{
+.subscribtion-success{
     text-align:center;
     margin-top: 30px;
     color: #f34646;

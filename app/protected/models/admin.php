@@ -6,21 +6,21 @@ use App\Core\DataBase;
 
 class AdminModel extends DataBase
 {
-    public function getAdminUser()
+    public function getAdminUser($login, $password)
     {
 
-        if( @!$_POST['login'] OR !$_POST['password']) return;
+        if( @!$login OR @!$password) return;
         $sql = "SELECT `login` , `password`, `role_title`, `upgrading_status` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(1, $_POST['login'], \PDO::PARAM_STR);
+        $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
 
-        if( password_verify( $_POST['password'], $user->password ) ) {
-            $_SESSION['admin'] ['enter'] = true;
+        if( password_verify( $password, $user->password ) ) {
+            /*$_SESSION['admin'] ['enter'] = true;
             $_SESSION['admin']['login'] = $user->login;
             $_SESSION['admin']['role_title'] = $user->role_title;
-            $_SESSION['admin']['upgrading_status'] = $user->upgrading_status;
+            $_SESSION['admin']['upgrading_status'] = $user->upgrading_status;*/
         }
 
     }
@@ -87,7 +87,7 @@ class AdminModel extends DataBase
         return $users;
     }
 
-    public function storeUser()
+   /* public function storeUser()
     {
         $status = $this->getUserUpgradingStatus();
 
@@ -105,7 +105,7 @@ class AdminModel extends DataBase
         $id = $this->conn->lastInsertId();
         unset ($_SESSION['makeUser']);
         return $id;
-    }
+    }*/
 
 
     public function getOneUser()
