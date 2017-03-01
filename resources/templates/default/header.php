@@ -18,9 +18,7 @@
       <div class="container">
         <?php if(@!$noTemplate): ?>
             <header class="main-header ">
-<pre>
-    <?php var_dump($_COOKIE); ?>
-</pre>
+
                 <nav class="main-header__nav ">
 
                     <a href="/<?= \Lib\HelperService::currentLang() ?>#" class="main-header__logo "><?= $ourBrandL ?></a>

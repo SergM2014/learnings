@@ -45,6 +45,7 @@ $signUpSecceededL = "Поздоровляю Вас зареестровано";
 $signInSecceededL = "Поздоровляю Ви успішно ввійшли в акаунт";
 $rememberMeL = "Запамятати мене";
 $alreadySignedIn = "Вас вже зареестровано на сайті!";
+$enterL = "Ввійти";
 
 
 

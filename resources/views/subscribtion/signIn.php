@@ -1,6 +1,6 @@
 
     <fieldset class="subscribtion-form">
-        <h1 class="subscribtion-form__titel"><?= $registerL ?></h1>
+        <h1 class="subscribtion-form__titel"><?= $enterL ?></h1>
             <form action="/subscribtion/login" method="post">
                 <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
                 <div class="subscribtion-form__field-block">

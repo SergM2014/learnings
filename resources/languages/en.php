@@ -47,6 +47,7 @@ $signUpSecceededL = "Greetings!!! You are signedUp!";
 $rememberMeL = "Remember me";
 $signInSecceededL = "Greetings!! You are signedIn!";
 $alreadySignedIn = "You are already signed in!";
+$enterL = "Enter";
 
 //these functionare for translation in controllers and models
 function variableInController(){

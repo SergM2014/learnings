@@ -5,6 +5,8 @@
     }
   },
   "require": {
-    "gregwar/captcha": "1.*"
+    "gregwar/captcha": "1.*",
+    "nesbot/carbon": "^1.22"
+
   }
 }

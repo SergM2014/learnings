@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Core\DataBase;
 use Lib\TokenService;
+use Carbon\Carbon;
 
 class Subscribtion extends DataBase
 {
@@ -20,32 +21,32 @@ class Subscribtion extends DataBase
         extract($input);
         $password= password_hash($password, PASSWORD_DEFAULT);
         $token = TokenService::setUserToken($login);
-        $sql = "INSERT INTO `users` (`login`, `password`,`email`, `role_title`, `upgrading_status`, `token`) VALUES (?, ?, ?, 'user', '1', ?)";
+        $sql = "INSERT INTO `users` (`login`, `password`,`email`,  `token`) VALUES (?, ?, ?, ?)";
         $stmt =$this->conn->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->bindValue(2, $password, \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['email'], \PDO::PARAM_STR);
         $stmt->bindValue(4, $token, \PDO::PARAM_STR);
 
-        if(!$stmt->execute()) return;
+        if(!$stmt->execute()) return  false;
 
         $id = $this->conn->lastInsertId();
         unset ($_SESSION['storeUser']);
 
-        $this->saveInSession($login, $password);
+        $this->saveInSession($login);
 
         return $id;
     }
 
-    protected function saveInSession($login, $upgradingStatus)
+    protected function saveInSession($login, $activeSubscribtion = null )
     {
         $_SESSION['user']['login'] = $login;
-        $_SESSION['user']['upgradingStatus'] = $upgradingStatus;
+        if(@$activeSubscribtion) $_SESSION['user']['activeSubscribtion'] = $activeSubscribtion;
 
     }
 
     /**
-     * Check whether given in input user exists in DB
+     * Check whether given in credentials user exists in DB
      *
      * @param array $input
      * @return bool|void
@@ -53,24 +54,28 @@ class Subscribtion extends DataBase
     public function getSubscribedUser( array $input)
     {
         extract($input);
-        if (@!$login OR @!$password) return;
-        $sql = "SELECT `login`, `password`, `role_title`, `upgrading_status`, `token` FROM `users` WHERE `login`=? ";
+        if (@!$login OR @!$password) return false;
+        $sql = "SELECT `login`, `password`, `start_date`, `subscribtion_term`, `token` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
 
+        $activeSubscribtion = $this->ifUserSubscribed($user);
+
         if (@password_verify($password, $user->password)) {
-            $this->saveInSession($login, $user->upgrading_status);
-           // return true;
-            return $user->token;
+            $this->saveInSession($login, $activeSubscribtion );
+
+            return ['token' => $user->token, 'activeSubscribtion' => $activeSubscribtion ];
         }
+        return false;
     }
+
 
     public function destroySession()
     {
         unset($_SESSION['user']['login']);
-        unset($_SESSION['user']['upgradingStatus']);
+        unset($_SESSION['user']['activeSubscribtion']);
     }
 
     /**
@@ -81,21 +86,48 @@ class Subscribtion extends DataBase
     public function getCookiedUser()
     {
         if (!isset($_COOKIE['login']) ) return;
-        $sql = "SELECT `login` , `role_title`, `upgrading_status` FROM `users` WHERE `login`=? AND `token`=?";
+        $sql = "SELECT `login` , `start_date`, `subscribtion_term` FROM `users` WHERE `login`=? AND `token`=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $_COOKIE['login'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_COOKIE['userToken'], \PDO::PARAM_STR);
 
         $stmt->execute();
-
-    //var_dump($stmt); //return only string
-
         $user = $stmt->fetch();
-//var_dump($user);
+
         if ($user) {
-            $this->saveInSession( $_COOKIE['login'], $user->upgrading_status);
+            $this->saveInSession( $_COOKIE['login'], @$_COOKIE['activeSubscribtion']);
             return true;
         }
+    }
+
+    /**
+     * check whether user's subscribtion is active;
+     *
+     * @param $user
+     */
+    private function ifUserSubscribed($user)
+    {
+        if(!$user->start_date OR !$user->subscribtion_term)  return false;
+
+        switch ($user->subscribtion_term) {
+            case 'monthly':
+                $method = 'addMonth';
+                break;
+            case 'quarterly':
+                $method = 'addMonths';
+                $argument = 3;
+                break;
+            case 'yearly':
+                $method = 'addYear';
+                break;
+
+        }
+
+        $date = new Carbon($user->start_date);
+        isset($argument) ? $date->$method($argument) : $date->$method();
+        $activeSubscribtion = (Carbon::now() < $date)? true: false;
+
+       return $activeSubscribtion;
     }
 
 
