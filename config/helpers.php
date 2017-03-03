@@ -21,5 +21,28 @@
             echo "<br>";
             echo "<pre>";
              var_dump($arg);
+             echo "<br>";
+             var_dump(__FILE__);
             exit();
         }
+
+
+
+    function subscribedUser()
+    {
+         $activeSubscribtion = $_SESSION['user']['activeSubscribtion']?? false;
+         return !!$activeSubscribtion;
+    }
+
+    function loggedInUser()
+    {
+        $loggedInUser = $_SESSION['user']['login']?? false ;
+        return !!$loggedInUser;
+    }
+
+   /* function includeViewFile($path)
+    {
+        $filePath = getDocumentRoot();
+        $filePath.= '/resources/views/'.$path.'.php';
+        include $filePath;
+    }*/

@@ -58,7 +58,7 @@ class Category extends DataBase
     public function getExtraLessons()
     {
         $id = $_GET['id'];
-        $sql = "SELECT `id`, `title`, `icon`, `link`, `free_status` FROM `lessons` WHERE  `category_id`=? AND `series_id` IS NULL";
+        $sql = "SELECT `id`, `title`, `icon`, `file`, `free_status` FROM `lessons` WHERE  `category_id`=? AND `series_id` IS NULL";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_STR);
         $stmt->execute();

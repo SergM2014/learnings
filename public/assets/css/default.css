@@ -73,7 +73,7 @@ html, body {
 .main-header {
   margin-top: 20px; }
 
-.main-header__h1 {
+.main-header__h1, .lesson-header_h1 {
   text-align: center;
   color: #aa1111; }
 
@@ -142,35 +142,7 @@ html, body {
   text-decoration:none;
 }
 
-/*this is technical classes*/
-.hidden {
-  display: none; }
 
-.clearfix:before, .clearfix:after, .content:before, .content:after {
-  content: "";
-  display: table; }
-
-.clearfix:after, .content:after {
-  clear: both; }
-
-.nested-1 {
-  background-color: #89a8ff; }
-
-.nested-2 {
-  background-color: #6ccc7a; }
-
-.nested-3 {
-  background-color: #ab968c; }
-
-.invisible {
-  visibility: hidden; }
-
-.warning {
-  color: red; }
-.error{
-    color:red;
-    border-bottom:1px dotted red;
-}
 
   .categories-block, .lessons-block, .testimonials-block, .subscription-block{
       display:flex;
@@ -404,6 +376,44 @@ html, body {
     color: #f34646;
 }
 
+.add-comment__block{
+    border:1px solid black;
+    min-height:200px;
+    margin-bottom: 20px;
+    padding-left:15px;
+    display:flex;
+    justify-content: center;
+}
+
+.add-comment__title{
+    text-align:center;
+    color: #cc7e8d;
+    margin:20px 0;
+}
+.image-download__preview {
+    max-height:112px;
+    max-width:112px;
+    border-radius:5px;
+}
+.add-comment__progress{
+    margin-top:10px;
+}
+.image-download__block{
+    margin-bottom:10px;
+}
+.image-download__btn{
+    padding:2px;
+    cursor:pointer;
+}
+.image-download__output{
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+   /* border: 1px solid black;*/
+    margin-bottom: 30px;
+}
+
+
 
 
 
@@ -454,5 +464,36 @@ html, body {
 
     .main-header__search-field-label {
         display: none; }
+}
+
+
+/*this is technical classes*/
+.hidden {
+    display: none; }
+
+.clearfix:before, .clearfix:after, .content:before, .content:after {
+    content: "";
+    display: table; }
+
+.clearfix:after, .content:after {
+    clear: both; }
+
+.nested-1 {
+    background-color: #89a8ff; }
+
+.nested-2 {
+    background-color: #6ccc7a; }
+
+.nested-3 {
+    background-color: #ab968c; }
+
+.invisible {
+    visibility: hidden; }
+
+.warning {
+    color: red; }
+.error{
+    color:red;
+    border-bottom:1px dotted red;
 }
 

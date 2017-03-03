@@ -5,13 +5,12 @@
 
 </section>
 
-
-<link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/5.11/video.min.js"></script>
-
 <section class="view-container">
+    <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/5.11/video.min.js"></script>
 
-   <!-- <video class="view-container-video"  controls="controls" poster = "/uploads/video/1.png" >-->
+    <h2 class="lesson-header_h1"><?= $lesson->title ?></h2>
+
     <video
         id="my-player"
         class="video-js view-container-video"
@@ -30,9 +29,18 @@
 <section class="under-video__container">
     <section class="lesson-comments">
 
-        <button id="download_lesson" class="lesson-comments__button">Download</button>
-        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/login">Login</a></button>
+        <?php if(subscribedUser()): ?>
+            <button id="download_lesson" class="lesson-comments__button"><?= $downloadL ?></button>
+        <?php endif; ?>
+
+        <?php if(!loggedInUser()): ?>
+             <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/login"><?= $loginL ?></a></button>
+        <?php endif; ?>
+
         <h3 class="under-video__container-h3"><?= $commentsL ?> (<?= count($comments) ?>)</h3>
+
+
+
 
 
     </section>
@@ -49,4 +57,11 @@
         <?php endforeach; ?>
 
     </section>
+
 </section>
+
+<?php if(loggedInUser()): ?>
+
+        <?php include PATH_SITE.'/resources/views/partials/addComment.php'; ?>
+
+<?php endif; ?>

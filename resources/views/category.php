@@ -43,7 +43,7 @@
         <?php foreach($extraLessons as $lesson): ?>
 
             <div class="lessons-block__item">
-                <a href="<?= $lesson->link ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
+                <a href="?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
                 <img  class="lessons-block__item-icon" src="/uploads/lessonsIcons/<?= $lesson->icon ?>">
             </div>
 
