@@ -1,7 +1,12 @@
+Array.prototype.intersect = function(a){
+    return this.filter(function(i){ return a.indexOf(i) > -1;});
+};
+
 let progress=document.getElementById('imageDownloadProgress'),
     output= document.getElementById('imageDownloadOutput'),
     submit_btn= document.getElementById('downloadImageBtn'),
     reset_btn= document.getElementById('resetImageBtn');
+
 
 
 
@@ -42,6 +47,7 @@ function abortHandler(event){
 }
 
 
+//to make previe image using file API
 
 
 if(document.getElementById('file')) {
@@ -78,33 +84,52 @@ if(submit_btn){
     submit_btn.onclick = function(e){
 
         e.preventDefault();
-        progress.classList.remove('invisible');
+        progress.classList.remove('hidden');
 
 
-        let file=document.getElementById("file").files[0];
+        let file = document.getElementById("file").files[0];
 
-        let formdata= new FormData();
-        let _token = document.getElementById('prozessAvatar').value;
-        let action = document.getElementById('action').value;
+        let formdata = new FormData();
+       // let _token = document.getElementById('prozessAvatar').value;
+       // let action = document.getElementById('action').value;
 
         formdata.append("file", file);
-        formdata.append("_token", _token);
-        formdata.append("action", action );
+      //  formdata.append("_token", _token);
+       // formdata.append("action", action );
 
-        let founded_lang =  new LangForAjax().getLanguage();
-        let url =  founded_lang+"/image/upload";
 
-        let send_image=new XMLHttpRequest();
-        send_image.upload.addEventListener("progress", progressHandler, false);
-        send_image.addEventListener("load", completeHandler, false);
-        send_image.addEventListener("error", errorHandler, false);
-        send_image.addEventListener("abort", abortHandler, false);
-        send_image.open("POST", url);
-        send_image.send(formdata);
 
-        reset_btn.setAttribute('disabled', 'disabled');
+        fetch('/index/getLanguageComponents', {
+            'method' : 'POST',
+            'credentials' : 'same-origin'
+        })
+            .then( response => response.json())
+            .then(j => {
+                let url = window.location.href;
+                let urlArray = url.split('/');
+                let intersection = urlArray.intersect(j.languagesArray);
 
-    };// end of function
+                let lang = intersection.shift();
+                lang = (lang)? lang : j.defaultLanguage;
+
+                let uploadUrl =  "/"+lang+"/images/uploadAvatar";
+
+                let send_image=new XMLHttpRequest();
+                send_image.upload.addEventListener("progress", progressHandler, false);
+                send_image.addEventListener("load", completeHandler, false);
+                send_image.addEventListener("error", errorHandler, false);
+                send_image.addEventListener("abort", abortHandler, false);
+                send_image.open("POST", uploadUrl);
+                send_image.send(formdata);
+
+                reset_btn.setAttribute('disabled', 'disabled');
+
+            })
+
+
+
+
+    };// end of submit button
 }
 
 
@@ -113,10 +138,10 @@ if(reset_btn) {
     reset_btn.onclick = function (e) {
         e.preventDefault();
 
-        let _token = document.getElementById('prozessAvatar').value;
+       // let _token = document.getElementById('prozessAvatar').value;
 
         document.getElementById('image_preview').setAttribute('src', '/public/img/noavatar.jpg');
-        document.getElementById('file').classList.remove('invisible');
+        document.getElementById('file').classList.remove('hidden');
 
         let founded_lang =  new LangForAjax().getLanguage();
         let url =  founded_lang+"/image/delete";

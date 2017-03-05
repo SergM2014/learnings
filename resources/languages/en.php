@@ -50,8 +50,8 @@ $alreadySignedIn = "You are already signed in!";
 $enterL = "Enter";
 $downloadL = "Download";
 $loginL = "Login";
-$addCommentL = "Додати коментар!";
-$deleteL = "DeleteL";
+$addCommentL = "Add Comment!";
+$deleteL = "Delete";
 
 //these functionare for translation in controllers and models
 function variableInController(){
@@ -98,3 +98,27 @@ function succededRegistrationMail($login, $password)
     пароль - $password";
 }
 
+function restrictedFileType()
+{
+    return "Restricted file type!!";
+}
+
+function tooBigFile()
+{
+    return "too big file size!";
+}
+
+function succeededUpload()
+{
+    return "File Uploaded!";
+}
+
+function smthIsWrong()
+{
+    return "Something went wrong!";
+}
+
+function fileDeleted()
+{
+    return "File is deleted!";
+}

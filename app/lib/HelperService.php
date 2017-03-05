@@ -79,11 +79,11 @@ class HelperService {
     }
 
     /**
-     * get Language component for plan description
+     * get abbriviatur of current Language
      *
      * @return int|string
      */
-    public static function getLanguageForPlanDescription()
+    public static function getCurrentLanguageAbbr()
     {
         $langs = self::prozessLangArray();
 

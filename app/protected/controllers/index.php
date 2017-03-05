@@ -30,7 +30,7 @@ class Index  extends BaseController
         $randomLessons = (new Lesson())->getRandomItems();
         $randomTestimonials = (new Testemonial())->getRandomItems();
 
-        $language = HelperService::getLanguageForPlanDescription();
+        $language = HelperService::getCurrentLanguageAbbr();
         $planDescription = (new DB)->getPlanDescription($language);
 
       return ['view'=>'views/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
@@ -43,6 +43,19 @@ class Index  extends BaseController
           $builder = (new DB)->printCaptcha();
           return ['view' => 'customer/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
       }
+
+
+    /**
+     * represet default language and array of given languages from config in json format
+     */
+      public function getLanguageComponents()
+      {
+          $langs = array_keys( HelperService::prozessLangArray());
+
+          echo json_encode(['defaultLanguage' => DEFAULT_LANG, 'languagesArray' => $langs]);
+          exit();
+      }
+
 
   }
   

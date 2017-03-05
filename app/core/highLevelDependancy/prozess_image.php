@@ -3,10 +3,10 @@
 namespace App\Core\HihgLevelDependacy;
 
 
-use function \restricted_file_type;
-use function \too_big_file;
+use function \restrictedFileType;
+use function \tooBigFile;
 
-abstract class Prozess_Image
+class Prozess_Image
 {
     protected function resizeImage($file, $thumb_path, $height, $width = null)
     {
@@ -85,12 +85,12 @@ abstract class Prozess_Image
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST' OR !in_array(strtolower($_FILES['file']['type']), IMAGE_TYPES))
 
-            return $response =["message"=>"<span class='image-upload--failed'>".restricted_file_type(). "</span>", "error"=>true];
+            return $response =["message"=>"<span class='image-upload--failed'>".restrictedFileType(). "</span>", "error"=>true];
 
         // Проверяем размер файла
         if ($_FILES['file']['size'] > IMAGE_SIZE)
 
-            return $response =["message"=>"<span class='image-upload--failed'>". too_big_file().$_FILES['file']['size']."</span>", "error" => true];
+            return $response =["message"=>"<span class='image-upload--failed'>". tooBigFile().$_FILES['file']['size']."</span>", "error" => true];
     }
 
 

@@ -9,6 +9,7 @@ return array(
     'App\\Controllers\\Admin' => $baseDir . '/app/protected/controllers/admin.php',
     'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/category.php',
     'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/404.php',
+    'App\\Controllers\\Images' => $baseDir . '/app/protected/controllers/images.php',
     'App\\Controllers\\Index' => $baseDir . '/app/protected/controllers/index.php',
     'App\\Controllers\\Lesson' => $baseDir . '/app/protected/controllers/lesson.php',
     'App\\Controllers\\Subscribtion' => $baseDir . '/app/protected/controllers/subsribtion.php',

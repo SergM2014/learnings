@@ -100,3 +100,28 @@ function succededRegistrationMail($login, $password)
     пароль - $password";
 }
 
+function restrictedFileType()
+{
+    return "Заборонений тип файлу!";
+}
+
+function tooBigFile()
+{
+    return "Занадто великий розмір фвйлу!";
+}
+
+function succeededUpload()
+{
+    return "Файл завантаженно!";
+}
+
+function smthIsWrong()
+{
+    return "Щось пішло не так!";
+}
+
+function fileDeleted()
+{
+    return "Файл видалено!";
+}
+
