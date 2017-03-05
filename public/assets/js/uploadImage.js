@@ -140,29 +140,41 @@ if(reset_btn) {
 
        // let _token = document.getElementById('prozessAvatar').value;
 
-        document.getElementById('image_preview').setAttribute('src', '/public/img/noavatar.jpg');
+        document.getElementById('downloadImagePreview').setAttribute('src', '/img/noavatar.jpg');
         document.getElementById('file').classList.remove('hidden');
-
-        let founded_lang =  new LangForAjax().getLanguage();
-        let url =  founded_lang+"/image/delete";
-
         let formData = new FormData;
-        formData.append('_token', _token);
+        // formData.append('_token', _token);
 
-        fetch( url,
-            {
-                method : "POST",
-                credentials: "same-origin",
-                body:formData
+        fetch('/index/getLanguageComponents', {
+            'method' : 'POST',
+            'credentials' : 'same-origin'
+        })
+            .then( response => response.json())
+            .then(j =>
+                    {   let url = window.location.href;
+                        let urlArray = url.split('/');
+                        let intersection = urlArray.intersect(j.languagesArray);
 
-            })
-            .then(responce => responce.json())
-            .then(j => output.innerHTML = j.message)
+                        let lang = intersection.shift();
+                        lang = (lang)? lang : j.defaultLanguage;
+
+                        let deleteUrl =  "/"+lang+"/images/deleteAvatar";
 
 
+                        fetch( deleteUrl,
+                            {
+                                method : "POST",
+                                credentials: "same-origin",
+                                body:formData
 
-        submit_btn.classList.add('invisible');
-       reset_btn.classList.add('invisible');
+                            })
+                            .then(responce => responce.json())
+                            .then(j => output.innerHTML = j.message)
+
+                    })
+
+        submit_btn.classList.add('hidden');
+        reset_btn.classList.add('hidden');
 
     };
 }
