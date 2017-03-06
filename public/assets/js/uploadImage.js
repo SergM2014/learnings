@@ -28,7 +28,7 @@ function completeHandler(event){//тут ивент переобразуется
     progress.innerHTML= "0%";
 
 
-    output.classList.remove('invisible');
+    output.classList.remove('hidden');
     submit_btn.classList.add('invisible');
     progress.classList.add('invisible');
     reset_btn.removeAttribute('disabled');
@@ -90,11 +90,12 @@ if(submit_btn){
         let file = document.getElementById("file").files[0];
 
         let formdata = new FormData();
-       // let _token = document.getElementById('prozessAvatar').value;
+        let _token = document.getElementById('prozessImageToken').value;
        // let action = document.getElementById('action').value;
 
         formdata.append("file", file);
-      //  formdata.append("_token", _token);
+        formdata.append("_token", _token);
+        formdata.append("ajax", true);
        // formdata.append("action", action );
 
 
@@ -138,12 +139,13 @@ if(reset_btn) {
     reset_btn.onclick = function (e) {
         e.preventDefault();
 
-       // let _token = document.getElementById('prozessAvatar').value;
+        let _token = document.getElementById('prozessImageToken').value;
 
         document.getElementById('downloadImagePreview').setAttribute('src', '/img/noavatar.jpg');
         document.getElementById('file').classList.remove('hidden');
         let formData = new FormData;
-        // formData.append('_token', _token);
+         formData.append('_token', _token);
+         formData.append('ajax', true);
 
         fetch('/index/getLanguageComponents', {
             'method' : 'POST',
@@ -158,20 +160,21 @@ if(reset_btn) {
                         let lang = intersection.shift();
                         lang = (lang)? lang : j.defaultLanguage;
 
-                        let deleteUrl =  "/"+lang+"/images/deleteAvatar";
-
-
+                        return  "/"+lang+"/images/deleteAvatar";
+                    })
+            .then(deleteUrl =>
                         fetch( deleteUrl,
                             {
                                 method : "POST",
                                 credentials: "same-origin",
                                 body:formData
-
                             })
-                            .then(responce => responce.json())
-                            .then(j => output.innerHTML = j.message)
+                    )
 
-                    })
+            .then(responce => responce.json())
+            .then(j => output.innerHTML = j.message)
+
+
 
         submit_btn.classList.add('hidden');
         reset_btn.classList.add('hidden');

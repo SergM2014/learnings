@@ -35,7 +35,7 @@ class TokenService
         $_SESSION['_token']['time'] = time();
         $random = uniqid(rand(), true);
 
-        $_SESSION['_token']['prozessAvatar'] = md5('prozessAvatar' . $random);
+        $_SESSION['_token']['prozessImage'] = md5('prozessImage' . $random);
         $_SESSION['_token']['enterAdmin'] = md5('enterAdmin' . $random);
         $_SESSION['_token']['user'] = md5('user' . $random);
 

@@ -46,7 +46,7 @@ class Index  extends BaseController
 
 
     /**
-     * represet default language and array of given languages from config in json format
+     * represent default language and array of given languages from config in json format
      */
       public function getLanguageComponents()
       {
