@@ -1,13 +1,35 @@
+
+// find repeated values in two arrays
 Array.prototype.intersect = function(a){
     return this.filter(function(i){ return a.indexOf(i) > -1;});
 };
 
-let progress=document.getElementById('imageDownloadProgress'),
-    output= document.getElementById('imageDownloadOutput'),
-    submit_btn= document.getElementById('downloadImageBtn'),
-    reset_btn= document.getElementById('resetImageBtn');
+let progress = document.getElementById('imageDownloadProgress'),
+    output = document.getElementById('imageDownloadOutput'),
+    submit_btn = document.getElementById('downloadImageBtn'),
+    reset_btn = document.getElementById('resetImageBtn');
 
+class Helper {
+    static getCurrentLang(j){
 
+        let url = window.location.href;
+        let urlArray = url.split('/');
+        let intersection = urlArray.intersect(j.languagesArray);
+
+        let lang = intersection.shift();
+        lang = (lang)? lang : j.defaultLanguage;
+
+        return lang;
+    }
+
+    static ucFirst(str) {
+        // только пустая строка в логическом контексте даст false
+        if (!str) return str;
+
+        return str[0].toUpperCase() + str.slice(1);
+    }
+
+}
 
 
 // this background is for imageupload
@@ -15,8 +37,9 @@ let progress=document.getElementById('imageDownloadProgress'),
 function progressHandler(event){
 
     let percent=Math.round((event.loaded/event.total)*100);
-    progress.style.width= percent+"%";
-    progress.innerHTML= percent+"%";
+
+    progress.value = percent;
+   // progress.innerText= percent+"%";
 }
 
 function completeHandler(event){//тут ивент переобразуется в XMLHttpRequestProgressEvent {}
@@ -24,13 +47,10 @@ function completeHandler(event){//тут ивент переобразуется
     let response = JSON.parse(event.target.responseText);
     output.innerHTML= response.message;
 
-    progress.style.width= "0%";
-    progress.innerHTML= "0%";
-
-
+    progress.value = 0;
     output.classList.remove('hidden');
-    submit_btn.classList.add('invisible');
-    progress.classList.add('invisible');
+    submit_btn.classList.add('hidden');
+    progress.classList.add('hidden');
     reset_btn.removeAttribute('disabled');
 }
 
@@ -91,12 +111,12 @@ if(submit_btn){
 
         let formdata = new FormData();
         let _token = document.getElementById('prozessImageToken').value;
-       // let action = document.getElementById('action').value;
+        let imageCustomType = document.getElementById('imageCustomType').value;
 
         formdata.append("file", file);
         formdata.append("_token", _token);
         formdata.append("ajax", true);
-       // formdata.append("action", action );
+        formdata.append("imageCustomType", imageCustomType );
 
 
 
@@ -106,14 +126,8 @@ if(submit_btn){
         })
             .then( response => response.json())
             .then(j => {
-                let url = window.location.href;
-                let urlArray = url.split('/');
-                let intersection = urlArray.intersect(j.languagesArray);
 
-                let lang = intersection.shift();
-                lang = (lang)? lang : j.defaultLanguage;
-
-                let uploadUrl =  "/"+lang+"/images/uploadAvatar";
+                let uploadUrl =  "/"+Helper.getCurrentLang(j)+"/images/upload"+Helper.ucFirst(imageCustomType);
 
                 let send_image=new XMLHttpRequest();
                 send_image.upload.addEventListener("progress", progressHandler, false);
@@ -127,9 +141,6 @@ if(submit_btn){
 
             })
 
-
-
-
     };// end of submit button
 }
 
@@ -140,36 +151,30 @@ if(reset_btn) {
         e.preventDefault();
 
         let _token = document.getElementById('prozessImageToken').value;
+        let imageCustomType = document.getElementById('imageCustomType').value;
+        let noPhoto = imageCustomType == 'avatar'? 'noavatar' : 'nophoto';
 
-        document.getElementById('downloadImagePreview').setAttribute('src', '/img/noavatar.jpg');
+        document.getElementById('downloadImagePreview').setAttribute('src', '/img/'+noPhoto+'.jpg');
         document.getElementById('file').classList.remove('hidden');
         let formData = new FormData;
          formData.append('_token', _token);
          formData.append('ajax', true);
+         formData.append("imageCustomType", imageCustomType );
 
         fetch('/index/getLanguageComponents', {
             'method' : 'POST',
             'credentials' : 'same-origin'
         })
             .then( response => response.json())
-            .then(j =>
-                    {   let url = window.location.href;
-                        let urlArray = url.split('/');
-                        let intersection = urlArray.intersect(j.languagesArray);
-
-                        let lang = intersection.shift();
-                        lang = (lang)? lang : j.defaultLanguage;
-
-                        return  "/"+lang+"/images/deleteAvatar";
-                    })
+            .then(j =>  "/"+Helper.getCurrentLang(j)+"/images/delete"+Helper.ucFirst(imageCustomType) )
             .then(deleteUrl =>
-                        fetch( deleteUrl,
-                            {
-                                method : "POST",
-                                credentials: "same-origin",
-                                body:formData
-                            })
-                    )
+                                fetch( deleteUrl,
+                                    {
+                                        method : "POST",
+                                        credentials: "same-origin",
+                                        body:formData
+                                    })
+                )
 
             .then(responce => responce.json())
             .then(j => output.innerHTML = j.message)

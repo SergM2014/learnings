@@ -4,7 +4,9 @@
 
         <h2 class="add-comment__title"><?= $addCommentL ?></h2>
 
-        <?php  include   PATH_SITE.'/resources/views/partials/addImage.php';  ?>
+        <?php
+                $imageCustomType = 'avatar';
+                include   PATH_SITE.'/resources/views/partials/addImage.php';  ?>
 
     </div>
 

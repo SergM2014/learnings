@@ -12,8 +12,9 @@ class Images  extends BaseController
   {
       public function __construct()
       {
-          TokenService::check('prozessImageToken');
           parent::__construct();
+          TokenService::check('prozessImage');
+
       }
 
     public function uploadAvatar()
@@ -27,7 +28,6 @@ class Images  extends BaseController
 
       public function deleteAvatar()
       {
-         // TokenService::check('prozessImageToken');
           $message = (new ModelImages())->deleteAvatar();
 
           echo json_encode($message);
