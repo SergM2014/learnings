@@ -50,7 +50,13 @@ $downloadL = "Завантажити";
 $loginL = "Війти";
 $addCommentL = "Додати коментар!";
 $deleteL = "Видалити";
-
+$settingsL = "Налаштування";
+$profileL = "Профіль";
+$changeNameL= "Змінити Імя";
+$changePasswordL = "Змінити пароль";
+$changeEmailL = "Змінити Email";
+$subscripedTillL = "Підписаний до ";
+$unsubscriped = "Непідписаний";
 
 
 

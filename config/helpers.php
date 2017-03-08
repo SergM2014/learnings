@@ -40,9 +40,10 @@
         return !!$loggedInUser;
     }
 
-   /* function includeViewFile($path)
-    {
-        $filePath = getDocumentRoot();
-        $filePath.= '/resources/views/'.$path.'.php';
-        include $filePath;
-    }*/
+   function displayPreviewImage($givenImage, $imageCustomType)
+   {
+        if(@!$givenImage) {
+           return $imageCustomType == 'avatar'? 'noavatar.jpg' : 'nophoto.jpg';
+        }
+        return $givenImage;
+   }

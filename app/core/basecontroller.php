@@ -25,10 +25,18 @@ use Lib\CookieService;
          CookieService::getUserCookies();
      }
 
-     public function alreadySignedUser()
+     protected function alreadySignedUser()
      {
          if(@isset($_SESSION['user']['login'])) {header("Location: /subscribtion/signed");}
      }
+
+
+     protected function ifNotSubscribed()
+     {
+         if(@!isset($_SESSION['user']['login'])) {header('Location: /subscribtion/signIn');}
+     }
+
+
 
 
  }

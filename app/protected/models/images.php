@@ -24,14 +24,15 @@ class Images extends Prozess_Image
 
         // Загрузка файла и вывод сообщения
         if(!@copy($tmp_path.$name, $path.$name)) {
-            return $response =["message"=>"<span class='avatar-upload--failed'>". smthIsWrong()." </span>", "error" => true];
+            return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()." </span>", "error" => true];
         }
         else {
 
-          //  $_SESSION[$_POST['action']]= $name;
+           // $_SESSION[$_POST['imageCustomType']]= $name;
+            $_SESSION['avatar'] = $name;
 
 
-            $response=["message"=>"<span class='avatar-upload--succeded'>".succeededUpload()."</span>", "success"=>true, "image"=> @$_SESSION[$_POST['action']]];
+            $response=["message"=>"<span class='image-upload--succeded'>".succeededUpload()."</span>", "success"=>true, "image"=> @$_SESSION[$_POST['action']]];
             chmod ($path.$name , 0777);
         }
         // Удаляем временный файл a
@@ -50,7 +51,7 @@ class Images extends Prozess_Image
         $avatar = @ $_SESSION['avatar'];
         @ unlink ( PATH_SITE.UPLOAD_FOLDER.'avatars/'.$_SESSION['avatar']);
         unset ( $_SESSION['avatar']);
-        $response= ["message"=>"<span class='avatar-delete--succeded'>". fileDeleted() ."</span>", "image"=> $avatar];
+        $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> $avatar];
 
         return $response;
     }

@@ -52,6 +52,14 @@ $downloadL = "Download";
 $loginL = "Login";
 $addCommentL = "Add Comment!";
 $deleteL = "Delete";
+$settingsL = "Settings";
+$profileL = "Profile";
+$changeNameL= "Change Name";
+$changePasswordL = "Change Password";
+$changeEmailL = "Change Email";
+$subscripedTillL = "Subscriped till  ";
+$unsubscriped = "Unsubscriped";
+
 
 //these functionare for translation in controllers and models
 function variableInController(){

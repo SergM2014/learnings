@@ -38,10 +38,16 @@
                             <?= $enterAdminL  ?>
                         </a>
                     <?php else:?>
+
                         <form action="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signOut"  method="post" class="main-header__admin">
                             <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
                             <button type="submit" class="main-header__admin-btn"> <?= $_SESSION['user']['login'].'/'.$exitL  ?></button>
                         </form>
+
+
+                          <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/profile">
+                              <?= $profileL  ?>
+                          </a>
 
                     <?php endif; ?>
 

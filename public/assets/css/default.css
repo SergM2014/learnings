@@ -400,6 +400,8 @@ html, body {
 }
 .image-download__block{
     margin-bottom:10px;
+    position:relative;
+
 }
 .image-download__btn{
     padding:2px;
@@ -408,9 +410,23 @@ html, body {
 .image-download__output{
     display: inline-block;
     width: 50%;
-    height: 50px;
-   /* border: 1px solid black;*/
-    margin-bottom: 30px;
+    position: absolute;
+    top:25px;
+    text-align: center;
+    padding-left: 5px;
+}
+.image-upload--succeded, .image-delete--succeded{
+    color: #56ff76;
+    text-align:center;
+}
+.image-upload--failed{
+    color:red;
+    text-align:center;
+}
+
+.profile-block{
+    width: 360px;
+    margin: 0 auto;
 }
 
 

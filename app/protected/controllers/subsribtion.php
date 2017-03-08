@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 use App\Core\BaseController;
 use Lib\CheckFieldsService;
 use App\Models\CheckForm;
@@ -10,8 +11,6 @@ use Lib\TokenService;
 use Lib\HelperService;
 use App\Controllers\Index as IndexController;
 use Lib\CookieService;
-
-
 
 
 class Subscribtion extends BaseController
@@ -120,6 +119,16 @@ class Subscribtion extends BaseController
     public function signed()
     {
         return ['view'=>'/views/subscribtion/alreadySignedIn.php'];
+    }
+
+    public function profile()
+    {
+        $this->ifNotSubscribed();
+
+        //select all information according to session user login
+$profileData = (new SubscribtionModel())->getUserInfo();
+
+        return ['view'=>'/views/subscribtion/profile.php', 'profileData' => $profileData];
     }
 
 

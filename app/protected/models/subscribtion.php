@@ -61,12 +61,12 @@ class Subscribtion extends DataBase
         $stmt->execute();
         $user = $stmt->fetch();
 
-        $activeSubscribtion = $this->ifUserSubscribed($user);
+        $subscription = $this->ifUserSubscribed($user);
 
         if (@password_verify($password, $user->password)) {
-            $this->saveInSession($login, $activeSubscribtion );
+            $this->saveInSession($login, $subscription->activeStatus );
 
-            return ['token' => $user->token, 'activeSubscribtion' => $activeSubscribtion ];
+            return ['token' => $user->token, 'activeSubscribtion' => $subscription->activeStatus ];
         }
         return false;
     }
@@ -124,10 +124,31 @@ class Subscribtion extends DataBase
         }
 
         $date = new Carbon($user->start_date);
-        isset($argument) ? $date->$method($argument) : $date->$method();
-        $activeSubscribtion = (Carbon::now() < $date)? true: false;
+        //date its end date of subscribtion
+        $subscription = new \stdClass();
+        $subscription->finalDate = isset($argument) ? $date->$method($argument) : $date->$method();
+        $subscription->activeStatus = (Carbon::now() < $date)? true: false;
 
-       return $activeSubscribtion;
+       return $subscription;
+    }
+
+
+    public function getUserInfo()
+    {
+        $sql = "SELECT `id`, `avatar`, `login`, `email`, `start_date`, `subscribtion_term` FROM `users` WHERE `login`=? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['user']['login'], \PDO::PARAM_STR);
+        $stmt->execute();
+        $res = $stmt->fetch();
+        //should get end day of subscribtion
+        $subscription = $this->ifUserSubscribed($res);
+
+        $res->finalDate = $subscription->finalDate;
+        $res->activeStatus = $subscription->activeStatus;
+
+        return $res;
+
+
     }
 
 
