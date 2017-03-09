@@ -121,14 +121,37 @@ class Subscribtion extends BaseController
         return ['view'=>'/views/subscribtion/alreadySignedIn.php'];
     }
 
-    public function profile()
+    public function profile($errors = null )
     {
         $this->ifNotSubscribed();
 
         //select all information according to session user login
-$profileData = (new SubscribtionModel())->getUserInfo();
+        $profileData = (new SubscribtionModel())->getUserInfo();
 
-        return ['view'=>'/views/subscribtion/profile.php', 'profileData' => $profileData];
+        $_SESSION['updateUser'] = true;
+
+        return ['view'=>'/views/subscribtion/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];
+    }
+
+
+    public function update()
+    {
+
+        TokenService::check('user');
+
+        $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password', 'password2', 'email');
+
+        $errors = (new CheckForm())->checkUpdateUserErrors($cleanedUpInputs);
+
+        if(!empty($errors) ){ return $this->profile($errors); }
+
+        if(!isset($_SESSION['updateUser']))  header('Location:/subscribtion/profile');
+
+        (new SubscribtionModel())->updateUser($cleanedUpInputs);
+
+        HelperService::sendMail($cleanedUpInputs);
+
+        return ['view'=>'/views/subscribtion/updateUserSuccess.php'];
     }
 
 

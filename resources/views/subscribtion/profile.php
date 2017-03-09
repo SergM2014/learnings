@@ -13,7 +13,7 @@
         <div class="subscribtion-form__field-block">
             <label>
                 <?= $changeNameL ?> <br>
-                <input type="text" name="login" value = "<?= @$profileData->login?? @$_POST['login'] ?>" >
+                <input type="text" name="login" value = "<?=  @$_POST['login']?? @$profileData->login ?>" >
                 <p><small class="error"><?= @$errors['login'] ?></small></p>
             </label>
         </div>
@@ -35,7 +35,7 @@
         <div class="subscribtion-form__field-block">
             <label>
                 <?= $changeEmailL ?> <br>
-                <input type="text" name="email" value = "<?= @$profileData->email?? @$_POST['email'] ?>" >
+                <input type="text" name="email" value = "<?=  @$_POST['email']?? @$profileData->email ?>" >
                 <p><small class="error"><?= @$errors['email'] ?></small></p>
             </label>
         </div>

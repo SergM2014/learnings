@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Core\DataBase;
 use Lib\TokenService;
 use Carbon\Carbon;
+use Lib\CookieService;
 
 class Subscribtion extends DataBase
 {
@@ -43,6 +44,8 @@ class Subscribtion extends DataBase
         $_SESSION['user']['login'] = $login;
         if(@$activeSubscribtion) $_SESSION['user']['activeSubscribtion'] = $activeSubscribtion;
 
+        CookieService::addUserCookies($login);
+
     }
 
     /**
@@ -64,9 +67,9 @@ class Subscribtion extends DataBase
         $subscription = $this->ifUserSubscribed($user);
 
         if (@password_verify($password, $user->password)) {
-            $this->saveInSession($login, $subscription->activeStatus );
+            $this->saveInSession($login, @$subscription->activeStatus );
 
-            return ['token' => $user->token, 'activeSubscribtion' => $subscription->activeStatus ];
+            return ['token' => $user->token, 'activeSubscribtion' => @$subscription->activeStatus ];
         }
         return false;
     }
@@ -76,6 +79,8 @@ class Subscribtion extends DataBase
     {
         unset($_SESSION['user']['login']);
         unset($_SESSION['user']['activeSubscribtion']);
+
+        CookieService::destroyUserCookies();
     }
 
     /**
@@ -143,12 +148,46 @@ class Subscribtion extends DataBase
         //should get end day of subscribtion
         $subscription = $this->ifUserSubscribed($res);
 
-        $res->finalDate = $subscription->finalDate;
-        $res->activeStatus = $subscription->activeStatus;
+        $res->finalDate = @$subscription->finalDate;
+        $res->activeStatus = @$subscription->activeStatus;
 
         return $res;
+    }
 
 
+    public function updateUser(array $input)
+    {
+        extract($input);
+
+        $sql = "UPDATE `users` SET `login`= ?, `email`= ?  WHERE `id`= ?";
+        $stmt =$this->conn->prepare($sql);
+        $stmt->bindValue(1, $login, \PDO::PARAM_STR);
+
+        $stmt->bindValue(2, $_POST['email'], \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['id'], \PDO::PARAM_INT);
+
+
+        if(!$stmt->execute()) return  false;
+
+        if($_POST['password'] !=''){
+
+            $password= password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE `users` SET `password` = ? ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(1, $password, \PDO::PARAM_INT);
+
+            if(!$stmt->execute()) return  false;
+        }
+
+
+        $this->saveInSession($login);
+
+        unset ($_SESSION['updateUser']);
+
+        //$this->saveInSession($login);
+
+        //return $id;
     }
 
 

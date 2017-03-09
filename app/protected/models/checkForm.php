@@ -17,8 +17,9 @@ class CheckForm extends DataBase
     use CheckFieldsService;
 
 
-    protected function checkIfNotEmpty($fields, $errors)
+    protected function checkIfNotEmpty(array $fields, $errors)
     {
+
         foreach ($fields as $key => $field ){
            if(empty($field)){
                $errors->$key = emptyField();
@@ -71,6 +72,24 @@ class CheckForm extends DataBase
         $this->checkIfEmail($errors);
 
         return (array)$errors;
+   }
+
+
+
+   public function checkUpdateUserErrors($inputs)
+   {
+       $errors = new \stdClass();
+
+       $this->checkIfNotEmpty(['login' => $inputs['login'], 'email' => $inputs['email']], $errors);
+       $this->ifUniqueLogin($inputs, $errors);
+       $this->comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
+
+       if($inputs['password'] == '') $inputs = [ 'login' => $inputs['login'], 'email' => $inputs['email'] ];
+
+       $this->checkFieldsLength($inputs, 6, $errors);
+       $this->checkIfEmail($errors);
+
+       return (array)$errors;
    }
 
 
