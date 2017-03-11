@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Core\BaseController;
 use App\Models\Comment;
 use App\Models\Lesson as ModelLesson;
-
+use App\Models\Index as DB;
 
 
 class Lesson  extends BaseController
@@ -26,7 +26,9 @@ class Lesson  extends BaseController
         $comments = (new Comment())->getCommentsOfOneLesson();
         $relatedLessons = $modelLesson->getRelatedLessons();
 
-      return ['view'=>'views/lesson.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons];
+        $builder = (new DB)->printCaptcha();
+
+      return ['view'=>'views/lesson.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons, 'builder'=> $builder ];
     }
 
 

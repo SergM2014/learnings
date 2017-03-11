@@ -4,10 +4,9 @@
 
         <h2 class="add-comment__title"><?= $addCommentL ?></h2>
 
-        <?php
-                $imageCustomType = 'avatar';
-
-                include   PATH_SITE.'/resources/views/partials/addImage.php';  ?>
+        <div id="CommentFormContainer">
+            <?php include PATH_SITE.'/resources/views/partials/commentForm.php'; ?>
+        </div>
 
     </div>
 

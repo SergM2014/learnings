@@ -12,6 +12,7 @@ use App\Models\Testemonial;
 use Lib\HelperService;
 
 
+
 class Index  extends BaseController
   {
 
@@ -38,7 +39,7 @@ class Index  extends BaseController
       public function refreshCaptcha()
       {
           $builder = (new DB)->printCaptcha();
-          return ['view' => 'customer/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
+          return ['view' => 'views/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
       }
 
 

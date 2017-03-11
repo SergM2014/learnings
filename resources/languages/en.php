@@ -61,6 +61,10 @@ $subscripedTillL = "Subscriped till  ";
 $unsubscriped = "The total user is totally unsubscriped";
 $editProfileL = "Edit Profile";
 $deletePreviewL = "Delete preview";
+$sendCommentL = "Add comment";
+$enterCaptchaL = "Enter captcha";
+$clickToRefreshL = "Click to refresh";
+$enterCommentL = "Enter comment";
 
 
 //these functionare for translation in controllers and models

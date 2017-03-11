@@ -453,6 +453,19 @@ html, body {
     cursor:pointer;
 }
 
+.add-comment__form{
+    margin:20px 0;
+}
+.add-comment__captcha{
+  cursor:pointer;
+
+}
+.add-comment__submit-btn{
+   padding:5px;
+    margin:10px 0;
+    cursor:pointer;
+}
+
 
 
 
@@ -532,8 +545,14 @@ html, body {
 
 .warning {
     color: red; }
+.warning:empty{
+    display:none;
+}
 .error{
     color:red;
     border-bottom:1px dotted red;
+}
+.error:empty{
+    display:none;
 }
 

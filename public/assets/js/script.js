@@ -30,7 +30,7 @@ languagesBox.addEventListener('click', function(){
 document.body.addEventListener('click', function(e){
 
 //catch the refresh captcha event
-    if(e.target.id == "captcha_img") {
+    if(e.target.id == "captchaImg") {
         fetch(
             '/index/refreshCaptcha', {
                 method: 'POST',
@@ -38,9 +38,19 @@ document.body.addEventListener('click', function(e){
             })
             .then(response =>response.text())
             .then(html => {
-                document.querySelector('#captcha-img-container').innerHTML = html;
+                document.querySelector('#captchaImgContainer').innerHTML = html;
             })
     }
+
+
+    if(e.target.id == "addCommentSubmitBtn"){
+        alert('I\'am submiting content now');
+    }
+
+
+
+
+
 
 
 

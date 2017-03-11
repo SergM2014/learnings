@@ -1,3 +1,3 @@
-<img src="<?php echo $builder->inline(); ?>" id="captcha_img" >
+<img src="<?php echo $builder->inline(); ?>" id="captchaImg" >
 
 

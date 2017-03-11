@@ -59,7 +59,10 @@ $subscripedTillL = "Підписаний до ";
 $unsubscriped = "Користувач непідписаний на жоден план";
 $editProfileL = "Редагувати профіль";
 $deletePreviewL = "Видалити зоображення";
-
+$sendCommentL = "Додати коментарій";
+$enterCaptchaL = "Введіть капчу";
+$clickToRefreshL = "Клікніть щоб обновити";
+$enterCommentL = "Введіть комментар";
 
 
 //these functionare for translation in controllers and models
