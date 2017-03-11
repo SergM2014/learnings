@@ -180,6 +180,15 @@ class Subscribtion extends DataBase
             if(!$stmt->execute()) return  false;
         }
 
+//var_dump($_SESSION['avatar']);
+        if(@$_SESSION['avatar']){
+            if($_SESSION['avatar'] == 'delete') $_SESSION['avatar'] = null;
+            $sql = "UPDATE `users` SET `avatar` = ? WHERE `id`=?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(1, $_SESSION['avatar'], \PDO::PARAM_STR);
+            $stmt->bindValue(2, $_POST['id'], \PDO::PARAM_INT);
+            if( $stmt->execute()) unset($_SESSION['avatar']);
+        }
 
         $this->saveInSession($login);
 

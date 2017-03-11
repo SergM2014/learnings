@@ -81,7 +81,7 @@ class CheckForm extends DataBase
        $errors = new \stdClass();
 
        $this->checkIfNotEmpty(['login' => $inputs['login'], 'email' => $inputs['email']], $errors);
-       $this->ifUniqueLogin($inputs, $errors);
+
        $this->comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
 
        if($inputs['password'] == '') $inputs = [ 'login' => $inputs['login'], 'email' => $inputs['email'] ];

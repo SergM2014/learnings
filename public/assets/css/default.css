@@ -367,7 +367,12 @@ html, body {
     cursor:pointer;
 }
 .subscribtion-form__field-block{
-    margin-bottom:5px;
+    margin:10px 0;
+}
+
+.subscribtion-form__field-block--notice{
+    margin-top:10px;
+    color:red;
 }
 
 .subscribtion-success{
@@ -390,19 +395,22 @@ html, body {
     color: #cc7e8d;
     margin:20px 0;
 }
+
 .image-download__preview {
     max-height:112px;
     max-width:112px;
     border-radius:5px;
 }
+
 .add-comment__progress{
     margin-top:10px;
 }
+
 .image-download__block{
     margin-bottom:10px;
     position:relative;
-
 }
+
 .image-download__btn{
     padding:2px;
     cursor:pointer;
@@ -426,7 +434,23 @@ html, body {
 
 .profile-block{
     width: 360px;
-    margin: 0 auto;
+    margin: 30px auto;
+}
+
+.header-h1{
+    text-align:center;
+    color:red;
+    margin:20px 0;
+}
+.profile-header__h1{
+    color: #884388;
+    margin-bottom:20px;
+}
+.image-download__delete-sign{
+    position:absolute;
+    top:0;
+    right:0;
+    cursor:pointer;
 }
 
 

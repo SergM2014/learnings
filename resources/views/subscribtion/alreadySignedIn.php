@@ -1,1 +1,1 @@
-<h1 class="subscribtion-success"><?= $alreadySignedIn ?></h1>
+<h1 class="header-h1"><?= $alreadySignedIn ?></h1>

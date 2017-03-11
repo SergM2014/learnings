@@ -40,10 +40,10 @@
         return !!$loggedInUser;
     }
 
-   function displayPreviewImage($givenImage, $imageCustomType)
+   function displayPreviewImage($givenImage, $imageCustomType, $path)
    {
         if(@!$givenImage) {
-           return $imageCustomType == 'avatar'? 'noavatar.jpg' : 'nophoto.jpg';
+           return $imageCustomType == 'avatar'? '/img/noavatar.jpg' : '/img/nophoto.jpg';
         }
-        return $givenImage;
+        return $path.$givenImage;
    }

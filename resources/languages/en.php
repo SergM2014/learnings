@@ -58,7 +58,9 @@ $changeNameL= "Change Name";
 $changePasswordL = "Change Password";
 $changeEmailL = "Change Email";
 $subscripedTillL = "Subscriped till  ";
-$unsubscriped = "Unsubscriped";
+$unsubscriped = "The total user is totally unsubscriped";
+$editProfileL = "Edit Profile";
+$deletePreviewL = "Delete preview";
 
 
 //these functionare for translation in controllers and models

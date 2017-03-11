@@ -1,6 +1,12 @@
 <div class="image-download__block">
-    <img src="/img/<?=  displayPreviewImage($givenImage, $imageCustomType) ?>" alt="" id="downloadImagePreview" class="image-download__preview">
-    <div id="imageDownloadOutput" class="image-download__output"></div>
+    <img src="<?=  displayPreviewImage($givenImage, $imageCustomType, $path) ?>" alt="" id="downloadImagePreview" class="image-download__preview">
+
+<?php if($givenImage): ?>
+    <img src="/img/small-close.png" alt="<?= $deletePreviewL ?>"  title ="<?= $deletePreviewL ?>" id="deleteImagePreview" class="image-download__delete-sign">
+<?php endif; ?>
+
+     <div id="imageDownloadOutput" class="image-download__output"></div>
+
 
     <form enctype="multipart/form-data">
         <input type="hidden" id="prozessImageToken" name="prozessImageToken" value = "<?= \Lib\TokenService::printTocken('prozessImage') ?>" >

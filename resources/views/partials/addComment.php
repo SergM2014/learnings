@@ -6,6 +6,7 @@
 
         <?php
                 $imageCustomType = 'avatar';
+
                 include   PATH_SITE.'/resources/views/partials/addImage.php';  ?>
 
     </div>

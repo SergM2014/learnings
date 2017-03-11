@@ -19,7 +19,7 @@
 	define('UPLOAD_FOLDER','/public/uploads/');
 
 
-    define('PRODUCTS_IMAGES', 'productsImages/');
+   // define('PRODUCTS_IMAGES', 'productsImages/');
 
 
     define('SLIDER_IMAGES', 'slider/');

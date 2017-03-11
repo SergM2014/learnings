@@ -56,7 +56,9 @@ $changeNameL= "Змінити Імя";
 $changePasswordL = "Змінити пароль";
 $changeEmailL = "Змінити Email";
 $subscripedTillL = "Підписаний до ";
-$unsubscriped = "Непідписаний";
+$unsubscriped = "Користувач непідписаний на жоден план";
+$editProfileL = "Редагувати профіль";
+$deletePreviewL = "Видалити зоображення";
 
 
 

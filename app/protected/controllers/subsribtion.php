@@ -128,6 +128,7 @@ class Subscribtion extends BaseController
         //select all information according to session user login
         $profileData = (new SubscribtionModel())->getUserInfo();
 
+        unset($_SESSION['avatar']);
         $_SESSION['updateUser'] = true;
 
         return ['view'=>'/views/subscribtion/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];

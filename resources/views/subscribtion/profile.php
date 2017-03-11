@@ -1,13 +1,16 @@
 <section class="profile-block">
+
+    <h1 class="profile-header__h1"><?= $editProfileL ?></h1>
     <?php
 
         $givenImage = $profileData->avatar;
         $imageCustomType = 'avatar';
+        $path = '/uploads/avatars/';
         include   PATH_SITE.'/resources/views/partials/addImage.php';
 
         ?>
 
-    <form action="/subscribtion/update" method="post">
+    <form action="/subscribtion/update" method="post" >
         <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
         <input type="hidden" name="id" value = "<?= $profileData->id ?>" >
         <div class="subscribtion-form__field-block">
@@ -46,9 +49,9 @@
     </form>
 
 
-    <p>
+    <div class="subscribtion-form__field-block--notice">
         <?= $profileData->activeStatus == 1 ? $subscripedTillL.' '.$profileData->finalDate->toDateString() : $unsubscriped; ?>
-    </p>
+    </div>
 
 </section>
 

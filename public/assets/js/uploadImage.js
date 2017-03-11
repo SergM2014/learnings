@@ -7,7 +7,8 @@ Array.prototype.intersect = function(a){
 let progress = document.getElementById('imageDownloadProgress'),
     output = document.getElementById('imageDownloadOutput'),
     submit_btn = document.getElementById('downloadImageBtn'),
-    reset_btn = document.getElementById('resetImageBtn');
+    reset_btn = document.getElementById('resetImageBtn'),
+    delete_img_sign = document.getElementById('deleteImagePreview');
 
 class Helper {
     static getCurrentLang(j){
@@ -72,6 +73,8 @@ function abortHandler(event){
 
 if(document.getElementById('file')) {
     document.getElementById('file').onchange = function () {
+
+        if(delete_img_sign) delete_img_sign.className = 'hidden';
 
         let input = this;
 
@@ -186,4 +189,35 @@ if(reset_btn) {
 
     };
 }
-//end of image upload
+//end of image reset
+
+
+if(delete_img_sign){
+    document.getElementById('deleteImagePreview').addEventListener('click', function(){
+//console.log(111);
+
+        let _token = document.getElementById('prozessImageToken').value;
+        let imageCustomType = document.getElementById('imageCustomType').value;
+        let noPhoto = imageCustomType == 'avatar'? 'noavatar' : 'nophoto';
+        document.getElementById('downloadImagePreview').setAttribute('src', '/img/'+noPhoto+'.jpg');
+
+        let formData = new FormData;
+        formData.append('deleteAvatarInSession', true);
+        formData.append('_token', _token);
+        formData.append('ajax', true);
+
+        this.className = 'hidden';
+
+
+        let deleteUrl = "/images/delete"+Helper.ucFirst(imageCustomType);
+
+        fetch( deleteUrl,
+            {
+                method : "POST",
+                credentials: "same-origin",
+                body:formData
+            })
+
+
+    })
+}
