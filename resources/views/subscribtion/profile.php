@@ -1,3 +1,10 @@
+<section class="breadcrumbs">
+
+    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <span class="breadcrumb__item--current"><?=  $profileL ?></span>
+
+</section>
+
 <section class="profile-block">
 
     <h1 class="profile-header__h1"><?= $editProfileL ?></h1>
