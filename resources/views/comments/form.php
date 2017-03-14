@@ -1,4 +1,5 @@
 
+<h2 class="add-comment__title"><?= $addCommentL ?></h2>
 
 <form method="post" class="add-comment__form" id="addCommentForm">
 
