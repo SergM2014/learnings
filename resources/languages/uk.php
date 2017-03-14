@@ -63,6 +63,7 @@ $sendCommentL = "Додати коментарій";
 $enterCaptchaL = "Введіть капчу";
 $clickToRefreshL = "Клікніть щоб обновити";
 $enterCommentL = "Введіть комментар";
+$commentAdded = "Ваш коментар доданою Його буде опублікованно після перегляду модератором!";
 
 
 //these functionare for translation in controllers and models
@@ -134,5 +135,10 @@ function smthIsWrong()
 function fileDeleted()
 {
     return "Файл видалено!";
+}
+
+function wrongCaptcha()
+{
+    return "Неправильна капча!";
 }
 

@@ -39,12 +39,13 @@ class Subscribtion extends DataBase
         return $id;
     }
 
-    protected function saveInSession($login, $activeSubscribtion = null )
+    protected function saveInSession($login, $id, $activeSubscribtion = null )
     {
         $_SESSION['user']['login'] = $login;
+        $_SESSION['user']['id'] = $id;
         if(@$activeSubscribtion) $_SESSION['user']['activeSubscribtion'] = $activeSubscribtion;
 
-        CookieService::addUserCookies($login);
+        CookieService::addUserCookies($login, $id);
 
     }
 
@@ -58,7 +59,7 @@ class Subscribtion extends DataBase
     {
         extract($input);
         if (@!$login OR @!$password) return false;
-        $sql = "SELECT `login`, `password`, `start_date`, `subscribtion_term`, `token` FROM `users` WHERE `login`=? ";
+        $sql = "SELECT `id`,`login`, `password`, `start_date`, `subscribtion_term`, `token` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->execute();
@@ -67,7 +68,7 @@ class Subscribtion extends DataBase
         $subscription = $this->ifUserSubscribed($user);
 
         if (@password_verify($password, $user->password)) {
-            $this->saveInSession($login, @$subscription->activeStatus );
+            $this->saveInSession($login, $user->id,  @$subscription->activeStatus );
 
             return ['token' => $user->token, 'activeSubscribtion' => @$subscription->activeStatus ];
         }
@@ -79,6 +80,7 @@ class Subscribtion extends DataBase
     {
         unset($_SESSION['user']['login']);
         unset($_SESSION['user']['activeSubscribtion']);
+        unset($_SESSION['user']['id']);
 
         CookieService::destroyUserCookies();
     }
@@ -180,7 +182,7 @@ class Subscribtion extends DataBase
             if(!$stmt->execute()) return  false;
         }
 
-//var_dump($_SESSION['avatar']);
+
         if(@$_SESSION['avatar']){
             if($_SESSION['avatar'] == 'delete') $_SESSION['avatar'] = null;
             $sql = "UPDATE `users` SET `avatar` = ? WHERE `id`=?";

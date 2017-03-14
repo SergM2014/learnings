@@ -5,7 +5,7 @@
         <h2 class="add-comment__title"><?= $addCommentL ?></h2>
 
         <div id="CommentFormContainer">
-            <?php include PATH_SITE.'/resources/views/partials/commentForm.php'; ?>
+            <?php include PATH_SITE.'/resources/views/comments/form.php'; ?>
         </div>
 
     </div>

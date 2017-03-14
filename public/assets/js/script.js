@@ -44,7 +44,20 @@ document.body.addEventListener('click', function(e){
 
 
     if(e.target.id == "addCommentSubmitBtn"){
-        alert('I\'am submiting content now');
+//alert('I\'am submiting content now');
+        let formData = new FormData(document.getElementById('addCommentForm'));
+//console.log(formData)
+        fetch(
+            '/comment/add', {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: formData
+            })
+            .then(response =>response.text())
+            .then(html => {
+                document.querySelector('#CommentFormContainer').innerHTML = html;
+            })
+
     }
 
 

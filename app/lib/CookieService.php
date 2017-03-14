@@ -8,11 +8,12 @@ use Lib\TokenService;
 
 class CookieService {
 
-    public static function addUserCookies($login, $token = false, $activeSubscribtion = false )
+    public static function addUserCookies($login, $userId, $token = false, $activeSubscribtion = false )
     {
         $expire_time = time()+1209600;
 
         setcookie('login', $login, $expire_time, '/' );
+        setcookie('userId', $login, $expire_time, '/' );
         if($token) setcookie('userToken', $token, $expire_time, '/');//here is an error tocken should be taken from the DB
         if($activeSubscribtion) setcookie('activeSubscribtion', $activeSubscribtion, time()+86400, '/'); //duration 24 hours
     }
@@ -43,6 +44,7 @@ class CookieService {
     public static function destroyUserCookies()
     {
         setcookie('login', '', time() - 1, '/');
+        setcookie('userId', '', time() - 1, '/');
         setcookie('userToken', '', time() - 1, '/');
         setcookie('activeSubscribtion', '', time()-1, '/');
     }

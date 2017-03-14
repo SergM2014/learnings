@@ -47,11 +47,11 @@
     <section class="related-lessons">
         <h3 class="under-video__container-h3"><?= $underVideoLessonsL ?></h3>
 
-        <?php foreach ($relatedLessons as $lesson): ?>
+        <?php foreach ($relatedLessons as $relatedLesson): ?>
         <div class="related-lessons__item">
-            <a href="/lesson?id=<?= $lesson->id ?>" class="related-lessons__item-link">
-                <img src="/uploads/lessonsIcons/<?= $lesson->icon ?>" alt="" class="related-lessons__item-img">
-                <span class="related-lessons__item-link-title"><?= $lesson->title ?></span>
+            <a href="/lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
+                <img src="/uploads/lessonsIcons/<?= $relatedLesson->icon ?>" alt="" class="related-lessons__item-img">
+                <span class="related-lessons__item-link-title"><?= $relatedLesson->title ?></span>
             </a>
         </div>
         <?php endforeach; ?>
@@ -62,6 +62,6 @@
 
 <?php if(loggedInUser()): ?>
 
-        <?php include PATH_SITE.'/resources/views/partials/addComment.php'; ?>
+        <?php include PATH_SITE.'/resources/views/comments/addComment.php'; ?>
 
 <?php endif; ?>

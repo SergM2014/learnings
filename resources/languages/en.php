@@ -65,6 +65,8 @@ $sendCommentL = "Add comment";
 $enterCaptchaL = "Enter captcha";
 $clickToRefreshL = "Click to refresh";
 $enterCommentL = "Enter comment";
+$commentAdded = "Your comment is added. It will be published after moderation!";
+
 
 
 //these functionare for translation in controllers and models
@@ -135,4 +137,9 @@ function smthIsWrong()
 function fileDeleted()
 {
     return "File is deleted!";
+}
+
+function wrongCaptcha()
+{
+    return "Неправильна капча!";
 }

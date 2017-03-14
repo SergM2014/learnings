@@ -24,6 +24,14 @@ trait CheckFieldsService {
         return $inputs;
     }
 
+    public static function stripMaliciousTags($content)
+    {
+        $content = strip_tags($content,'<a><b><blockquote><br><button><cite><code><div><dd><dl><dt><em><fieldset>
+        <font><h1><h2><h3><h4><h5><hr><i><it><img><label><li><ol><p><pre><span><strong><table><tbody><tr>
+        <td><th><u><ul>');
+        return $content;
+    }
+
 
     /**
      *
@@ -35,11 +43,13 @@ trait CheckFieldsService {
     public function stripTags($income)
     {
         $content = $this->closeTags($income);
-
+/*
         $content = strip_tags($content,'<a><b><blockquote><br><button><cite><code><div><dd><dl><dt><em><fieldset>
         <font><h1><h2><h3><h4><h5><hr><i><it><img><label><li><ol><p><pre><span><strong><table><tbody><tr>
         <td><th><u><ul>');
-        return $content;
+        return $content;*/
+       $content = self::stripMaliciousTags($content);
+       return $content;
     }
 
     /**

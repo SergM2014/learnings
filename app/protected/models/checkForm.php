@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Core\DataBase;
 use Lib\CheckFieldsService;
 
+
 use function \emptyField;
 use function \notEqualRepeatedPassword;
 use function \notApropriateLength;
 use function \wrongEmail;
 use function \repeatedLogin;
+use function \wrongCaptcha;
 
 
 class CheckForm extends DataBase
@@ -90,6 +92,21 @@ class CheckForm extends DataBase
        $this->checkIfEmail($errors);
 
        return (array)$errors;
+   }
+
+   public function checkAddCommentForm($inputs)
+   {
+        $errors =  new \stdClass();
+
+        $this->checkIfNotEmpty($inputs, $errors);
+
+
+        if($_SESSION['phrase']!= $inputs['captcha']) {
+           $errors->captcha = $errors->captcha ?? wrongCaptcha();
+        }
+
+      return (array)$errors;
+
    }
 
 
