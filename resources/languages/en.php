@@ -66,6 +66,8 @@ $enterCaptchaL = "Enter captcha";
 $clickToRefreshL = "Click to refresh";
 $enterCommentL = "Enter comment";
 $commentAdded = "Your comment is added. It will be published after moderation!";
+$giveResponseToComment = "Response the comment";
+$responseGivvenComment = "The comment to response";
 
 
 

@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+
+
 use App\Core\DataBase;
+
 
 class Comment extends DataBase
 {
@@ -11,7 +14,8 @@ class Comment extends DataBase
     public function getCommentsOfOneLesson()
     {
         $id= $_GET['id'];
-        $sql= "SELECT `id`, `comment`, `user_id` FROM `comments` WHERE `lesson_id`= ? AND `published`='1'";
+        $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
+          `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`lesson_id`= ? AND `c`.`published`='1'";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
@@ -30,6 +34,17 @@ class Comment extends DataBase
 
         if($stmt->execute()) return true;
         return false;
+    }
+
+    public function getOneComment()
+    {
+        $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
+          `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`id`= ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['commentId'], \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
     }
 
 

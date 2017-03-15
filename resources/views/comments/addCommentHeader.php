@@ -1,0 +1,1 @@
+<h2 class="add-comment__title"><?= $addCommentL ?></h2>

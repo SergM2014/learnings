@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Core\BaseController;
+use App\Core\DataBase;
 use App\Models\Index as DB;
 use App\Models\CheckForm;
 use Lib\CheckFieldsService;
@@ -39,8 +40,19 @@ class Comment  extends BaseController
 
         return  ['view' => '/views/comments/addSuccess.php','ajax' => true];
 
+    }
 
+    public function getOneForResponse()
+    {
+        $comment = (new DBComment())->getOneComment();
+//dd($comment);
 
+        return  ['view' => '/views/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
+    }
+
+    public function resetHeader()
+    {
+        return  ['view' => '/views/comments/addCommentHeader.php', 'ajax' => true];
     }
 
 

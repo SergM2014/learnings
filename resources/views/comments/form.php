@@ -1,14 +1,18 @@
+<div id="addCommentHeader" class="add-comment__header">
+    <?php include PATH_SITE.'/resources/views/comments/addCommentHeader.php'; ?>
+</div>
 
-<h2 class="add-comment__title"><?= $addCommentL ?></h2>
 
 <form method="post" class="add-comment__form" id="addCommentForm">
 
 
         <input type="hidden" name="lessonId" value="<?= @$_POST['lessonId']?? $lesson->id ?>">
         <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>" >
+        <input type="hidden" id="commentParentId" name="parentId"  value="0">
 
         <small><?= $enterCommentL ?></small>
-        <div><textarea name="comment" id="comment" name="comment" cols="40" rows="10">
+        <div>
+            <textarea name="comment" id="comment" name="comment" cols="40" rows="10">
                 <?= \Lib\CheckFieldsService::stripMaliciousTags(@$_POST['comment']) ?>
             </textarea>
         </div>

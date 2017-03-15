@@ -64,6 +64,8 @@ $enterCaptchaL = "Введіть капчу";
 $clickToRefreshL = "Клікніть щоб обновити";
 $enterCommentL = "Введіть комментар";
 $commentAdded = "Ваш коментар доданою Його буде опублікованно після перегляду модератором!";
+$giveResponseToComment = "Дати відповідь на комментар";
+$responseGivvenComment = "Комментар для відповіді";
 
 
 //these functionare for translation in controllers and models

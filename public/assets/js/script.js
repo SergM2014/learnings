@@ -60,6 +60,44 @@ document.body.addEventListener('click', function(e){
 
     }
 
+    if(e.target.closest('.lesson-comments__response-link')){
+       let commentId = e.target.dataset.commentId;
+//console.log(commentId)
+        let formData = new FormData(document.getElementById('addCommentForm'));
+        formData.append('commentId', commentId );
+
+        fetch(
+            '/comment/getOneForResponse', {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: formData
+            })
+            .then(response =>response.text())
+            .then(html => {
+                document.querySelector('#addCommentHeader').innerHTML = html;
+                document.querySelector('#commentParentId').value  = commentId;
+            })
+
+    }
+
+
+    if(e.target.id =='lessonCommentCloseSign'){
+//alert('closing')
+
+
+        fetch(
+            '/comment/resetHeader', {
+                method: 'POST',
+                credentials: 'same-origin',
+
+            })
+            .then(response =>response.text())
+            .then(html => {
+                document.querySelector('#addCommentHeader').innerHTML = html;
+                document.querySelector('#commentParentId').value  = 0;
+            })
+    }
+
 
 
 

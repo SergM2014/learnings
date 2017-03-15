@@ -73,7 +73,7 @@ html, body {
 .main-header {
   margin-top: 20px; }
 
-.main-header__h1, .lesson-header_h1 {
+.main-header__h1, .lesson-header_h1, .header__h2 {
   text-align: center;
   color: #aa1111; }
 
@@ -464,6 +464,57 @@ html, body {
    padding:5px;
     margin:10px 0;
     cursor:pointer;
+}
+
+.lesson-comments__avatar{
+    max-height: 100px;
+    max-width: 100px;
+    border-radius: 5px;
+}
+.lesson-comments__article{
+    border-bottom:1px solid black;
+    padding:5px;
+    position:relative;
+}
+.lesson-comments__time{
+    margin-left:10px;
+}
+.lesson-comments__text{
+    background: #95ff7a;
+    padding-left:20px;
+}
+
+.lesson-comments__response-link-container{
+    position:relative;
+    height:20px;
+}
+
+.lesson-comments__response-link{
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 2px;
+    border-radius: 3px;
+
+}
+
+.lesson-comments__login{
+    font: bold italic 20px serif;
+    color:red;
+}
+.add-comment__header{
+    position:relative;
+    padding-top:50px;
+}
+
+.lesson-comments__close-sign {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top:5px;
+    right: 10px;
+    cursor: pointer;
 }
 
 
