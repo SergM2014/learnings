@@ -292,21 +292,21 @@ html, body {
 
 .under-video__container{
     margin-bottom:20px;
-   display:flex;
-    justify-content: center;
+     display:flex;
+
 
 }
 .under-video__container-h3{
     text-align:center;
 }
 .lesson-comments{
-    width:49%;
+    width:66%;
     min-height:200px;
     border-right:1px solid black;
 
 }
 .related-lessons{
-    width:49%;
+    width:33%;
     min-height:200px;
 
 
@@ -454,7 +454,7 @@ html, body {
 }
 
 .add-comment__form{
-    margin:20px 0;
+    margin:50px 0 20px;
 }
 .add-comment__captcha{
   cursor:pointer;
@@ -466,6 +466,9 @@ html, body {
     cursor:pointer;
 }
 
+.lesson-comments__items li{
+    list-style-type: none;
+}
 .lesson-comments__avatar{
     max-height: 100px;
     max-width: 100px;
@@ -475,6 +478,7 @@ html, body {
     border-bottom:1px solid black;
     padding:5px;
     position:relative;
+
 }
 .lesson-comments__time{
     margin-left:10px;
@@ -503,14 +507,20 @@ html, body {
     font: bold italic 20px serif;
     color:red;
 }
+
+.lesson-comments__children-container{
+    margin:20px 0 20px 35px;
+
+}
+
 .add-comment__header{
     position:relative;
     padding-top:50px;
 }
 
 .lesson-comments__close-sign {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     position: absolute;
     top:5px;
     right: 10px;

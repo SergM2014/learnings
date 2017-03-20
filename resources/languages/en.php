@@ -145,3 +145,7 @@ function wrongCaptcha()
 {
     return "Неправильна капча!";
 }
+function responseGivvenComment()
+{
+    return "Response the comment!";
+}

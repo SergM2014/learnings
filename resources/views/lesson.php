@@ -42,21 +42,10 @@
         <?php if(!!count($comments)): ?>
 
 
-            <?php foreach($comments as $comment): ?>
-                <article class="lesson-comments__article">
-                    <img class="lesson-comments__avatar" src="<?= $comment->avatar? '/uploads/avatars/'.$comment->avatar : '/img/noavatar.jpg' ?>" alt="">
-                    <span class="lesson-comments__login"><?= $comment->login ?></span>
-                    <time class="lesson-comments__time"><?= $comment->added_at ?></time>
-                    <div class="lesson-comments__text"><?= $comment->comment ?></div>
-                    <div class="lesson-comments__response-link-container">
-                        <a href="#addComment" class="lesson-comments__response-link" data-comment-id="<?= $comment->id ?>" ><?= $giveResponseToComment ?></a>
-                    </div>
-                </article>
 
-
-
-            <?php endforeach; ?>
-
+        <ul class="lesson-comments__items">
+            <?= $commentsTreeStructure  ?>
+        </ul>
         <?php endif; ?>
 
     </section>

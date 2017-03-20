@@ -21,7 +21,7 @@ class Comment  extends BaseController
        *
        * @return array
        */
-    public function add()
+    public function store()
 	{
         TokenService::check('user');
 
@@ -45,7 +45,6 @@ class Comment  extends BaseController
     public function getOneForResponse()
     {
         $comment = (new DBComment())->getOneComment();
-//dd($comment);
 
         return  ['view' => '/views/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
     }

@@ -42,13 +42,13 @@ document.body.addEventListener('click', function(e){
             })
     }
 
-
+    //add Comment
     if(e.target.id == "addCommentSubmitBtn"){
-//alert('I\'am submiting content now');
+
         let formData = new FormData(document.getElementById('addCommentForm'));
-//console.log(formData)
+
         fetch(
-            '/comment/add', {
+            '/comment/store', {
                 method: 'POST',
                 credentials: 'same-origin',
                 body: formData
@@ -60,9 +60,10 @@ document.body.addEventListener('click', function(e){
 
     }
 
+    //shoose  comment  to answer
     if(e.target.closest('.lesson-comments__response-link')){
        let commentId = e.target.dataset.commentId;
-//console.log(commentId)
+
         let formData = new FormData(document.getElementById('addCommentForm'));
         formData.append('commentId', commentId );
 
@@ -80,16 +81,12 @@ document.body.addEventListener('click', function(e){
 
     }
 
-
+//close the choseen comment that should be closed
     if(e.target.id =='lessonCommentCloseSign'){
-//alert('closing')
-
-
         fetch(
             '/comment/resetHeader', {
                 method: 'POST',
                 credentials: 'same-origin',
-
             })
             .then(response =>response.text())
             .then(html => {

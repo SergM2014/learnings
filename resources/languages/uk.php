@@ -143,4 +143,8 @@ function wrongCaptcha()
 {
     return "Неправильна капча!";
 }
+function responseGivvenComment()
+{
+    return "Відповісти на комментар!";
+}
 

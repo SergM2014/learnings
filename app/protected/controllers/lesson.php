@@ -21,14 +21,16 @@ class Lesson  extends BaseController
        */
     public function index()
 	{
+	    $commentModel = new Comment();
 	    $modelLesson = new ModelLesson();
         $lesson =  $modelLesson->getOneLesson();
-        $comments = (new Comment())->getCommentsOfOneLesson();
+        $comments = $commentModel->getCommentsOfOneLesson();
+        $commentsTreeStructure = $commentModel->getCommentsTreeStructure();
         $relatedLessons = $modelLesson->getRelatedLessons();
 
         $builder = (new DB)->printCaptcha();
 
-      return ['view'=>'views/lesson.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons, 'builder'=> $builder ];
+      return ['view'=>'views/lesson.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons, 'builder'=> $builder, 'commentsTreeStructure'=> $commentsTreeStructure ];
     }
 
 
