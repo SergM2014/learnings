@@ -69,6 +69,13 @@ class Comment extends DataBase
         return $result;
     }
 
+
+    /**
+     * bild tree structure of comments
+     *
+     * @param int $parent
+     * @return string
+     */
     public function getCommentsTreeStructure($parent = 0)
     {
         //translation of
@@ -88,7 +95,7 @@ class Comment extends DataBase
 
                 if(loggedInUser()){
                     $print .= "<div class='lesson-comments__response-link-container'>
-                        <a href='#addComment' class='lesson-comments__response-link' data-comment-id='{$comment->id}' >{$responseGivvencomment}</a>
+                        <a href='#addComment' class='lesson-comments__link-btn' data-comment-id='{$comment->id}' >{$responseGivvencomment}</a>
                     </div>";
                 }
                 foreach( $this->commentsOfLesson as $subComment){

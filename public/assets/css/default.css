@@ -493,14 +493,21 @@ html, body {
     height:20px;
 }
 
-.lesson-comments__response-link{
+.lesson-comments__link-btn{
     position: absolute;
     right: 5px;
     text-decoration: none;
     border: 1px solid black;
     padding: 2px;
     border-radius: 3px;
+}
 
+.lesson-comments__link-btn--toLoadContent{
+    right: 5px;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 2px;
+    border-radius: 3px;
 }
 
 .lesson-comments__login{

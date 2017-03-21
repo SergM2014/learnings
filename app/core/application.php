@@ -7,6 +7,8 @@ use App\Core\HihgLevelDependacy\MainDispatcher;
 
 class Application extends MainDispatcher {
 
+  
+
     /**
      *
      * fire off appointed controller

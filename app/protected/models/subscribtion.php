@@ -58,7 +58,9 @@ class Subscribtion extends DataBase
     public function getSubscribedUser( array $input)
     {
         extract($input);
+
         if (@!$login OR @!$password) return false;
+
         $sql = "SELECT `id`,`login`, `password`, `start_date`, `subscribtion_term`, `token` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
@@ -67,7 +69,8 @@ class Subscribtion extends DataBase
 
         $subscription = $this->ifUserSubscribed($user);
 
-        if (@password_verify($password, $user->password)) {
+        if (password_verify($password, $user->password)) {
+
             $this->saveInSession($login, $user->id,  @$subscription->activeStatus );
 
             return ['token' => $user->token, 'activeSubscribtion' => @$subscription->activeStatus ];

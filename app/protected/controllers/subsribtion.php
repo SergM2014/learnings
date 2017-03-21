@@ -88,11 +88,15 @@ class Subscribtion extends BaseController
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password');
 
-        extract((new SubscribtionModel())->getSubscribedUser($cleanedUpInputs));
+        @extract((new SubscribtionModel())->getSubscribedUser($cleanedUpInputs));
 
-         if(@$token AND isset($_POST['rememberMe'])) CookieService::addUserCookies($cleanedUpInputs['login'], $token, $activeSubscribtion);
+         if(@$token AND isset($_POST['rememberMe'])) {
+             CookieService::addUserCookies($cleanedUpInputs['login'], $token, $activeSubscribtion);
 
-        return ['view'=>'/views/subscribtion/signInSuccess.php'];
+             return ['view' => '/views/subscribtion/signInSuccess.php'];
+         }
+      //in case of fail
+       header('Location: /subscribtion/signIn');
     }
 
     /**

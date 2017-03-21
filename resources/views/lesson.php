@@ -30,11 +30,13 @@
     <section class="lesson-comments">
 
         <?php if(subscribedUser()): ?>
-            <button id="download_lesson" class="lesson-comments__button"><?= $downloadL ?></button>
+
+            <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+
         <?php endif; ?>
 
         <?php if(!loggedInUser()): ?>
-             <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/login"><?= $loginL ?></a></button>
+             <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
         <?php endif; ?>
 
         <h3 class="under-video__container-h3"><?= $commentsL ?> (<?= count($comments) ?>)</h3>
