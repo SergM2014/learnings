@@ -20,9 +20,9 @@ use Lib\CookieService;
       */
      public function __construct()
      {
-         @session_start();
+        @session_start();
 
-         CookieService::getUserCookies();
+        CookieService::getUserCookies();
      }
 
      protected function alreadySignedUser()

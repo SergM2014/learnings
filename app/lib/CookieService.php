@@ -13,7 +13,7 @@ class CookieService {
         $expire_time = time()+1209600;
 
         setcookie('login', $login, $expire_time, '/' );
-        setcookie('userId', $login, $expire_time, '/' );
+        setcookie('userId', $userId, $expire_time, '/' );
         if($token) setcookie('userToken', $token, $expire_time, '/');//here is an error tocken should be taken from the DB
         if($activeSubscribtion) setcookie('activeSubscribtion', $activeSubscribtion, time()+86400, '/'); //duration 24 hours
     }

@@ -34,7 +34,7 @@ class Subscribtion extends DataBase
         $id = $this->conn->lastInsertId();
         unset ($_SESSION['storeUser']);
 
-        $this->saveInSession($login);
+        $this->saveInSession($login, $id);
 
         return $id;
     }
@@ -44,9 +44,6 @@ class Subscribtion extends DataBase
         $_SESSION['user']['login'] = $login;
         $_SESSION['user']['id'] = $id;
         if(@$activeSubscribtion) $_SESSION['user']['activeSubscribtion'] = $activeSubscribtion;
-
-        CookieService::addUserCookies($login, $id);
-
     }
 
     /**
@@ -73,7 +70,8 @@ class Subscribtion extends DataBase
 
             $this->saveInSession($login, $user->id,  @$subscription->activeStatus );
 
-            return ['token' => $user->token, 'activeSubscribtion' => @$subscription->activeStatus ];
+
+            return ['token' => $user->token, 'userId'=>$user->id, 'activeSubscribtion' => @$subscription->activeStatus ];
         }
         return false;
     }
@@ -103,9 +101,13 @@ class Subscribtion extends DataBase
 
         $stmt->execute();
         $user = $stmt->fetch();
-
+var_dump($_COOKIE);
+echo "<br>";
+echo __FILE__;
         if ($user) {
-            $this->saveInSession( $_COOKIE['login'], @$_COOKIE['activeSubscribtion']);
+echo "<br>";
+var_dump($user);
+            $this->saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscribtion']);
             return true;
         }
     }
