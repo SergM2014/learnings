@@ -24,20 +24,22 @@
 
     </video>
 
+    <?php if(subscribedUser()): ?>
+
+        <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+
+    <?php endif; ?>
+
+    <?php if(!loggedInUser()): ?>
+        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
+    <?php endif; ?>
+
 </section>
 
 <section class="under-video__container">
     <section class="lesson-comments">
 
-        <?php if(subscribedUser()): ?>
 
-            <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
-
-        <?php endif; ?>
-
-        <?php if(!loggedInUser()): ?>
-             <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
-        <?php endif; ?>
 
         <h3 class="under-video__container-h3"><?= $commentsL ?> (<?= count($comments) ?>)</h3>
 

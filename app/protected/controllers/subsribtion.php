@@ -92,7 +92,7 @@ class Subscribtion extends BaseController
 
          if(@$token AND isset($_POST['rememberMe'])) {
              CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscribtion);
-            // CookieService::addUserCookies($user->login, $user->id, $user->token, @$subscription->activeStatus);
+
 
              return ['view' => '/views/subscribtion/signInSuccess.php'];
          }

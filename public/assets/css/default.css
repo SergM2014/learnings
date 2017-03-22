@@ -82,7 +82,7 @@ html, body {
   width: 100%;
   min-height: 45px;
   border: 1px inset #990000;
-  background-color: #ff8675;
+  background-color: #6bff4f;
   border-radius: 4px;
   padding: 10px; }
 
@@ -549,6 +549,9 @@ html, body {
 
     .main-header__logo {
         display: none; }
+    .main-header__nav{
+        min-height: 65px;
+    }
 
     .main-header__menu {
         position: absolute;
@@ -572,6 +575,9 @@ html, body {
 
     .main-header__menu-item:first-of-type {
         margin-top: 0; }
+    .main-header__search-container{
+        margin-top:5px;
+    }
 
     .sort-container {
         margin-left: 10px; }
@@ -585,7 +591,77 @@ html, body {
 
     .main-header__search-field-label {
         display: none; }
+
+
+    .view-container-video{
+        max-height:300px;
+    }
+    .under-video__container{
+        display:table;
+    }
+    .lesson-comments{
+
+        border-right:none;
+        display:table-row-group;
+
+    }
+    .related-lessons{
+
+        display:table-header-group;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*this is technical classes*/
@@ -623,4 +699,15 @@ html, body {
 .error:empty{
     display:none;
 }
+
+
+
+
+
+
+
+
+
+
+
 

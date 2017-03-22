@@ -50,7 +50,7 @@ class Subscribtion extends DataBase
      * Check whether given in credentials user exists in DB
      *
      * @param array $input
-     * @return bool|void
+     * @return array|void
      */
     public function getSubscribedUser( array $input)
     {
@@ -101,15 +101,13 @@ class Subscribtion extends DataBase
 
         $stmt->execute();
         $user = $stmt->fetch();
-var_dump($_COOKIE);
-echo "<br>";
-echo __FILE__;
+
         if ($user) {
-echo "<br>";
-var_dump($user);
+
             $this->saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscribtion']);
             return true;
         }
+        return false;
     }
 
     /**
