@@ -5,33 +5,46 @@
 
 </section>
 
+
 <section class="view-container">
-    <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
-    <script src="//vjs.zencdn.net/5.11/video.min.js"></script>
 
     <h2 class="lesson-header_h1"><?= $lesson->title ?></h2>
 
-    <video
-        id="my-player"
-        class="video-js view-container-video"
-        controls
-        preload="auto"
-        poster="//vjs.zencdn.net/v/oceans.png"
-        data-setup='{}'>
-        <source src="/uploads/video/<?= $lesson->file ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <?php if (is_null($lesson->file )): ?>
 
-        Элемент video не поддерживается вашим браузером.
+    <h3 class="header"><?= $videoIsNotAccessible ?></h3>
 
-    </video>
+    <?php elseif($lesson->free_status == 1 OR subscribedUser()): ?>
 
-    <?php if(subscribedUser()): ?>
+        <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
+        <script src="//vjs.zencdn.net/5.11/video.min.js"></script>
 
-        <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+        <video
+            id="my-player"
+            class="video-js view-container-video"
+            controls
+            preload="auto"
+            poster="//vjs.zencdn.net/v/oceans.png"
+            data-setup='{}'>
+            <source src="/uploads/video/<?= $lesson->file ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 
-    <?php endif; ?>
+            Элемент video не поддерживается вашим браузером.
 
-    <?php if(!loggedInUser()): ?>
-        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
+        </video>
+
+        <?php if(subscribedUser()): ?>
+
+            <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+
+        <?php endif; ?>
+
+        <?php if(!loggedInUser()): ?>
+            <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
+        <?php endif; ?>
+
+
+    <?php else: ?>
+        <h4 class="header"><?= $subscribedOnlyUser ?></h4>
     <?php endif; ?>
 
 </section>

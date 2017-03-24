@@ -75,7 +75,9 @@ html, body {
 
 .main-header__h1, .lesson-header_h1, .header__h2 {
   text-align: center;
-  color: #aa1111; }
+  color: #aa1111;
+  margin:20px 0;
+}
 
 .main-header__nav {
   margin-top: 15px;
@@ -532,6 +534,12 @@ html, body {
     top:5px;
     right: 10px;
     cursor: pointer;
+}
+
+.header{
+    text-align:center;
+    color: #ab6c6f;
+    margin:10px 0;
 }
 
 

@@ -68,6 +68,8 @@ $enterCommentL = "Enter comment";
 $commentAdded = "Your comment is added. It will be published after moderation!";
 $giveResponseToComment = "Response the comment";
 $responseGivvenComment = "The comment to response";
+$videoIsNotAccessible = "Video is not accessible!";
+$subscribedOnlyUser = "Subscribed only users!";
 
 
 

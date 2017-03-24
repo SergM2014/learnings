@@ -66,6 +66,8 @@ $enterCommentL = "Введіть комментар";
 $commentAdded = "Ваш коментар доданою Його буде опублікованно після перегляду модератором!";
 $giveResponseToComment = "Дати відповідь на комментар";
 $responseGivvenComment = "Комментар для відповіді";
+$videoIsNotAccessible ="Відео не доступне!";
+$subscribedOnlyUser = "Лише для підпісанних користувачів";
 
 
 //these functionare for translation in controllers and models
