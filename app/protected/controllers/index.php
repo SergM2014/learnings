@@ -13,6 +13,7 @@ use Lib\HelperService;
 
 
 
+
 class Index  extends BaseController
   {
 
@@ -52,6 +53,13 @@ class Index  extends BaseController
 
           echo json_encode(['defaultLanguage' => DEFAULT_LANG, 'languagesArray' => $langs]);
           exit();
+      }
+
+
+      public function testemonials()
+      {
+          $testimonials = (new Testemonial())->getAll();
+          return ['view'=>'views/testimonials.php', 'testimonials'=>$testimonials];
       }
 
 

@@ -54,7 +54,7 @@
     <?php endforeach; ?>
 
     <div id="" class="testimonials-block__further">
-        <a href="/testimonials/show">
+        <a href="/index/testemonials">
              <span id="" class="testimonials-block__furher-title"><?= $lookThroughTestimonialsL ?></span>
         </a>
     </div>
