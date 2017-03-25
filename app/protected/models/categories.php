@@ -31,10 +31,10 @@ class Category extends DataBase
         return $result;
     }
 
-    public function getAmountOfExtraLessons()
+    public function getAmountOfExtraLessons($categoryId = null )
     {
-        $id = $_GET['id'];
-        $sql= "SELECT COUNT(`id`) AS `number` FROM `lessons` WHERE `series_id` IS NULL AND `category_id`=? GROUP BY `category_id`";
+        $id = $categoryId?? $_GET['id'];
+        $sql= "SELECT COUNT(`id`) AS `number` FROM `lessons` WHERE `serie_id` IS NULL AND `category_id`=? GROUP BY `category_id`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_STR);
         $stmt->execute();
@@ -47,7 +47,7 @@ class Category extends DataBase
     {
         $id = $_GET['id'];
         $sql = "SELECT `s`.`id`, `s`.`title`, `s`.`icon`, `s`.`upgrading_skill`, COUNT(`l`.`id`) AS `lessons_count` 
-                FROM `series` `s` LEFT JOIN `lessons` `l` ON `s`.`id`= `l`.`series_id` WHERE `s`.`category_id`=? GROUP BY `s`.`id`";
+                FROM `series` `s` LEFT JOIN `lessons` `l` ON `s`.`id`= `l`.`serie_id` WHERE `s`.`category_id`=? GROUP BY `s`.`id`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_STR);
         $stmt->execute();
@@ -55,10 +55,10 @@ class Category extends DataBase
         return $result;
     }
 
-    public function getExtraLessons()
+    public function getExtraLessons($categoryId = null )
     {
-        $id = $_GET['id'];
-        $sql = "SELECT `id`, `title`, `icon`, `file`, `free_status` FROM `lessons` WHERE  `category_id`=? AND `series_id` IS NULL";
+        $id = $categoryId?? $_GET['id'];
+        $sql = "SELECT `id`, `title`, `icon`, `file`, `free_status` FROM `lessons` WHERE  `category_id`=? AND `serie_id` IS NULL";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_STR);
         $stmt->execute();

@@ -9,7 +9,7 @@ class Lesson extends DataBase
 
     public function getAll()
     {
-        $sql= "SELECT `id`, `title`, `icon`, `series_id`, `file`, `free_status` FROM `lessons`";
+        $sql= "SELECT `id`, `title`, `icon`, `serie_id`, `file`, `free_status` FROM `lessons`";
         $stmt = $this->conn->query($sql);
         $result = $stmt->fetchAll();
 
@@ -28,16 +28,16 @@ class Lesson extends DataBase
     {
         $id = $_GET['id'];
 
-        $sql = "SELECT `category_id`, `series_id` FROM `lessons` WHERE `id`=?";
+        $sql = "SELECT `category_id`, `serie_id` FROM `lessons` WHERE `id`=?";
         $stmt = $this->conn -> prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         extract($result);
 
-            $sql= "SELECT `id`, `title`, `icon`, `category_id` , `file`, `free_status` FROM `lessons` WHERE `series_id` =? AND `id`!= ? ORDER BY `id`";
+            $sql= "SELECT `id`, `title`, `icon`, `category_id` , `file`, `free_status` FROM `lessons` WHERE `serie_id` =? AND `id`!= ? ORDER BY `id`";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(1, $series_id, \PDO::PARAM_INT);
+            $stmt->bindValue(1, $serie_id, \PDO::PARAM_INT);
             $stmt->bindValue(2, $id, \PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -59,7 +59,7 @@ class Lesson extends DataBase
     public function getOneLesson()
     {
         $id = $_GET['id'];
-        $sql= "SELECT `id`, `title`, `icon`, `category_id`, `series_id`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
+        $sql= "SELECT `id`, `title`, `icon`, `category_id`, `serie_id`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
         $stmt = $this->conn->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();

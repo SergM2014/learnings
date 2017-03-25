@@ -28,6 +28,7 @@ return array(
     'App\\Models\\Images' => $baseDir . '/app/protected/models/images.php',
     'App\\Models\\Index' => $baseDir . '/app/protected/models/index.php',
     'App\\Models\\Lesson' => $baseDir . '/app/protected/models/lessons.php',
+    'App\\Models\\Serie' => $baseDir . '/app/protected/models/serie.php',
     'App\\Models\\Subscribtion' => $baseDir . '/app/protected/models/subscribtion.php',
     'App\\Models\\Testemonial' => $baseDir . '/app/protected/models/testemonial.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',

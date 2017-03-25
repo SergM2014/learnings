@@ -70,6 +70,8 @@ $giveResponseToComment = "Response the comment";
 $responseGivvenComment = "The comment to response";
 $videoIsNotAccessible = "Video is not accessible!";
 $subscribedOnlyUser = "Subscribed only users!";
+$seriesLessonsL = "Series Lessons";
+$nothingFound = "Nothing is found!";
 
 
 

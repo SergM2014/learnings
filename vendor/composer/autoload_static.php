@@ -76,6 +76,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Models\\Images' => __DIR__ . '/../..' . '/app/protected/models/images.php',
         'App\\Models\\Index' => __DIR__ . '/../..' . '/app/protected/models/index.php',
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/protected/models/lessons.php',
+        'App\\Models\\Serie' => __DIR__ . '/../..' . '/app/protected/models/serie.php',
         'App\\Models\\Subscribtion' => __DIR__ . '/../..' . '/app/protected/models/subscribtion.php',
         'App\\Models\\Testemonial' => __DIR__ . '/../..' . '/app/protected/models/testemonial.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',

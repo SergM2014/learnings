@@ -68,6 +68,8 @@ $giveResponseToComment = "Дати відповідь на комментар";
 $responseGivvenComment = "Комментар для відповіді";
 $videoIsNotAccessible ="Відео не доступне!";
 $subscribedOnlyUser = "Лише для підпісанних користувачів";
+$seriesLessonsL = "Уроки Серії";
+$nothingFound = "Нічого не знайдено!";
 
 
 //these functionare for translation in controllers and models
