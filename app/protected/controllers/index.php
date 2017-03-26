@@ -8,16 +8,18 @@ use App\Core\BaseController;
 use App\Models\Index as DB;
 use App\Models\Category;
 use App\Models\Lesson;
-use App\Models\Testemonial;
+use App\Models\Testimonial;
 use Lib\HelperService;
-
+use Lib\CheckFieldsService;
+use Lib\TokenService;
+use App\Models\CheckForm;
 
 
 
 class Index  extends BaseController
   {
 
-
+    use CheckFieldsService;
       /**
        * fire off he index action
        *
@@ -27,7 +29,7 @@ class Index  extends BaseController
 	{
         $categories = (new Category())->getAll();
         $randomLessons = (new Lesson())->getRandomItems();
-        $randomTestimonials = (new Testemonial())->getRandomItems();
+        $randomTestimonials = (new Testimonial())->getRandomItems();
 
         $language = HelperService::getCurrentLanguageAbbr();
         $planDescription = (new DB)->getPlanDescription($language);
@@ -56,10 +58,32 @@ class Index  extends BaseController
       }
 
 
-      public function testemonials()
+      public function testimonials()
       {
-          $testimonials = (new Testemonial())->getAll();
-          return ['view'=>'views/testimonials.php', 'testimonials'=>$testimonials];
+          $testimonials = (new Testimonial())->getAll();
+          $builder = (new DB)->printCaptcha();
+          return ['view'=>'views/testimonials/index.php', 'testimonials'=>$testimonials, 'builder' => $builder,];
+      }
+
+      public function storeTestimonial()
+      {
+          TokenService::check('user');
+
+          $cleanedUpInputs = self::escapeInputs('testimonial', 'captcha');
+
+          $errors = (new CheckForm())->checkAddTestimonialForm($cleanedUpInputs);
+
+          if(!empty($errors) ) {
+
+              $builder = (new DB())->printCaptcha();
+
+              return ['view' => '/views/testimonials/form.php', 'errors'=>$errors,  'ajax' => true , 'builder' => $builder];
+          }
+
+          (new Testimonial())->saveTestimonial($this->stripTags($_POST['testimonial']));
+
+
+          return  ['view' => '/views/testimonials/addSuccess.php','ajax' => true];
       }
 
 

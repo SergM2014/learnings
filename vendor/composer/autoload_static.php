@@ -78,7 +78,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/protected/models/lessons.php',
         'App\\Models\\Serie' => __DIR__ . '/../..' . '/app/protected/models/serie.php',
         'App\\Models\\Subscribtion' => __DIR__ . '/../..' . '/app/protected/models/subscribtion.php',
-        'App\\Models\\Testemonial' => __DIR__ . '/../..' . '/app/protected/models/testemonial.php',
+        'App\\Models\\Testimonial' => __DIR__ . '/../..' . '/app/protected/models/testimonial.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

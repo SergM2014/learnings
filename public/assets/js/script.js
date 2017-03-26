@@ -96,7 +96,22 @@ document.body.addEventListener('click', function(e){
     }
 
 
+    if(e.target.id == "addTestimonialSubmitBtn"){
 
+        let formData = new FormData(document.getElementById('addTestimonialForm'));
+
+        fetch(
+            '/index/storeTestimonial', {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: formData
+            })
+            .then(response =>response.text())
+            .then(html => {
+                document.querySelector('#TestimonialFormContainer').innerHTML = html;
+            })
+
+    }
 
 
 

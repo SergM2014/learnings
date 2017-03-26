@@ -51,6 +51,11 @@ class CheckForm extends DataBase
 
     }
 
+    protected  function checkCaptcha($inputs, $errors)
+    {
+        if($_SESSION['phrase']!= $inputs['captcha']) { $errors->captcha = $errors->captcha ?? wrongCaptcha(); }
+    }
+
     protected function ifUniqueLogin(array $income, $errors)
     {
         $sql = "SELECT `id` FROM `users` WHERE `login`=?";
@@ -100,12 +105,22 @@ class CheckForm extends DataBase
 
         $this->checkIfNotEmpty($inputs, $errors);
 
-
-        if($_SESSION['phrase']!= $inputs['captcha']) {
-           $errors->captcha = $errors->captcha ?? wrongCaptcha();
-        }
+        $this->checkCaptcha($inputs, $errors);
 
       return (array)$errors;
+
+   }
+
+   public function checkAddTestimonialForm($inputs)
+   {
+       $errors =  new \stdClass();
+
+       $this->checkIfNotEmpty($inputs, $errors);
+
+       $this->checkCaptcha($inputs, $errors);
+
+
+       return (array)$errors;
 
    }
 

@@ -30,7 +30,7 @@ return array(
     'App\\Models\\Lesson' => $baseDir . '/app/protected/models/lessons.php',
     'App\\Models\\Serie' => $baseDir . '/app/protected/models/serie.php',
     'App\\Models\\Subscribtion' => $baseDir . '/app/protected/models/subscribtion.php',
-    'App\\Models\\Testemonial' => $baseDir . '/app/protected/models/testemonial.php',
+    'App\\Models\\Testimonial' => $baseDir . '/app/protected/models/testimonial.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

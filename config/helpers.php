@@ -22,7 +22,7 @@
             echo "<pre>";
              var_dump($arg);
              echo "<br>";
-             var_dump(__FILE__);
+
             exit();
         }
 

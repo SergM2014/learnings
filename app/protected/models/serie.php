@@ -31,5 +31,17 @@ class Serie extends DataBase
         return $lessonsAmount;
     }
 
+    /**
+     * return categoryId value from array of lessons
+     *
+     * @param $array
+     * @return mixed
+     */
+    public function  getCategoryId($array)
+    {
+        $categoryId = $array[0]->category->id;
+        return $categoryId;
+    }
+
 
 }
