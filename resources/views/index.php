@@ -13,7 +13,7 @@
     <?php foreach ($categories as $category) : ?>
 
         <div class="categories-block__item">
-            <a href="/category?id=<?= $category->id ?>">
+            <a href="/<?= \Lib\HelperService::currentLang() ?>category?id=<?= $category->id ?>">
                  <h3><?= $category->title ?></h3>
             </a>
             <?php if ($category->count_series): ?>
@@ -31,7 +31,7 @@
 
     <?php foreach ($randomLessons as $lesson): ?>
 
-        <a href="/lesson?id=<?= $lesson->id ?>">
+        <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $lesson->id ?>">
             <div class="lessons-block__item"><h3><?= $lesson->title ?></h3>
                 <img src="/uploads/lessonsIcons/<?= $lesson->icon ?>" class="lessons-block__item-icon" alt="">
             </div>
@@ -54,7 +54,7 @@
     <?php endforeach; ?>
 
     <div id="" class="testimonials-block__further">
-        <a href="/index/testimonials">
+        <a href="/<?= \Lib\HelperService::currentLang() ?>index/testimonials">
              <span id="" class="testimonials-block__furher-title"><?= $lookThroughTestimonialsL ?></span>
         </a>
     </div>

@@ -12,9 +12,7 @@
 
         <small><?= $enterCommentL ?></small>
         <div>
-            <textarea name="comment" id="comment" name="comment" cols="40" rows="10">
-                <?= \Lib\CheckFieldsService::stripMaliciousTags(@$_POST['comment']) ?>
-            </textarea>
+            <textarea name="comment" id="comment" name="comment" cols="40" rows="10"><?= \Lib\CheckFieldsService::stripMaliciousTags(@$_POST['comment']) ?></textarea>
         </div>
 
          <p><small class="error"><?= @$errors['comment'] ?></small></p>

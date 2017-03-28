@@ -1,23 +1,66 @@
+Array.prototype.intersect = function(a){
+    return this.filter(function(i){ return a.indexOf(i) > -1;});
+};
+
+
 let languagesBox = document.getElementsByClassName('main-header__language-select')[0];
 
 
+class Helper {
+
+    static getCurrentLang(languagesSettings) {
+
+        let url = window.location.href;
+        let urlArray = url.split('/');
+        let intersection = urlArray.intersect(languagesSettings.languagesArray);
+
+        let lang = intersection.shift();
+        return  (lang) ? lang : languagesSettings.defaultLanguage;
+    }
 
 
+    /**
+     * getLanguagesSettings
+     *
+     * @returns {Promise.<TResult>}
+     */
+    static getLanguagesSettings() {
 
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+        return  fetch('/index/getLanguageComponents', {
+            'method' : 'POST',
+            'credentials' : 'same-origin'
+        })
+            .then( response => response.json());
+
+
+    }
+
+    /**
+     * returns ajax request according to current language on site
+     *
+     * @param givenUrl
+     * @param formData
+     * @returns {Promise.<TResult>}
+     */
+    static postAjax(givenUrl, formData){
+
+         let queryResult =   Helper.getLanguagesSettings()
+                .then(languagesSettings => {
+
+                    let url = "/" + Helper.getCurrentLang(languagesSettings) + givenUrl;
+
+                    return   fetch(
+                        url, {
+                            method: 'POST',
+                            credentials: 'same-origin',
+                            body: formData
+                        })
+                });
+
+        return queryResult;
+
+    }
 }
-
-function validatePhone(phone){
-   let regexp = /\d{3}-\d{3}-\d{2}-\d{2}/;
-    //if (regexp.test(phone))  return true;
-    return (regexp.test(phone));
-
-   // return false;
-}
-
-
 
 
 
@@ -26,6 +69,8 @@ function validatePhone(phone){
 languagesBox.addEventListener('click', function(){
     document.getElementsByClassName('main-header__language-select-dropdown')[0].classList.toggle('hidden')
 });
+
+
 
 document.body.addEventListener('click', function(e){
 
@@ -47,32 +92,23 @@ document.body.addEventListener('click', function(e){
 
         let formData = new FormData(document.getElementById('addCommentForm'));
 
-        fetch(
-            '/comment/store', {
-                method: 'POST',
-                credentials: 'same-origin',
-                body: formData
-            })
+        Helper.postAjax("/comment/store", formData)
+
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#CommentFormContainer').innerHTML = html;
             })
-
     }
 
     //shoose  comment  to answer
-    if(e.target.closest('.lesson-comments__response-link')){
-       let commentId = e.target.dataset.commentId;
+    if(e.target.closest('.lesson-comments__response-link-btn')){
+
+        let commentId = e.target.dataset.commentId;
 
         let formData = new FormData(document.getElementById('addCommentForm'));
         formData.append('commentId', commentId );
 
-        fetch(
-            '/comment/getOneForResponse', {
-                method: 'POST',
-                credentials: 'same-origin',
-                body: formData
-            })
+        Helper.postAjax('/comment/getOneForResponse', formData)
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#addCommentHeader').innerHTML = html;
@@ -100,12 +136,7 @@ document.body.addEventListener('click', function(e){
 
         let formData = new FormData(document.getElementById('addTestimonialForm'));
 
-        fetch(
-            '/index/storeTestimonial', {
-                method: 'POST',
-                credentials: 'same-origin',
-                body: formData
-            })
+        Helper.postAjax('/index/storeTestimonial', formData)
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#TestimonialFormContainer').innerHTML = html;

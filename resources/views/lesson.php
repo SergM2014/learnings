@@ -1,6 +1,6 @@
 <section class="breadcrumbs">
 
-    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <a href="/<?= \Lib\HelperService::currentLang() ?>" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
     <span class="breadcrumb__item--current"><?=  $lessonL ?></span>
 
 </section>
@@ -34,7 +34,11 @@
 
         <?php if(subscribedUser()): ?>
 
-            <a download href="/uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+        <div class="lesson-comments__link-btn-container">
+
+            <a download href="/<?= \Lib\HelperService::currentLang() ?>uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+
+        </div>
 
         <?php endif; ?>
 
@@ -71,7 +75,7 @@
 
         <?php foreach ($relatedLessons as $relatedLesson): ?>
         <div class="related-lessons__item">
-            <a href="/lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
+            <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
                 <img src="/uploads/lessonsIcons/<?= $relatedLesson->icon ?>" alt="" class="related-lessons__item-img">
                 <span class="related-lessons__item-link-title"><?= $relatedLesson->title ?></span>
             </a>

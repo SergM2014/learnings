@@ -95,7 +95,7 @@ class Comment extends DataBase
 
                 if(loggedInUser()){
                     $print .= "<div class='lesson-comments__response-link-container'>
-                        <a href='#addComment' class='lesson-comments__link-btn' data-comment-id='{$comment->id}' >{$responseGivvencomment}</a>
+                        <a href='#addComment' class='lesson-comments__response-link-btn' data-comment-id='{$comment->id}' >{$responseGivvencomment}</a>
                     </div>";
                 }
                 foreach( $this->commentsOfLesson as $subComment){

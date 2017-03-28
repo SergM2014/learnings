@@ -508,7 +508,7 @@ html, body {
     height:20px;
 }
 
-.lesson-comments__link-btn{
+.lesson-comments__response-link-btn{
     position: absolute;
     right: 5px;
     text-decoration: none;
@@ -523,6 +523,11 @@ html, body {
     border: 1px solid black;
     padding: 2px;
     border-radius: 3px;
+
+}
+
+.lesson-comments__link-btn-container{
+    margin-top:20px;
 }
 
 .lesson-comments__login{
