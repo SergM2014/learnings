@@ -72,7 +72,7 @@ $seriesLessonsL = "Уроки Серії";
 $nothingFound = "Нічого не знайдено!";
 $enterTestimonialL = "Введіть відгук";
 $addTestimonialL = "Додати відгук";
-$testimonialsForLoggedInl = "Тільки зареєстровані користувачі можуть залишати рекомендації";
+$testimonialsForLoggedInL = "Тільки зареєстровані користувачі можуть залишати рекомендації";
 $testimonialAddedL = "Ваш відгук додано його буде опубліковано після перегляду модератором";
 
 

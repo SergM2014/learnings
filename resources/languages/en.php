@@ -74,7 +74,7 @@ $seriesLessonsL = "Series Lessons";
 $nothingFound = "Nothing is found!";
 $enterTestimonialL = "Enter testimonial";
 $addTestimonialL = "Add testimonial";
-$testimonialsForLoggedInl = "Only logged in users add testimonials";
+$testimonialsForLoggedInL = "Only logged in users add testimonials";
 $testimonialAddedL = "Yor testemonial is added.It will be published after moderator review";
 
 

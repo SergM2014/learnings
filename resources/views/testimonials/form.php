@@ -9,7 +9,7 @@
 
         <small><?= $enterTestimonialL ?></small>
         <div>
-            <textarea name="testimonial" id="testimonial" name="testimonial" cols="40" rows="10"><?= \Lib\CheckFieldsService::stripMaliciousTags(@$_POST['testimonial']) ?></textarea>
+            <textarea name="testimonial" id="testimonial" name="testimonial" cols="40" rows="10" required ><?= \Lib\CheckFieldsService::stripMaliciousTags(@$_POST['testimonial']) ?></textarea>
         </div>
 
          <p><small class="error"><?= @$errors['testimonial'] ?></small></p>
@@ -25,7 +25,7 @@
 
         <small><?= $enterCaptchaL ?></small>
         <div>
-            <input type="text" name="captcha" id="captcha">
+            <input type="text" name="captcha" id="captcha" required>
         </div>
 
         <p><small class="error"><?= @$errors['captcha'] ?></small></p>

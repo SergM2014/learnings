@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Core\DataBase;
+use Lib\CheckFieldsService;
 
 class Testimonial extends DataBase
 {
+    use CheckFieldsService;
 
     public function getAll()
     {
@@ -27,7 +29,13 @@ class Testimonial extends DataBase
 
     public function saveTestimonial()
     {
+        $testimonial = $this->stripTags($_POST['testimonial']);
 
+        $sql ="INSERT INTO `testimonials` (`testimonial`, `user_id`, `published`, `changed`) VALUES (?, ?, '0', '0')";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $testimonial, \PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['user']['id'], \PDO::PARAM_INT);
+        $stmt->execute();
     }
 
 
