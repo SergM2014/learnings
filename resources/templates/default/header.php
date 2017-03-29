@@ -67,7 +67,7 @@
                         </div>
                     </ul>
 
-                    <div class="main-header__search-container" >
+                    <div id="mainHeaderSearchContainer" class="main-header__search-container" >
                         <span class="main-header__search-field-label"> <?= $searchL ?></span>
                         <input type="text" name="search" id="search" class="main-header__search-field"  maxlength="20" autofocus >
                         <aside class="main-header__search-result-box--hidden" id="search-results"></aside>

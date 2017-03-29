@@ -134,7 +134,7 @@ document.body.addEventListener('click', function(e){
             })
     }
 
-
+//click add testimonial btn
     if(e.target.id == "addTestimonialSubmitBtn"){
 
         let formData = new FormData(document.getElementById('addTestimonialForm'));
@@ -152,6 +152,35 @@ document.body.addEventListener('click', function(e){
 
 
 });//ends of events hanged on the body
+
+
+document.getElementById('search').addEventListener('keyup', function(e){
+
+    if(document.getElementById('searchResultsContainer')){ document.getElementById('searchResultsContainer').remove();}
+
+    let search = this.value;
+    if(search == '') { return;}
+
+
+    let searchResultsCont = document.createElement('div');
+    searchResultsCont.id = "searchResultsContainer";
+    document.getElementById('mainHeaderSearchContainer').appendChild(searchResultsCont);
+    searchResultsCont.className = "search-results-container--hidden";
+
+
+    let formData = new FormData;
+    formData.append('search', search);
+    postAjax('/index/search', formData)
+        .then(response =>response.text())
+        .then(html => {
+
+            searchResultsCont.insertAdjacentHTML('afterBegin', html);
+            searchResultsCont.className = "search-results-container";
+
+        });
+
+
+});
 
 
 
