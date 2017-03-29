@@ -6,7 +6,7 @@ Array.prototype.intersect = function(a){
 let languagesBox = document.getElementsByClassName('main-header__language-select')[0];
 
 
-class Helper {
+class LanguageHelper {
 
     static getCurrentLang(languagesSettings) {
 
@@ -15,7 +15,7 @@ class Helper {
         let intersection = urlArray.intersect(languagesSettings.languagesArray);
 
         let lang = intersection.shift();
-        return  (lang) ? lang : languagesSettings.defaultLanguage;
+        return (lang) ? lang : languagesSettings.defaultLanguage;
     }
 
 
@@ -26,14 +26,15 @@ class Helper {
      */
     static getLanguagesSettings() {
 
-        return  fetch('/index/getLanguageComponents', {
-            'method' : 'POST',
-            'credentials' : 'same-origin'
+        return fetch('/index/getLanguageComponents', {
+            'method': 'POST',
+            'credentials': 'same-origin'
         })
-            .then( response => response.json());
+            .then(response => response.json());
 
 
     }
+}
 
     /**
      * returns ajax request according to current language on site
@@ -42,12 +43,12 @@ class Helper {
      * @param formData
      * @returns {Promise.<TResult>}
      */
-    static postAjax(givenUrl, formData){
+    function postAjax(givenUrl, formData){
 
-         let queryResult =   Helper.getLanguagesSettings()
+         let queryResult =   LanguageHelper.getLanguagesSettings()
                 .then(languagesSettings => {
 
-                    let url = "/" + Helper.getCurrentLang(languagesSettings) + givenUrl;
+                    let url = "/" + LanguageHelper.getCurrentLang(languagesSettings) + givenUrl;
 
                     return   fetch(
                         url, {
@@ -60,7 +61,9 @@ class Helper {
         return queryResult;
 
     }
-}
+
+
+
 
 
 
@@ -87,12 +90,12 @@ document.body.addEventListener('click', function(e){
             })
     }
 
-    //add Comment
+//click add comment button
     if(e.target.id == "addCommentSubmitBtn"){
 
         let formData = new FormData(document.getElementById('addCommentForm'));
 
-        Helper.postAjax("/comment/store", formData)
+        postAjax("/comment/store", formData)
 
             .then(response =>response.text())
             .then(html => {
@@ -100,7 +103,7 @@ document.body.addEventListener('click', function(e){
             })
     }
 
-    //shoose  comment  to answer
+//shoose  comment  to answer
     if(e.target.closest('.lesson-comments__response-link-btn')){
 
         let commentId = e.target.dataset.commentId;
@@ -108,7 +111,7 @@ document.body.addEventListener('click', function(e){
         let formData = new FormData(document.getElementById('addCommentForm'));
         formData.append('commentId', commentId );
 
-        Helper.postAjax('/comment/getOneForResponse', formData)
+        postAjax('/comment/getOneForResponse', formData)
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#addCommentHeader').innerHTML = html;
@@ -136,7 +139,7 @@ document.body.addEventListener('click', function(e){
 
         let formData = new FormData(document.getElementById('addTestimonialForm'));
 
-        Helper.postAjax('/index/storeTestimonial', formData)
+        postAjax('/index/storeTestimonial', formData)
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#TestimonialFormContainer').innerHTML = html;

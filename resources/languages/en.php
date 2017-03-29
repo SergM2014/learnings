@@ -1,6 +1,7 @@
 <?php
 
-$siteDescriptionL = "Site Description";
+$attrLang = "en";
+$siteDescriptionL = "Learning site";
 
 
 $ourBrandL = "Our Brand";
