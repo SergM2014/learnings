@@ -147,8 +147,27 @@ document.body.addEventListener('click', function(e){
 
     }
 
+//click outside result search container to hide it
     if(!e.target.closest("#searchResultsContainer")){
         if(document.getElementById('searchResultsContainer')) document.getElementById('searchResultsContainer').className = "search-results-container--hidden";
+    }
+
+
+//clicking the results in results search container
+    if(e.target.className == "search-results__founded"){
+
+         document.getElementById('searchResultsContainer').className = "search-results-container--hidden";
+
+        let modalBackgound = document.createElement('div');
+         modalBackgound.id = "modalBackground";
+         modalBackgound.className = "modal-background";
+
+         document.body.insertBefore(modalBackgound, document.body.firstChild);
+
+         let modalBody = document.createElement('div');
+         modalBody.id = 'modalBody';
+         modalBody.className = "modal-body";
+         modalBackgound.appendChild(modalBody);
     }
 
 

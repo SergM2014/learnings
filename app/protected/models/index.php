@@ -33,10 +33,14 @@ use Gregwar\Captcha\CaptchaBuilder;
      {
          $search = $_POST['searchField'];
 
-        $sql =" SELECT `l`.`id`, `l`.`title` FROM `lessons` `l`
-                WHERE MATCH (`l`.`title`) AGAINST (? IN BOOLEAN  MODE) LIMIT 0,7";
+        $sql =" SELECT `l`.`id`, `l`.`title`, `c`.`title` AS `category_title`, `s`.`title` AS `serie_title` 
+                FROM `lessons` `l` JOIN `categories` `c` ON `l`.`category_id` = `c`.`id`
+                JOIN `series` `s` ON  `l`.`serie_id` = `s`.`id`
+                WHERE MATCH (`l`.`title`) AGAINST (:search IN BOOLEAN  MODE)  OR MATCH(`c`.`title`) AGAINST (:search IN BOOLEAN MODE)
+                 OR MATCH (`s`.`title`)  AGAINST (:search IN BOOLEAN MODE) LIMIT 0,7";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(1, "$search*", \PDO::PARAM_INT);
+        $stmt->bindValue(':search',  "$search*", \PDO::PARAM_STR);
+
         $stmt->execute();
         $searchResults = $stmt->fetchAll();
 
