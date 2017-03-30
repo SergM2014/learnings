@@ -124,6 +124,7 @@ html, body {
     padding: 3px;
     color: #111117;
     background: #cfda7b;
+    min-height:44px;
     transition: 2s ease-out;
 }
 .search-results-container--hidden{
@@ -131,7 +132,7 @@ html, body {
     top: 20px;
     left: 1500px;
     width: 260px;
-    min-height: 200px;
+    min-height: 44px;
     border: 1px solid red;
     z-index: 100;
     border-radius: 5px;
@@ -682,6 +683,7 @@ html, body {
     .search-results-container{
         left:0;
         width:245px;
+
     }
 
 

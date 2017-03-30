@@ -177,19 +177,32 @@ document.body.addEventListener('click', function(e){
 });//ends of events hanged on the body
 
 
-document.getElementById('search').addEventListener('keyup', function(e){
+document.getElementById('search').addEventListener('keyup', function(e) {
 
-    if(document.getElementById('searchResultsContainer')){ document.getElementById('searchResultsContainer').remove();}
+    let existingSearchResultsCont = document.getElementById('searchResultsContainer');
+
+    if (existingSearchResultsCont) {
+        existingSearchResultsCont.innerHTML='';
+    }
 
     let searchField = this.value;
-    if(searchField == '') { return;}
+    searchField = searchField.trim();
+
+    if (searchField == '') {
+        existingSearchResultsCont.remove();
+        return;
+    }
 
 
-    let searchResultsCont = document.createElement('div');
-    searchResultsCont.id = "searchResultsContainer";
-    document.getElementById('mainHeaderSearchContainer').appendChild(searchResultsCont);
-    searchResultsCont.className = "search-results-container--hidden";
+    let searchResultsCont;
 
+     if (!existingSearchResultsCont ) {
+
+             searchResultsCont = document.createElement('div');
+            searchResultsCont.id = "searchResultsContainer";
+            document.getElementById('mainHeaderSearchContainer').appendChild(searchResultsCont);
+            searchResultsCont.className = "search-results-container--hidden";
+    }
 
     let formData = new FormData;
     formData.append('searchField', searchField);
@@ -197,8 +210,14 @@ document.getElementById('search').addEventListener('keyup', function(e){
         .then(response =>response.text())
         .then(html => {
 
-            searchResultsCont.insertAdjacentHTML('afterBegin', html);
-            searchResultsCont.className = "search-results-container";
+
+            if(existingSearchResultsCont){
+                existingSearchResultsCont.insertAdjacentHTML('afterBegin', html);
+                return;
+            }
+                searchResultsCont.insertAdjacentHTML('afterBegin', html);
+                searchResultsCont.className = "search-results-container";
+
 
         });
 
