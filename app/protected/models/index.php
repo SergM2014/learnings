@@ -29,5 +29,20 @@ use Gregwar\Captcha\CaptchaBuilder;
      }
 
 
+     public function getSearchResults()
+     {
+         $search = $_POST['searchField'];
+
+        $sql =" SELECT `l`.`id`, `l`.`title` FROM `lessons` `l`
+                WHERE MATCH (`l`.`title`) AGAINST (? IN BOOLEAN  MODE) LIMIT 0,7";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, "$search*", \PDO::PARAM_INT);
+        $stmt->execute();
+        $searchResults = $stmt->fetchAll();
+
+        return $searchResults;
+     }
+
+
 
  }

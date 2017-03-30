@@ -147,6 +147,10 @@ document.body.addEventListener('click', function(e){
 
     }
 
+    if(!e.target.closest("#searchResultsContainer")){
+        if(document.getElementById('searchResultsContainer')) document.getElementById('searchResultsContainer').className = "search-results-container--hidden";
+    }
+
 
 
 
@@ -158,8 +162,8 @@ document.getElementById('search').addEventListener('keyup', function(e){
 
     if(document.getElementById('searchResultsContainer')){ document.getElementById('searchResultsContainer').remove();}
 
-    let search = this.value;
-    if(search == '') { return;}
+    let searchField = this.value;
+    if(searchField == '') { return;}
 
 
     let searchResultsCont = document.createElement('div');
@@ -169,7 +173,7 @@ document.getElementById('search').addEventListener('keyup', function(e){
 
 
     let formData = new FormData;
-    formData.append('search', search);
+    formData.append('searchField', searchField);
     postAjax('/index/search', formData)
         .then(response =>response.text())
         .then(html => {
