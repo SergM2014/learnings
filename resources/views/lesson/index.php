@@ -32,6 +32,9 @@
 
         </video>
 
+        <div class="lesson-excerpt">
+            <?= $lesson->excerpt ?>
+        </div>
         <?php if(subscribedUser()): ?>
 
         <div class="lesson-comments__link-btn-container">
