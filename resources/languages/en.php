@@ -77,7 +77,8 @@ $enterTestimonialL = "Enter testimonial";
 $addTestimonialL = "Add testimonial";
 $testimonialsForLoggedInL = "Only logged in users add testimonials";
 $testimonialAddedL = "Yor testemonial is added.It will be published after moderator review";
-
+$gotoLessonL = "Go to lesson";
+$closeL = "Close";
 
 
 //these functionare for translation in controllers and models

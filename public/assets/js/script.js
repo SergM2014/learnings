@@ -156,21 +156,32 @@ document.body.addEventListener('click', function(e){
 //clicking the results in results search container
     if(e.target.className == "search-results__founded"){
 
-         document.getElementById('searchResultsContainer').className = "search-results-container--hidden";
+        let lessonId = e.target.dataset.lessonId;
+        let formData = new FormData;
+        formData.append('lessonId', lessonId);
+        postAjax('/lesson/preview', formData)
+            .then(response =>response.text())
+            .then( html =>{
+                document.getElementById('searchResultsContainer').className = "search-results-container--hidden";
 
-        let modalBackgound = document.createElement('div');
-         modalBackgound.id = "modalBackground";
-         modalBackgound.className = "modal-background";
+                let modalBackgound = document.createElement('div');
+                modalBackgound.id = "modalBackground";
+                modalBackgound.className = "modal-background";
 
-         document.body.insertBefore(modalBackgound, document.body.firstChild);
+                document.body.insertBefore(modalBackgound, document.body.firstChild);
 
-         let modalBody = document.createElement('div');
-         modalBody.id = 'modalBody';
-         modalBody.className = "modal-body";
-         modalBackgound.appendChild(modalBody);
+                let modalBody = document.createElement('div');
+                modalBody.id = 'modalBody';
+                modalBody.className = "modal-body";
+                modalBackgound.appendChild(modalBody);
+                modalBody.innerHTML = html;
+            });
+
     }
 
-
+    if(e.target.id == "previewLessonCloseSign" || e.target.id == "previewLessonCloseBtn"){
+        document.getElementById('modalBackground').remove();
+    }
 
 
 
@@ -188,7 +199,7 @@ document.getElementById('search').addEventListener('keyup', function(e) {
     let searchField = this.value;
     searchField = searchField.trim();
 
-    if (searchField == '') {
+    if (searchField == '' && typeof existingSearchResultsCont != "undefined") {
         existingSearchResultsCont.remove();
         return;
     }

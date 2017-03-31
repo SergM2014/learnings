@@ -75,7 +75,8 @@ $enterTestimonialL = "Введіть відгук";
 $addTestimonialL = "Додати відгук";
 $testimonialsForLoggedInL = "Тільки зареєстровані користувачі можуть залишати рекомендації";
 $testimonialAddedL = "Ваш відгук додано його буде опубліковано після перегляду модератором";
-
+$gotoLessonL = "Перейти до урока";
+$closeL = "Закрити";
 
 //these functionare for translation in controllers and models
 function variableInController(){

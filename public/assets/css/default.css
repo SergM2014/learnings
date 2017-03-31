@@ -619,18 +619,61 @@ html, body {
 }
 
 .modal-body{
-    width:90%;
-    min-height:400px;;
-    z-index:350;
-    background: red;
-    margin:50px auto 0 auto;
-
+    width: 90%;
+    min-height: 400px;
+    z-index: 350;
+    background: #bbc7ca;
+    margin: 50px auto 0 auto;
+    border-radius: 10px;
+    padding: 10px;
+   /* display: flex;*/
+    position: relative;
 }
 .red{
     color:red;
 }
 .green{
     color:green;
+}
+.preview-lesson__close-sign{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    cursor:pointer;
+
+}
+.preview-lesson__excerpt{
+    background: #a6cea6;
+    margin: 20px 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+.preview-lesson__link-container{
+    height:25px;
+
+
+}
+.preview-lesson__link{
+    float: right;
+    background: #b39b9b;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.preview-lesson__close-btn-container{
+    display:flex;
+    justify-content: center;
+}
+.preview-lesson__close-btn{
+    width:120px;
+    cursor:pointer;
+}
+.preview-lesson__icon{
+    margin:20px;
+    max-height:200px;
+    max-width:200px;
 }
 
 
@@ -712,6 +755,10 @@ html, body {
     .related-lessons{
 
         display:table-header-group;
+    }
+    .modal-body{
+        padding:5px;
+        width:100%;
     }
 
 

@@ -58,12 +58,24 @@ class Lesson extends DataBase
 
     public function getOneLesson()
     {
-        $id = $_GET['id'];
-        $sql= "SELECT `id`, `title`, `icon`, `category_id`, `serie_id`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
+        $id =  $_GET['id'];
+        $sql= "SELECT `id`, `title`, `icon`, `category_id`, `serie_id`, `excerpt`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
         $stmt = $this->conn->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
+        return $result;
+    }
+
+    public function getOneLessonforPreview()
+    {
+        $id = $_POST['lessonId'];
+        $sql= "SELECT `id`, `title`, `icon`,  `excerpt`  FROM `lessons` WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+//dd($result);
         return $result;
     }
 
