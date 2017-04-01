@@ -367,6 +367,13 @@ html, body {
     min-width: 70px;
     cursor:pointer;
 }
+.lesson-comments__button-bottom{
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 70px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
 .lesson-comments__button-link{
     text-decoration:none;
     color:#000000;
@@ -575,7 +582,7 @@ html, body {
 
 }
 
-.add-comment__header{
+.add-comment__head{
     position:relative;
     padding-top:50px;
 }

@@ -42,6 +42,7 @@ class Comment  extends BaseController
 
     }
 
+
     public function getOneForResponse()
     {
         $comment = (new DBComment())->getOneComment();
@@ -49,9 +50,17 @@ class Comment  extends BaseController
         return  ['view' => '/views/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
     }
 
+
     public function resetHeader()
     {
-        return  ['view' => '/views/comments/addCommentHeader.php', 'ajax' => true];
+        return  ['view' => '/views/comments/addCommentHead.php', 'ajax' => true];
+    }
+
+
+    public function showForm()
+    {
+        $builder = (new DB())->printCaptcha();
+        return  ['view' => '/views/comments/form.php', 'builder' =>$builder, 'ajax' => true];
     }
 
 

@@ -37,6 +37,7 @@
     function loggedInUser()
     {
         $loggedInUser = $_SESSION['user']['login']?? false ;
+
         return !!$loggedInUser;
     }
 

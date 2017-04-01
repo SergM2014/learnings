@@ -77,6 +77,7 @@ $testimonialsForLoggedInL = "Тільки зареєстровані корис�
 $testimonialAddedL = "Ваш відгук додано його буде опубліковано після перегляду модератором";
 $gotoLessonL = "Перейти до урока";
 $closeL = "Закрити";
+$loginToAddCommentL ="Ввійдіть, щоб добавити коментар";
 
 //these functionare for translation in controllers and models
 function variableInController(){

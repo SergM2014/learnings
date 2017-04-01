@@ -25,7 +25,7 @@
 
         <small><?= $enterCaptchaL ?></small>
         <div>
-            <input type="text" name="captcha" id="captcha" required>
+            <input type="text" name="captcha" id="captcha" required maxlength="8">
         </div>
 
         <p><small class="error"><?= @$errors['captcha'] ?></small></p>

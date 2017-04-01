@@ -72,7 +72,10 @@ class HelperService {
         $url = trim($url);
         foreach ($langs as $key => $value){
             $position = strpos($url, $key);
-            if($position === 0) { return $key.'/';}
+            if($position === 0) {
+                if ($key == DEFAULT_LANG ){return '';}
+                return $key.'/';
+            }
         }
 
         return '';
@@ -114,7 +117,7 @@ class HelperService {
             $position = strpos($url, $key);
             if($position === 0) { return $value;}
         }
-
+//return українська
         return DEFAULT_LANG_TITLE;
 
     }

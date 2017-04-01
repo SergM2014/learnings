@@ -1,12 +1,14 @@
-<div id="addCommentHeader" class="add-comment__header">
-    <?php include PATH_SITE.'/resources/views/comments/addCommentHeader.php'; ?>
+<div id="addCommentHead" class="add-comment__head">
+
+    <?php include PATH_SITE.'/resources/views/comments/addCommentHead.php'; ?>
+
 </div>
 
 
 <form method="post" class="add-comment__form" id="addCommentForm">
 
 
-        <input type="hidden" name="lessonId" value="<?= @$_POST['lessonId']?? $lesson->id ?>">
+        <input type="hidden" id="lessonId" name="lessonId" value="<?= @$_POST['lessonId']?? $lesson->id ?>">
         <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>" >
         <input type="hidden" id="commentParentId" name="parentId"  value="0">
 
@@ -27,7 +29,7 @@
 
         <small><?= $enterCaptchaL ?></small>
         <div>
-            <input type="text" name="captcha" id="captcha" required >
+            <input type="text" name="captcha" id="captcha" required  maxlength="7">
         </div>
 
          <p><small class="error"><?= @$errors['captcha'] ?></small></p>

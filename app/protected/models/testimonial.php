@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use App\Core\DataBase;
-use Lib\CheckFieldsService;
+
 
 class Testimonial extends DataBase
 {
-    use CheckFieldsService;
 
     public function getAll()
     {
@@ -27,10 +26,8 @@ class Testimonial extends DataBase
         return $this->getAccidentalItems($number, $items);
     }
 
-    public function saveTestimonial()
+    public function saveTestimonial( $testimonial)
     {
-        $testimonial = $this->stripTags($_POST['testimonial']);
-
         $sql ="INSERT INTO `testimonials` (`testimonial`, `user_id`, `published`, `changed`) VALUES (?, ?, '0', '0')";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $testimonial, \PDO::PARAM_STR);

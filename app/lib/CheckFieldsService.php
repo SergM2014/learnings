@@ -40,14 +40,10 @@ trait CheckFieldsService {
      * @param $income
      * @return string
      */
-    public function stripTags($income)
+    public function stripTags($content)
     {
-        $content = $this->closeTags($income);
-/*
-        $content = strip_tags($content,'<a><b><blockquote><br><button><cite><code><div><dd><dl><dt><em><fieldset>
-        <font><h1><h2><h3><h4><h5><hr><i><it><img><label><li><ol><p><pre><span><strong><table><tbody><tr>
-        <td><th><u><ul>');
-        return $content;*/
+        $content = $this->closeTags($content);
+
        $content = self::stripMaliciousTags($content);
        return $content;
     }

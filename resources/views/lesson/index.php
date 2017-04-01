@@ -32,9 +32,7 @@
 
         </video>
 
-        <div class="lesson-excerpt">
-            <?= $lesson->excerpt ?>
-        </div>
+
         <?php if(subscribedUser()): ?>
 
         <div class="lesson-comments__link-btn-container">
@@ -45,14 +43,23 @@
 
         <?php endif; ?>
 
-        <?php if(!loggedInUser()): ?>
-            <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
-        <?php endif; ?>
+
 
 
     <?php else: ?>
         <h4 class="header"><?= $subscribedOnlyUser ?></h4>
     <?php endif; ?>
+
+    <?php if(!loggedInUser()): ?>
+
+        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
+    <?php endif; ?>
+
+    <div class="lesson-excerpt">
+        <?= $lesson->excerpt ?>
+    </div>
+
+
 
 </section>
 
@@ -91,7 +98,21 @@
 
 <?php if(loggedInUser()): ?>
 
+
+    <section class="add-comment__block">
+
         <a name="addComment"></a>
-        <?php include PATH_SITE.'/resources/views/comments/addComment.php'; ?>
+
+        <div id="commentFormContainer">
+            <?php include PATH_SITE.'/resources/views/comments/form.php'; ?>
+        </div>
+
+
+    </section>
+
+<?php else: ?>
+
+
+    <button class="lesson-comments__button-bottom"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginToAddCommentL ?></a></button>
 
 <?php endif; ?>

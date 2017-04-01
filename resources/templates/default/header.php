@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="E shop ">
-    <meta name="description" content="training shop">
+    <meta name="keywords" content="Learning Resourse">
+    <meta name="description" content="Learning Resourse">
     <title><?= $siteDescriptionL ?></title>
 
 

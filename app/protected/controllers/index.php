@@ -57,13 +57,18 @@ class Index  extends BaseController
           exit();
       }
 
-
+    /**
+     * show all testimonial
+     *
+     * @return array
+     */
       public function testimonials()
       {
           $testimonials = (new Testimonial())->getAll();
           $builder = (new DB)->printCaptcha();
           return ['view'=>'views/testimonials/index.php', 'testimonials'=>$testimonials, 'builder' => $builder,];
       }
+
 
       public function storeTestimonial()
       {
@@ -85,6 +90,7 @@ class Index  extends BaseController
 
           return  ['view' => '/views/testimonials/addSuccess.php','ajax' => true];
       }
+
 
       public function search()
       {

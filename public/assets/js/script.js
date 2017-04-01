@@ -45,6 +45,11 @@ class LanguageHelper {
      */
     function postAjax(givenUrl, formData){
 
+       if(!formData){
+           let formData = new FormData;
+           formData.append('ajax', true );
+       }
+
          let queryResult =   LanguageHelper.getLanguagesSettings()
                 .then(languagesSettings => {
 
@@ -99,7 +104,7 @@ document.body.addEventListener('click', function(e){
 
             .then(response =>response.text())
             .then(html => {
-                document.querySelector('#CommentFormContainer').innerHTML = html;
+                document.querySelector('#commentFormContainer').innerHTML = html;
             })
     }
 
@@ -107,32 +112,33 @@ document.body.addEventListener('click', function(e){
     if(e.target.closest('.lesson-comments__response-link-btn')){
 
         let commentId = e.target.dataset.commentId;
+        let lessonId = document.getElementById('lessonId').value;
 
         let formData = new FormData(document.getElementById('addCommentForm'));
         formData.append('commentId', commentId );
+        formData.append('lessonId', lessonId);
 
-        postAjax('/comment/getOneForResponse', formData)
+
+        postAjax('/comment/showForm')
             .then(response =>response.text())
             .then(html => {
-                document.querySelector('#addCommentHeader').innerHTML = html;
-                document.querySelector('#commentParentId').value  = commentId;
+                document.getElementById('commentFormContainer').innerHTML = html;
+                document.querySelector('#commentParentId').value = commentId;
+                document.getElementById('lessonId').value = lessonId;
+
+
+                postAjax('/comment/getOneForResponse', formData)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.querySelector('#addCommentHead').innerHTML = html;
+                    })
             })
+
+
 
     }
 
-//close the choseen comment that should be closed
-    if(e.target.id =='lessonCommentCloseSign'){
-        fetch(
-            '/comment/resetHeader', {
-                method: 'POST',
-                credentials: 'same-origin',
-            })
-            .then(response =>response.text())
-            .then(html => {
-                document.querySelector('#addCommentHeader').innerHTML = html;
-                document.querySelector('#commentParentId').value  = 0;
-            })
-    }
+
 
 //click add testimonial btn
     if(e.target.id == "addTestimonialSubmitBtn"){
@@ -179,6 +185,26 @@ document.body.addEventListener('click', function(e){
 
     }
 
+
+
+//this is the clos sign section
+
+    //close the choseen comment that should be closed
+    if(e.target.id == 'lessonCommentCloseSign'){
+        fetch(
+            '/comment/resetHeader', {
+                method: 'POST',
+                credentials: 'same-origin',
+            })
+            .then(response =>response.text())
+            .then(html => {
+                document.querySelector('#addCommentHead').innerHTML = html;
+                document.querySelector('#commentParentId').value  = 0;
+            })
+    }
+
+
+
     if(e.target.id == "previewLessonCloseSign" || e.target.id == "previewLessonCloseBtn"){
         document.getElementById('modalBackground').remove();
     }
@@ -199,7 +225,7 @@ document.getElementById('search').addEventListener('keyup', function(e) {
     let searchField = this.value;
     searchField = searchField.trim();
 
-    if (searchField == '' && typeof existingSearchResultsCont != "undefined") {
+    if (searchField == '' || /*typeof existingSearchResultsCont !== "undefined"*/ !existingSearchResultsCont) {
         existingSearchResultsCont.remove();
         return;
     }
