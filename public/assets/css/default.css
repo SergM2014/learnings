@@ -689,6 +689,23 @@ html, body {
     border-radius: 3px;
 }
 
+.main-header__touch-btn{
+    display:none;
+    width:30px;
+    height:20px;
+    border:1px solid black;
+    border-radius:3px;
+    padding-top:1px;
+    background: #58cdab;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.main-header__icon-bar {
+    margin:3px;
+    border-top:1px solid black;
+}
+
 
 
 
@@ -698,8 +715,10 @@ html, body {
 
 
 @media screen and (max-width: 750px) {
-    .main-header__touch-button {
-        display: flex; }
+    .main-header__touch-btn {
+        display:inline-block;
+    }
+
 
     .main-header__logo {
         display: none; }
@@ -720,7 +739,11 @@ html, body {
         border-radius: 0 10px 10px 0;
         padding: 10px;
         opacity: 0.9;
-        transition: 1.2s ease-out; }
+        transition: 1.2s ease-out;
+    }
+    .show-menu{
+        left:0!important;
+    }
 
     .main-header__language-select {
         width: 60px;

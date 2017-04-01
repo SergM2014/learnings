@@ -209,6 +209,11 @@ document.body.addEventListener('click', function(e){
         document.getElementById('modalBackground').remove();
     }
 
+    if(!e.target.closest('#mainHeaderTouchBtn')){
+       let menu = document.getElementById('mainHeaderMenu');
+       if(menu){if(menu.classList.contains('show-menu')) menu.classList.remove('show-menu')}
+    }
+
 
 
 });//ends of events hanged on the body
@@ -259,6 +264,11 @@ document.getElementById('search').addEventListener('keyup', function(e) {
         });
 
 
+});
+
+document.getElementById('mainHeaderTouchBtn').addEventListener('click', function(){
+
+    document.getElementById('mainHeaderMenu').classList.add('show-menu');
 });
 
 

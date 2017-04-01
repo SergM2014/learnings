@@ -21,15 +21,16 @@
 
                 <nav class="main-header__nav ">
 
-                    <a href="/<?= \Lib\HelperService::currentLang() ?>#" class="main-header__logo "><?= $ourBrandL ?></a>
+                    <!--<a href="/<?/*= \Lib\HelperService::currentLang() */?>#" class="main-header__logo "><?/*= $ourBrandL */?></a>-->
 
-                    <div class="main-header__touch-button">
-                        <span class="main-header__icon-bar"></span>
-                        <span class="main-header__icon-bar"></span>
-                        <span class="main-header__icon-bar"></span>
+                    <div id="mainHeaderTouchBtn" class="main-header__touch-btn">
+                        <div class="main-header__icon-bar"></div>
+                        <div class="main-header__icon-bar"></div>
+                        <div class="main-header__icon-bar"></div>
                     </div>
 
-                     <ul class="main-header__menu" >
+                     <ul id="mainHeaderMenu" class="main-header__menu" >
+                         <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>/#"><?= $ourBrandL ?></a></li>
                          <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>"><?= $mainPageL ?></a></li>
 
                     </ul>
