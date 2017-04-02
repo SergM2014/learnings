@@ -8,7 +8,7 @@ use Lib\TokenService;
 use Carbon\Carbon;
 use Lib\CookieService;
 
-class Subscribtion extends DataBase
+class Subscription extends DataBase
 {
 
     /**
@@ -39,11 +39,11 @@ class Subscribtion extends DataBase
         return $id;
     }
 
-    protected function saveInSession($login, $id, $activeSubscribtion = null )
+    protected function saveInSession($login, $id, $activeSubscription = null )
     {
         $_SESSION['user']['login'] = $login;
         $_SESSION['user']['id'] = $id;
-        if(@$activeSubscribtion) $_SESSION['user']['activeSubscribtion'] = $activeSubscribtion;
+        if(@$activeSubscription) $_SESSION['user']['activeSubscription'] = $activeSubscription;
     }
 
     /**
@@ -58,20 +58,20 @@ class Subscribtion extends DataBase
 
         if (@!$login OR @!$password) return false;
 
-        $sql = "SELECT `id`,`login`, `password`, `start_date`, `subscribtion_term`, `token` FROM `users` WHERE `login`=? ";
+        $sql = "SELECT `id`,`login`, `password`, `start_date`, `subscription_term`, `token` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
 
-        $subscription = $this->ifUserSubscribed($user);
+        $subscription = $this->ifUserSubscriped($user);
 
         if (password_verify($password, $user->password)) {
 
             $this->saveInSession($login, $user->id,  @$subscription->activeStatus );
 
 
-            return ['token' => $user->token, 'userId'=>$user->id, 'activeSubscribtion' => @$subscription->activeStatus ];
+            return ['token' => $user->token, 'userId'=>$user->id, 'activeSubscription' => @$subscription->activeStatus ];
         }
         return false;
     }
@@ -80,7 +80,7 @@ class Subscribtion extends DataBase
     public function destroySession()
     {
         unset($_SESSION['user']['login']);
-        unset($_SESSION['user']['activeSubscribtion']);
+        unset($_SESSION['user']['activeSubscription']);
         unset($_SESSION['user']['id']);
 
         CookieService::destroyUserCookies();
@@ -94,7 +94,7 @@ class Subscribtion extends DataBase
     public function getCookiedUser()
     {
         if (!isset($_COOKIE['login']) ) return;
-        $sql = "SELECT `login` , `start_date`, `subscribtion_term` FROM `users` WHERE `login`=? AND `token`=?";
+        $sql = "SELECT `login` , `start_date`, `subscription_term` FROM `users` WHERE `login`=? AND `token`=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $_COOKIE['login'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_COOKIE['userToken'], \PDO::PARAM_STR);
@@ -104,7 +104,7 @@ class Subscribtion extends DataBase
 
         if ($user) {
 
-            $this->saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscribtion']);
+            $this->saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscription']);
             return true;
         }
         return false;
@@ -115,11 +115,11 @@ class Subscribtion extends DataBase
      *
      * @param $user
      */
-    private function ifUserSubscribed($user)
+    private function ifUserSubscriped($user)
     {
-        if(!$user->start_date OR !$user->subscribtion_term)  return false;
+        if(!$user->start_date OR !$user->subscription_term)  return false;
 
-        switch ($user->subscribtion_term) {
+        switch ($user->subscription_term) {
             case 'monthly':
                 $method = 'addMonth';
                 break;
@@ -145,13 +145,13 @@ class Subscribtion extends DataBase
 
     public function getUserInfo()
     {
-        $sql = "SELECT `id`, `avatar`, `login`, `email`, `start_date`, `subscribtion_term` FROM `users` WHERE `login`=? ";
+        $sql = "SELECT `id`, `avatar`, `login`, `email`, `start_date`, `subscription_term` FROM `users` WHERE `login`=? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $_SESSION['user']['login'], \PDO::PARAM_STR);
         $stmt->execute();
         $res = $stmt->fetch();
         //should get end day of subscribtion
-        $subscription = $this->ifUserSubscribed($res);
+        $subscription = $this->ifUserSubscriped($res);
 
         $res->finalDate = @$subscription->finalDate;
         $res->activeStatus = @$subscription->activeStatus;

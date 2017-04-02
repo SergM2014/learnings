@@ -125,16 +125,14 @@ document.body.addEventListener('click', function(e){
                 document.getElementById('commentFormContainer').innerHTML = html;
                 document.querySelector('#commentParentId').value = commentId;
                 document.getElementById('lessonId').value = lessonId;
+                return true;
+                  })
 
-
-                postAjax('/comment/getOneForResponse', formData)
-                    .then(response => response.text())
-                    .then(html => {
+            .then(()=> postAjax('/comment/getOneForResponse', formData))
+            .then(response => response.text())
+            .then(html => {
                         document.querySelector('#addCommentHead').innerHTML = html;
                     })
-            })
-
-
 
     }
 

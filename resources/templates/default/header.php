@@ -21,7 +21,6 @@
 
                 <nav class="main-header__nav ">
 
-                    <!--<a href="/<?/*= \Lib\HelperService::currentLang() */?>#" class="main-header__logo "><?/*= $ourBrandL */?></a>-->
 
                     <div id="mainHeaderTouchBtn" class="main-header__touch-btn">
                         <div class="main-header__icon-bar"></div>
@@ -35,18 +34,18 @@
 
                     </ul>
                       <?php if(@!isset($_SESSION['user']['login'])): ?>
-                        <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signIn">
+                        <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/signIn">
                             <?= $enterAdminL  ?>
                         </a>
                     <?php else:?>
 
-                        <form action="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signOut"  method="post" class="main-header__admin">
+                        <form action="/<?= \Lib\HelperService::currentLang() ?>subscription/signOut"  method="post" class="main-header__admin">
                             <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
                             <button type="submit" class="main-header__admin-btn"> <?= $_SESSION['user']['login'].'/'.$exitL  ?></button>
                         </form>
 
 
-                          <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/profile">
+                          <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/profile">
                               <?= $profileL  ?>
                           </a>
 
@@ -54,7 +53,7 @@
 
 
                     <?php if(@!$_SESSION['user']['login']): ?>
-                         <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscribtion/signUp""><?= $registerL ?></a>
+                         <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/signUp""><?= $registerL ?></a>
                     <?php endif; ?>
                     <?php //get the given languages array
                     $langs = \Lib\HelperService::prozessLangArray(); ?>

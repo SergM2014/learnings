@@ -17,7 +17,7 @@
 
         ?>
 
-    <form action="/subscribtion/update" method="post" >
+    <form action="/subscription/update" method="post" >
         <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
         <input type="hidden" name="id" value = "<?= $profileData->id ?>" >
         <div class="subscribtion-form__field-block">

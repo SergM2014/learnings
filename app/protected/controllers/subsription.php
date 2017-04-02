@@ -5,15 +5,15 @@ namespace App\Controllers;
 
 use App\Core\BaseController;
 use Lib\CheckFieldsService;
-
-use App\Models\Subscribtion  as SubscribtionModel;
+use App\Models\CheckForm;
+use App\Models\Subscription  as SubscriptionModel;
 use Lib\TokenService;
 use Lib\HelperService;
 use App\Controllers\Index as IndexController;
 use Lib\CookieService;
 
 
-class Subscribtion extends BaseController
+class Subscription extends BaseController
 {
     public function index()
     {
@@ -32,7 +32,7 @@ class Subscribtion extends BaseController
 
         $_SESSION['storeUser'] = true;
 
-        return ['view'=>'/views/subscribtion/signUp.php', 'noTemplate' =>true, 'errors' =>$errors ];
+        return ['view'=>'/views/subscription/signUp.php', 'noTemplate' =>true, 'errors' =>$errors ];
     }
 
     /**
@@ -50,13 +50,13 @@ class Subscribtion extends BaseController
 
         if(!empty($errors) ){ return $this->signUp($errors); }
 
-        if(!isset($_SESSION['storeUser']))  header('Location:/subscribtion/signUp');
+        if(!isset($_SESSION['storeUser']))  header('Location:/subscription/signUp');
 
-        (new SubscribtionModel())->storeUser($cleanedUpInputs);
+        (new SubscriptionModel())->storeUser($cleanedUpInputs);
 
          HelperService::sendMail($cleanedUpInputs);
 
-        return ['view'=>'/views/subscribtion/signUpSuccess.php'];
+        return ['view'=>'/views/subscription/signUpSuccess.php'];
     }
 
 
@@ -72,7 +72,7 @@ class Subscribtion extends BaseController
 
         $_SESSION['getUser'] = true;
 
-        return ['view'=>'/views/subscribtion/signIn.php', 'noTemplate' =>true, 'errors' =>$errors ];
+        return ['view'=>'/views/subscription/signIn.php', 'noTemplate' =>true, 'errors' =>$errors ];
     }
 
     /**
@@ -88,16 +88,16 @@ class Subscribtion extends BaseController
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password');
 
-        @extract((new SubscribtionModel())->getSubscribedUser($cleanedUpInputs));
+        @extract((new SubscriptionModel())->getSubscribedUser($cleanedUpInputs));
 
          if(@$token AND isset($_POST['rememberMe'])) {
-             CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscribtion);
+             CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscription);
 
 
-             return ['view' => '/views/subscribtion/signInSuccess.php'];
+             return ['view' => '/views/subscription/signInSuccess.php'];
          }
       //in case of fail
-       header('Location: /subscribtion/signIn');
+       header('Location: /subscription/signIn');
     }
 
     /**
@@ -109,7 +109,7 @@ class Subscribtion extends BaseController
     {
         TokenService::check('user');
 
-        (new SubscribtionModel())->destroySession();
+        (new SubscriptionModel())->destroySession();
 
         CookieService::destroyUserCookies();
 
@@ -123,7 +123,7 @@ class Subscribtion extends BaseController
      */
     public function signed()
     {
-        return ['view'=>'/views/subscribtion/alreadySignedIn.php'];
+        return ['view'=>'/views/subscription/alreadySignedIn.php'];
     }
 
     public function profile($errors = null )
@@ -131,12 +131,12 @@ class Subscribtion extends BaseController
         $this->ifNotSubscribed();
 
         //select all information according to session user login
-        $profileData = (new SubscribtionModel())->getUserInfo();
+        $profileData = (new SubscriptionModel())->getUserInfo();
 
         unset($_SESSION['avatar']);
         $_SESSION['updateUser'] = true;
 
-        return ['view'=>'/views/subscribtion/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];
+        return ['view'=>'/views/subscription/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];
     }
 
 
@@ -151,13 +151,13 @@ class Subscribtion extends BaseController
 
         if(!empty($errors) ){ return $this->profile($errors); }
 
-        if(!isset($_SESSION['updateUser']))  header('Location:/subscribtion/profile');
+        if(!isset($_SESSION['updateUser']))  header('Location:/subscription/profile');
 
-        (new SubscribtionModel())->updateUser($cleanedUpInputs);
+        (new SubscriptionModel())->updateUser($cleanedUpInputs);
 
         HelperService::sendMail($cleanedUpInputs);
 
-        return ['view'=>'/views/subscribtion/updateUserSuccess.php'];
+        return ['view'=>'/views/subscription/updateUserSuccess.php'];
     }
 
 

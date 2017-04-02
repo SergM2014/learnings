@@ -28,9 +28,9 @@
 
 
 
-    function subscribedUser()
+    function subscripedUser()
     {
-         $activeSubscribtion = $_SESSION['user']['activeSubscribtion']?? false;
+         $activeSubscribtion = $_SESSION['user']['activeSubscription']?? false;
          return !!$activeSubscribtion;
     }
 

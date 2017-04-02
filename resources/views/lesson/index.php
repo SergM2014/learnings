@@ -14,7 +14,7 @@
 
     <h3 class="header"><?= $videoIsNotAccessible ?></h3>
 
-    <?php elseif($lesson->free_status == 1 OR subscribedUser()): ?>
+    <?php elseif($lesson->free_status == 1 OR subscripedUser()): ?>
 
         <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
         <script src="//vjs.zencdn.net/5.11/video.min.js"></script>
@@ -33,7 +33,7 @@
         </video>
 
 
-        <?php if(subscribedUser()): ?>
+        <?php if(subscripedUser()): ?>
 
         <div class="lesson-comments__link-btn-container">
 
@@ -52,7 +52,7 @@
 
     <?php if(!loggedInUser()): ?>
 
-        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginL ?></a></button>
+        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscription/signIn"><?= $loginL ?></a></button>
     <?php endif; ?>
 
     <div class="lesson-excerpt">
@@ -113,6 +113,6 @@
 <?php else: ?>
 
 
-    <button class="lesson-comments__button-bottom"><a class="lesson-comments__button-link" href="/subscribtion/signIn"><?= $loginToAddCommentL ?></a></button>
+    <button class="lesson-comments__button-bottom"><a class="lesson-comments__button-link" href="/subscription/signIn"><?= $loginToAddCommentL ?></a></button>
 
 <?php endif; ?>
