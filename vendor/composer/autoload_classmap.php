@@ -6,14 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Controllers\\Admin' => $baseDir . '/app/protected/controllers/admin.php',
-    'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/category.php',
-    'App\\Controllers\\Comment' => $baseDir . '/app/protected/controllers/comment.php',
-    'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/404.php',
-    'App\\Controllers\\Images' => $baseDir . '/app/protected/controllers/images.php',
-    'App\\Controllers\\Index' => $baseDir . '/app/protected/controllers/index.php',
-    'App\\Controllers\\Lesson' => $baseDir . '/app/protected/controllers/lesson.php',
-    'App\\Controllers\\Subscription' => $baseDir . '/app/protected/controllers/subsription.php',
+    'App\\Controllers\\Admin\\Index' => $baseDir . '/app/protected/controllers/admin/index.php',
+    'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/common/category.php',
+    'App\\Controllers\\Comment' => $baseDir . '/app/protected/controllers/common/comment.php',
+    'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/common/404.php',
+    'App\\Controllers\\Images' => $baseDir . '/app/protected/controllers/common/images.php',
+    'App\\Controllers\\Index' => $baseDir . '/app/protected/controllers/common/index.php',
+    'App\\Controllers\\Lesson' => $baseDir . '/app/protected/controllers/common/lesson.php',
+    'App\\Controllers\\Subscription' => $baseDir . '/app/protected/controllers/common/subsription.php',
     'App\\Core\\AdminController' => $baseDir . '/app/core/admincontroller.php',
     'App\\Core\\Application' => $baseDir . '/app/core/application.php',
     'App\\Core\\BaseController' => $baseDir . '/app/core/basecontroller.php',

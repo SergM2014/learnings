@@ -18,7 +18,7 @@ $variableInController = "that is controller";
 $backToSiteL = "Back to site";
 $adminEntryTitleL = "Enter to admin Zone";
 $loginTitleL = "Login";
-$passwordL = "Пароль";
+$passwordL = "Password";
 
 $youAreInAdminL = "Admin zone";
 $exitL = "exit";

@@ -3,7 +3,7 @@
 namespace Lib;
 
 
-use App\Models\Subscribtion;
+use App\Models\Subscription;
 use Lib\TokenService;
 
 class CookieService {
@@ -35,7 +35,7 @@ class CookieService {
 
         if(@!isset($_SESSION['user']['login']) && isset($_COOKIE['login']) && isset($_COOKIE['userToken']) ){
 
-            (new Subscribtion())->getCookiedUser();
+            (new Subscription())->getCookiedUser();
         }
     }
 

@@ -17,11 +17,16 @@ class Application extends MainDispatcher {
      */
     public function runController($controller){
 
-        $name_contr = 'App\\Controllers\\'.ucfirst($controller[0]);
+        if( isset($controller['admin'])){$class = '\App\Controllers\Admin\\'; } else {
+            {$class = '\App\Controllers\\'; }
+        }
+
+
+        $nameContr = $class.ucfirst($controller[0]);
 
         $action = $controller[1];
 
-        $contr = new $name_contr($controller);
+        $contr = new $nameContr($controller);
 
         $data=call_user_func(array($contr, $action));
 
@@ -60,6 +65,8 @@ class Application extends MainDispatcher {
         if($result ) return 'templates/admin';
         return 'templates/default/';
     }
+
+
 
 
 

@@ -34,7 +34,7 @@ class Category  extends BaseController
 
 
 
-      return ['view'=>'views/category.php', 'categoryWithSeries'=>$categoryWithSeries,
+      return ['view'=>'views/common/category.php', 'categoryWithSeries'=>$categoryWithSeries,
           'extraLessonsAmount' => $extraLessonsAmount, 'seriesWithLessons'=>$seriesWithLessons, 'extraLessons'=>$extraLessons];
     }
 
@@ -53,7 +53,7 @@ class Category  extends BaseController
 
         $extraLessons = $catModel->getExtraLessons($categoryId);
 
-        return ['view'=>'views/serie.php', 'lessons'=>$lessons, 'extraLessons' => $extraLessons, 'categoryId'=>$categoryId,
+        return ['view'=>'views/common/serie.php', 'lessons'=>$lessons, 'extraLessons' => $extraLessons, 'categoryId'=>$categoryId,
             'extraLessonsAmount' => $extraLessonsAmount, 'serieLessonsAmount' => $serieLessonsAmount];
     }
 

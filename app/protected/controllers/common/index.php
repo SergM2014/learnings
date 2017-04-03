@@ -34,7 +34,7 @@ class Index  extends BaseController
         $language = HelperService::getCurrentLanguageAbbr();
         $planDescription = (new DB)->getPlanDescription($language);
 
-      return ['view'=>'views/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
+      return ['view'=>'views/common/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
           'randomTestimonials'=> $randomTestimonials, 'planDescription'=>$planDescription];
     }
 
@@ -42,7 +42,7 @@ class Index  extends BaseController
       public function refreshCaptcha()
       {
           $builder = (new DB)->printCaptcha();
-          return ['view' => 'views/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
+          return ['view' => 'views/common/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
       }
 
 
@@ -66,7 +66,7 @@ class Index  extends BaseController
       {
           $testimonials = (new Testimonial())->getAll();
           $builder = (new DB)->printCaptcha();
-          return ['view'=>'views/testimonials/index.php', 'testimonials'=>$testimonials, 'builder' => $builder,];
+          return ['view'=>'views/common/testimonials/index.php', 'testimonials'=>$testimonials, 'builder' => $builder,];
       }
 
 
@@ -82,20 +82,20 @@ class Index  extends BaseController
 
               $builder = (new DB())->printCaptcha();
 
-              return ['view' => '/views/testimonials/form.php', 'errors'=>$errors,  'ajax' => true , 'builder' => $builder];
+              return ['view' => '/views/common/testimonials/form.php', 'errors'=>$errors,  'ajax' => true , 'builder' => $builder];
           }
 
           (new Testimonial())->saveTestimonial($this->stripTags($_POST['testimonial']));
 
 
-          return  ['view' => '/views/testimonials/addSuccess.php','ajax' => true];
+          return  ['view' => '/views/common/testimonials/addSuccess.php','ajax' => true];
       }
 
 
       public function search()
       {
         $searchResults = (new DB())->getSearchResults();
-          return  ['view' => '/views/partials/searchResults.php', 'searchResults'=>$searchResults, 'ajax' => true];
+          return  ['view' => '/views/common/partials/searchResults.php', 'searchResults'=>$searchResults, 'ajax' => true];
 
       }
 

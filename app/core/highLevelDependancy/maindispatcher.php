@@ -26,16 +26,35 @@ abstract class MainDispatcher
 	 */
 	public function getController(){
 
+        $controller= [];
 
-		if(!is_array($this->url) && !empty($this->url)){ $controller[0]= $this->url; $controller[1]= 'index';}
+        if(!is_array($this->url) && !empty($this->url)) {
+            if ($this->url == 'admin') { $controller[0] = 'index'; $controller[1] = 'index'; $controller['admin'] = 'admin';
+            } else {
+                $controller[0] = $this->url; $controller[1] = 'index';
+            }
+        }
 
 		if(empty($this->url)){$controller[0]= 'index'; $controller[1]= 'index';}
 
-		if(!isset($controller)){$controller= $this->url;}
+
+            if(empty($controller) AND is_array($this->url)) {
+
+                if($this->url[0] == 'admin'){
+                    $controller['admin'] = 'admin'; $controller[0]= $this->url[1]; $controller[1] = $this->url[2]?? 'index';
+                } else {
+                    $controller = $this->url;
+                }
+		}
 //404 redirection
+
+        if( isset($controller['admin'])){$class = '\App\Controllers\Admin\\'; } else {
+            {$class = '\App\Controllers\\'; }
+        }
+
 		if(
-            !class_exists('\App\Controllers\\'.ucfirst($controller[0])) OR
-            !method_exists('\App\Controllers\\'.ucfirst($controller[0]), $controller[1] )
+            !class_exists($class.ucfirst($controller[0])) OR
+            !method_exists($class.ucfirst($controller[0]), $controller[1] )
         )
         { $controller[0] = 'error_404'; $controller[1] = 'index'; }
 

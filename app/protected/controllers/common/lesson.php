@@ -30,7 +30,7 @@ class Lesson  extends BaseController
 
         $builder = (new DB)->printCaptcha();
 
-      return ['view'=>'views/lesson/index.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons, 'builder'=> $builder, 'commentsTreeStructure'=> $commentsTreeStructure ];
+      return ['view'=>'views/common/lesson/index.php', 'lesson' =>$lesson, 'comments' => $comments, 'relatedLessons' => $relatedLessons, 'builder'=> $builder, 'commentsTreeStructure'=> $commentsTreeStructure ];
     }
 
 
@@ -38,7 +38,7 @@ class Lesson  extends BaseController
     {
 
         $lesson =  ( new ModelLesson())->getOneLessonforPreview();
-        return ['view'=>'views/lesson/preview.php', 'lesson' =>$lesson , 'ajax'=> true ];
+        return ['view'=>'views/common/lesson/preview.php', 'lesson' =>$lesson , 'ajax'=> true ];
     }
 
 

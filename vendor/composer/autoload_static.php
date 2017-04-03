@@ -54,14 +54,14 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
     );
 
     public static $classMap = array (
-        'App\\Controllers\\Admin' => __DIR__ . '/../..' . '/app/protected/controllers/admin.php',
-        'App\\Controllers\\Category' => __DIR__ . '/../..' . '/app/protected/controllers/category.php',
-        'App\\Controllers\\Comment' => __DIR__ . '/../..' . '/app/protected/controllers/comment.php',
-        'App\\Controllers\\Error_404' => __DIR__ . '/../..' . '/app/protected/controllers/404.php',
-        'App\\Controllers\\Images' => __DIR__ . '/../..' . '/app/protected/controllers/images.php',
-        'App\\Controllers\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/index.php',
-        'App\\Controllers\\Lesson' => __DIR__ . '/../..' . '/app/protected/controllers/lesson.php',
-        'App\\Controllers\\Subscription' => __DIR__ . '/../..' . '/app/protected/controllers/subsription.php',
+        'App\\Controllers\\Admin\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/admin/index.php',
+        'App\\Controllers\\Category' => __DIR__ . '/../..' . '/app/protected/controllers/common/category.php',
+        'App\\Controllers\\Comment' => __DIR__ . '/../..' . '/app/protected/controllers/common/comment.php',
+        'App\\Controllers\\Error_404' => __DIR__ . '/../..' . '/app/protected/controllers/common/404.php',
+        'App\\Controllers\\Images' => __DIR__ . '/../..' . '/app/protected/controllers/common/images.php',
+        'App\\Controllers\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/common/index.php',
+        'App\\Controllers\\Lesson' => __DIR__ . '/../..' . '/app/protected/controllers/common/lesson.php',
+        'App\\Controllers\\Subscription' => __DIR__ . '/../..' . '/app/protected/controllers/common/subsription.php',
         'App\\Core\\AdminController' => __DIR__ . '/../..' . '/app/core/admincontroller.php',
         'App\\Core\\Application' => __DIR__ . '/../..' . '/app/core/application.php',
         'App\\Core\\BaseController' => __DIR__ . '/../..' . '/app/core/basecontroller.php',

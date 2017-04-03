@@ -32,13 +32,13 @@ class Comment  extends BaseController
 
             $builder = (new DB())->printCaptcha();
 
-            return ['view' => '/views/comments/form.php', 'errors'=>$errors, 'builder'=>$builder, 'ajax' => true];
+            return ['view' => '/views/common/comments/form.php', 'errors'=>$errors, 'builder'=>$builder, 'ajax' => true];
         }
 
        (new DBComment())->saveComment($this->stripTags($_POST['comment']));
 
 
-        return  ['view' => '/views/comments/addSuccess.php','ajax' => true];
+        return  ['view' => '/views/common/comments/addSuccess.php','ajax' => true];
 
     }
 
@@ -47,20 +47,20 @@ class Comment  extends BaseController
     {
         $comment = (new DBComment())->getOneComment();
 
-        return  ['view' => '/views/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
+        return  ['view' => '/views/common/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
     }
 
 
     public function resetHeader()
     {
-        return  ['view' => '/views/comments/addCommentHead.php', 'ajax' => true];
+        return  ['view' => '/views/common/comments/addCommentHead.php', 'ajax' => true];
     }
 
 
     public function showForm()
     {
         $builder = (new DB())->printCaptcha();
-        return  ['view' => '/views/comments/form.php', 'builder' =>$builder, 'ajax' => true];
+        return  ['view' => '/views/common/comments/form.php', 'builder' =>$builder, 'ajax' => true];
     }
 
 

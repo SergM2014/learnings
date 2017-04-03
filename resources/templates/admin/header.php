@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Comments ">
-    <meta name="description" content="create comments">
-    <title>Admin Comments Page</title>
+    <meta name="keywords" content="Admin Part">
+    <meta name="description" content="admin part">
+    <title>Admin</title>
 
-
-	<link href="/assets/css/admin.css" rel="stylesheet">
-
+    <?php if(@!$noTemplate): ?>
+        <link href="/assets/css/admin.css" rel="stylesheet">
+    <?php endif; ?>
 
     </head>
     <body>
 
-       <!-- --><?php /* include PATH_SITE.'/resources/admin/partials/message_area.php'  */?>
+    <?php if(@!$noTemplate): ?>
 
 
     <div class="container">
 
 
 
-        <?php if(isset($_SESSION['admin'])) : ?>
+        <?php if(isset($_SESSION['admin']) ) : ?>
 
         <header class="main-header ">
 
@@ -75,4 +75,5 @@
 
        <section class="content">
 
+    <?php endif; ?>
 

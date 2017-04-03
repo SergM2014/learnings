@@ -1,9 +1,10 @@
+        <?php if(@!$noTemplate): ?>
             </section><!-- content-->
 
 
 
 
-            <?php if (isset($_SESSION['admin'])) : ?>
+            <?php if (isset($_SESSION['admin']) ) : ?>
 
                 <footer class="site-footer">
 
@@ -14,5 +15,6 @@
             <?php endif; ?>
 
     </div><!-- container-->
+        <?php endif; ?>
 </body>
 </html>

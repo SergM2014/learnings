@@ -32,7 +32,7 @@ class Subscription extends BaseController
 
         $_SESSION['storeUser'] = true;
 
-        return ['view'=>'/views/subscription/signUp.php', 'noTemplate' =>true, 'errors' =>$errors ];
+        return ['view'=>'/views/common/subscription/signUp.php', 'noTemplate' =>true, 'errors' =>$errors ];
     }
 
     /**
@@ -56,7 +56,7 @@ class Subscription extends BaseController
 
          HelperService::sendMail($cleanedUpInputs);
 
-        return ['view'=>'/views/subscription/signUpSuccess.php'];
+        return ['view'=>'/views/common/subscription/signUpSuccess.php'];
     }
 
 
@@ -72,7 +72,7 @@ class Subscription extends BaseController
 
         $_SESSION['getUser'] = true;
 
-        return ['view'=>'/views/subscription/signIn.php', 'noTemplate' =>true, 'errors' =>$errors ];
+        return ['view'=>'/views/common/subscription/signIn.php', 'noTemplate' =>true, 'errors' =>$errors ];
     }
 
     /**
@@ -94,7 +94,7 @@ class Subscription extends BaseController
              CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscription);
 
 
-             return ['view' => '/views/subscription/signInSuccess.php'];
+             return ['view' => '/views/common/subscription/signInSuccess.php'];
          }
       //in case of fail
        header('Location: /subscription/signIn');
@@ -123,20 +123,19 @@ class Subscription extends BaseController
      */
     public function signed()
     {
-        return ['view'=>'/views/subscription/alreadySignedIn.php'];
+        return ['view'=>'/views/common/subscription/alreadySignedIn.php'];
     }
 
     public function profile($errors = null )
     {
         $this->ifNotSubscribed();
 
-        //select all information according to session user login
         $profileData = (new SubscriptionModel())->getUserInfo();
 
         unset($_SESSION['avatar']);
         $_SESSION['updateUser'] = true;
 
-        return ['view'=>'/views/subscription/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];
+        return ['view'=>'/views/common/subscription/profile.php', 'profileData' => @$profileData, 'errors' =>$errors];
     }
 
 
@@ -157,7 +156,7 @@ class Subscription extends BaseController
 
         HelperService::sendMail($cleanedUpInputs);
 
-        return ['view'=>'/views/subscription/updateUserSuccess.php'];
+        return ['view'=>'/views/common/subscription/updateUserSuccess.php'];
     }
 
 
