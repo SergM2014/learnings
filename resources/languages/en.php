@@ -80,6 +80,7 @@ $testimonialAddedL = "Yor testemonial is added.It will be published after modera
 $gotoLessonL = "Go to lesson";
 $closeL = "Close";
 $loginToAddCommentL = "Login to add the comment";
+$adminGreetings = "Greetings! You entered admin zone now";
 
 
 //these functionare for translation in controllers and models

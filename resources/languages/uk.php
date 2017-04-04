@@ -78,6 +78,7 @@ $testimonialAddedL = "Ваш відгук додано його буде опу�
 $gotoLessonL = "Перейти до урока";
 $closeL = "Закрити";
 $loginToAddCommentL ="Ввійдіть, щоб добавити коментар";
+$adminGreetings = "Вітаю ви війшли до адміністративної зони";
 
 //these functionare for translation in controllers and models
 function variableInController(){

@@ -7,15 +7,35 @@ use App\Core\DataBase;
 class Lesson extends DataBase
 {
 
-    public function getAll()
+    public function getAll($admin = false, $p = 1)
     {
-        $sql= "SELECT `id`, `title`, `icon`, `serie_id`, `file`, `free_status` FROM `lessons`";
-        $stmt = $this->conn->query($sql);
-        $result = $stmt->fetchAll();
+        $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
+        $page = $_GET['p']?? $p;
+        $start = ($page-1)*$amountOnPage;
 
-        return $result;
+        $sql= "SELECT `id`, `title`, `icon`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $start, \PDO::PARAM_INT);
+        $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
+        $stmt->execute();
+        $lessons = $stmt->fetchAll();
+
+        return $lessons;
 
     }
+
+
+    public function countPages($admin = false)
+    {
+        $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
+        $sql= "SELECT COUNT(`id`) FROM `lessons`";
+        $stmt = $this->conn->query($sql);
+        $result = $stmt->fetchColumn();
+        $pages = ceil($result/$amountOnPage);
+
+         return $pages;
+    }
+
 
     public function getRandomItems($number = 12)
     {
@@ -75,7 +95,7 @@ class Lesson extends DataBase
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
-//dd($result);
+
         return $result;
     }
 
