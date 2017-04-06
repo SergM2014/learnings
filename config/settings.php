@@ -3,6 +3,7 @@
     include_once ('helpers.php');
 
     define('PATH_SITE', getDocumentRoot());
+    define('ROOT', getCorrectLinkDocumentRoot());
 
     define('NAMESITE','learnings');
     define('URL','http://learnings/');
@@ -19,14 +20,12 @@
 	define('UPLOAD_FOLDER','/public/uploads/');
 
 
-   // define('PRODUCTS_IMAGES', 'productsImages/');
 
 
-    define('SLIDER_IMAGES', 'slider/');
-    define('CAROUSEL_IMAGES', 'carousel/');
+
+
     define('AVATARS_IMAGES', 'avatars/');
-    define('CAROUSEL_W', 175);
-    define('CAROUSEL_H', 70);
+
     define('PRODUCT_IMAGES_H', 300);
     define('AVATAR_IMAGES_H',135);
     define('IMAGE_SIZE', 20480000);//20mb

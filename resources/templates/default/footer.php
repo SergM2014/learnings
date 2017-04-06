@@ -4,7 +4,7 @@
                     <span class="site-footer__mark"><?= $footerDisclaimerL ?></span>
                 </footer>
 
-                <script src="/assets/js/script.js?ver=<?= time() ?>" ></script>
+                <script src="<?= ROOT ?>/assets/js/script.js?ver=<?= time() ?>" ></script>
             <?php endif; ?>
     </div><!-- container-->
 </body>

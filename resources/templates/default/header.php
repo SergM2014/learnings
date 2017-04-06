@@ -9,7 +9,7 @@
     <title><?= $siteDescriptionL ?></title>
 
 
-	<link href="/assets/css/default.css?ver=<?= time() ?>" rel="stylesheet">
+	<link href="<?= ROOT ?>/assets/css/default.css?ver=<?= time() ?>" rel="stylesheet">
 
 
 

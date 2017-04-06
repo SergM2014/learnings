@@ -4,7 +4,7 @@
      * define if document root is in public folder or not
      * @return string
      */
-     function getDocumentRoot()
+        function getDocumentRoot()
 
         {
             $arr = explode('/', $_SERVER['DOCUMENT_ROOT']);
@@ -16,35 +16,51 @@
             return $_SERVER['DOCUMENT_ROOT'];
         }
 
-    function dd($arg)
+
+// only in case if cannot overwrite root Folder ex as in case of free hosting
+        function getCorrectLinkDocumentRoot($rootFolder = 'public')
         {
-            echo "<br>";
-            echo "<pre>";
-             var_dump($arg);
-             echo "<br>";
+            $arr = explode('/', $_SERVER['DOCUMENT_ROOT']);
+            if(!in_array($rootFolder, $arr)){
 
-            exit();
+              return '/'.$rootFolder;
+            }
+            return '';
         }
 
 
 
-    function subscripedUser()
-    {
-         $activeSubscribtion = $_SESSION['user']['activeSubscription']?? false;
-         return !!$activeSubscribtion;
-    }
+        function dd($arg)
+            {
+                echo "<br>";
+                echo "<pre>";
+                 var_dump($arg);
+                 echo "<br>";
 
-    function loggedInUser()
-    {
-        $loggedInUser = $_SESSION['user']['login']?? false ;
+                exit();
+            }
 
-        return !!$loggedInUser;
-    }
 
-   function displayPreviewImage($givenImage, $imageCustomType, $path)
-   {
-        if(@!$givenImage) {
-           return $imageCustomType == 'avatar'? '/img/noavatar.jpg' : '/img/nophoto.jpg';
+        function subscripedUser()
+        {
+             $activeSubscribtion = $_SESSION['user']['activeSubscription']?? false;
+             return !!$activeSubscribtion;
         }
-        return $path.$givenImage;
-   }
+
+
+
+        function loggedInUser()
+        {
+            $loggedInUser = $_SESSION['user']['login']?? false ;
+
+            return !!$loggedInUser;
+        }
+
+
+       function displayPreviewImage($givenImage, $imageCustomType, $path)
+       {
+            if(@!$givenImage) {
+               return $imageCustomType == 'avatar'? '/img/noavatar.jpg' : '/img/nophoto.jpg';
+            }
+            return $path.$givenImage;
+       }

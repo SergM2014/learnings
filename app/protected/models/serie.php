@@ -39,7 +39,7 @@ class Serie extends DataBase
      */
     public function  getCategoryId($array)
     {
-        $categoryId = $array[0]->category->id;
+        $categoryId = $array[0]->category_id;
         return $categoryId;
     }
 

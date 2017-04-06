@@ -23,7 +23,7 @@
 
               <div class="series-block__item">
                   <span class="series-block__item-level"><?php $level = 'level'.$serie->upgrading_skill.'L'; echo $$level ?></span>
-                    <img src="/uploads/seriesIcons/<?= $serie->icon ?>" alt="" class="series-block__item-img">
+                    <img src="<?= ROOT ?>/uploads/seriesIcons/<?= $serie->icon ?>" alt="" class="series-block__item-img">
                   <a href="/<?= \Lib\HelperService::currentLang() ?>category/serie?id=<?= $serie->id ?>"><h3 class="series-block__item-title"><?= $serie->title ?></h3></a>
                   <span class="series-block__item-bottom-lesson"><?= $serie->lessons_count ?>
                     <?= $serie->lessons_count == 1 ? $lessonL: $lessonsL ?>
@@ -52,7 +52,7 @@
 
             <div class="lessons-block__item">
                 <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
-                <img  class="lessons-block__item-icon" src="/uploads/lessonsIcons/<?= $lesson->icon ?>">
+                <img  class="lessons-block__item-icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>">
             </div>
 
         <?php endforeach ?>

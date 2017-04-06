@@ -31,7 +31,7 @@
 
 
             <div id="TestimonialFormContainer">
-                <?php include PATH_SITE.'/resources/views/testimonials/form.php'; ?>
+                <?php include PATH_SITE.'/resources/views/common/testimonials/form.php'; ?>
             </div>
 
         </div>

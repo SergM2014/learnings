@@ -33,7 +33,7 @@
 
         <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $lesson->id ?>">
             <div class="lessons-block__item"><h3><?= $lesson->title ?></h3>
-                <img src="/uploads/lessonsIcons/<?= $lesson->icon ?>" class="lessons-block__item-icon" alt="">
+                <img src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>" class="lessons-block__item-icon" alt="">
             </div>
 
         </a>

@@ -45,6 +45,7 @@ class Category  extends BaseController
 
         $lessons = $serieModel->getSerieLessons();
 
+
         $categoryId = $serieModel->getCategoryId($lessons);
 
         $serieLessonsAmount = $serieModel->getSerieLessonsAmount();

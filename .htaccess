@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !^public
+
+
+#RewriteRule ^ public/index.php[L]
+RewriteRule ^(.*)$ public/$1 [L,QSA]
+
+#AddDefaultCharset UTF-8
+#php_flag magic_quotes_gpc Off
+#php_value display_errors on

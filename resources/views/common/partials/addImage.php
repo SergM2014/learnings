@@ -2,7 +2,7 @@
     <img src="<?=  displayPreviewImage($givenImage, $imageCustomType, $path) ?>" alt="" id="downloadImagePreview" class="image-download__preview">
 
 <?php if($givenImage): ?>
-    <img src="/img/small-close.png" alt="<?= $deletePreviewL ?>"  title ="<?= $deletePreviewL ?>" id="deleteImagePreview" class="image-download__delete-sign">
+    <img src="<?= ROOT ?>/img/small-close.png" alt="<?= $deletePreviewL ?>"  title ="<?= $deletePreviewL ?>" id="deleteImagePreview" class="image-download__delete-sign">
 <?php endif; ?>
 
      <div id="imageDownloadOutput" class="image-download__output"></div>
@@ -20,6 +20,6 @@
 
     </progress>
 
-    <script src="/assets/js/uploadImage.js?ver=<?= time() ?>" ></script>
+    <script src="<?= ROOT ?>/assets/js/uploadImage.js?ver=<?= time() ?>" ></script>
 
 </div>

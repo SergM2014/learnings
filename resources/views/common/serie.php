@@ -23,7 +23,7 @@
       <?php foreach($lessons as $lesson): ?>
           <div class="lessons-block__item">
               <a href="/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
-              <img  class="lessons-block__item-icon" src="/uploads/lessonsIcons/<?= $lesson->icon ?>">
+              <img  class="lessons-block__item-icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>">
           </div>
 
       <?php endforeach; ?>
@@ -50,7 +50,7 @@
 
             <div class="lessons-block__item">
                 <a href="/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
-                <img  class="lessons-block__item-icon" src="/uploads/lessonsIcons/<?= $lesson->icon ?>">
+                <img  class="lessons-block__item-icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>">
             </div>
 
         <?php endforeach ?>

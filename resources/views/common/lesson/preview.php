@@ -1,7 +1,7 @@
-<img id="previewLessonCloseSign" class="preview-lesson__close-sign" src="/img/close.png" alt="">
+<img id="previewLessonCloseSign" class="preview-lesson__close-sign" src="<?= ROOT ?>/img/close.png" alt="">
 
 
-    <img class="preview-lesson__icon" src="/uploads/lessonsIcons/<?= $lesson->icon ?>" alt="">
+    <img class="preview-lesson__icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>" alt="">
     <div class="preview-lesson__excerpt">
         <?= $lesson->excerpt ?>
     </div>

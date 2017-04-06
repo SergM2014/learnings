@@ -1,5 +1,5 @@
 <div id="addTestimonialHeader" class="add-testimonial__header">
-    <?php include PATH_SITE.'/resources/views/testimonials/addTestimonialHeader.php'; ?>
+    <?php include PATH_SITE.'/resources/views/common/testimonials/addTestimonialHeader.php'; ?>
 </div>
 
 
@@ -20,7 +20,7 @@
 
         <br>
         <div id="captchaImgContainer" class="add-comment__captcha">
-            <?php include PATH_SITE.'/resources/views/partials/captcha.php'; ?>
+            <?php include PATH_SITE.'/resources/views/common/partials/captcha.php'; ?>
         </div>
 
         <small><?= $enterCaptchaL ?></small>

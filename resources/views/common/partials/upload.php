@@ -7,7 +7,7 @@
 
     <div id="avatar_area"  class="clearfix">
         <img alt="" id="image_preview" class="avatar-thumb-preview" src="<?php if(isset($_SESSION['avatar']))
-            {echo '/uploads/avatars/'.$_SESSION['avatar'];} else {echo URL.'public/img/noavatar.jpg';} ?>"  />
+            {echo ROOT.'/uploads/avatars/'.$_SESSION['avatar'];} else {echo ROOT.'/img/noavatar.jpg';} ?>"  />
 
         <div id="output" class="avatar__progress-container invisible" ></div>
         <div class="progress ">

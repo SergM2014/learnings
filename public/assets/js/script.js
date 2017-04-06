@@ -228,7 +228,7 @@ document.getElementById('search').addEventListener('keyup', function(e) {
     let searchField = this.value;
     searchField = searchField.trim();
 
-    if (searchField == '' || /*typeof existingSearchResultsCont !== "undefined"*/ !existingSearchResultsCont) {
+    if (searchField == '' && existingSearchResultsCont) {
         existingSearchResultsCont.remove();
         return;
     }
@@ -238,7 +238,7 @@ document.getElementById('search').addEventListener('keyup', function(e) {
 
      if (!existingSearchResultsCont ) {
 
-             searchResultsCont = document.createElement('div');
+            searchResultsCont = document.createElement('div');
             searchResultsCont.id = "searchResultsContainer";
             document.getElementById('mainHeaderSearchContainer').appendChild(searchResultsCont);
             searchResultsCont.className = "search-results-container--hidden";

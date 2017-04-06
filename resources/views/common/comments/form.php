@@ -1,6 +1,6 @@
 <div id="addCommentHead" class="add-comment__head">
 
-    <?php include PATH_SITE.'/resources/views/comments/addCommentHead.php'; ?>
+    <?php include PATH_SITE.'/resources/views/common/comments/addCommentHead.php'; ?>
 
 </div>
 
@@ -24,7 +24,7 @@
 
         <br>
         <div id="captchaImgContainer" class="add-comment__captcha">
-            <?php include PATH_SITE.'/resources/views/partials/captcha.php'; ?>
+            <?php include PATH_SITE.'/resources/views/common/partials/captcha.php'; ?>
         </div>
 
         <small><?= $enterCaptchaL ?></small>

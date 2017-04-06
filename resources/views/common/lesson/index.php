@@ -26,7 +26,7 @@
             preload="auto"
             poster="//vjs.zencdn.net/v/oceans.png"
             data-setup='{}'>
-            <source src="/uploads/video/<?= $lesson->file ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+            <source src="<?= ROOT ?>/uploads/video/<?= $lesson->file ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 
             Элемент video не поддерживается вашим браузером.
 
@@ -37,7 +37,7 @@
 
         <div class="lesson-comments__link-btn-container">
 
-            <a download href="/<?= \Lib\HelperService::currentLang() ?>uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+            <a download href="/<?= \Lib\HelperService::currentLang().ROOT ?>uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
 
         </div>
 
@@ -86,7 +86,7 @@
         <?php foreach ($relatedLessons as $relatedLesson): ?>
         <div class="related-lessons__item">
             <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
-                <img src="/uploads/lessonsIcons/<?= $relatedLesson->icon ?>" alt="" class="related-lessons__item-img">
+                <img src="<?= ROOT ?>/uploads/lessonsIcons/<?= $relatedLesson->icon ?>" alt="" class="related-lessons__item-img">
                 <span class="related-lessons__item-link-title"><?= $relatedLesson->title ?></span>
             </a>
         </div>
@@ -104,7 +104,8 @@
         <a name="addComment"></a>
 
         <div id="commentFormContainer">
-            <?php include PATH_SITE.'/resources/views/comments/form.php'; ?>
+
+            <?php include PATH_SITE.'/resources/views/common/comments/form.php'; ?>
         </div>
 
 

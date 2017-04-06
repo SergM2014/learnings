@@ -1,4 +1,4 @@
-<img id="lessonCommentCloseSign" class="lesson-comments__close-sign" src="/img/close.png" alt="">
+<img id="lessonCommentCloseSign" class="lesson-comments__close-sign" src="<?= ROOT ?>/img/close.png" alt="">
 <article class="lesson-comments__article">
 
 
