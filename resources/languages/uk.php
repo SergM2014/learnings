@@ -79,6 +79,11 @@ $gotoLessonL = "Перейти до урока";
 $closeL = "Закрити";
 $loginToAddCommentL ="Ввійдіть, щоб добавити коментар";
 $adminGreetings = "Вітаю ви війшли до адміністративної зони";
+$lessonsTitlesL = "Уроки";
+$titleL = "Назва";
+$excerptL = "Витяг";
+$showL = "Продивитися";
+$updateL = "Оновити";
 
 //these functionare for translation in controllers and models
 function variableInController(){

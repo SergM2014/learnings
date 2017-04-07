@@ -9,7 +9,7 @@
     <title>Admin</title>
 
     <?php if(@!$noTemplate): ?>
-        <link href="/assets/css/admin.css" rel="stylesheet">
+        <link href="/assets/css/admin.css?ver=<?= time() ?>" rel="stylesheet">
     <?php endif; ?>
 
     </head>
@@ -42,7 +42,7 @@
                  <ul class="main-header__menu" >
 
                      <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
-                     <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>admin/lesson" class="main-header__menu-item-link"><?= $lessonsL ?></a></li>
+                     <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
 
 
 

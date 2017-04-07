@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Controllers\\Admin\\Index' => $baseDir . '/app/protected/controllers/admin/index.php',
     'App\\Controllers\\Admin\\Lesson' => $baseDir . '/app/protected/controllers/admin/lesson.php',
+    'App\\Controllers\\Admin\\PopUp' => $baseDir . '/app/protected/controllers/admin/popUp.php',
     'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/common/category.php',
     'App\\Controllers\\Comment' => $baseDir . '/app/protected/controllers/common/comment.php',
     'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/common/404.php',

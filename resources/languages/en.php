@@ -81,6 +81,11 @@ $gotoLessonL = "Go to lesson";
 $closeL = "Close";
 $loginToAddCommentL = "Login to add the comment";
 $adminGreetings = "Greetings! You entered admin zone now";
+$lessonsTitlesL = "Lessons";
+$titleL = "Title";
+$excerptL = "Excerpt";
+$showL = "Show";
+$updateL = "Update";
 
 
 //these functionare for translation in controllers and models

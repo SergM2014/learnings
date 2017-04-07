@@ -27,14 +27,14 @@ class AdminModel extends DataBase
         }
     }
 
-
-
-    public function getLoopCounter()
+    public function getTableCounter()
     {
-        $p = @ $_POST['p']? : '1';
-        $counter = (int)($p-1)*AMOUNTONPAGEADMIN +1;
-        return $counter;
+        $p = $_GET['p']?? 1;
+        $start = ($p-1)*AMOUNTONPAGEADMIN+1;
+        return $start;
     }
+
+
 
     public  function removeUnnecessaryImages()
     {
@@ -92,25 +92,7 @@ class AdminModel extends DataBase
         return $users;
     }
 
-   /* public function storeUser()
-    {
-        $status = $this->getUserUpgradingStatus();
 
-        $password= password_hash($_POST['user_password'], PASSWORD_DEFAULT);
-
-
-        $sql = "INSERT INTO `users` (`login`, `password`, `role_title`, `upgrading_status`) VALUES (?, ?, ?, ?)";
-        $stmt =$this->conn->prepare($sql);
-        $stmt->bindValue(1, $_POST['user_name'], \PDO::PARAM_STR);
-        $stmt->bindValue(2, $password, \PDO::PARAM_STR);
-        $stmt->bindValue(3, $_POST['user_role'], \PDO::PARAM_STR);
-        $stmt->bindValue(4, $status, \PDO::PARAM_INT);
-        $stmt->execute();
-
-        $id = $this->conn->lastInsertId();
-        unset ($_SESSION['makeUser']);
-        return $id;
-    }*/
 
 
     public function getOneUser()

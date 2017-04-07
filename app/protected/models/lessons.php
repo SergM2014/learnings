@@ -13,7 +13,7 @@ class Lesson extends DataBase
         $page = $_GET['p']?? $p;
         $start = ($page-1)*$amountOnPage;
 
-        $sql= "SELECT `id`, `title`, `icon`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
+        $sql= "SELECT `id`, `title`, `icon`, `excerpt`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $start, \PDO::PARAM_INT);
         $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
