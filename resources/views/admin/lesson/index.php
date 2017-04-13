@@ -21,4 +21,6 @@
 
 </div>
 
+
+
 <?php include PATH_SITE.'/resources/views/admin/partials/pagination.php'; ?>

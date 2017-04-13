@@ -8,7 +8,8 @@ let progress = document.getElementById('imageDownloadProgress'),
     output = document.getElementById('imageDownloadOutput'),
     submit_btn = document.getElementById('downloadImageBtn'),
     reset_btn = document.getElementById('resetImageBtn'),
-    delete_img_sign = document.getElementById('deleteImagePreview');
+    delete_img_sign = document.getElementById('deleteImagePreview'),
+    imageField =  document.getElementById('file');
 
 class Helper {
     static getCurrentLang(j){
@@ -180,7 +181,13 @@ if(reset_btn) {
                 )
 
             .then(responce => responce.json())
-            .then(j => output.innerHTML = j.message)
+            .then(j => { output.innerHTML = j.message;
+            if(output.classList.contains('hidden')) {
+                output.classList.remove('hidden')
+            }
+            imageField.value = '';
+
+            });
 
 
 

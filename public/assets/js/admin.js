@@ -134,8 +134,6 @@ document.body.addEventListener('click', function (e) {
     if(e.target.closest('.table__row')){
         let lessonId = e.target.closest('.table__row').dataset.lessonId;
 
-
-
         new PopUpMenu(e).fillUpMenuContent(lessonId, '/admin/popUp/lesson', 'admin/lesson');
 
     }

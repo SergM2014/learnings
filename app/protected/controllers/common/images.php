@@ -34,6 +34,22 @@ class Images  extends BaseController
           exit();
       }
 
+    public function uploadLessonsIcon()
+    {
+        $message = (new ModelImages())->uploadLessonIcon();
+
+        echo json_encode($message);
+        exit();
+    }
+
+      public function deleteLessonsIcon()
+      {
+          $message = (new ModelImages())->deleteLessonsIcon();
+
+          echo json_encode($message);
+          exit();
+      }
+
 
   }
   

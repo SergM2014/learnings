@@ -109,3 +109,90 @@ th{
   text-decoration:underline;
   font-size:14px;
 }
+.centered{
+  width:360px;
+  margin:0 auto;
+}
+
+.header-h2{
+  text-align:center;
+  color: #ff6975;
+}
+.form-field{
+  margin:10px 0;
+}
+.serie-selection li{
+  list-style-type: none;
+}
+.serie-item{
+  margin-left:20px;
+}
+.tree-branch{
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 150px;
+  margin-top: 5px;
+  background: #a98bc7;
+  text-align: center;
+}
+.tree-branch:hover{
+  background: #ffacde;
+}
+.form-field__label{
+  color:red;
+}
+.form-field__error{
+  color:red;
+  border-bottom:1px dotted red;
+  display:block;
+}
+.form-field__error:empty {
+  display:none;
+}
+.lesson-form{
+  padding:20px 0;
+}
+
+
+
+.hidden{
+  display:none;
+}
+.image-download__preview, .file-download__preview {
+  max-width:150px;
+  max-height:150px;
+  border-radius:5px;
+}
+
+.add-comment__progress{
+  margin-top:10px;
+}
+
+.image-download__block, .file-download__block{
+  margin-bottom:10px;
+  position:relative;
+}
+
+.image-download__btn, .file-download__btn{
+  padding:2px;
+  cursor:pointer;
+}
+.image-download__output, .file-download__output{
+  display: inline-block;
+  width: 50%;
+  position: absolute;
+  top:25px;
+  text-align: center;
+  padding-left: 5px;
+}
+.image-upload--succeded, .image-delete--succeded,.file-upload--succeded, .file-delete--succeded{
+  color: #56ff76;
+  text-align:center;
+}
+.image-upload--failed, .file-upload--failed{
+  color:red;
+  text-align:center;
+}

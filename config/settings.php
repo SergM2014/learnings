@@ -18,17 +18,21 @@
 
     define('IMAGE_TYPES',['image/gif', 'image/png', 'image/jpeg']);
 	define('UPLOAD_FOLDER','/public/uploads/');
+	define('LESSONS_FOLDER','video/');
+    define('LESSON_SIZE', 100*1024*1024);//100mb
+    define('VIDEO_TYPES', ['video/mp4']);
 
 
 
 
 
-
+    define('LESSONS_ICONS_IMAGES', 'lessonsIcons/');
+    define('LESSONS_ICONS_IMAGES_EXTENT', 150);
     define('AVATARS_IMAGES', 'avatars/');
 
     define('PRODUCT_IMAGES_H', 300);
-    define('AVATAR_IMAGES_H',135);
-    define('IMAGE_SIZE', 20480000);//20mb
+    define('AVATAR_IMAGES_EXTENT',135);
+    define('IMAGE_SIZE', 10*1024*1024);//10mb
 
 
 

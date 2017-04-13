@@ -86,6 +86,15 @@ $titleL = "Title";
 $excerptL = "Excerpt";
 $showL = "Show";
 $updateL = "Update";
+$addL = "Add";
+$shooseSerieL = "Choose serie";
+$setPayedStatusL = "Set payed status";
+$freeL = "Free";
+$notFreeL = "Not free";
+$createLessonL = "Create Lesson";
+$iconL = "Icon";
+$fileL = "File";
+$lessonFileUploadRemark = "mp4 extention only! Size not more than 100Mb";
 
 
 //these functionare for translation in controllers and models
@@ -123,14 +132,14 @@ function smthWentWrong()
 }
 function repeatedLogin()
 {
-    return "Логін вже занйнято";
+    return "Login is already taken";
 }
 
 function succededRegistrationMail($login, $password)
 {
-    return "Прийміть поздлровлення ! \n 
-    Ваш логін - $login \n
-    пароль - $password";
+    return "Congratulations ! \n 
+    Your login - $login \n
+    Your password - $password";
 }
 
 function restrictedFileType()
@@ -160,7 +169,7 @@ function fileDeleted()
 
 function wrongCaptcha()
 {
-    return "Неправильна капча!";
+    return "Wrong captcha!";
 }
 function responseGivvenComment()
 {

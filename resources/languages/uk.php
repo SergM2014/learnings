@@ -84,6 +84,15 @@ $titleL = "Назва";
 $excerptL = "Витяг";
 $showL = "Продивитися";
 $updateL = "Оновити";
+$addL = "Додати";
+$shooseSerieL = "Визначити серію";
+$setPayedStatusL = "Визначити оплачуваний статус";
+$freeL = "Безкоштовний";
+$notFreeL = "Платний";
+$createLessonL = "Створити урок";
+$iconL = "Иконка";
+$fileL = "Файл";
+$lessonFileUploadRemark = "Лише mp4 розширення! Розмір не більше  100Mb";
 
 //these functionare for translation in controllers and models
 function variableInController(){
@@ -138,7 +147,7 @@ function restrictedFileType()
 
 function tooBigFile()
 {
-    return "Занадто великий розмір фвйлу!";
+    return "Занадто великий розмір файлу!";
 }
 
 function succeededUpload()

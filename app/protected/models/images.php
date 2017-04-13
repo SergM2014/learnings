@@ -15,25 +15,24 @@ class Images extends Prozess_Image
     public function uploadAvatar(){
 
         $path = PATH_SITE.UPLOAD_FOLDER.AVATARS_IMAGES;
-        $tmp_path= PATH_SITE.UPLOAD_FOLDER.'tmp/';
 
         $error =  $this->checkUploadFileErrors();
         if(!empty($error)) return $error;
 
-        $name = $this->resizeImage($_FILES['file'], $tmp_path, AVATAR_IMAGES_H);
+        $name = $this->resizeImage($_FILES['file'], $path, AVATAR_IMAGES_EXTENT);
 
         // Загрузка файла и вывод сообщения
-        if(!@copy($tmp_path.$name, $path.$name)) {
-            return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()." </span>", "error" => true];
-        }
-        else {
+        if($name) {
+            unset($_FILES['file']);
             $_SESSION['avatar'] = $name;
-
             $response=["message"=>"<span class='image-upload--succeded'>".succeededUpload()."</span>", "success"=>true, "image"=> @$_SESSION[$_POST['action']]];
             chmod ($path.$name , 0777);
         }
-        // Удаляем временный файл a
-        unlink(PATH_SITE.UPLOAD_FOLDER.'tmp/' . $name);
+        else {
+            return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()." </span>", "error" => true];
+        }
+
+
 
         return $response;
     }
@@ -45,15 +44,59 @@ class Images extends Prozess_Image
     public function deleteAvatar ()
     {
         if ($_POST['deleteAvatarInSession'] == true) {
-//var_dump($_SESSION);
+
             $_SESSION['avatar'] = 'delete';
-var_dump($_SESSION['avatar']);
+
             return;
         }
 
         $avatar = @ $_SESSION['avatar'];
         @ unlink ( PATH_SITE.UPLOAD_FOLDER.'avatars/'.$_SESSION['avatar']);
         unset ( $_SESSION['avatar']);
+        $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> $avatar];
+
+        return $response;
+    }
+
+
+    public function uploadLessonIcon(){
+
+        $path = PATH_SITE.UPLOAD_FOLDER.LESSONS_ICONS_IMAGES;
+
+
+        $error =  $this->checkUploadFileErrors();
+        if(!empty($error)) return $error;
+
+        $name = $this->resizeImage($_FILES['file'], $path, LESSONS_ICONS_IMAGES_EXTENT);
+
+        // Загрузка файла и вывод сообщения
+        if($name) {
+            unset($_FILES['file']);
+            $_SESSION['lessonsIcon'] = $name;
+            $response=["message"=>"<span class='image-upload--succeded'>".succeededUpload()."</span>", "success"=>true, "image"=> @$_SESSION[$_POST['action']]];
+            chmod ($path.$name , 0777);
+        }
+        else {
+            return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()." </span>", "error" => true];
+        }
+
+
+        return $response;
+    }
+
+
+    public function deleteLessonsIcon ()
+    {
+        if (@$_POST['deleteLessonsIconInSession'] == true) {
+
+            $_SESSION['lessonsIcon'] = 'delete';
+
+            return;
+        }
+
+        $avatar = @ $_SESSION['lessonsIcon'];
+        @ unlink ( PATH_SITE.UPLOAD_FOLDER.'lessonsIcons/'.$_SESSION['lessonsIcon']);
+        unset ( $_SESSION['lessonsIcon']);
         $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> $avatar];
 
         return $response;

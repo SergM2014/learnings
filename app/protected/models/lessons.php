@@ -100,4 +100,64 @@ class Lesson extends DataBase
     }
 
 
+    public function uploadFile()
+    {
+
+        $error = $this->checkUploadsFileErrors();
+
+        if($error) return $error;
+
+        $path = PATH_SITE.UPLOAD_FOLDER.LESSONS_FOLDER;
+
+
+        $newname = $path.$_FILES['downloadFile']['name'];
+
+        move_uploaded_file($_FILES['downloadFile']['tmp_name'], $newname);
+
+
+        // Загрузка файла и вывод сообщения
+        if( file_exists($newname)) {
+            $_SESSION['downloadFile'] = $newname;
+            $response=["message"=>"<span class='image-upload--succeded'>".succeededUpload()."</span>", "success"=>true, "image"=> @$_SESSION[$_POST['action']]];
+            chmod ($newname , 0777);
+        }
+        else {
+            return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()." </span>", "error" => true];
+        }
+
+
+        return $response;
+    }
+
+    protected function checkUploadsFileErrors()
+    {
+
+        if(empty($_FILES) OR $_FILES['downloadFile']['size']== 0  OR $_FILES['downloadFile']['size'] > LESSON_SIZE) return $response =["message"=>"<span class='image-upload--failed'>".  tooBigFile()."</span>", "error" => true];
+
+        if(!is_uploaded_file($_FILES['downloadFile']['tmp_name'])) return $response =["message"=>"<span class='image-upload--failed'>". smthIsWrong()."</span>", "error" => true];
+
+        if (!in_array(strtolower($_FILES['downloadFile']['type']), VIDEO_TYPES))  return $response =["message"=>"<span class='image-upload--failed'>".restrictedFileType(). "</span>", "error"=>true];
+
+        return  null;
+    }
+
+
+    public function deleteFile ()
+    {
+        if (@$_POST['deleteFile'] == true) {
+
+            $_SESSION['downloadFile'] = 'delete';
+
+            return;
+        }
+
+        $file = @ $_SESSION['downloadFile'];
+        @ unlink ($_SESSION['downloadFile']);
+        unset ( $_SESSION['downloadFile']);
+        $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> basename($file)];
+
+        return $response;
+    }
+
+
 }
