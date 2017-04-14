@@ -140,7 +140,27 @@ document.body.addEventListener('click', function (e) {
 
 
 
+    if(e.target.closest('[data-category-id]')){
 
+        let elem = e.target;
+        let categoryId = elem.closest('[data-category-id]').dataset.categoryId;
+        let serieId = elem.closest('[data-serie-id')? elem.closest('[data-serie-id]').dataset.serieId: null;
+
+
+       let selected = document.getElementById('serieList').querySelectorAll('.tree-branch--selected');
+
+           for(let i = 0; i < selected.length; i++){
+              selected[i].classList.remove('tree-branch--selected')
+           }
+
+         elem.closest('.tree-branch').classList.add('tree-branch--selected');
+
+        document.getElementById('categoryField').value = categoryId;
+
+        document.getElementById('serieField').value = serieId;
+
+
+    }
 
 
 
@@ -150,6 +170,17 @@ document.body.addEventListener('click', function (e) {
 
 
 });
+
+
+let categoryId = document.getElementById('categoryField').value;
+let serieId = document.getElementById('serieField').value;
+//console.log(categoryId, serieId);
+
+if(serieId) {
+    document.getElementById('serieList').querySelector(`[data-serie-id="${serieId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
+} else {
+    document.getElementById('serieList').querySelector(`[data-category-id="${categoryId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
+}
 
 
 

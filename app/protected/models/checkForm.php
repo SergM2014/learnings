@@ -12,6 +12,8 @@ use function \notApropriateLength;
 use function \wrongEmail;
 use function \repeatedLogin;
 use function \wrongCaptcha;
+use function \noCategoryAndSerie;
+use function \noFile;
 
 
 class CheckForm extends DataBase
@@ -123,6 +125,43 @@ class CheckForm extends DataBase
        return (array)$errors;
 
    }
+
+
+    protected function checkCategory($errors)
+    {
+        if(!$_POST['category']) { $errors->category = $errors->category ?? noCategoryAndSerie();}
+
+    }
+
+
+    protected function checkDownloadedFile($errors)
+    {
+        if (@!$_SESSION['downloadFile']) {
+            $errors->downloadFile = $errors->downloadFile ?? noFile();
+        }
+
+    }
+    protected function checkLessonsIcon($errors)
+    {
+        if (@!$_SESSION['lessonsIcon']) {
+            $errors->lessonsIcon = $errors->lessonsIcon ?? noFile();
+        }
+
+    }
+
+
+        public function checkAddLessonForm($inputs)
+    {
+        $errors =  new \stdClass();
+
+        $this->checkIfNotEmpty($inputs, $errors);
+        $this->checkCategory($errors);
+        $this->checkDownloadedFile($errors);
+        $this->checkLessonsIcon($errors);
+
+        return (array)$errors;
+
+    }
 
 
 

@@ -196,3 +196,6 @@ th{
   color:red;
   text-align:center;
 }
+.tree-branch--selected{
+  background: #ff3838!important;
+}

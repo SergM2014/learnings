@@ -13,11 +13,12 @@ use Lib\TokenService;
 use App\Models\Lesson as LessonModel;
 use App\Models\AdminModel;
 use App\Models\Serie;
-//use Intervention\Image\ImageManagerStatic as Image;
-
+use Lib\CheckFieldsService;
+use App\Models\CheckForm;
 
 class Lesson  extends AdminController
   {
+    use CheckFieldsService;
 
     public function index()
 	{
@@ -26,7 +27,7 @@ class Lesson  extends AdminController
         $pages = $model->countPages('true');
         $tableCounter = (new AdminModel())->getTableCounter();
 
-        return ['view'=>'views/admin/lesson/index.php', 'lessons'=>$lessons, 'pages'=>$pages, 'counter'=>$tableCounter ];
+        return ['view'=>'/views/admin/lesson/index.php', 'lessons'=>$lessons, 'pages'=>$pages, 'counter'=>$tableCounter ];
     }
 
 
@@ -35,7 +36,7 @@ class Lesson  extends AdminController
     {
         $model = new Serie();
         $treeMenu =$model->printOutSerieTreeMenu();
-        return ['view'=>'views/admin/lesson/create.php', 'treeMenu'=>$treeMenu ];
+        return ['view'=>'/views/admin/lesson/create.php', 'treeMenu'=>$treeMenu ];
     }
 
 
@@ -52,6 +53,29 @@ class Lesson  extends AdminController
         $message = (new LessonModel())->deleteFile();
         echo json_encode($message);
         exit();
+    }
+
+
+    public function store()
+    {
+
+
+        //TokenService::check('admin');
+
+        $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
+
+        $errors = (new CheckForm())->checkAddLessonForm($cleanedUpInputs);
+        if(!empty($errors) ) {
+
+
+            $treeMenu = (new Serie)->printOutSerieTreeMenu();
+            return ['view' => '/views/admin/lesson/create.php', 'errors'=>$errors , 'treeMenu'=>$treeMenu];
+        }
+
+        (new LessonModel())->saveLesson($this->stripTags($_POST['comment']));
+
+
+        return  ['view' => '/views/common/comments/addSuccess.php','ajax' => true];
     }
 
 

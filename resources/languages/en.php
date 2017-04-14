@@ -97,6 +97,7 @@ $fileL = "File";
 $lessonFileUploadRemark = "mp4 extention only! Size not more than 100Mb";
 
 
+
 //these functionare for translation in controllers and models
 function variableInController(){
     return "Variable in Controller";
@@ -174,4 +175,14 @@ function wrongCaptcha()
 function responseGivvenComment()
 {
     return "Response the comment!";
+}
+
+function noCategoryAndSerie()
+{
+    return "Empty category/serie!";
+}
+
+function noFile()
+{
+    return "No file!";
 }

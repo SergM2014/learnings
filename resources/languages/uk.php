@@ -174,3 +174,13 @@ function responseGivvenComment()
     return "Відповісти на комментар!";
 }
 
+function noCategoryAndSerie()
+{
+    return "Не вказана категорія/серія!";
+}
+
+function noFile()
+{
+    return "Відсутній файл!";
+}
+
