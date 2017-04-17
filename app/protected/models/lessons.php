@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Core\DataBase;
+use Lib\CheckFieldsService;
 
 class Lesson extends DataBase
 {
+
+    use CheckFieldsService;
 
     public function getAll($admin = false, $p = 1)
     {
@@ -157,6 +160,56 @@ class Lesson extends DataBase
         $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> basename($file)];
 
         return $response;
+    }
+
+
+    public function saveLesson($excerpt)
+    {
+        $serieId = is_null($_POST['serie'])? null: (int)$_POST['serie'];
+
+        if($serieId) {
+            $this->persistWithSerie($excerpt, $serieId);
+        } else {
+            $this->persistWithoutSerie($excerpt);
+        }
+
+        unset($_SESSION['lessonsIcon']);
+        unset($_SESSION['downloadFile']);
+    }
+
+
+    private function persistWithSerie($excerpt, $serieId)
+    {
+
+        $inputs = self::escapeInputs('title');
+
+        $sql = "INSERT INTO `lessons`(`title`, `icon`, `category_id`, `serie_id`, `excerpt`, `file`, `free_status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
+        $stmt->bindValue(4, $serieId);
+        $stmt->bindValue(5, $excerpt, \PDO::PARAM_STR);
+        $stmt->bindValue(6, basename($_SESSION['downloadFile']), \PDO::PARAM_STR);
+        $stmt->bindValue(7, $_POST['free_status'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+
+    }
+
+    private function persistWithoutSerie($excerpt)
+    {
+        $inputs = self::escapeInputs('title');
+
+        $sql = "INSERT INTO `lessons`(`title`, `icon`, `category_id`,  `excerpt`, `file`, `free_status`) VALUES (?, ?, ?, ?, ?, ? )";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
+        $stmt->bindValue(4, $excerpt, \PDO::PARAM_STR);
+        $stmt->bindValue(5, basename($_SESSION['downloadFile']), \PDO::PARAM_STR);
+        $stmt->bindValue(6, $_POST['free_status'], \PDO::PARAM_INT);
+        $stmt->execute();
     }
 
 

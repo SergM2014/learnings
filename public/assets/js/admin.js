@@ -172,13 +172,13 @@ document.body.addEventListener('click', function (e) {
 });
 
 
-let categoryId = document.getElementById('categoryField').value;
-let serieId = document.getElementById('serieField').value;
-//console.log(categoryId, serieId);
+let categoryId = document.getElementById('categoryField')? document.getElementById('categoryField').value: null;
+let serieId = document.getElementById('serieField')? document.getElementById('serieField').value: null;
+
 
 if(serieId) {
     document.getElementById('serieList').querySelector(`[data-serie-id="${serieId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
-} else {
+} else if(categoryId) {
     document.getElementById('serieList').querySelector(`[data-category-id="${categoryId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
 }
 

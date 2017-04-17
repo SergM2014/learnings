@@ -60,7 +60,7 @@ class Lesson  extends AdminController
     {
 
 
-        //TokenService::check('admin');
+        TokenService::check('admin');
 
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
@@ -72,10 +72,10 @@ class Lesson  extends AdminController
             return ['view' => '/views/admin/lesson/create.php', 'errors'=>$errors , 'treeMenu'=>$treeMenu];
         }
 
-        (new LessonModel())->saveLesson($this->stripTags($_POST['comment']));
+        (new LessonModel())->saveLesson($this->stripTags($_POST['excerpt']));
 
 
-        return  ['view' => '/views/common/comments/addSuccess.php','ajax' => true];
+        return  ['view' => '/views/admin/lesson/addSuccess.php'];
     }
 
 

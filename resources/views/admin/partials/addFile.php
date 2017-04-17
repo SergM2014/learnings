@@ -5,15 +5,15 @@
 
 
 
-     <div id="fileDownloadOutput" class="file-download__output"></div>
+     <div id="fileDownloadOutput" class="file-download__output"><?= @basename($_SESSION['downloadFile']) ?></div>
 
 
     <form enctype="multipart/form-data">
         <input type="hidden" id="prozessFileToken" name="prozessFileToken" value = "<?= \Lib\TokenService::printTocken('admin') ?>" >
 
-        <input type="file" name="downloadFile" id="downloadFile" class="<?= @$_SESSION['file']? 'hidden': '' ?>">
+        <input type="file" name="downloadFile" id="downloadFile" class="<?= @$_SESSION['downloadFile']? 'hidden': '' ?>">
         <button type="button" id="downloadFileBtn" class="file-download__btn hidden"><?= $downloadL ?></button>
-        <button type="button" id="resetFileBtn" class="file-download__btn <?= @!$_SESSION['file']? 'hidden': '' ?>"><?= $deleteL ?></button>
+        <button type="button" id="resetFileBtn" class="file-download__btn <?= @!$_SESSION['downloadFile']? 'hidden': '' ?>"><?= $deleteL ?></button>
     </form>
 
     <progress max="100" value="0" id="fileDownloadProgress"  class="file-download__progress hidden" >
