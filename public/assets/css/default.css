@@ -26,7 +26,11 @@ html, body {
   max-width: 1200px;
   margin: 0 auto; }
 
-
+.site-footer__admin-link{
+    position:absolute;
+    bottom:0;
+    right:0;
+}
 
 .content-zone {
   float: right;
