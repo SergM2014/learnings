@@ -58,8 +58,6 @@ class Lesson  extends AdminController
 
     public function store()
     {
-
-
         TokenService::check('admin');
 
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
@@ -78,6 +76,20 @@ class Lesson  extends AdminController
         return  ['view' => '/views/admin/lesson/addSuccess.php'];
     }
 
+
+    public function edit()
+    {
+        $lesson = (new LessonModel())->getOneLesson();
+        $model = new Serie();
+        $treeMenu =$model->printOutSerieTreeMenu();
+        return ['view'=>'/views/admin/lesson/edit.php', 'treeMenu'=>$treeMenu , 'lesson'=> $lesson ];
+    }
+
+    public function update()
+    {
+       echo 111;
+       exit();
+    }
 
 
 

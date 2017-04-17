@@ -95,7 +95,7 @@ class Images extends Prozess_Image
         }
 
         $avatar = @ $_SESSION['lessonsIcon'];
-        @ unlink ( PATH_SITE.UPLOAD_FOLDER.'lessonsIcons/'.$_SESSION['lessonsIcon']);
+//@ unlink ( PATH_SITE.UPLOAD_FOLDER.'lessonsIcons/'.$_SESSION['lessonsIcon']);
         unset ( $_SESSION['lessonsIcon']);
         $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> $avatar];
 

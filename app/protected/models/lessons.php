@@ -155,7 +155,7 @@ class Lesson extends DataBase
         }
 
         $file = @ $_SESSION['downloadFile'];
-        @ unlink ($_SESSION['downloadFile']);
+//@ unlink (ROOT.'uploads/video/'.basename($_SESSION['downloadFile']));
         unset ( $_SESSION['downloadFile']);
         $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> basename($file)];
 

@@ -96,6 +96,7 @@ $iconL = "Icon";
 $fileL = "File";
 $lessonFileUploadRemark = "mp4 extention only! Size not more than 100Mb";
 $lessonAdded = "Lesson is successfuly added!";
+$updateLessonL = "Update Lesson";
 
 
 //these functionare for translation in controllers and models

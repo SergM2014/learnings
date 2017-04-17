@@ -94,6 +94,9 @@ $iconL = "Иконка";
 $fileL = "Файл";
 $lessonFileUploadRemark = "Лише mp4 розширення! Розмір не більше  100Mb";
 $lessonAdded = "Урок успішно додано!";
+$updateLessonL = "Оновити урок";
+
+
 
 //these functionare for translation in controllers and models
 function variableInController(){
