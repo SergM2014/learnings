@@ -29,6 +29,7 @@
 
     <form class="lesson-form" method="post" action = "/admin/lesson/store">
 
+
         <?php include PATH_SITE.'/resources/views/admin/lesson/formFields.php'; ?>
 
         <button type="submit"><?= $createLessonL ?></button>

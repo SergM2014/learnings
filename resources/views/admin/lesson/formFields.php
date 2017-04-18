@@ -2,13 +2,13 @@
 
 <div class="form-field">
     <label for="title" class="form-field__label"><?= $titleL ?></label><br>
-    <input type="text" name="title" id="title" value="<?= $lesson->title??  @$_POST['title'] ?>" required >
+    <input type="text" name="title" id="title" value="<?= $_POST['title']?? @$lesson->title ?>" required >
     <small class="form-field__error"><?= @$errors['title'] ?></small>
 </div>
 
 <div class="form-field">
     <label for="excerpt" class="form-field__label"><?= $excerptL ?></label>
-    <textarea name="excerpt" id="excerpt" rows="10" cols="40" required ><?=$lesson->excerpt?? @$_POST['excerpt'] ?></textarea>
+    <textarea name="excerpt" id="excerpt" rows="10" cols="40" required ><?= $_POST['excerpt']??  @$lesson->excerpt ?></textarea>
     <small class="form-field__error"><?= @$errors['excerpt'] ?></small>
 </div>
 
@@ -17,8 +17,8 @@
     <label  class="form-field__label"><?= $shooseSerieL ?></label>
     <small class="form-field__error"><?= @$errors['category'] ?></small>
 
-    <input type="hidden" id="categoryField" name="category" value="<?= $lesson->category_id?? @$_POST['category'] ?>">
-    <input type="hidden" id="serieField" name="serie" value="<?= $lesson->serie_id?? @$_POST['serie'] ?>" >
+    <input type="hidden" id="categoryField" name="category" value="<?= $_POST['category']?? @$lesson->category_id ?>">
+    <input type="hidden" id="serieField" name="serie" value="<?= $_POST['serie']??  @$lesson->serie_id ?>" >
 
     <ul id="serieList" class="serie-selection">
         <?= $treeMenu ?>

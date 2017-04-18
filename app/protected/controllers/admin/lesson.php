@@ -62,7 +62,7 @@ class Lesson  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
-        $errors = (new CheckForm())->checkAddLessonForm($cleanedUpInputs);
+        $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
 
@@ -80,15 +80,28 @@ class Lesson  extends AdminController
     public function edit()
     {
         $lesson = (new LessonModel())->getOneLesson();
-        $model = new Serie();
-        $treeMenu =$model->printOutSerieTreeMenu();
+        $treeMenu = (new Serie())->printOutSerieTreeMenu();
         return ['view'=>'/views/admin/lesson/edit.php', 'treeMenu'=>$treeMenu , 'lesson'=> $lesson ];
     }
 
     public function update()
     {
-       echo 111;
-       exit();
+        TokenService::check('admin');
+
+        $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
+
+        $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
+        if(!empty($errors) ) {
+
+            $lesson = (new LessonModel())->getOneLesson();
+            $treeMenu = (new Serie)->printOutSerieTreeMenu();
+            return ['view' => '/views/admin/lesson/edit.php', 'errors'=>$errors , 'treeMenu'=>$treeMenu, 'lesson'=> $lesson ];
+        }
+
+        (new LessonModel())->updateLesson($this->stripTags($_POST['excerpt']));
+
+
+        return  ['view' => '/views/admin/lesson/updateSuccess.php'];
     }
 
 

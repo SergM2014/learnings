@@ -150,7 +150,7 @@ class CheckForm extends DataBase
     }
 
 
-        public function checkAddLessonForm($inputs)
+        public function checkLessonForm($inputs)
     {
         $errors =  new \stdClass();
 

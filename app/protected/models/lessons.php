@@ -81,7 +81,7 @@ class Lesson extends DataBase
 
     public function getOneLesson()
     {
-        $id =  $_GET['id'];
+        $id =  $_GET['id']?? $_POST['lessonId'];
         $sql= "SELECT `id`, `title`, `icon`, `category_id`, `serie_id`, `excerpt`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
         $stmt = $this->conn->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
@@ -210,6 +210,61 @@ class Lesson extends DataBase
         $stmt->bindValue(5, basename($_SESSION['downloadFile']), \PDO::PARAM_STR);
         $stmt->bindValue(6, $_POST['free_status'], \PDO::PARAM_INT);
         $stmt->execute();
+    }
+
+
+    public function updateLesson($excerpt)
+    {
+        $serieId = is_null($_POST['serie'])? null: (int)$_POST['serie'];
+
+        if($serieId) {
+            $this->updatetWithSerie($excerpt, $serieId);
+        } else {
+            $this->updateWithoutSerie($excerpt);
+        }
+
+        unset($_SESSION['lessonsIcon']);
+        unset($_SESSION['downloadFile']);
+    }
+
+
+    private function updatetWithSerie($excerpt, $serieId)
+    {
+
+        $inputs = self::escapeInputs('title');
+
+        $sql = "UPDATE `lessons` SET `title`=?, `icon`=?, `category_id`=?, `serie_id`=?, `excerpt`=?, `file`=?, `free_status`=? WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
+        $stmt->bindValue(4, $serieId);
+        $stmt->bindValue(5, $excerpt, \PDO::PARAM_STR);
+        $stmt->bindValue(6, basename($_SESSION['downloadFile']), \PDO::PARAM_STR);
+        $stmt->bindValue(7, $_POST['free_status'], \PDO::PARAM_INT);
+        $stmt->bindValue(8, $_POST['lessonId'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+    }
+
+
+    private function updateWithoutSerie($excerpt)
+    {
+
+        $inputs = self::escapeInputs('title');
+
+        $sql = "UPDATE `lessons` SET `title`=?, `icon`=?, `category_id`=?,  `excerpt`=?, `file`=?, `free_status`=? WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
+
+        $stmt->bindValue(4, $excerpt, \PDO::PARAM_STR);
+        $stmt->bindValue(5, basename($_SESSION['downloadFile']), \PDO::PARAM_STR);
+        $stmt->bindValue(6, $_POST['free_status'], \PDO::PARAM_INT);
+        $stmt->bindValue(7, $_POST['lessonId'], \PDO::PARAM_INT);
+        $stmt->execute();
+
     }
 
 
