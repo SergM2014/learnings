@@ -96,6 +96,12 @@ $lessonFileUploadRemark = "Лише mp4 розширення! Розмір не 
 $lessonAdded = "Урок успішно додано!";
 $updateLessonL = "Оновити урок";
 $lessonUpdatedL = "Урок оновленно!";
+$serieTitleL = "Назва серії";
+$categoryTitleL = "Назва категорії";
+$videoTitleL = "Назва відео";
+$noVideoL = "відео файл відсутній";
+$payStatusL= "платний статус";
+$backL = "Назад";
 
 
 //these functionare for translation in controllers and models

@@ -98,6 +98,12 @@ $lessonFileUploadRemark = "mp4 extention only! Size not more than 100Mb";
 $lessonAdded = "Lesson is successfuly added!";
 $updateLessonL = "Update Lesson";
 $lessonUpdatedL = "Lesson is Updated!";
+$serieTitleL = "Serie Title";
+$categoryTitleL = "Category Title";
+$videoTitleL = "VideoTitle";
+$noVideoL = "No video file";
+$payStatusL = "Pay status";
+$backL = "Back";
 
 
 //these functionare for translation in controllers and models

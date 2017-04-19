@@ -267,5 +267,29 @@ class Lesson extends DataBase
 
     }
 
+    public function getFullOneLesson()
+    {
+        $id =  $_GET['id']?? $_POST['lessonId'];
+        $sql= "SELECT `l`.`id`, `l`.`title`, `l`.`icon`, `l`.`category_id`, `l`.`serie_id`, `l`.`excerpt`, `l`.`file`,
+              `l`.`free_status`, `c`.`title` AS `category_title` FROM `lessons` `l` JOIN `categories` `c` ON 
+              `l`.`category_id`= `c`.`id`   WHERE `l`.`id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+
+        if($result->serie_id){
+            $sql = "SELECT `title` AS `serie_title` FROM `series` WHERE `id`= $result->serie_id";
+            $stmt= $this->conn->query($sql);
+            $stmt->execute();
+            $serieTitle = $stmt->fetchColumn();
+            $result->serie_title= $serieTitle;
+        }
+
+
+        return $result;
+    }
+
 
 }

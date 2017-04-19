@@ -199,3 +199,21 @@ th{
 .tree-branch--selected{
   background: #ff3838!important;
 }
+
+.show-lesson{
+  max-width: 750px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 50px auto;
+  padding: 10px;
+  background-color: antiquewhite;
+}
+
+.show-lesson__field-title{
+  font:bold italic 110% serif;
+  color:red;
+}
+.show-lesson__footer{
+  display:flex;
+  justify-content: space-around;
+}

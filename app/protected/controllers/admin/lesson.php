@@ -84,6 +84,7 @@ class Lesson  extends AdminController
         return ['view'=>'/views/admin/lesson/edit.php', 'treeMenu'=>$treeMenu , 'lesson'=> $lesson ];
     }
 
+
     public function update()
     {
         TokenService::check('admin');
@@ -102,6 +103,14 @@ class Lesson  extends AdminController
 
 
         return  ['view' => '/views/admin/lesson/updateSuccess.php'];
+    }
+
+
+    public function show()
+    {
+        $lesson = (new LessonModel())->getFullOneLesson();
+
+        return  ['view' => '/views/admin/lesson/show.php', 'lesson'=> $lesson ];
     }
 
 
