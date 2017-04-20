@@ -10,6 +10,7 @@
 
                 </footer>
 
+
                 <script src="<?= ROOT ?>/assets/js/admin.js?ver=<?= time() ?>"></script>
 
             <?php endif; ?>

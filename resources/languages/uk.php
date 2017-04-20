@@ -102,6 +102,9 @@ $videoTitleL = "Назва відео";
 $noVideoL = "відео файл відсутній";
 $payStatusL= "платний статус";
 $backL = "Назад";
+$cancelL = "Відміна";
+$yesL ="Так";
+$shureDeleteLessonL = "Ви впевнені що бажаете видалити урок?";
 
 
 //these functionare for translation in controllers and models
@@ -193,4 +196,5 @@ function noFile()
 {
     return "Відсутній файл!";
 }
+
 

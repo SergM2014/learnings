@@ -114,6 +114,12 @@ class Lesson  extends AdminController
     }
 
 
+    public function delete()
+    {
+        $response = (new LessonModel())->deleteLesson();
+        echo json_encode($response);
+        exit();
+    }
 
 
 

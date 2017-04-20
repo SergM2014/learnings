@@ -104,6 +104,10 @@ $videoTitleL = "VideoTitle";
 $noVideoL = "No video file";
 $payStatusL = "Pay status";
 $backL = "Back";
+$cancelL = "Cancel";
+$yesL = "Yes";
+$shureDeleteLessonL = "Are You shure to delete the lesson?";
+
 
 
 //these functionare for translation in controllers and models
@@ -194,3 +198,4 @@ function noFile()
 {
     return "No file!";
 }
+

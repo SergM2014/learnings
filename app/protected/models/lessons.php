@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\DataBase;
 use Lib\CheckFieldsService;
+use function \lessonIsDeleted;
 
 class Lesson extends DataBase
 {
@@ -155,7 +156,7 @@ class Lesson extends DataBase
         }
 
         $file = @ $_SESSION['downloadFile'];
-//@ unlink (ROOT.'uploads/video/'.basename($_SESSION['downloadFile']));
+        //@ unlink (ROOT.'uploads/video/'.basename($_SESSION['downloadFile']));
         unset ( $_SESSION['downloadFile']);
         $response= ["message"=>"<span class='image-delete--succeded'>". fileDeleted() ."</span>", "image"=> basename($file)];
 
@@ -289,6 +290,18 @@ class Lesson extends DataBase
 
 
         return $result;
+    }
+
+
+    public function deleteLesson()
+    {
+        /*$sql= "DELETE FROM `lessons` WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();*/
+        $response= ["message"=> lessonIsDeleted() , "success"=> true ];
+
+        return $response;
     }
 
 

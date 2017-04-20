@@ -42,10 +42,12 @@ class LanguageHelper {
  */
 function postAjax(givenUrl, formData){
 
-    if(!formData){
+   /* if(!formData)
         let formData = new FormData;
-        formData.append('ajax', true );
-    }
+
+
+    formData.append('ajax', true );*/
+
 
     let queryResult =   LanguageHelper.getLanguagesSettings()
         .then(languagesSettings => {
@@ -126,6 +128,24 @@ class PopUpMenu{
 
 }
 
+class Modal {
+    static createBackground() {
+        let background = document.createElement('div');
+        background.className = "modal-background";
+        background.id = "modalBackground";
+        document.body.insertBefore(background, document.body.firstChild);
+    }
+
+    static createModalWindow(controller, formData){
+        this.createBackground();
+        postAjax(controller,formData)
+             .then(response => response.text())
+            .then(html =>document.getElementById('modalBackground').insertAdjacentHTML('afterBegin', html));
+    }
+
+
+}
+
 
 
 
@@ -164,7 +184,11 @@ document.body.addEventListener('click', function (e) {
 
 
 
+if(e.target.id == "popUpAdminDeleteLesson"){
+console.log(111)
 
+      Modal.createModalWindow('/admin/popUp/drawDeleteLessonModal')
+}
 
 
 

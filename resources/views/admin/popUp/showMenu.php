@@ -5,12 +5,12 @@
 
 
 
-<form id="delete-item" action="/<?= \Lib\HelperService::currentLang() .$_POST['processContr']?>/delete" method="post" class="">
+<form id="delete<?= ucfirst(basename($_POST['processContr'])) ?>" action="/<?= \Lib\HelperService::currentLang() .$_POST['processContr']?>/delete" method="post" class="">
 
     <input type="hidden" name="id" value="<?= (int)$_POST['id'] ?>">
     <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('admin') ?>" >
 
 
-    <button type="submit" class="popUp-menu__delete-item" id="popUp-admin-delete-item" ><?= $deleteL ?></button>
+    <button type="button" class="popUp-menu__delete-item" id="popUpAdminDelete<?= ucfirst(basename($_POST['processContr'])) ?>" ><?= $deleteL ?></button>
 
 </form>

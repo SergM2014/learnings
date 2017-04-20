@@ -9,6 +9,7 @@
     <title>Admin</title>
 
     <?php if(@!$noTemplate): ?>
+
         <link href="/assets/css/admin.css?ver=<?= time() ?>" rel="stylesheet">
     <?php endif; ?>
 
