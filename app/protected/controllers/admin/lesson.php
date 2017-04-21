@@ -116,6 +116,7 @@ class Lesson  extends AdminController
 
     public function delete()
     {
+        TokenService::check('admin');
         $response = (new LessonModel())->deleteLesson();
         echo json_encode($response);
         exit();

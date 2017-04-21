@@ -299,7 +299,7 @@ class Lesson extends DataBase
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
         $stmt->execute();*/
-        $response= ["message"=> lessonIsDeleted() , "success"=> true ];
+        $response= ["message"=> lessonIsDeleted() , "success"=> true, "lessonId"=> (int)$_POST['id'] ];
 
         return $response;
     }

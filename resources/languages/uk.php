@@ -197,4 +197,10 @@ function noFile()
     return "Відсутній файл!";
 }
 
+function lessonIsDeleted()
+{
+    return "Урок видаленно!";
+}
+
+
 

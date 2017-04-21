@@ -19,13 +19,19 @@
     <?php if(@!$noTemplate): ?>
 
 
+    <div id="alertZone" class="alert-zone hidden">
+        <img src="<?= ROOT ?>/img/small-close.png" id="closeAlert" class="close-alert-sign" alt="">
+        <span id="alertZoneText" class="alert-zone__text">nrmdth'm'dfjyh'jrmy</span>
+    </div>
+
+
     <div class="container">
-
-
 
         <?php if(isset($_SESSION['admin']) ) : ?>
 
         <header class="main-header ">
+
+
 
             <h1 class="main-header__title--h1"><?= $youAreInAdminL ?></h1>
 

@@ -66,6 +66,16 @@ function postAjax(givenUrl, formData){
 
 }
 
+function hideAlert(){
+    document.getElementById('alertZone').classList.add('hidden');
+    document.getElementById('alertZoneText').innerText = '';
+}
+
+function showAlert(message){
+    document.getElementById('alertZone').classList.remove('hidden');
+    document.getElementById('alertZoneText').innerText = message;
+}
+
 
 
 class PopUpMenu{
@@ -84,7 +94,7 @@ class PopUpMenu{
 
         this.popUp = document.createElement('div');
         this.popUp.className = "popup-menu";
-        this.popUp.id = "popup-menu";
+        this.popUp.id = "popupMenu";
 
         document.body.insertBefore(this.popUp, document.body.firstChild);
 
@@ -97,7 +107,7 @@ class PopUpMenu{
 
     static deleteMenu()
     {
-        if(document.getElementById('popup-menu')){document.getElementById('popup-menu').remove();}
+        if(document.getElementById('popupMenu')){document.getElementById('popupMenu').remove();}
     }
 
 
@@ -122,7 +132,7 @@ class PopUpMenu{
 
         postAjax(popUpContr,formData)
             .then(response => response.text())
-            .then(html =>document.getElementById('popup-menu').innerHTML= html);
+            .then(html =>document.getElementById('popupMenu').innerHTML= html);
     }
 
 
@@ -147,6 +157,10 @@ class Modal {
 }
 
 
+//close alert window
+document.getElementById('closeAlert').addEventListener('click', function(){
+  hideAlert();
+});
 
 
 document.body.addEventListener('click', function (e) {
@@ -184,11 +198,37 @@ document.body.addEventListener('click', function (e) {
 
 
 
-if(e.target.id == "popUpAdminDeleteLesson"){
-console.log(111)
+    if(e.target.id == "popUpAdminDeleteLesson"){
 
-      Modal.createModalWindow('/admin/popUp/drawDeleteLessonModal')
-}
+          Modal.createModalWindow('/admin/popUp/drawDeleteLessonModal')
+    }
+
+
+    //close deleteLesson modal window
+    if(e.target.id == "closeWindowBtn" || e.target.id == "closeWindowSign"){
+        document.getElementById('modalBackground').remove();
+    }
+
+
+    if(e.target.id == "confirmDeleteLessonBtn"){
+//console.log(111)
+
+        let formData = new FormData(document.getElementById('deleteLesson'));
+// console.log(formData)
+//         let lessonId = formData.id;
+// console.log(lessonId)
+        postAjax('/admin/lesson/delete', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+                    document.getElementById('modalBackground').remove();
+                    document.getElementById('popupMenu').remove();
+                    document.querySelector(`[data-lesson-id="${j.lessonId}"]`).remove();
+
+                   showAlert(j.message)
+                }
+            })
+    }
 
 
 

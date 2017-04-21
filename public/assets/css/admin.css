@@ -159,7 +159,7 @@ th{
 
 
 .hidden{
-  display:none;
+  display:none!important;
 }
 .image-download__preview, .file-download__preview {
   max-width:150px;
@@ -260,4 +260,30 @@ th{
 .modal-window__btn{
     width:120px;
     cursor:pointer;
+}
+.alert-zone{
+  background-color: rgba(255, 55, 56, 0.99);
+  width: 100%;
+  min-height: 150px;
+  position: fixed;
+  text-align: center;
+  color: #0d1821;
+  z-index: 1100;
+  top: 150px;
+  border-radius: 10px;
+  display:flex;
+  font-size: 25px;
+}
+.close-alert-sign{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #2aa4a5;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.alert-zone__text{
+  margin:auto;
 }

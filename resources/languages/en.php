@@ -199,3 +199,8 @@ function noFile()
     return "No file!";
 }
 
+function lessonIsDeleted()
+{
+    return "Lesson is deleted!";
+}
+
