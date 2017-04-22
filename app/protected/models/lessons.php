@@ -11,13 +11,33 @@ class Lesson extends DataBase
 
     use CheckFieldsService;
 
+//    public function getAll($admin = false, $p = 1)
+//    {
+//        $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
+//        $page = $_GET['p']?? $p;
+//        $start = ($page-1)*$amountOnPage;
+//
+//        $sql= "SELECT `id`, `title`, `icon`, `excerpt`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
+//        $stmt = $this->conn->prepare($sql);
+//        $stmt->bindValue(1, $start, \PDO::PARAM_INT);
+//        $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
+//        $stmt->execute();
+//        $lessons = $stmt->fetchAll();
+//
+//        return $lessons;
+//    }
+
+
     public function getAll($admin = false, $p = 1)
     {
         $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
         $page = $_GET['p']?? $p;
         $start = ($page-1)*$amountOnPage;
 
-        $sql= "SELECT `id`, `title`, `icon`, `excerpt`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
+        $sql= "SELECT `l`.`id`, `l`.`title`, `l`.`icon`, `l`.`excerpt`, `l`.`serie_id`, `l`.`file`, `l`.`free_status`,
+              COUNT(`c`.`id`) AS `comments_number`, `cat`.`title` AS `category_title`, `s`.`title` AS `serie_title` FROM `lessons` `l`
+               LEFT JOIN `comments` `c` ON `l`.`id` = `c`.`lesson_id` JOIN `categories` `cat` 
+                ON `l`.`category_id`= `cat`.`id` LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id` GROUP BY `l`.`id`  LIMIT ?, ?  ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $start, \PDO::PARAM_INT);
         $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
@@ -25,7 +45,6 @@ class Lesson extends DataBase
         $lessons = $stmt->fetchAll();
 
         return $lessons;
-
     }
 
 

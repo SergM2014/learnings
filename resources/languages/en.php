@@ -107,6 +107,9 @@ $backL = "Back";
 $cancelL = "Cancel";
 $yesL = "Yes";
 $shureDeleteLessonL = "Are You shure to delete the lesson?";
+$ctagory_serieTitleL = "Category/Serie";
+$commentsNumberL = "Comments number";
+$noSerieTitleL = "No serie";
 
 
 

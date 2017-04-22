@@ -105,6 +105,9 @@ $backL = "Назад";
 $cancelL = "Відміна";
 $yesL ="Так";
 $shureDeleteLessonL = "Ви впевнені що бажаете видалити урок?";
+$ctagory_serieTitleL = "Категорія/Серія";
+$commentsNumberL = "Кількість коментарів";
+$noSerieTitleL = "Без серії";
 
 
 //these functionare for translation in controllers and models

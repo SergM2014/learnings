@@ -1,9 +1,12 @@
+<div>
 
+
+</div>
 <div class="table-container">
 
     <table class="table">
         <tr>
-            <th>#</th><th></th><th><?= $titleL ?></th><th><?= $excerptL ?></th>
+            <th>#</th><th></th><th><?= $titleL ?></th><th><?= $excerptL ?></th><th><?= $ctagory_serieTitleL ?></th><th><?= $commentsNumberL ?></th>
         </tr>
 
         <?php foreach ($lessons as $lesson): ?>
@@ -13,6 +16,8 @@
                 <td><img src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>" class="table-image" alt=""></td>
                 <td><?= $lesson->title ?></td>
                 <td><?= $lesson->excerpt ?></td>
+                <td><?= $lesson->category_title ?>/<?= $lesson->serie_title?? $noSerieTitleL ?></td>
+                <td><?= $lesson->comments_number ?></td>
             </tr>
 
         <?php endforeach ?>

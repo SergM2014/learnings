@@ -3,6 +3,8 @@
     include_once ('helpers.php');
 
     define('PATH_SITE', getDocumentRoot());
+
+    //constant root returns '/public' OR '' depending on given document root
     define('ROOT', getCorrectLinkDocumentRoot());
 
     define('NAMESITE','learnings');
