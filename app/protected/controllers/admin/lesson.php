@@ -22,20 +22,22 @@ class Lesson  extends AdminController
 
     public function index()
 	{
+
 	    $model= new LessonModel();
         $lessons = $model->getAll('true');
         $pages = $model->countPages('true');
         $tableCounter = (new AdminModel())->getTableCounter();
+        $serieDropDownList = (new Serie())->printSerieDropDownList();
 
-        return ['view'=>'/views/admin/lesson/index.php', 'lessons'=>$lessons, 'pages'=>$pages, 'counter'=>$tableCounter ];
+        return ['view'=>'/views/admin/lesson/index.php', 'lessons'=>$lessons, 'pages'=>$pages, 'counter'=>$tableCounter,
+            'serieDropDownList'=>  $serieDropDownList ];
     }
 
 
 
     public function create()
     {
-        $model = new Serie();
-        $treeMenu =$model->printOutSerieTreeMenu();
+        $treeMenu = (new Serie())->printOutSerieTreeMenu();
         return ['view'=>'/views/admin/lesson/create.php', 'treeMenu'=>$treeMenu ];
     }
 

@@ -11,33 +11,72 @@ class Lesson extends DataBase
 
     use CheckFieldsService;
 
-//    public function getAll($admin = false, $p = 1)
-//    {
-//        $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
-//        $page = $_GET['p']?? $p;
-//        $start = ($page-1)*$amountOnPage;
-//
-//        $sql= "SELECT `id`, `title`, `icon`, `excerpt`, `serie_id`, `file`, `free_status` FROM `lessons` LIMIT ?, ? ";
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->bindValue(1, $start, \PDO::PARAM_INT);
-//        $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
-//        $stmt->execute();
-//        $lessons = $stmt->fetchAll();
-//
-//        return $lessons;
-//    }
+
+    private function getConsraint()
+    {
+        if(is_numeric(@$_GET['category_and_serie'])){
+
+            $number = (int)$_GET['category_and_serie'];
+
+            $constraint = " WHERE `l`.`serie_id`= $number ";
+
+
+        } elseif (!isset($_GET['category_and_serie']) OR $_GET['category_and_serie'] == 'all') {
+
+            $constraint = '';
+
+        } else
+        {
+            $string = $this->conn->quote($_GET['category_and_serie']);
+            $constraint = " WHERE `cat`.`title` = $string";
+
+        }
+        return $constraint;
+    }
+
 
 
     public function getAll($admin = false, $p = 1)
     {
+        switch(@$_GET['order']){
+            case 'new_first':
+                $order = '`l`.`added_at` DESC';
+                break;
+            case 'old_first':
+                $order = '`l`.`added_at` ASC';
+                break;
+            case 'abc':
+                $order = '`l`.`title` ASC';
+                break;
+            case 'abc_backwards':
+                $order = '`l`.`title` DESC';
+                break;
+            case 'more_comments_first':
+                $order = '`comments_number` DESC';
+                break;
+            case 'less_comments_first':
+                $order = '`comments_number` ASC';
+                break;
+
+            default:
+                $order = '`l`.`added_at` DESC';
+        }
+
+
+        $constraint = $this->getConsraint();
+
+
+
         $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
         $page = $_GET['p']?? $p;
         $start = ($page-1)*$amountOnPage;
 
-        $sql= "SELECT `l`.`id`, `l`.`title`, `l`.`icon`, `l`.`excerpt`, `l`.`serie_id`, `l`.`file`, `l`.`free_status`,
+        $sql= "SELECT `l`.`id`, `l`.`title`, `l`.`icon`, `l`.`excerpt`, `l`.`serie_id`, `l`.`file`, `l`.`free_status`, `l`.`added_at`,
               COUNT(`c`.`id`) AS `comments_number`, `cat`.`title` AS `category_title`, `s`.`title` AS `serie_title` FROM `lessons` `l`
-               LEFT JOIN `comments` `c` ON `l`.`id` = `c`.`lesson_id` JOIN `categories` `cat` 
-                ON `l`.`category_id`= `cat`.`id` LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id` GROUP BY `l`.`id`  LIMIT ?, ?  ";
+               LEFT JOIN `comments` `c` ON `l`.`id` = `c`.`lesson_id`
+               JOIN `categories` `cat` ON `l`.`category_id`= `cat`.`id`
+               LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id`
+               $constraint GROUP BY `l`.`id` ORDER BY $order  LIMIT ?, ?  ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $start, \PDO::PARAM_INT);
         $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
@@ -50,8 +89,10 @@ class Lesson extends DataBase
 
     public function countPages($admin = false)
     {
+        $constraint = $this->getConsraint();
         $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
-        $sql= "SELECT COUNT(`id`) FROM `lessons`";
+        $sql= "SELECT COUNT(`l`.`id`) FROM `lessons` `l` JOIN `categories` `cat` ON `l`.`category_id`= `cat`.`id`
+               LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id` $constraint";
         $stmt = $this->conn->query($sql);
         $result = $stmt->fetchColumn();
         $pages = ceil($result/$amountOnPage);
@@ -314,10 +355,12 @@ class Lesson extends DataBase
 
     public function deleteLesson()
     {
-        /*$sql= "DELETE FROM `lessons` WHERE `id`=?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
-        $stmt->execute();*/
+        if(!DEBUG_MODE) {
+            $sql = "DELETE FROM `lessons` WHERE `id`=?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+            $stmt->execute();
+        }
         $response= ["message"=> lessonIsDeleted() , "success"=> true, "lessonId"=> (int)$_POST['id'] ];
 
         return $response;

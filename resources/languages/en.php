@@ -107,9 +107,17 @@ $backL = "Back";
 $cancelL = "Cancel";
 $yesL = "Yes";
 $shureDeleteLessonL = "Are You shure to delete the lesson?";
-$ctagory_serieTitleL = "Category/Serie";
+$category_serieTitleL = "Category/Serie";
 $commentsNumberL = "Comments number";
 $noSerieTitleL = "No serie";
+$newFirstL = "New first";
+$oldFirstL = "Old first";
+$abcL = "ABC";
+$abcBackwardsL = "abc backwards";
+$moreCommentsFirstL = "more comments first";
+$lessCommentsFirstL = "less comments first";
+$addedAtL = "Added at";
+$selectAllL = "Select all";
 
 
 

@@ -105,9 +105,17 @@ $backL = "Назад";
 $cancelL = "Відміна";
 $yesL ="Так";
 $shureDeleteLessonL = "Ви впевнені що бажаете видалити урок?";
-$ctagory_serieTitleL = "Категорія/Серія";
+$category_serieTitleL = "Категорія/Серія";
 $commentsNumberL = "Кількість коментарів";
 $noSerieTitleL = "Без серії";
+$newFirstL = "Спочатку нові";
+$oldFirstL = "Спочатку старі";
+$abcL = "за алфавітом";
+$abcBackwardsL = "проти алфавита";
+$moreCommentsFirstL = "найбільше коментарів спочатку";
+$lessCommentsFirstL = "найменше коментарів спочатку";
+$addedAtL = "Доданно";
+$selectAllL = "Вибрати все";
 
 
 //these functionare for translation in controllers and models

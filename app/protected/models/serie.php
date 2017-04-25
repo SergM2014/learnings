@@ -80,4 +80,33 @@ class Serie extends DataBase
     }
 
 
+    public function printSerieDropDownList()
+    {
+        $constraint = @$_GET['category_and_serie'];
+
+        $print = '';
+        $categories = $this->getAllSeries();
+        foreach ($categories as $category) {
+            $print .= "<option value='{$category->category_title}'";
+            $selected = (@ $constraint  == $category->category_title)? 'selected':'';
+            $print .= " $selected >{$category->category_title}</option>";
+            $ids = explode(',', $category->serie_ids);
+            $titles = explode(',', $category->serie_titles);
+            $length = count($ids);
+
+            if ($ids) {
+                for ($i = 0; $i < $length; $i++) {
+                    $print .= "<option value='{$ids[$i]}'";
+                    $selected = (@ $constraint  == $ids[$i])? 'selected' : '';
+                    $print .= " $selected >--{$titles[$i]}</option>";
+                }
+            }
+        }
+
+
+        return $print;
+
+    }
+
+
 }
