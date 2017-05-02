@@ -20,18 +20,23 @@ class DataBase {
         if(is_object(self::$savedConnection)) {$this->conn = self::$savedConnection; return; }
 
      try{
-           $this->conn = self::$savedConnection = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER, PASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES\'UTF8\''));
+          self::$savedConnection = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER,
+         PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
-     echo "DB connection";
+         self::$savedConnection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
 
-        }catch(\PDOException $e) {die("Ошибка соединения с базой или хостом:".$e->getMessage());}
+         self::$savedConnection ->exec("SET time_zone = 'Erope/Kiev'");
 
-        $this->conn->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+         if(DEBUG_MODE){
+             //на время разработки
+             self::$savedConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
+         }
 
-        if(DEBUG_MODE){
-         //на время разработки
-         $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
-	   }
+         $this->conn = self::$savedConnection;
+
+
+     }catch(\PDOException $e) {die("Ошибка соединения с базой или хостом:".$e->getMessage());}
+
 
     }
 
