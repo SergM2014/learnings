@@ -1,6 +1,6 @@
 <section class="breadcrumbs">
 
-    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <a href="<?= \Lib\HelperService::currentLang() ?>/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
     <span class="breadcrumb__item--current"><?=  $testimonialsL ?></span>
 
 </section>

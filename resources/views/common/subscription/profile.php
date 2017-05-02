@@ -1,6 +1,6 @@
 <section class="breadcrumbs">
 
-    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <a href="<?= \Lib\HelperService::currentLang() ?>/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
     <span class="breadcrumb__item--current"><?=  $profileL ?></span>
 
 </section>
@@ -17,7 +17,7 @@
 
         ?>
 
-    <form action="/subscription/update" method="post" >
+    <form action="<?= \Lib\HelperService::currentLang() ?>/subscription/update" method="post" >
         <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
         <input type="hidden" name="id" value = "<?= $profileData->id ?>" >
         <div class="subscribtion-form__field-block">

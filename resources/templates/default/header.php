@@ -29,23 +29,23 @@
                     </div>
 
                      <ul id="mainHeaderMenu" class="main-header__menu" >
-                         <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>/#"><?= $ourBrandL ?></a></li>
-                         <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>"><?= $mainPageL ?></a></li>
+                         <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/#"><?= $ourBrandL ?></a></li>
+                         <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/"><?= $mainPageL ?></a></li>
 
                     </ul>
                       <?php if(@!isset($_SESSION['user']['login'])): ?>
-                        <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/signIn">
+                        <a class="main-header__admin" href="<?= \Lib\HelperService::currentLang() ?>/subscription/signIn">
                             <?= $enterAdminL  ?>
                         </a>
                     <?php else:?>
 
-                        <form action="/<?= \Lib\HelperService::currentLang() ?>subscription/signOut"  method="post" class="main-header__admin">
+                        <form action="<?= \Lib\HelperService::currentLang() ?>/subscription/signOut"  method="post" class="main-header__admin">
                             <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
                             <button type="submit" class="main-header__admin-btn"> <?= $_SESSION['user']['login'].'/'.$exitL  ?></button>
                         </form>
 
 
-                          <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/profile">
+                          <a class="main-header__admin" href="<?= \Lib\HelperService::currentLang() ?>/subscription/profile">
                               <?= $profileL  ?>
                           </a>
 
@@ -53,7 +53,7 @@
 
 
                     <?php if(@!$_SESSION['user']['login']): ?>
-                         <a class="main-header__admin" href="/<?= \Lib\HelperService::currentLang() ?>subscription/signUp""><?= $registerL ?></a>
+                         <a class="main-header__admin" href="<?= \Lib\HelperService::currentLang() ?>/subscription/signUp""><?= $registerL ?></a>
                     <?php endif; ?>
                     <?php //get the given languages array
                     $langs = \Lib\HelperService::prozessLangArray(); ?>

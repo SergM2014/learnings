@@ -73,8 +73,8 @@ class HelperService {
         foreach ($langs as $key => $value){
             $position = strpos($url, $key);
             if($position === 0) {
-                if ($key == DEFAULT_LANG ){return '';}
-                return $key.'/';
+                if ($key == DEFAULT_LANG ){ return ''; }
+                return '/'.$key;
             }
         }
 

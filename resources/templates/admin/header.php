@@ -48,15 +48,15 @@
 
                  <ul class="main-header__menu" >
 
-                     <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
-                     <li class="main-header__menu-item"><a href="/<?= \Lib\HelperService::currentLang() ?>admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
+                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
+                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
 
 
 
                         <div class="main-header__right-side">
 
                              <li class="main-header__admin">
-                                 <form action="/<?= \Lib\HelperService::currentLang() ?>admin/index/logOut" method="post">
+                                 <form action="<?= \Lib\HelperService::currentLang() ?>/admin/index/logOut" method="post">
                                      <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('admin') ?>">
 
                                     <button type="submit"><?= $_SESSION['admin']['login'].' / '. $exitL ?></button>

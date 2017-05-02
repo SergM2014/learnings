@@ -1,7 +1,7 @@
 
     <fieldset class="subscribtion-form">
         <h1 class="subscribtion-form__titel"><?= $enterL ?></h1>
-            <form action="/subscription/login" method="post">
+            <form action="<?= \Lib\HelperService::currentLang() ?>/subscription/login" method="post">
                 <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('user') ?>">
                 <div class="subscribtion-form__field-block">
                     <label>

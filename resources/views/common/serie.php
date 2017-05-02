@@ -1,7 +1,7 @@
 <section class="breadcrumbs">
 
-    <a href="/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
-    <a href="/category?id=<?= $categoryId ?>" class="breadcrumb__item"><?=  $seriesBeadcrumbsL ?></a> =>
+    <a href="<?= \Lib\HelperService::currentLang() ?>/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <a href="<?= \Lib\HelperService::currentLang() ?>/category?id=<?= $categoryId ?>" class="breadcrumb__item"><?=  $seriesBeadcrumbsL ?></a> =>
     <span class="breadcrumb__item--current"><?=  $seriesLessonsL ?></span>
 
 </section>
@@ -22,7 +22,7 @@
     <section class="lessons-block--seried">
       <?php foreach($lessons as $lesson): ?>
           <div class="lessons-block__item">
-              <a href="/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
+              <a href="<?= \Lib\HelperService::currentLang() ?>/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
               <img  class="lessons-block__item-icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>">
           </div>
 
@@ -49,7 +49,7 @@
         <?php foreach($extraLessons as $lesson): ?>
 
             <div class="lessons-block__item">
-                <a href="/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
+                <a href="<?= \Lib\HelperService::currentLang() ?>/lesson?id=<?= $lesson->id ?>" class="lessons-block__item-link"><?= $lesson->title ?></a>
                 <img  class="lessons-block__item-icon" src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>">
             </div>
 

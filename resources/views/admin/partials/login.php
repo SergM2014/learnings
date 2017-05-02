@@ -2,13 +2,13 @@
     .login_form {width:360px;   margin:100px auto; padding:10px; border:1px solid #000000; display:flex; justify-content:center }
 </style>
 
-<a href="/<?= \Lib\HelperService::currentLang() ?>"><?= $backToSiteL ?></a>
+<a href="<?= \Lib\HelperService::currentLang() ?>/"><?= $backToSiteL ?></a>
 <div class="login_form">
 
 
 
 
-    <form  method="POST" action="/<?= \Lib\HelperService::currentLang() ?>admin/index/login">
+    <form  method="POST" action="<?= \Lib\HelperService::currentLang() ?>/admin/index/login">
         <h3><?= $adminEntryTitleL ?></h3>
         <input type="hidden" name="_token" value="<?php \Lib\TokenService::printTocken('admin') ?>">
         <p><label for="login"><?= $loginTitleL ?></label><br>

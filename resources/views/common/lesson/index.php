@@ -1,6 +1,6 @@
 <section class="breadcrumbs">
 
-    <a href="/<?= \Lib\HelperService::currentLang() ?>" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
+    <a href="<?= \Lib\HelperService::currentLang() ?>/" class="breadcrumb__item"><?=  $mainPageL ?></a>  =>
     <span class="breadcrumb__item--current"><?=  $lessonL ?></span>
 
 </section>
@@ -37,7 +37,7 @@
 
         <div class="lesson-comments__link-btn-container">
 
-            <a download href="/<?= \Lib\HelperService::currentLang().ROOT ?>uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
+            <a download href="<?= \Lib\HelperService::currentLang().'/'.ROOT ?>uploads/video/<?= $lesson->file ?>"  class="lesson-comments__link-btn--toLoadContent" ><?= $downloadL ?></a>
 
         </div>
 
@@ -52,7 +52,7 @@
 
     <?php if(!loggedInUser()): ?>
 
-        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="/subscription/signIn"><?= $loginL ?></a></button>
+        <button class="lesson-comments__button"><a class="lesson-comments__button-link" href="<?= \Lib\HelperService::currentLang() ?>/subscription/signIn"><?= $loginL ?></a></button>
     <?php endif; ?>
 
     <div class="lesson-excerpt">
@@ -85,7 +85,7 @@
 
         <?php foreach ($relatedLessons as $relatedLesson): ?>
         <div class="related-lessons__item">
-            <a href="/<?= \Lib\HelperService::currentLang() ?>lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
+            <a href="<?= \Lib\HelperService::currentLang() ?>/lesson?id=<?= $relatedLesson->id ?>" class="related-lessons__item-link">
                 <img src="<?= ROOT ?>/uploads/lessonsIcons/<?= $relatedLesson->icon ?>" alt="" class="related-lessons__item-img">
                 <span class="related-lessons__item-link-title"><?= $relatedLesson->title ?></span>
             </a>
@@ -114,6 +114,6 @@
 <?php else: ?>
 
 
-    <button class="lesson-comments__button-bottom"><a class="lesson-comments__button-link" href="/subscription/signIn"><?= $loginToAddCommentL ?></a></button>
+    <button class="lesson-comments__button-bottom"><a class="lesson-comments__button-link" href="<?= \Lib\HelperService::currentLang() ?>/subscription/signIn"><?= $loginToAddCommentL ?></a></button>
 
 <?php endif; ?>

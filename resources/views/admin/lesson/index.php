@@ -1,6 +1,6 @@
 
 
-<form method="get" action="/<?= \Lib\HelperService::currentLang() ?>admin/lesson">
+<form method="get" action="<?= \Lib\HelperService::currentLang() ?>/admin/lesson">
 
     <label for="orderList"><?= $orderByL ?></label>
     <select name="order" id="orderList">

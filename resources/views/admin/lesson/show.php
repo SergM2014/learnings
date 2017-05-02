@@ -19,7 +19,7 @@
 
     <div class="show-lesson__footer">
         <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><?= $backL ?></a>
-        <a href="/<?= \Lib\HelperService::currentLang() ?>admin/lesson/edit?id=<?= $lesson->id ?>"><?= $updateL ?></a>
+        <a href="<?= \Lib\HelperService::currentLang() ?>/admin/lesson/edit?id=<?= $lesson->id ?>"><?= $updateL ?></a>
     </div>
 
 </div>
