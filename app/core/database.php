@@ -13,12 +13,16 @@ class DataBase {
 
 	protected $conn;
 
+	private static $savedConnection;
+
     public function __construct(){
 
-     try{
-           $this->conn = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER, PASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES\'UTF8\''));
+        if(is_object(self::$savedConnection)) {$this->conn = self::$savedConnection; return; }
 
-        // $this->conn = new \PDO("sqlite:".NAME_BD);
+     try{
+           $this->conn = self::$savedConnection = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER, PASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES\'UTF8\''));
+
+     echo "DB connection";
 
         }catch(\PDOException $e) {die("Ошибка соединения с базой или хостом:".$e->getMessage());}
 
