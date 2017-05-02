@@ -116,6 +116,7 @@ $moreCommentsFirstL = "найбільше коментарів спочатку"
 $lessCommentsFirstL = "найменше коментарів спочатку";
 $addedAtL = "Доданно";
 $selectAllL = "Вибрати все";
+$orderByL = "Впорядкувати по";
 
 
 //these functionare for translation in controllers and models

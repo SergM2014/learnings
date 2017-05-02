@@ -2,7 +2,8 @@
 
 <form method="get" action="/<?= \Lib\HelperService::currentLang() ?>admin/lesson">
 
-    <select name="order">
+    <label for="orderList"><?= $orderByL ?></label>
+    <select name="order" id="orderList">
 
         <option value="new_first" <?= @$_GET['order' ]== 'new_first' ? 'selected': '' ?> ><?= $newFirstL ?></option>
         <option value="old_first" <?= @$_GET['order'] == 'old_first' ? 'selected': '' ?> ><?= $oldFirstL ?></option>
@@ -12,7 +13,8 @@
         <option value="less_comments_first" <?=  @$_GET['order'] == 'less_comments_first' ? 'selected': '' ?> ><?= $lessCommentsFirstL ?></option>
     </select>
 
-    <select name="category_and_serie">
+    <label for="categoryAndSerie"><?= $category_serieTitleL ?></label>
+    <select name="category_and_serie" id="categoryAndSerie">
         <option value="all"><?= $selectAllL ?></option>
         <?= $serieDropDownList ?>
     </select>
