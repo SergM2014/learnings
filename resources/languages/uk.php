@@ -117,6 +117,8 @@ $lessCommentsFirstL = "найменше коментарів спочатку";
 $addedAtL = "Доданно";
 $selectAllL = "Вибрати все";
 $orderByL = "Впорядкувати по";
+$renameL = "Перейменувати";
+$createSerieL = "Створити серію";
 
 
 //these functionare for translation in controllers and models

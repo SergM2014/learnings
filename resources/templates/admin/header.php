@@ -21,7 +21,7 @@
 
     <div id="alertZone" class="alert-zone hidden">
         <img src="<?= ROOT ?>/img/small-close.png" id="closeAlert" class="close-alert-sign" alt="">
-        <span id="alertZoneText" class="alert-zone__text">nrmdth'm'dfjyh'jrmy</span>
+        <span id="alertZoneText" class="alert-zone__text">Here is alert text to be inserted</span>
     </div>
 
 
@@ -50,6 +50,7 @@
 
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
+                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/categoryAndSerie" class="main-header__menu-item-link"><?= $category_serieTitleL ?></a></li>
 
 
 

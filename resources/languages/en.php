@@ -119,6 +119,8 @@ $lessCommentsFirstL = "less comments first";
 $addedAtL = "Added at";
 $selectAllL = "Select all";
 $orderByL = "Order by";
+$renameL = "Rename";
+$createSerieL = "Create serie";
 
 
 

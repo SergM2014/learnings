@@ -172,6 +172,18 @@ document.body.addEventListener('click', function (e) {
 
     }
 
+    if(e.target.classList.contains('admin-section')) {
+
+        let serieId = e.target.closest('li').dataset.serieId;
+        let categoryId = e.target.closest('[data-category-serie-id]').dataset.categorySerieId;
+//console.log(serieId, categoryId)
+
+        if(serieId){
+            new PopUpMenu(e).fillUpMenuContent(serieId, '/admin/popUp/serie', 'admin/categoryAndSerie');
+        } else {
+            new PopUpMenu(e).fillUpMenuContent(categoryId, '/admin/popUp/category', 'admin/categoryAndSerie');
+        }
+    }
 
 
     if(e.target.closest('[data-category-id]')){
@@ -181,13 +193,16 @@ document.body.addEventListener('click', function (e) {
         let serieId = elem.closest('[data-serie-id')? elem.closest('[data-serie-id]').dataset.serieId: null;
 
 
+        elem.closest('.tree-branch').classList.add('tree-branch--selected');
+
+
        let selected = document.getElementById('serieList').querySelectorAll('.tree-branch--selected');
 
            for(let i = 0; i < selected.length; i++){
               selected[i].classList.remove('tree-branch--selected')
            }
 
-         elem.closest('.tree-branch').classList.add('tree-branch--selected');
+
 
         document.getElementById('categoryField').value = categoryId;
 
@@ -198,25 +213,23 @@ document.body.addEventListener('click', function (e) {
 
 
 
-    if(e.target.id == "popUpAdminDeleteLesson"){
+    if(e.target.id === "popUpAdminDeleteLesson"){
 
           Modal.createModalWindow('/admin/popUp/drawDeleteLessonModal')
     }
 
 
     //close deleteLesson modal window
-    if(e.target.id == "closeWindowBtn" || e.target.id == "closeWindowSign"){
+    if(e.target.id === "closeWindowBtn" || e.target.id === "closeWindowSign"){
         document.getElementById('modalBackground').remove();
     }
 
 
-    if(e.target.id == "confirmDeleteLessonBtn"){
-//console.log(111)
+    if(e.target.id === "confirmDeleteLessonBtn"){
+
 
         let formData = new FormData(document.getElementById('deleteLesson'));
-// console.log(formData)
-//         let lessonId = formData.id;
-// console.log(lessonId)
+
         postAjax('/admin/lesson/delete', formData)
             .then(response => response.json() )
             .then(j => {

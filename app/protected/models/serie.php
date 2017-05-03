@@ -54,12 +54,15 @@ class Serie extends DataBase
         return $series;
     }
 
-    public function printOutSerieTreeMenu()
+    public function printOutSerieTreeMenu($categoryAndSerieSection = null )
     {
+        $identifier = $categoryAndSerieSection? 'data-category-serie-id': 'data-category-id';
+        $classIdentifier = $categoryAndSerieSection? 'admin-section': '';
+
         $print = '';
         $categories = $this->getAllSeries();
         foreach ($categories as $category){
-            $print.= "<li data-category-id= {$category->category_id}><span class='category-item tree-branch'>{$category->category_title}</span>";
+            $print.= "<li $identifier = {$category->category_id}><span class='category-item tree-branch $classIdentifier'>{$category->category_title}</span>";
             $ids = explode(',', $category->serie_ids);
             $titles = explode(',', $category->serie_titles);
             $length = count($ids);
@@ -67,7 +70,7 @@ class Serie extends DataBase
             if($ids){
                 $print.= "<ul>";
                 for($i=0; $i<$length; $i++){
-                    $print.= "<li data-serie-id={$ids[$i]}><span class='serie-item tree-branch'>{$titles[$i]}</span></li>";
+                    $print.= "<li data-serie-id={$ids[$i]}><span class='serie-item tree-branch $classIdentifier'>{$titles[$i]}</span></li>";
                 }
                 $print.= "</ul>";
             }

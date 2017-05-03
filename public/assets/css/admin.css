@@ -287,3 +287,7 @@ th{
 .alert-zone__text{
   margin:auto;
 }
+
+.category-item{
+  background-color: rgba(255,75,104,0.99);
+}
