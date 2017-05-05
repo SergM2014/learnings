@@ -27,10 +27,11 @@
 
 
 
-
-    define('LESSONS_ICONS_IMAGES', 'lessonsIcons/');
-    define('LESSONS_ICONS_IMAGES_EXTENT', 150);
     define('AVATARS_IMAGES', 'avatars/');
+    define('LESSONS_ICONS_IMAGES', 'lessonsIcons/');
+    define('SERIES_ICONS_IMAGES', 'seriesIcons/');
+    define('ICONS_IMAGES_EXTENT', 150);
+
 
     define('PRODUCT_IMAGES_H', 300);
     define('AVATAR_IMAGES_EXTENT',135);

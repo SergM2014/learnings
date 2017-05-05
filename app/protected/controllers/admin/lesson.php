@@ -35,26 +35,13 @@ class Lesson  extends AdminController
 
 
 
-    public function create()
+    public function create($errors = null )
     {
         $treeMenu = (new Serie())->printOutSerieTreeMenu();
-        return ['view'=>'/views/admin/lesson/create.php', 'treeMenu'=>$treeMenu ];
-    }
 
+        $_SESSION['createLesson'] = true;
 
-    public function downloadFile()
-    {
-
-        $message = (new LessonModel())->uploadFile();
-        echo json_encode($message);
-        exit();
-    }
-
-    public function deleteFile()
-    {
-        $message = (new LessonModel())->deleteFile();
-        echo json_encode($message);
-        exit();
+        return ['view'=>'/views/admin/lesson/create.php', 'treeMenu'=>$treeMenu, 'errors'=>$errors ];
     }
 
 
@@ -62,28 +49,32 @@ class Lesson  extends AdminController
     {
         TokenService::check('admin');
 
+        if(!@$_SESSION['createLesson']) return $this->index();
+
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
         $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
-
-            $treeMenu = (new Serie)->printOutSerieTreeMenu();
-            return ['view' => '/views/admin/lesson/create.php', 'errors'=>$errors , 'treeMenu'=>$treeMenu];
+           return  $this->create($errors);
         }
 
         (new LessonModel())->saveLesson($this->stripTags($_POST['excerpt']));
 
+        unset($_SESSION['createLesson']);
 
         return  ['view' => '/views/admin/lesson/addSuccess.php'];
     }
 
 
-    public function edit()
+    public function edit($errors = null )
     {
         $lesson = (new LessonModel())->getOneLesson();
         $treeMenu = (new Serie())->printOutSerieTreeMenu();
-        return ['view'=>'/views/admin/lesson/edit.php', 'treeMenu'=>$treeMenu , 'lesson'=> $lesson ];
+
+        $_SESSION['editLesson'] = true;
+
+        return ['view'=>'/views/admin/lesson/edit.php', 'treeMenu'=>$treeMenu , 'lesson'=> $lesson, 'errors'=>$errors ];
     }
 
 
@@ -91,18 +82,19 @@ class Lesson  extends AdminController
     {
         TokenService::check('admin');
 
+        if(!@$_SESSION['editLesson']) return $this->index();
+
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
         $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
-            $lesson = (new LessonModel())->getOneLesson();
-            $treeMenu = (new Serie)->printOutSerieTreeMenu();
-            return ['view' => '/views/admin/lesson/edit.php', 'errors'=>$errors , 'treeMenu'=>$treeMenu, 'lesson'=> $lesson ];
+            return $this->edit($errors);
         }
 
         (new LessonModel())->updateLesson($this->stripTags($_POST['excerpt']));
 
+        unset ($_SESSION['editLesson']);
 
         return  ['view' => '/views/admin/lesson/updateSuccess.php'];
     }
@@ -121,6 +113,21 @@ class Lesson  extends AdminController
         TokenService::check('admin');
         $response = (new LessonModel())->deleteLesson();
         echo json_encode($response);
+        exit();
+    }
+
+    public function downloadFile()
+    {
+
+        $message = (new LessonModel())->uploadFile();
+        echo json_encode($message);
+        exit();
+    }
+
+    public function deleteFile()
+    {
+        $message = (new LessonModel())->deleteFile();
+        echo json_encode($message);
         exit();
     }
 

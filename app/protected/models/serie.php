@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\DataBase;
+use Lib\LangService;
 
 class Serie extends DataBase
 {
@@ -111,5 +112,38 @@ class Serie extends DataBase
 
     }
 
+
+    public function getOneSerie()
+    {
+        $id= $_POST['serieId']?? $_GET['id'];
+
+        $sql = "SELECT `id`, `category_id`, `title`, `icon`, `upgrading_skill` FROM `series` WHERE `id`=? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $serie = $stmt->fetch();
+
+        return $serie;
+    }
+
+
+
+    public function updateSerie($title)
+    {
+        $id = $_POST['serieId'];
+
+        $translitedInLatin= LangService::translite_in_Latin($title);
+
+        $sql = "UPDATE `series` SET `title` = ?, `eng_translit_title`=?, `icon`= ?, `upgrading_skill` = ?  WHERE `id`= ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $title, \PDO::PARAM_STR);
+        $stmt->bindValue(2, $translitedInLatin, \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_SESSION['serieIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(4,$_POST['upgradingSkill'], \PDO::PARAM_INT);
+        $stmt->bindValue(5,$id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        unset($_SESSION['serieIcon']);
+    }
 
 }

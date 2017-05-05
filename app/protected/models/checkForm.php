@@ -150,7 +150,7 @@ class CheckForm extends DataBase
     }
 
 
-        public function checkLessonForm($inputs)
+    public function checkLessonForm($inputs)
     {
         $errors =  new \stdClass();
 
@@ -160,7 +160,26 @@ class CheckForm extends DataBase
         $this->checkLessonsIcon($errors);
 
         return (array)$errors;
+    }
 
+
+    protected function checkSerieIcon($errors)
+    {
+        if (@!$_SESSION['serieIcon'] OR $_SESSION['serieIcon'] == 'delete') {
+            $errors->serieIcon = $errors->serieIcon ?? noFile();
+        }
+
+    }
+
+
+    public function checkSerieForm($inputs)
+    {
+        $errors =  new \stdClass();
+
+        $this->checkIfNotEmpty($inputs, $errors);
+        $this->checkSerieIcon($errors);
+
+        return (array)$errors;
     }
 
 

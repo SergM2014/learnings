@@ -1,4 +1,4 @@
-<p><a href='<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr'] ?>/editSerie?id=<?= (int)$_POST['id'] ?>' class='popUp-menu-item'><?= $renameL ?></a></p>
+<p><a href='<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr'] ?>/editSerie?id=<?= (int)$_POST['id'] ?>' class='popUp-menu-item'><?= $updateL ?></a></p>
 
 
 <form id="delete<?= ucfirst(basename($_POST['processContr'])) ?>" action="<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr']?>/deleteSerie" method="post" class="">

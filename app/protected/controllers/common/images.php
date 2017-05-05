@@ -51,5 +51,23 @@ class Images  extends BaseController
       }
 
 
+    public function deleteSerieIcon()
+    {
+        $message = (new ModelImages())->deleteSerieIcon();
+
+        echo json_encode($message);
+        exit();
+    }
+
+
+    public function uploadSerieIcon()
+    {
+        $message = (new ModelImages())->uploadSerieIcon();
+
+        echo json_encode($message);
+        exit();
+    }
+
+
   }
   

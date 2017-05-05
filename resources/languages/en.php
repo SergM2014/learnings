@@ -121,8 +121,12 @@ $selectAllL = "Select all";
 $orderByL = "Order by";
 $renameL = "Rename";
 $createSerieL = "Create serie";
-
-
+$difficultyLevelL = "Difficulty level";
+$lowL = "Low";
+$middleL = "Middle";
+$highL = "High";
+$updateSerieL = "Update Serie";
+$serieUpdatedL = "Serie is updated!";
 
 
 //these functionare for translation in controllers and models

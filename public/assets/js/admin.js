@@ -179,9 +179,9 @@ document.body.addEventListener('click', function (e) {
 //console.log(serieId, categoryId)
 
         if(serieId){
-            new PopUpMenu(e).fillUpMenuContent(serieId, '/admin/popUp/serie', 'admin/categoryAndSerie');
+            new PopUpMenu(e).fillUpMenuContent(serieId, '/admin/popUp/serie', 'admin/cluster');
         } else {
-            new PopUpMenu(e).fillUpMenuContent(categoryId, '/admin/popUp/category', 'admin/categoryAndSerie');
+            new PopUpMenu(e).fillUpMenuContent(categoryId, '/admin/popUp/category', 'admin/cluster');
         }
     }
 

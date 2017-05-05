@@ -119,6 +119,12 @@ $selectAllL = "Вибрати все";
 $orderByL = "Впорядкувати по";
 $renameL = "Перейменувати";
 $createSerieL = "Створити серію";
+$difficultyLevelL = "Рівень важкості";
+$lowL = "Низький";
+$middleL = "Середній";
+$highL = "Високий";
+$updateSerieL ="Оновити серію";
+$serieUpdatedL = "Серію оновленно!";
 
 
 //these functionare for translation in controllers and models

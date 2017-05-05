@@ -4,7 +4,6 @@
 
 
 
-
 <form id="delete<?= ucfirst(basename($_POST['processContr'])) ?>" action="<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr']?>/deleteCategory" method="post" class="">
 
     <input type="hidden" name="id" value="<?= (int)$_POST['id'] ?>">

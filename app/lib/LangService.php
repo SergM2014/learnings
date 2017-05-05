@@ -10,9 +10,9 @@ class LangService{
      * @param $translit_from
      * @return string
      */
-    public static function translite_in_Latin($translit_from)
+    public static function translite_in_Latin($translitFrom)
     {
-        $translit_in_latin = array(
+        $translitInLatin = array(
             'ы'=>'yii',
 
             'й'=>'ji',
@@ -48,12 +48,12 @@ class LangService{
             'ж'=>'j',
             'г'=>'g',
             'а'=>'a',
-            ' '=>'_'
+
         );
 
         
-        $initial_string = strtolower($translit_from);
-        $translited = strtr($initial_string, $translit_in_latin);
+        $initialString = mb_strtolower($translitFrom, "UTF-8");
+        $translited = strtr($initialString, $translitInLatin);
 
         return $translited;
     }

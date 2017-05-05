@@ -7,8 +7,12 @@
 
         <?php
 
-        if(@$lesson->icon) $_SESSION['lessonsIcon']= $lesson->icon;
-        $givenImage =  $_SESSION['lessonsIcon']?? null;
+        if(@!$_SESSION['lessonsIcon'] AND @$_POST['action']== 'handleLessonIcon'){
+            $givenImage = null;
+        } else {
+            $givenImage = $_SESSION['lessonsIcon'] = $lesson->icon;
+        }
+
         $imageCustomType = 'lessonsIcon';
         $path = ROOT."/uploads/lessonsIcons/"; ?>
 
