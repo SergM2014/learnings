@@ -152,13 +152,6 @@ class Serie extends DataBase
 
     public function delete()
     {
-
-
-        if(DEBUG_MODE){
-            $response= ["message"=> serieDeleted() , "success"=> true, "serieId"=> (int)$_POST['id'] ];
-            return $response;
-        }
-
         $sql = "SELECT COUNT(`id`) FROM `lessons` WHERE `serie_id` = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
@@ -168,6 +161,12 @@ class Serie extends DataBase
               $response= ["message"=> serieHasLessons() , "fail"=> true, "serieId"=> (int)$_POST['id'] ];
               return $response;
           }
+
+
+        if(DEBUG_MODE){
+            $response= ["message"=> serieDeleted() , "success"=> true, "serieId"=> (int)$_POST['id'] ];
+            return $response;
+        }
 
           if($foundedLessons === 0 ){
               $sql = "DELETE FROM `series` WHERE `id`= ?";

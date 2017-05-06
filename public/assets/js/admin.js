@@ -227,6 +227,7 @@ document.body.addEventListener('click', function (e) {
     //close deleteLesson modal window
     if(e.target.id === "closeWindowBtn" || e.target.id === "closeWindowSign"){
         document.getElementById('modalBackground').remove();
+        document.getElementById('popupMenu').remove();
     }
 
 
@@ -278,6 +279,16 @@ document.body.addEventListener('click', function (e) {
 });
 
 
+document.getElementsByClassName('container')[0].addEventListener('click', function (e) {
+    if( document.getElementById('popupMenu')){
+     document.getElementById('popupMenu').remove();
+     }
+     if(!document.getElementById('alertZone').classList.contains('hidden')){
+         document.getElementById('alertZone').classList.add('hidden');
+     }
+});
+
+
 let categoryId = document.getElementById('categoryField')? document.getElementById('categoryField').value: null;
 let serieId = document.getElementById('serieField')? document.getElementById('serieField').value: null;
 
@@ -288,9 +299,7 @@ if(serieId) {
     document.getElementById('serieList').querySelector(`[data-category-id="${categoryId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
 }
 
-document.getElementsByClassName('content')[0].addEventListener('click', function(e){
 
-});
 
 
 
