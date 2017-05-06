@@ -218,6 +218,11 @@ document.body.addEventListener('click', function (e) {
           Modal.createModalWindow('/admin/popUp/drawDeleteLessonModal')
     }
 
+    if(e.target.id === "popUpAdminDeleteSerie"){
+
+        Modal.createModalWindow('/admin/popUp/drawDeleteSerieModal')
+    }
+
 
     //close deleteLesson modal window
     if(e.target.id === "closeWindowBtn" || e.target.id === "closeWindowSign"){
@@ -243,6 +248,30 @@ document.body.addEventListener('click', function (e) {
             })
     }
 
+    if(e.target.id === "confirmDeleteSerieBtn"){
+
+
+        let formData = new FormData(document.getElementById('deleteSerie'));
+
+        postAjax('/admin/cluster/deleteSerie', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+                    document.getElementById('modalBackground').remove();
+                    document.getElementById('popupMenu').remove();
+                    document.querySelector(`[data-serie-id="${j.serieId}"]`).remove();
+
+                    showAlert(j.message)
+                }
+
+                if(j.fail){
+                    //here we print if something went wrong
+                    document.getElementById('modalWindowText').classList.remove('hidden');
+                    document.getElementById('modalWindowText').innerText = j.message;
+                }
+            })
+    }
+
 
 
 
@@ -258,6 +287,10 @@ if(serieId) {
 } else if(categoryId) {
     document.getElementById('serieList').querySelector(`[data-category-id="${categoryId}"`).querySelector('.tree-branch').classList.add('tree-branch--selected')
 }
+
+document.getElementsByClassName('content')[0].addEventListener('click', function(e){
+
+});
 
 
 

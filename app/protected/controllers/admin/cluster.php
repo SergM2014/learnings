@@ -59,7 +59,13 @@ class Cluster  extends AdminController
     }
 
 
-
+    public function deleteSerie()
+    {
+        TokenService::check('admin');
+        $response = (new Serie())->delete();
+        echo json_encode($response);
+        exit();
+    }
 
 
 

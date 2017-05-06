@@ -125,6 +125,7 @@ $middleL = "Середній";
 $highL = "Високий";
 $updateSerieL ="Оновити серію";
 $serieUpdatedL = "Серію оновленно!";
+$shureDeleteSerieL = "Ви впевнені що бажаете видалити серію?";
 
 
 //these functionare for translation in controllers and models
@@ -220,6 +221,16 @@ function noFile()
 function lessonIsDeleted()
 {
     return "Урок видаленно!";
+}
+
+function serieHasLessons()
+{
+    return "Видалити неможливо! Серія має уроки!";
+}
+
+function serieDeleted()
+{
+    return "Серію видаленно!";
 }
 
 

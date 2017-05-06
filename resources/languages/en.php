@@ -127,6 +127,7 @@ $middleL = "Middle";
 $highL = "High";
 $updateSerieL = "Update Serie";
 $serieUpdatedL = "Serie is updated!";
+$shureDeleteSerieL = "are you shure to delete the serie?";
 
 
 //these functionare for translation in controllers and models
@@ -221,5 +222,15 @@ function noFile()
 function lessonIsDeleted()
 {
     return "Lesson is deleted!";
+}
+
+function serieHasLessons()
+{
+    return "Impposible to delete! The serie has lessons!";
+}
+
+function serieDeleted()
+{
+    return "The serie is deleted!";
 }
 

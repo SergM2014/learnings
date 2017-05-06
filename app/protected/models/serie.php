@@ -5,6 +5,10 @@ namespace App\Models;
 use App\Core\DataBase;
 use Lib\LangService;
 
+use function serieHasLessons;
+use function serieDeleted;
+use function smthWentWrong;
+
 class Serie extends DataBase
 {
 
@@ -144,6 +148,41 @@ class Serie extends DataBase
         $stmt->execute();
 
         unset($_SESSION['serieIcon']);
+    }
+
+    public function delete()
+    {
+
+
+        if(DEBUG_MODE){
+            $response= ["message"=> serieDeleted() , "success"=> true, "serieId"=> (int)$_POST['id'] ];
+            return $response;
+        }
+
+        $sql = "SELECT COUNT(`id`) FROM `lessons` WHERE `serie_id` = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+        $foundedLessons = (int)$stmt->fetchColumn();
+          if($foundedLessons >0 ) {
+              $response= ["message"=> serieHasLessons() , "fail"=> true, "serieId"=> (int)$_POST['id'] ];
+              return $response;
+          }
+
+          if($foundedLessons === 0 ){
+              $sql = "DELETE FROM `series` WHERE `id`= ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+                $stmt->execute();
+              $response= ["message"=> serieDeleted() , "success"=> true, "serieId"=> (int)$_POST['id'] ];
+              return $response;
+          }
+
+
+        $response= ["message"=> smthWentWrong() , "fail"=> true, "serieId"=> (int)$_POST['id'] ];
+        return $response;
+
+
     }
 
 }
