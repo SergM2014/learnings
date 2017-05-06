@@ -126,6 +126,9 @@ $highL = "Високий";
 $updateSerieL ="Оновити серію";
 $serieUpdatedL = "Серію оновленно!";
 $shureDeleteSerieL = "Ви впевнені що бажаете видалити серію?";
+$createSerieL = "Створити серію";
+$serieAddedL = "Серію додано!";
+$createL = "Створити";
 
 
 //these functionare for translation in controllers and models

@@ -128,6 +128,9 @@ $highL = "High";
 $updateSerieL = "Update Serie";
 $serieUpdatedL = "Serie is updated!";
 $shureDeleteSerieL = "are you shure to delete the serie?";
+$createSerieL = "Create serie";
+$serieAddedL = "Serie added!";
+$createL = "Create";
 
 
 //these functionare for translation in controllers and models

@@ -180,8 +180,26 @@ class Serie extends DataBase
 
         $response= ["message"=> smthWentWrong() , "fail"=> true, "serieId"=> (int)$_POST['id'] ];
         return $response;
+    }
 
 
+    public function saveSerie($title)
+    {
+        $id = $_POST['parentId'];
+
+        $translitedInLatin= LangService::translite_in_Latin($title);
+
+        $sql = "INSERT INTO `series` (`category_id`, `title`, `eng_translit_title`, `icon`, `upgrading_skill`) VALUES(?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1,$id, \PDO::PARAM_INT);
+        $stmt->bindValue(2, $title, \PDO::PARAM_STR);
+        $stmt->bindValue(3, $translitedInLatin, \PDO::PARAM_STR);
+        $stmt->bindValue(4, $_SESSION['serieIcon'], \PDO::PARAM_STR);
+        $stmt->bindValue(5, $_POST['upgradingSkill'], \PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        unset($_SESSION['serieIcon']);
     }
 
 }

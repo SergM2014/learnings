@@ -1,6 +1,6 @@
 <div class="image-download__block">
 
-    <img src="<?=  displayPreviewImage($givenImage, $imageCustomType, $path) ?>" alt="" id="downloadImagePreview" class="image-download__preview">
+    <img src="<?=  displayPreviewImage(@$givenImage, $imageCustomType, $path) ?>" alt="" id="downloadImagePreview" class="image-download__preview">
 
 
      <div id="imageDownloadOutput" class="image-download__output"></div>

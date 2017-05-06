@@ -68,7 +68,34 @@ class Cluster  extends AdminController
     }
 
 
+    public function createSerie($errors = null )
+    {
+        $_SESSION['createSerie'] = true;
 
+        return ['view'=>'/views/admin/cluster/createSerie.php',  'errors' => $errors ];
+    }
+
+
+    public function saveSerie()
+    {
+        TokenService::check('admin');
+
+        if(!@$_SESSION['createSerie']) return $this->index();
+
+        $cleanedUpInputs = self::escapeInputs('title');
+
+        $errors = (new CheckForm())->checkSerieForm($cleanedUpInputs);
+        if(!empty($errors) ) {
+
+            return $this->createSerie($errors);
+        }
+
+        (new Serie())->saveSerie($cleanedUpInputs['title']);
+
+        unset ($_SESSION['createSerie']);
+
+        return  ['view' => '/views/admin/cluster/serieAddSuccess.php'];
+    }
 
 
 

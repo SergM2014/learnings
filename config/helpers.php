@@ -59,7 +59,9 @@
 
        function displayPreviewImage($givenImage , $imageCustomType, $path)
        {
+
             if(@!$givenImage) {
+
                return $imageCustomType == 'avatar'? '/img/noavatar.jpg' : '/img/nophoto.jpg';
             }
             return $path.$givenImage;
