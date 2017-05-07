@@ -131,6 +131,8 @@ $serieAddedL = "Серію додано!";
 $createL = "Створити";
 $createCategoryL = "Створити категорію";
 $categoryAddedL = "Категорію додано!";
+$updateCategoryL = "Оновити категорію";
+$categoryUpdatedL = "Категорію оновленно!";
 
 
 //these functionare for translation in controllers and models

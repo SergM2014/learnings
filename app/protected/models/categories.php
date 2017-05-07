@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\DataBase;
+use Lib\LangService;
 
 class Category extends DataBase
 {
@@ -64,6 +65,46 @@ class Category extends DataBase
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    public function getOneSimplifiedCategory()
+    {
+        $id = $_GET['id']?? @$_POST['categoryId'];
+
+        $sql= "SELECT `id`, `title` FROM `categories`  WHERE `id`= ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $id, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
+
+    public function saveCategory($title)
+    {
+        $translitedInLatin= LangService::translite_in_Latin($title);
+
+        $sql = "INSERT INTO `categories` ( `title`, `eng_translit_title`) VALUES(?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $title, \PDO::PARAM_STR);
+        $stmt->bindValue(2, $translitedInLatin, \PDO::PARAM_STR);
+
+        $stmt->execute();
+
+    }
+
+    public function updateCategory($title)
+    {
+        $translitedInLatin= LangService::translite_in_Latin($title);
+
+        $sql = "UPDATE `categories` SET  `title`=?, `eng_translit_title`= ? WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $title, \PDO::PARAM_STR);
+        $stmt->bindValue(2, $translitedInLatin, \PDO::PARAM_STR);
+        $stmt->bindValue(3, $_POST['categoryId'], \PDO::PARAM_INT);
+
+        $stmt->execute();
     }
 
 

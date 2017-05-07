@@ -133,6 +133,8 @@ $serieAddedL = "Serie added!";
 $createL = "Create";
 $createCategoryL = "Create Category";
 $categoryAddedL = "Category Added!";
+$updateCategoryL = "Update Category";
+$categoryUpdatedL = "Category is updated!";
 
 
 //these functionare for translation in controllers and models

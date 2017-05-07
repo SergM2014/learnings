@@ -10,8 +10,7 @@ use App\Core\AdminController;
 
 
 use Lib\TokenService;
-use App\Models\Lesson as LessonModel;
-use App\Models\AdminModel;
+use App\Models\Category;
 use App\Models\Serie;
 use Lib\CheckFieldsService;
 use App\Models\CheckForm;
@@ -120,13 +119,43 @@ class Cluster  extends AdminController
             return $this->createCategory($errors);
         }
 
-        (new Serie())->saveCategory($cleanedUpInputs['title']);
+        (new Category())->saveCategory($cleanedUpInputs['title']);
 
         unset ($_SESSION['createCategory']);
 
         return  ['view' => '/views/admin/cluster/categoryAddSuccess.php'];
     }
 
+
+
+    public function editCategory($errors = null )
+    {
+        $category = (new Category)->getOneSimplifiedCategory();
+        $_SESSION['editCategory'] = true;
+
+        return ['view'=>'/views/admin/cluster/editCategory.php',  'errors' => $errors, 'category' => $category ];
+    }
+
+    public function updateCategory()
+    {
+        TokenService::check('admin');
+
+        if(!@$_SESSION['editCategory']) return $this->index();
+
+        $cleanedUpInputs = self::escapeInputs('title');
+
+        $errors = (new CheckForm())->checkCategoryForm($cleanedUpInputs);
+        if(!empty($errors) ) {
+
+            return $this->editCategory($errors);
+        }
+
+        (new Category())->updateCategory($cleanedUpInputs['title']);
+
+        unset ($_SESSION['ediCategory']);
+
+        return  ['view' => '/views/admin/cluster/categoryUpdateSuccess.php'];
+    }
 
 
 

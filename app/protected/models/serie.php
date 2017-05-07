@@ -202,18 +202,6 @@ class Serie extends DataBase
         unset($_SESSION['serieIcon']);
     }
 
-    public function saveCategory($title)
-    {
 
-        $translitedInLatin= LangService::translite_in_Latin($title);
-
-        $sql = "INSERT INTO `categories` ( `title`, `eng_translit_title`) VALUES(?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(1, $title, \PDO::PARAM_STR);
-        $stmt->bindValue(2, $translitedInLatin, \PDO::PARAM_STR);
-
-        $stmt->execute();
-
-    }
 
 }
