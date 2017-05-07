@@ -290,7 +290,7 @@ document.body.addEventListener('click', function (e) {
                 if(j.success) {
                     document.getElementById('modalBackground').remove();
                     document.getElementById('popupMenu').remove();
-                    document.querySelector(`[data-serie-id="${j.serieId}"]`).remove();
+                    document.querySelector(`[data-category-serie-id="${j.categoryId}"]`).remove();
 
                     showAlert(j.message)
                 }

@@ -51,8 +51,10 @@ class Serie extends DataBase
 
     public function getAllSeries()
     {
-        $sql= "SELECT GROUP_CONCAT(`s`.`id`) AS `serie_ids`, `s`.`category_id`, GROUP_CONCAT(`s`.`title`) AS `serie_titles`, `c`.`title` AS `category_title`  FROM `series` `s`
-                JOIN `categories` `c` ON `s`.`category_id`= `c`.`id` GROUP BY `category_id` ";
+        $sql= "SELECT GROUP_CONCAT(`s`.`id`) AS `serie_ids`, `c`.`id` AS `category_id`, GROUP_CONCAT(`s`.`title`) AS `serie_titles`, `c`.`title` AS `category_title`  FROM `categories` `c`
+                LEFT JOIN `series` `s` ON `s`.`category_id`= `c`.`id` GROUP BY  `c`.`id` ";
+
+
         $stmt = $this->conn->query($sql);
         $series = $stmt->fetchAll();
 
@@ -72,10 +74,10 @@ class Serie extends DataBase
             $titles = explode(',', $category->serie_titles);
             $length = count($ids);
 
-            if($ids){
+            if($ids > 0){
                 $print.= "<ul>";
                 for($i=0; $i<$length; $i++){
-                    $print.= "<li data-serie-id={$ids[$i]}><span class='serie-item tree-branch $classIdentifier'>{$titles[$i]}</span></li>";
+                    if($ids[$i]){  $print.= "<li data-serie-id={$ids[$i]}><span class='serie-item tree-branch $classIdentifier'>{$titles[$i]}</span></li>"; }
                 }
                 $print.= "</ul>";
             }
