@@ -135,6 +135,7 @@ $createCategoryL = "Create Category";
 $categoryAddedL = "Category Added!";
 $updateCategoryL = "Update Category";
 $categoryUpdatedL = "Category is updated!";
+$shureDeleteCategoryL = "Are you shure to delete the category ?";
 
 
 //these functionare for translation in controllers and models
@@ -241,3 +242,17 @@ function serieDeleted()
     return "The serie is deleted!";
 }
 
+function categoryHasLessons()
+{
+    return "Impposible to delete! The category has lessons!";
+}
+
+function categoryDeleted()
+{
+    return "Category is deleted!";
+}
+
+function categoryHasSeries()
+{
+    return "Impposible to delete! The category has series!";
+}

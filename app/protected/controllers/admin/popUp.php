@@ -42,4 +42,9 @@ class PopUp  extends BaseController
         return ['view'=> '/views/admin/modalWindow/deleteSerie.php', 'ajax'=> true ];
     }
 
+    public function drawDeleteCategoryModal()
+    {
+        return ['view'=> '/views/admin/modalWindow/deleteCategory.php', 'ajax'=> true ];
+    }
+
 }

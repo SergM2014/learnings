@@ -133,6 +133,7 @@ $createCategoryL = "Створити категорію";
 $categoryAddedL = "Категорію додано!";
 $updateCategoryL = "Оновити категорію";
 $categoryUpdatedL = "Категорію оновленно!";
+$shureDeleteCategoryL = "Ви іпевнені що хочите видалити категорію?";
 
 
 //these functionare for translation in controllers and models
@@ -240,5 +241,19 @@ function serieDeleted()
     return "Серію видаленно!";
 }
 
+function categoryHasLessons()
+{
+    return "Видалити наможливо! Категорія має уроки!";
+}
+
+function categoryDeleted()
+{
+    return "Категорію видаленно!";
+}
+
+function categoryHasSeries()
+{
+    return "Видалити неможливо! Катагорія має серії";
+}
 
 

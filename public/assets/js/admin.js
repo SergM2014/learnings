@@ -223,6 +223,11 @@ document.body.addEventListener('click', function (e) {
         Modal.createModalWindow('/admin/popUp/drawDeleteSerieModal')
     }
 
+    if(e.target.id === "popUpAdminDeleteCategory"){
+
+        Modal.createModalWindow('/admin/popUp/drawDeleteCategoryModal')
+    }
+
 
     //close deleteLesson modal window
     if(e.target.id === "closeWindowBtn" || e.target.id === "closeWindowSign"){
@@ -255,6 +260,31 @@ document.body.addEventListener('click', function (e) {
         let formData = new FormData(document.getElementById('deleteSerie'));
 
         postAjax('/admin/cluster/deleteSerie', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+                    document.getElementById('modalBackground').remove();
+                    document.getElementById('popupMenu').remove();
+                    document.querySelector(`[data-serie-id="${j.serieId}"]`).remove();
+
+                    showAlert(j.message)
+                }
+
+                if(j.fail){
+                    //here we print if something went wrong
+                    document.getElementById('modalWindowText').classList.remove('hidden');
+                    document.getElementById('modalWindowText').innerText = j.message;
+                }
+            })
+    }
+
+
+    if(e.target.id === "confirmDeleteCategoryBtn"){
+
+
+        let formData = new FormData(document.getElementById('deleteCategory'));
+
+        postAjax('/admin/cluster/deleteCategory', formData)
             .then(response => response.json() )
             .then(j => {
                 if(j.success) {

@@ -158,7 +158,13 @@ class Cluster  extends AdminController
     }
 
 
-
+    public function deleteCategory()
+    {
+        TokenService::check('admin');
+        $response = (new Category)->delete();
+        echo json_encode($response);
+        exit();
+    }
 
 
 

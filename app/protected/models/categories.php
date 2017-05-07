@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Core\DataBase;
 use Lib\LangService;
+use function  categoryHasLessons;
+use function  categoryDeleted;
 
 class Category extends DataBase
 {
@@ -105,6 +107,57 @@ class Category extends DataBase
         $stmt->bindValue(3, $_POST['categoryId'], \PDO::PARAM_INT);
 
         $stmt->execute();
+    }
+
+
+    public function delete()
+    {
+        $sql = "SELECT COUNT(`id`) FROM `lessons` WHERE `category_id` = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+        $foundedLessons = (int)$stmt->fetchColumn();
+
+        $sql = "SELECT COUNT(`id`) FROM `series` WHERE `category_id` = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+        $foundedSeries = (int)$stmt->fetchColumn();
+
+
+        if($foundedSeries >0 ) {
+            $response= ["message"=> categoryHasSeries() , "fail"=> true, "categoryId"=> (int)$_POST['id'] ];
+            return $response;
+        }
+
+
+        if($foundedLessons >0 ) {
+            $response= ["message"=> categoryHasLessons() , "fail"=> true, "categoryId"=> (int)$_POST['id'] ];
+            return $response;
+        }
+
+
+        if(DEBUG_MODE){
+            $response= ["message"=> categoryDeleted() , "success"=> true, "categoryId"=> (int)$_POST['id'] ];
+            return $response;
+        }
+
+        if($foundedLessons === 0 OR $foundedSeries === 0 ){
+            $sql = "DELETE FROM `categories` WHERE `id`= ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+            $stmt->execute();
+            $response= ["message"=> categoryDeleted() , "success"=> true, "categoryId"=> (int)$_POST['id'] ];
+            return $response;
+        }
+
+
+
+
+
+
+        $response= ["message"=> smthWentWrong() , "fail"=> true, "categoryId"=> (int)$_POST['id'] ];
+        return $response;
     }
 
 
