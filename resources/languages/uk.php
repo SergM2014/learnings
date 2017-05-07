@@ -129,6 +129,8 @@ $shureDeleteSerieL = "Ви впевнені що бажаете видалити
 $createSerieL = "Створити серію";
 $serieAddedL = "Серію додано!";
 $createL = "Створити";
+$createCategoryL = "Створити категорію";
+$categoryAddedL = "Категорію додано!";
 
 
 //these functionare for translation in controllers and models

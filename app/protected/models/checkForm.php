@@ -183,6 +183,16 @@ class CheckForm extends DataBase
     }
 
 
+    public function checkCategoryForm($inputs)
+    {
+        $errors =  new \stdClass();
+
+        $this->checkIfNotEmpty($inputs, $errors);
+
+        return (array)$errors;
+    }
+
+
 
 
 

@@ -131,6 +131,8 @@ $shureDeleteSerieL = "are you shure to delete the serie?";
 $createSerieL = "Create serie";
 $serieAddedL = "Serie added!";
 $createL = "Create";
+$createCategoryL = "Create Category";
+$categoryAddedL = "Category Added!";
 
 
 //these functionare for translation in controllers and models

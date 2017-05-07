@@ -98,8 +98,34 @@ class Cluster  extends AdminController
     }
 
 
+    public function createCategory($errors = null )
+    {
+        $_SESSION['createCategory'] = true;
+
+        return ['view'=>'/views/admin/cluster/createCategory.php',  'errors' => $errors ];
+    }
 
 
+    public function saveCategory()
+    {
+        TokenService::check('admin');
+
+        if(!@$_SESSION['createCategory']) return $this->index();
+
+        $cleanedUpInputs = self::escapeInputs('title');
+
+        $errors = (new CheckForm())->checkCategoryForm($cleanedUpInputs);
+        if(!empty($errors) ) {
+
+            return $this->createCategory($errors);
+        }
+
+        (new Serie())->saveCategory($cleanedUpInputs['title']);
+
+        unset ($_SESSION['createCategory']);
+
+        return  ['view' => '/views/admin/cluster/categoryAddSuccess.php'];
+    }
 
 
 
