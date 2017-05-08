@@ -80,6 +80,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Controllers\\Admin\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/admin/index.php',
         'App\\Controllers\\Admin\\Lesson' => __DIR__ . '/../..' . '/app/protected/controllers/admin/lesson.php',
         'App\\Controllers\\Admin\\PopUp' => __DIR__ . '/../..' . '/app/protected/controllers/admin/popUp.php',
+        'App\\Controllers\\Admin\\Testimonial' => __DIR__ . '/../..' . '/app/protected/controllers/admin/testimonial.php',
         'App\\Controllers\\Category' => __DIR__ . '/../..' . '/app/protected/controllers/common/category.php',
         'App\\Controllers\\Comment' => __DIR__ . '/../..' . '/app/protected/controllers/common/comment.php',
         'App\\Controllers\\Error_404' => __DIR__ . '/../..' . '/app/protected/controllers/common/404.php',

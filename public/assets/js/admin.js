@@ -165,12 +165,21 @@ document.getElementById('closeAlert').addEventListener('click', function(){
 
 document.body.addEventListener('click', function (e) {
 
-    if(e.target.closest('.table__row')){
+
+    if(e.target.closest('.lesson-row')){
         let lessonId = e.target.closest('.table__row').dataset.lessonId;
 
         new PopUpMenu(e).fillUpMenuContent(lessonId, '/admin/popUp/lesson', 'admin/lesson');
 
     }
+
+    if(e.target.closest('.testimonial-row')){
+        let testimonialId = e.target.closest('.table__row').dataset.testimonialId;
+
+        new PopUpMenu(e).fillUpMenuContent(testimonialId, '/admin/popUp/testimonial', 'admin/testimonial');
+
+    }
+
 
     if(e.target.classList.contains('admin-section')) {
 

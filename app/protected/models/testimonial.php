@@ -8,10 +8,12 @@ use App\Core\DataBase;
 class Testimonial extends DataBase
 {
 
-    public function getAll()
+    public function getAll($admin= false)
     {
-        $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`added_at`  FROM `testimonials` `t`
-                LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` WHERE `t`.`published`= '1' ";
+        if($admin) {$constraint = ''; } else {$constraint = " WHERE `t`.`published`= '1' "; }
+
+        $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`published`, `t`.`changed`, `added_at`  FROM `testimonials` `t`
+                LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` $constraint ";
         $stmt = $this->conn->query($sql);
         $result = $stmt->fetchAll();
 
@@ -36,6 +38,15 @@ class Testimonial extends DataBase
     }
 
 
+    public function countPages($admin = false)
+    {
+        $amountOnPage = @$admin ? AMOUNTONPAGEADMIN : AMOUNTONPAGE;
+        $sql = "SELECT COUNT(`id`) FROM `testimonials`";
+        $stmt = $this->conn->query($sql);
+        $result = $stmt->fetchColumn();
+        $pages = ceil($result / $amountOnPage);
 
+        return $pages;
 
+    }
 }

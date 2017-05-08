@@ -51,7 +51,7 @@
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/cluster" class="main-header__menu-item-link"><?= $category_serieTitleL ?></a></li>
-
+                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/testimonial" class="main-header__menu-item-link"><?= $testimonialsL ?></a></li>
 
 
                         <div class="main-header__right-side">

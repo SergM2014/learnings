@@ -136,6 +136,15 @@ $categoryAddedL = "Category Added!";
 $updateCategoryL = "Update Category";
 $categoryUpdatedL = "Category is updated!";
 $shureDeleteCategoryL = "Are you shure to delete the category ?";
+$responseL = "Response";
+$userL = "User";
+$publishedL = "Published";
+$changedL = "Changed";
+$avatarL = "Avatar";
+$noL = "No";
+$editL = "Edit";
+$publishL = "Publish";
+$unpublishL = "Unpublish";
 
 
 //these functionare for translation in controllers and models

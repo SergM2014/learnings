@@ -134,6 +134,15 @@ $categoryAddedL = "Категорію додано!";
 $updateCategoryL = "Оновити категорію";
 $categoryUpdatedL = "Категорію оновленно!";
 $shureDeleteCategoryL = "Ви іпевнені що хочите видалити категорію?";
+$responseL = "Відгук";
+$userL = "Користувач";
+$publishedL = "Опубліковано";
+$changedL = "Змінено";
+$avatarL = "Аватар";
+$noL = "Ні";
+$editL = "Редагувати";
+$publishL = "Публікувати";
+$unpublishL = "Не публікувати";
 
 
 //these functionare for translation in controllers and models

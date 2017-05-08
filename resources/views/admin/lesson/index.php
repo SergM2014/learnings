@@ -36,7 +36,7 @@
 
         <?php foreach ($lessons as $lesson): ?>
 
-            <tr class="table__row" data-lesson-id ="<?= $lesson->id ?>">
+            <tr class="table__row lesson-row" data-lesson-id ="<?= $lesson->id ?>">
                 <td><?= $counter++ ?></td>
                 <td><img src="<?= ROOT ?>/uploads/lessonsIcons/<?= $lesson->icon ?>" class="table-image" alt=""></td>
                 <td><?= $lesson->title ?></td>

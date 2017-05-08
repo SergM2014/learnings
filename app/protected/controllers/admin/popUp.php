@@ -47,4 +47,10 @@ class PopUp  extends BaseController
         return ['view'=> '/views/admin/modalWindow/deleteCategory.php', 'ajax'=> true ];
     }
 
+
+    public function testimonial()
+    {
+        return ['view' => 'views/admin/popUp/showTestimonialMenu.php', 'ajax' => true ];
+    }
+
 }

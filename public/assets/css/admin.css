@@ -55,7 +55,7 @@ html, body {
   margin-right: 10px; }
 
 .pagination__container{
-  margin-top:15px;
+  margin:15px 0;
   display:flex;
 }
 .pagination{
@@ -89,7 +89,8 @@ th{
 }
 .table__row:hover{
   cursor:pointer;
-  background: #ff7e88;
+  background-color: #ff7e88;
+
 }
 
 .popup-menu{
@@ -161,6 +162,14 @@ th{
 .hidden{
   display:none!important;
 }
+.green {
+  color: #11ff30;
+}
+.red{
+  color: #aa1111;
+}
+
+
 .image-download__preview, .file-download__preview {
   max-width:150px;
   max-height:150px;
