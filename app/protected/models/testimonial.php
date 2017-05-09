@@ -49,4 +49,31 @@ class Testimonial extends DataBase
         return $pages;
 
     }
+
+    public function getOneTestimonial()
+    {
+        $id= $_GET['id']?? $_POST['testimonialId'];
+
+        $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`published`, `t`.`changed`, `added_at`  FROM `testimonials` `t`
+                LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` WHERE `t`.`id` = ?  ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $id, \PDO::PARAM_INT);
+        $stmt ->execute();
+        $testimonial = $stmt->fetch();
+//for radio input published/unpublished
+        if(isset($_POST['published'])) $testimonial->published = $_POST['published'];
+
+        return $testimonial;
+    }
+
+    public function updateTestimonial($testimonial)
+    {
+        $sql = "UPDATE  `testimonials` SET `testimonial`=?, `published`=?, `changed` = '1' WHERE `id` = ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt -> bindValue(1, $_POST['testimonial'], \PDO::PARAM_STR);
+        $stmt -> bindValue(2, $_POST['published'], \PDO::PARAM_INT);
+        $stmt -> bindValue(3, $_POST['testimonialId'], \PDO::PARAM_INT);
+        $stmt -> execute();
+
+    }
 }

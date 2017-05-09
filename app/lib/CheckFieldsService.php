@@ -18,7 +18,7 @@ trait CheckFieldsService {
         $inputs = [];
 
         foreach($fields as $field){
-            $inputs[$field] = htmlspecialchars($_POST[$field], ENT_QUOTES);
+            $inputs[$field] = trim(htmlspecialchars($_POST[$field], ENT_QUOTES));
         }
 
         return $inputs;

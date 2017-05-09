@@ -145,6 +145,10 @@ $noL = "No";
 $editL = "Edit";
 $publishL = "Publish";
 $unpublishL = "Unpublish";
+$editTestimonialL = "Edit Testimonial";
+$testimonialUpdatedL = "Testimonial is updated!";
+$unpublishedL = "Unpublished";
+$notChangedL = "Not changed";
 
 
 //these functionare for translation in controllers and models

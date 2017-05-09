@@ -1,6 +1,6 @@
 
 
-<p><a href='<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr'] ?>/editl?id=<?= (int)$_POST['id'] ?>' class='popUp-menu-item'><?= $editL ?></a></p>
+<p><a href='<?= \Lib\HelperService::currentLang() .'/'.$_POST['processContr'] ?>/edit?id=<?= (int)$_POST['id'] ?>' class='popUp-menu-item'><?= $editL ?></a></p>
 
 
 

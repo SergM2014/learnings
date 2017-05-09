@@ -118,6 +118,7 @@ th{
 .header-h2{
   text-align:center;
   color: #ff6975;
+  margin:10px 0;
 }
 .form-field{
   margin:10px 0;
@@ -303,3 +304,4 @@ th{
 .red-text{
   color:red;
 }
+

@@ -143,6 +143,10 @@ $noL = "Ні";
 $editL = "Редагувати";
 $publishL = "Публікувати";
 $unpublishL = "Не публікувати";
+$editTestimonialL = "Редагувати рекомендацію";
+$testimonialUpdatedL = "Рекомендацію оновленно!";
+$unpublishedL = "Не публікованно";
+$notChangedL = "Не змінено";
 
 
 //these functionare for translation in controllers and models
