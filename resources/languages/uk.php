@@ -269,4 +269,24 @@ function categoryHasSeries()
     return "Видалити неможливо! Катагорія має серії";
 }
 
+function testimonialIsPublished()
+{
+    return "Рекомендацію опупліковано!";
+}
+
+function testimonialIsUnpublished()
+{
+    return "Рекомендацыю знято з публикації!";
+}
+
+function yes()
+{
+    return "Так";
+}
+
+function no()
+{
+    return "Ні";
+}
+
 

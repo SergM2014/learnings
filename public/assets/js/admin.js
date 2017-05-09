@@ -237,6 +237,51 @@ document.body.addEventListener('click', function (e) {
         Modal.createModalWindow('/admin/popUp/drawDeleteCategoryModal')
     }
 
+    if(e.target.id === "popUpAdminPublishTestimonial"){
+
+        let formData = new FormData(document.getElementById('publishTestimonial'));
+
+        postAjax('/admin/testimonial/publish', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+
+                    document.getElementById('popupMenu').remove();
+                  let selector = document.querySelector(`[data-testimonial-id="${j.testimonialId}"]`).querySelector('.publish-status');
+                  selector.classList.remove('red');
+                  selector.classList.add('green');
+                  selector.innerText= j.response;
+
+                    showAlert(j.message)
+                }
+
+
+            })
+    }
+
+    if(e.target.id === "popUpAdminUnpublishTestimonial"){
+
+        let formData = new FormData(document.getElementById('unpublishTestimonial'));
+
+        postAjax('/admin/testimonial/unpublish', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+
+                    document.getElementById('popupMenu').remove();
+                    let selector = document.querySelector(`[data-testimonial-id="${j.testimonialId}"]`).querySelector('.publish-status');
+                    selector.classList.remove('green');
+                    selector.classList.add('red');
+                    selector.innerText= j.response;
+
+                    showAlert(j.message)
+                }
+
+
+            })
+    }
+
+
 
     //close deleteLesson modal window
     if(e.target.id === "closeWindowBtn" || e.target.id === "closeWindowSign"){

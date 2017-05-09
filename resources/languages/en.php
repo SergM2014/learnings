@@ -269,3 +269,23 @@ function categoryHasSeries()
 {
     return "Impposible to delete! The category has series!";
 }
+
+function testimonialIsPublished()
+{
+    return "Testimonial is published!";
+}
+
+function testimonialIsUnpublished()
+{
+    return "Testimonial is unpublished!";
+}
+
+function yes()
+{
+    return "Yes";
+}
+
+function no()
+{
+    return "No";
+}

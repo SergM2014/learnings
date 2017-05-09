@@ -4,6 +4,10 @@ namespace App\Models;
 
 use App\Core\DataBase;
 
+use function \testimonialIsPublished;
+use function \testimonialIsUnpublished;
+use function \yes;
+use function \no;
 
 class Testimonial extends DataBase
 {
@@ -75,5 +79,31 @@ class Testimonial extends DataBase
         $stmt -> bindValue(3, $_POST['testimonialId'], \PDO::PARAM_INT);
         $stmt -> execute();
 
+    }
+
+
+    public function publish()
+    {
+        $sql = "UPDATE `testimonials` SET `published`= '1'  WHERE `id`=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $response= ["message"=> testimonialIsPublished() , "success"=> true, "testimonialId"=> (int)$_POST['id'], "response"=>yes() ];
+
+        return $response;
+    }
+
+
+    public function unpublish()
+    {
+        $sql = "UPDATE `testimonials` SET `published`= '0'  WHERE `id`= ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $response= ["message"=> testimonialIsUnpublished() , "success"=> true, "testimonialId"=> (int)$_POST['id'], "response" =>no() ];
+
+        return $response;
     }
 }

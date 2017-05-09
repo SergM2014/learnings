@@ -63,5 +63,23 @@ class Testimonial  extends AdminController {
     }
 
 
-  }
+    public function publish()
+    {
+        TokenService::check('admin');
+        $response = (new TestimonialModel())->publish();
+        echo json_encode($response);
+        exit();
+    }
+
+    public function unpublish()
+    {
+        TokenService::check('admin');
+        $response = (new TestimonialModel())->unpublish();
+        echo json_encode($response);
+        exit();
+    }
+
+
+
+}
   

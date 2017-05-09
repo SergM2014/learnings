@@ -19,7 +19,7 @@
                 </td>
                 <td><?= $testimonial->testimonial ?></td>
 
-                <td class="<?= $testimonial->published == '1'? 'green': 'red' ?>"><?= $testimonial->published == '1'? $yesL: $noL ?></td>
+                <td class=" publish-status <?= $testimonial->published == '1'? 'green': 'red' ?>"><?= $testimonial->published == '1'? $yesL: $noL ?></td>
                 <td class="<?= $testimonial->changed == '0'? 'green': 'red' ?>"><?= $testimonial->changed == '0'? $noL: $yesL ?></td>
                 <td><?= $testimonial->added_at ?></td>
             </tr>
