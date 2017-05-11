@@ -2,6 +2,10 @@
 
 namespace App\Core;
 
+
+
+
+use Lib\CheckFieldsService;
 /**
  *
  * the class protect against unauthorirized access to the admin part
@@ -10,6 +14,8 @@ namespace App\Core;
  */
 class AdminController  extends BaseController{
 
+
+    use CheckFieldsService;
     /**
      *
      * realisation of protection against the unauthorized access

@@ -5,24 +5,18 @@ namespace App\Controllers\Admin;
 
 
 use App\Core\AdminController;
-
-
-
-
-use Lib\TokenService;
 use App\Models\Lesson as LessonModel;
 use App\Models\AdminModel;
 use App\Models\Serie;
-use Lib\CheckFieldsService;
+use Lib\TokenService;
 use App\Models\CheckForm;
 
 class Lesson  extends AdminController
   {
-    use CheckFieldsService;
+
 
     public function index()
 	{
-
 	    $model= new LessonModel();
         $lessons = $model->getAll('true');
         $pages = $model->countPages('true');

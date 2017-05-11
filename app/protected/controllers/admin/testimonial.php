@@ -6,17 +6,12 @@ namespace App\Controllers\Admin;
 
 use App\Core\AdminController;
 
-
-
-use Lib\TokenService;
 use App\Models\Testimonial as TestimonialModel;
 use App\Models\AdminModel;
-use Lib\CheckFieldsService;
+use Lib\TokenService;
 use App\Models\CheckForm;
 
 class Testimonial  extends AdminController {
-
-    use CheckFieldsService;
 
     public function index()
     {

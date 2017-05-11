@@ -5,19 +5,15 @@ namespace App\Controllers\Admin;
 
 
 use App\Core\AdminController;
-
-
-
-
-use Lib\TokenService;
 use App\Models\Category;
 use App\Models\Serie;
-use Lib\CheckFieldsService;
+use Lib\TokenService;
 use App\Models\CheckForm;
+
 
 class Cluster  extends AdminController
   {
-    use CheckFieldsService;
+
 
     public function index()
 	{
