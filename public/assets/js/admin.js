@@ -1,3 +1,5 @@
+let languageCached;
+let popupMenuSaved;
 Array.prototype.intersect = function(a){
     return this.filter(function(i){ return a.indexOf(i) > -1;});
 };
@@ -23,21 +25,24 @@ class LanguageHelper {
      */
     static getLanguagesSettings() {
 
+        if(languageCached) return languageCached;
+
         return fetch('/index/getLanguageComponents', {
             'method': 'POST',
             'credentials': 'same-origin'
         })
-            .then(response => response.json());
+            .then(response => { languageCached =  response.json(); return languageCached; });
 
 
     }
 }
 
 /**
- * returns ajax request according to current language on site
+ * wraper for ajax request based on fetch
  *
  * @param givenUrl
  * @param formData
+ * @param cache
  * @returns {Promise.<TResult>}
  */
 function postAjax(givenUrl, formData){
@@ -59,6 +64,7 @@ function postAjax(givenUrl, formData){
                     method: 'POST',
                     credentials: 'same-origin',
                     body: formData
+
                 })
         });
 
@@ -90,13 +96,20 @@ class PopUpMenu{
 
 
     drawMenu(x = 100, y = 60){
-        PopUpMenu.deleteMenu();
 
-        this.popUp = document.createElement('div');
-        this.popUp.className = "popup-menu";
-        this.popUp.id = "popupMenu";
+        if(popupMenuSaved && document.getElementById('popupMenu')){
+            this.popUp = document.getElementById('popupMenu');
+            this.popUp.classList.remove('hidden')
+        } else {
 
-        document.body.insertBefore(this.popUp, document.body.firstChild);
+            this.popUp = document.createElement('div');
+            this.popUp.className = "popup-menu";
+            this.popUp.id = "popupMenu";
+
+            document.body.insertBefore(this.popUp, document.body.firstChild);
+        }
+
+
 
         if(this.x+x >this.screenWidth+pageXOffset) this.x= (this.screenWidth+pageXOffset-x);
         if(this.y+y >this.screenHeight+pageYOffset) this.y= (this.screenHeight+pageYOffset-y);
@@ -111,28 +124,26 @@ class PopUpMenu{
     }
 
 
-    /**
-     * create popup Menu with givven parameters
-     *
-     * id-> key data that should be transmitted
-     * popUpContr ->Controller that is responsibele for out put of menu
-     * processContr->controller that is put in outputed menu
-     *
-     * @param id
-     * @param popUpContr
-     * @param processContr
-     */
-
     fillUpMenuContent(id, popUpContr, processContr){
        this.drawMenu();
+
 
         let formData = new FormData;
         formData.append('id', id);
         formData.append('processContr', processContr);
 
         postAjax(popUpContr,formData)
-            .then(response => response.text())
+            .then(response => { popupMenuSaved = true; return response.text(); })
             .then(html =>document.getElementById('popupMenu').innerHTML= html);
+    }
+
+    static hideMenu()
+    {
+        if(document.getElementById('popupMenu')){
+            document.getElementById('popupMenu').classList.add('hidden');
+
+
+        }
     }
 
 
@@ -173,19 +184,19 @@ document.body.addEventListener('click', function (e) {
 
     }
 
-    if(e.target.closest('.testimonial-row')){
+    if(e.target.closest('.testimonial-row')) {
         let testimonialId = e.target.closest('.table__row').dataset.testimonialId;
 
-        new PopUpMenu(e).fillUpMenuContent(testimonialId, '/admin/popUp/testimonial', 'admin/testimonial');
+              new PopUpMenu(e).fillUpMenuContent(testimonialId, '/admin/popUp/testimonial', 'admin/testimonial');
 
-    }
+          }
+
 
 
     if(e.target.classList.contains('admin-section')) {
 
         let serieId = e.target.closest('li').dataset.serieId;
         let categoryId = e.target.closest('[data-category-serie-id]').dataset.categorySerieId;
-//console.log(serieId, categoryId)
 
         if(serieId){
             new PopUpMenu(e).fillUpMenuContent(serieId, '/admin/popUp/serie', 'admin/cluster');
@@ -365,7 +376,8 @@ document.body.addEventListener('click', function (e) {
 
 document.getElementsByClassName('container')[0].addEventListener('click', function (e) {
     if( document.getElementById('popupMenu')){
-     document.getElementById('popupMenu').remove();
+
+      PopUpMenu.hideMenu();
      }
      if(!document.getElementById('alertZone').classList.contains('hidden')){
          document.getElementById('alertZone').classList.add('hidden');
