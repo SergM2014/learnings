@@ -19,7 +19,7 @@ class Images  extends BaseController
 
     public function uploadAvatar()
       {
-          $message = (new ModelImages())->uploadAvatar();
+          $message =  (new ModelImages)->uploadAvatar();
 
           echo json_encode($message);
           exit();

@@ -27,15 +27,15 @@ class Comment  extends BaseController
 
         $cleanedUpInputs = self::escapeInputs('comment', 'captcha');
 
-	    $errors = (new CheckForm())->checkAddCommentForm($cleanedUpInputs);
+	    $errors = CheckForm::checkAddCommentForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
-            $builder = (new DB())->printCaptcha();
+            $builder = DB::printCaptcha();
 
             return ['view' => '/views/common/comments/form.php', 'errors'=>$errors, 'builder'=>$builder, 'ajax' => true];
         }
 
-       (new DBComment())->saveComment($this->stripTags($_POST['comment']));
+        DBComment::saveComment($this->stripTags($_POST['comment']));
 
 
         return  ['view' => '/views/common/comments/addSuccess.php','ajax' => true];
@@ -45,7 +45,7 @@ class Comment  extends BaseController
 
     public function getOneForResponse()
     {
-        $comment = (new DBComment())->getOneComment();
+        $comment = DBComment::getOneComment();
 
         return  ['view' => '/views/common/comments/oneForResponse.php', 'comment'=> $comment, 'ajax' => true];
     }
@@ -59,7 +59,7 @@ class Comment  extends BaseController
 
     public function showForm()
     {
-        $builder = (new DB())->printCaptcha();
+        $builder = DB::printCaptcha();
         return  ['view' => '/views/common/comments/form.php', 'builder' =>$builder, 'ajax' => true];
     }
 

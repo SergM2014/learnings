@@ -13,12 +13,12 @@ class Comment extends DataBase
 
     public function __construct()
     {
-        parent::__construct();
+
         if(@$_GET['id']){
             $id= $_GET['id'];
             $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`parent_id`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
             `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`lesson_id`= ? AND `c`.`published`='1' GROUP BY `c`.`id`";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $id, \PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -32,12 +32,12 @@ class Comment extends DataBase
     }
 
 
-    public function getCommentsOfOneLesson()
+    public static function getCommentsOfOneLesson()
     {
         $id= $_GET['id'];
         $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
           `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`lesson_id`= ? AND `c`.`published`='1'";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -45,10 +45,10 @@ class Comment extends DataBase
         return $result;
     }
 
-    public function saveComment($comment)
+    public static function saveComment($comment)
     {
         $sql = "INSERT INTO `comments` (`comment`, `lesson_id`,`parent_id`, `user_id`) VALUES(?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $comment, \PDO::PARAM_STR);
         $stmt->bindValue(2, $_POST['lessonId'], \PDO::PARAM_INT);
         $stmt->bindValue(3, $_POST['parentId'], \PDO::PARAM_INT);
@@ -58,11 +58,11 @@ class Comment extends DataBase
         return false;
     }
 
-    public function getOneComment()
+    public static function getOneComment()
     {
         $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
           `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`id`= ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_POST['commentId'], \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();

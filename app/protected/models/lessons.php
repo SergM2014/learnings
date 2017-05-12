@@ -151,7 +151,7 @@ class Lesson extends DataBase
         return $result;
     }
 
-    public function getOneLessonforPreview()
+    public static function getOneLessonforPreview()
     {
         $id = $_POST['lessonId'];
         $sql= "SELECT `id`, `title`, `icon`,  `excerpt`  FROM `lessons` WHERE `id`=?";

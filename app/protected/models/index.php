@@ -12,7 +12,7 @@ use Gregwar\Captcha\CaptchaBuilder;
 
 
 
-     public function printCaptcha()
+     public static function printCaptcha()
      {
          $builder = new CaptchaBuilder;
          $builder->build();
@@ -20,16 +20,16 @@ use Gregwar\Captcha\CaptchaBuilder;
          return $builder;
      }
 
-     public function getPlanDescription($language)
+     public static function getPlanDescription($language)
      {
          $sql = "SELECT plan_description_$language FROM background";
-         $stmt = $this->conn->query($sql);
+         $stmt = self::conn()->query($sql);
          $planDescription = $stmt->fetchColumn();
          return $planDescription;
      }
 
 
-     public function getSearchResults()
+     public static function getSearchResults()
      {
          $search = $_POST['searchField'];
 
@@ -38,7 +38,7 @@ use Gregwar\Captcha\CaptchaBuilder;
                 JOIN `series` `s` ON  `l`.`serie_id` = `s`.`id`
                 WHERE MATCH (`l`.`title`) AGAINST (:search IN BOOLEAN  MODE)  OR MATCH(`c`.`title`) AGAINST (:search IN BOOLEAN MODE)
                  OR MATCH (`s`.`title`)  AGAINST (:search IN BOOLEAN MODE) LIMIT 0,7";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(':search',  "$search*", \PDO::PARAM_STR);
 
         $stmt->execute();

@@ -27,12 +27,12 @@ class Index  extends BaseController
        */
     public function index()
 	{
-        $categories = (new Category())->getAll();
-        $randomLessons = (new Lesson())->getRandomItems();
-        $randomTestimonials = (new Testimonial())->getRandomItems();
+        $categories = Category::getAll();
+        $randomLessons = Lesson::getRandomItems();
+        $randomTestimonials = Testimonial::getRandomItems();
 
         $language = HelperService::getCurrentLanguageAbbr();
-        $planDescription = (new DB)->getPlanDescription($language);
+        $planDescription = DB::getPlanDescription($language);
 
       return ['view'=>'views/common/index.php', 'categories'=>$categories, 'randomLessons'=>$randomLessons,
           'randomTestimonials'=> $randomTestimonials, 'planDescription'=>$planDescription];
@@ -41,7 +41,7 @@ class Index  extends BaseController
 
       public function refreshCaptcha()
       {
-          $builder = (new DB)->printCaptcha();
+          $builder = DB::printCaptcha();
           return ['view' => 'views/common/partials/captcha.php', 'builder' => $builder, 'ajax' => true];
       }
 
@@ -64,8 +64,8 @@ class Index  extends BaseController
      */
       public function testimonials()
       {
-          $testimonials = (new Testimonial())->getAll();
-          $builder = (new DB)->printCaptcha();
+          $testimonials = Testimonial::getAll();
+          $builder = DB::printCaptcha();
           return ['view'=>'views/common/testimonials/index.php', 'testimonials'=>$testimonials, 'builder' => $builder,];
       }
 
@@ -76,16 +76,16 @@ class Index  extends BaseController
 
           $cleanedUpInputs = self::escapeInputs('testimonial', 'captcha');
 
-          $errors = (new CheckForm())->checkAddTestimonialForm($cleanedUpInputs);
+          $errors = CheckForm::checkAddTestimonialForm($cleanedUpInputs);
 
           if(!empty($errors) ) {
 
-              $builder = (new DB())->printCaptcha();
+              $builder = DB::printCaptcha();
 
               return ['view' => '/views/common/testimonials/form.php', 'errors'=>$errors,  'ajax' => true , 'builder' => $builder];
           }
 
-          (new Testimonial())->saveTestimonial($this->stripTags($_POST['testimonial']));
+          Testimonial::saveTestimonial($this->stripTags($_POST['testimonial']));
 
 
           return  ['view' => '/views/common/testimonials/addSuccess.php','ajax' => true];
@@ -94,7 +94,7 @@ class Index  extends BaseController
 
       public function search()
       {
-        $searchResults = (new DB())->getSearchResults();
+        $searchResults = DB::getSearchResults();
           return  ['view' => '/views/common/partials/searchResults.php', 'searchResults'=>$searchResults, 'ajax' => true];
 
       }

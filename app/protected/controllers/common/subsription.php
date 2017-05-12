@@ -46,13 +46,13 @@ class Subscription extends BaseController
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password', 'password2', 'email');
 
-        $errors = (new CheckForm())->checkSignUpErrors($cleanedUpInputs);
+        $errors = CheckForm::checkSignUpErrors($cleanedUpInputs);
 
         if(!empty($errors) ){ return $this->signUp($errors); }
 
         if(!isset($_SESSION['storeUser']))  header('Location:/subscription/signUp');
 
-        (new SubscriptionModel())->storeUser($cleanedUpInputs);
+        SubscriptionModel::storeUser($cleanedUpInputs);
 
          HelperService::sendMail($cleanedUpInputs);
 
@@ -88,7 +88,7 @@ class Subscription extends BaseController
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password');
 
-        @extract((new SubscriptionModel())->getSubscribedUser($cleanedUpInputs));
+        @extract(SubscriptionModel::getSubscribedUser($cleanedUpInputs));
 
          if(@$token AND isset($_POST['rememberMe'])) {
              CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscription);
@@ -109,7 +109,7 @@ class Subscription extends BaseController
     {
         TokenService::check('user');
 
-        (new SubscriptionModel())->destroySession();
+        SubscriptionModel::destroySession();
 
         CookieService::destroyUserCookies();
 
@@ -130,7 +130,7 @@ class Subscription extends BaseController
     {
         $this->ifNotSubscribed();
 
-        $profileData = (new SubscriptionModel())->getUserInfo();
+        $profileData =  SubscriptionModel::getUserInfo();
 
         unset($_SESSION['avatar']);
         $_SESSION['updateUser'] = true;
@@ -146,13 +146,13 @@ class Subscription extends BaseController
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password', 'password2', 'email');
 
-        $errors = (new CheckForm())->checkUpdateUserErrors($cleanedUpInputs);
+        $errors =  CheckForm::checkUpdateUserErrors($cleanedUpInputs);
 
         if(!empty($errors) ){ return $this->profile($errors); }
 
         if(!isset($_SESSION['updateUser']))  header('Location:/subscription/profile');
 
-        (new SubscriptionModel())->updateUser($cleanedUpInputs);
+        SubscriptionModel::updateUser($cleanedUpInputs);
 
         HelperService::sendMail($cleanedUpInputs);
 

@@ -17,13 +17,13 @@ class Subscription extends DataBase
      * @param array $input
      * @return string
      */
-    public function storeUser(array $input)
+    public static function storeUser(array $input)
     {
         extract($input);
         $password= password_hash($password, PASSWORD_DEFAULT);
         $token = TokenService::setUserToken($login);
         $sql = "INSERT INTO `users` (`login`, `password`,`email`,  `token`) VALUES (?, ?, ?, ?)";
-        $stmt =$this->conn->prepare($sql);
+        $stmt =self::conn()->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->bindValue(2, $password, \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['email'], \PDO::PARAM_STR);
@@ -31,15 +31,15 @@ class Subscription extends DataBase
 
         if(!$stmt->execute()) return  false;
 
-        $id = $this->conn->lastInsertId();
+        $id = self::conn()->lastInsertId();
         unset ($_SESSION['storeUser']);
 
-        $this->saveInSession($login, $id);
+        self::saveInSession($login, $id);
 
         return $id;
     }
 
-    protected function saveInSession($login, $id, $activeSubscription = null )
+    protected static function saveInSession($login, $id, $activeSubscription = null )
     {
         $_SESSION['user']['login'] = $login;
         $_SESSION['user']['id'] = $id;
@@ -52,23 +52,23 @@ class Subscription extends DataBase
      * @param array $input
      * @return array|void
      */
-    public function getSubscribedUser( array $input)
+    public static function getSubscribedUser( array $input)
     {
         extract($input);
 
         if (@!$login OR @!$password) return false;
 
         $sql = "SELECT `id`,`login`, `password`, `start_date`, `subscription_term`, `token` FROM `users` WHERE `login`=? ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
 
-        $subscription = $this->ifUserSubscriped($user);
+        $subscription = self::ifUserSubscriped($user);
 
         if (password_verify($password, $user->password)) {
 
-            $this->saveInSession($login, $user->id,  @$subscription->activeStatus );
+           self::saveInSession($login, $user->id,  @$subscription->activeStatus );
 
 
             return ['token' => $user->token, 'userId'=>$user->id, 'activeSubscription' => @$subscription->activeStatus ];
@@ -77,7 +77,7 @@ class Subscription extends DataBase
     }
 
 
-    public function destroySession()
+    public static function destroySession()
     {
         unset($_SESSION['user']['login']);
         unset($_SESSION['user']['activeSubscription']);
@@ -91,11 +91,11 @@ class Subscription extends DataBase
      *
      * @return bool|void
      */
-    public function getCookiedUser()
+    public static function getCookiedUser()
     {
         if (!isset($_COOKIE['login']) ) return;
         $sql = "SELECT `login` , `start_date`, `subscription_term` FROM `users` WHERE `login`=? AND `token`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_COOKIE['login'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_COOKIE['userToken'], \PDO::PARAM_STR);
 
@@ -104,7 +104,7 @@ class Subscription extends DataBase
 
         if ($user) {
 
-            $this->saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscription']);
+            self::saveInSession( $_COOKIE['login'], $_COOKIE['userId'], @$_COOKIE['activeSubscription']);
             return true;
         }
         return false;
@@ -115,7 +115,7 @@ class Subscription extends DataBase
      *
      * @param $user
      */
-    private function ifUserSubscriped($user)
+    private static function ifUserSubscriped($user)
     {
         if(!$user->start_date OR !$user->subscription_term)  return false;
 
@@ -143,15 +143,15 @@ class Subscription extends DataBase
     }
 
 
-    public function getUserInfo()
+    public static function getUserInfo()
     {
         $sql = "SELECT `id`, `avatar`, `login`, `email`, `start_date`, `subscription_term` FROM `users` WHERE `login`=? ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_SESSION['user']['login'], \PDO::PARAM_STR);
         $stmt->execute();
         $res = $stmt->fetch();
         //should get end day of subscribtion
-        $subscription = $this->ifUserSubscriped($res);
+        $subscription = self::ifUserSubscriped($res);
 
         $res->finalDate = @$subscription->finalDate;
         $res->activeStatus = @$subscription->activeStatus;
@@ -160,12 +160,12 @@ class Subscription extends DataBase
     }
 
 
-    public function updateUser(array $input)
+    public static function updateUser(array $input)
     {
         extract($input);
 
         $sql = "UPDATE `users` SET `login`= ?, `email`= ?  WHERE `id`= ?";
-        $stmt =$this->conn->prepare($sql);
+        $stmt =self::conn()->prepare($sql);
         $stmt->bindValue(1, $login, \PDO::PARAM_STR);
 
         $stmt->bindValue(2, $_POST['email'], \PDO::PARAM_STR);
@@ -179,7 +179,7 @@ class Subscription extends DataBase
             $password= password_hash($password, PASSWORD_DEFAULT);
 
             $sql = "UPDATE `users` SET `password` = ? ";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $password, \PDO::PARAM_INT);
 
             if(!$stmt->execute()) return  false;
@@ -189,13 +189,13 @@ class Subscription extends DataBase
         if(@$_SESSION['avatar']){
             if($_SESSION['avatar'] == 'delete') $_SESSION['avatar'] = null;
             $sql = "UPDATE `users` SET `avatar` = ? WHERE `id`=?";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $_SESSION['avatar'], \PDO::PARAM_STR);
             $stmt->bindValue(2, $_POST['id'], \PDO::PARAM_INT);
             if( $stmt->execute()) unset($_SESSION['avatar']);
         }
 
-        $this->saveInSession($login);
+        self::saveInSession($login);
 
         unset ($_SESSION['updateUser']);
 
