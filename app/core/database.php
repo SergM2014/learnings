@@ -11,36 +11,36 @@ namespace App\Core;
  */
 class DataBase {
 
-	protected $conn;
 
-	private static $savedConnection;
+    private static $connection;
 
-    public function __construct(){
+    public static function conn()
+    {
 
-        if(is_object(self::$savedConnection)) {$this->conn = self::$savedConnection; return; }
+        if(is_object(self::$connection))  return self::$connection;
 
-     try{
-          self::$savedConnection = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER,
-         PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+        try{
+            self::$connection = new \PDO('mysql:dbname='.NAME_BD.';host='.HOST.'', USER,
+                PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
 
-         self::$savedConnection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+            self::$connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
 
-         self::$savedConnection ->exec("SET time_zone = 'Erope/Kiev'");
+            self::$connection ->exec("SET time_zone = 'Erope/Kiev'");
 
-         if(DEBUG_MODE){
-             //на время разработки
-             self::$savedConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
-         }
+            if(DEBUG_MODE){
+                //на время разработки
+                self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
+            }
 
-         $this->conn = self::$savedConnection;
+            return self::$connection;
 
 
-     }catch(\PDOException $e) {die("Ошибка соединения с базой или хостом:".$e->getMessage());}
+        }catch(\PDOException $e) {die("Ошибка соединения с базой или хостом:".$e->getMessage());}
 
 
     }
 
-    public function getAccidentalItems(int $number, array $items)
+    public static function getAccidentalItems(int $number, array $items)
     {
         $count = count($items);
 

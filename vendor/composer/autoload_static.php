@@ -89,6 +89,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
         'App\\Controllers\\Lesson' => __DIR__ . '/../..' . '/app/protected/controllers/common/lesson.php',
         'App\\Controllers\\Subscription' => __DIR__ . '/../..' . '/app/protected/controllers/common/subsription.php',
         'App\\Core\\AdminController' => __DIR__ . '/../..' . '/app/core/admincontroller.php',
+        'App\\Core\\AdminDataBase' => __DIR__ . '/../..' . '/app/core/admindatabase.php',
         'App\\Core\\Application' => __DIR__ . '/../..' . '/app/core/application.php',
         'App\\Core\\BaseController' => __DIR__ . '/../..' . '/app/core/basecontroller.php',
         'App\\Core\\DataBase' => __DIR__ . '/../..' . '/app/core/database.php',

@@ -17,11 +17,11 @@ class Lesson  extends AdminController
 
     public function index()
 	{
-	    $model= new LessonModel();
-        $lessons = $model->getAll('true');
-        $pages = $model->countPages('true');
-        $tableCounter = (new AdminModel())->getTableCounter();
-        $serieDropDownList = (new Serie())->printSerieDropDownList();
+
+        $lessons = LessonModel::getAll('true');
+        $pages = LessonModel::countPages('true');
+        $tableCounter =  AdminModel::getTableCounter();
+        $serieDropDownList =  Serie::printSerieDropDownList();
 
         return ['view'=>'/views/admin/lesson/index.php', 'lessons'=>$lessons, 'pages'=>$pages, 'counter'=>$tableCounter,
             'serieDropDownList'=>  $serieDropDownList ];
@@ -31,7 +31,7 @@ class Lesson  extends AdminController
 
     public function create($errors = null )
     {
-        $treeMenu = (new Serie())->printOutSerieTreeMenu();
+        $treeMenu = Serie::printOutSerieTreeMenu();
 
         $_SESSION['createLesson'] = true;
 
@@ -47,13 +47,13 @@ class Lesson  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
-        $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
+        $errors =  CheckForm::checkLessonForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
            return  $this->create($errors);
         }
 
-        (new LessonModel())->saveLesson($this->stripTags($_POST['excerpt']));
+       LessonModel::saveLesson($this->stripTags($_POST['excerpt']));
 
         unset($_SESSION['createLesson']);
 
@@ -63,8 +63,8 @@ class Lesson  extends AdminController
 
     public function edit($errors = null )
     {
-        $lesson = (new LessonModel())->getOneLesson();
-        $treeMenu = (new Serie())->printOutSerieTreeMenu();
+        $lesson =  LessonModel::getOneLesson();
+        $treeMenu =  Serie::printOutSerieTreeMenu();
 
         $_SESSION['editLesson'] = true;
 
@@ -80,13 +80,13 @@ class Lesson  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title', 'excerpt');
 
-        $errors = (new CheckForm())->checkLessonForm($cleanedUpInputs);
+        $errors = CheckForm::checkLessonForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
             return $this->edit($errors);
         }
 
-        (new LessonModel())->updateLesson($this->stripTags($_POST['excerpt']));
+        LessonModel::updateLesson($this->stripTags($_POST['excerpt']));
 
         unset ($_SESSION['editLesson']);
 
@@ -96,7 +96,7 @@ class Lesson  extends AdminController
 
     public function show()
     {
-        $lesson = (new LessonModel())->getFullOneLesson();
+        $lesson = LessonModel::getFullOneLesson();
 
         return  ['view' => '/views/admin/lesson/show.php', 'lesson'=> $lesson ];
     }
@@ -105,7 +105,7 @@ class Lesson  extends AdminController
     public function delete()
     {
         TokenService::check('admin');
-        $response = (new LessonModel())->deleteLesson();
+        $response =  LessonModel::deleteLesson();
         echo json_encode($response);
         exit();
     }
@@ -113,14 +113,14 @@ class Lesson  extends AdminController
     public function downloadFile()
     {
 
-        $message = (new LessonModel())->uploadFile();
+        $message =  LessonModel::uploadFile();
         echo json_encode($message);
         exit();
     }
 
     public function deleteFile()
     {
-        $message = (new LessonModel())->deleteFile();
+        $message =  LessonModel::deleteFile();
         echo json_encode($message);
         exit();
     }

@@ -12,10 +12,10 @@ use function smthWentWrong;
 class Serie extends DataBase
 {
 
-    public function getSerieLessons()
+    public static function getSerieLessons()
     {
         $sql = "SELECT `id`, `title`, `icon`, `serie_id`, `category_id`, `file`, `free_status` FROM `lessons` WHERE `serie_id`= ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_GET['id'], \PDO::PARAM_INT);
         $stmt->execute();
 
@@ -24,10 +24,10 @@ class Serie extends DataBase
         return $lessons;
     }
 
-    public function getSerieLessonsAmount()
+    public static function getSerieLessonsAmount()
     {
         $sql = "SELECT COUNT(`id`) FROM `lessons` WHERE `serie_id`= ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_GET['id'], \PDO::PARAM_INT);
         $stmt->execute();
 
@@ -42,32 +42,32 @@ class Serie extends DataBase
      * @param $array
      * @return mixed
      */
-    public function  getCategoryId($array)
+    public static function getCategoryId($array)
     {
         $categoryId = $array[0]->category_id;
         return $categoryId;
     }
 
 
-    public function getAllSeries()
+    public static function getAllSeries()
     {
         $sql= "SELECT GROUP_CONCAT(`s`.`id`) AS `serie_ids`, `c`.`id` AS `category_id`, GROUP_CONCAT(`s`.`title`) AS `serie_titles`, `c`.`title` AS `category_title`  FROM `categories` `c`
                 LEFT JOIN `series` `s` ON `s`.`category_id`= `c`.`id` GROUP BY  `c`.`id` ";
 
 
-        $stmt = $this->conn->query($sql);
+        $stmt = self::conn()->query($sql);
         $series = $stmt->fetchAll();
 
         return $series;
     }
 
-    public function printOutSerieTreeMenu($categoryAndSerieSection = null )
+    public static function printOutSerieTreeMenu($categoryAndSerieSection = null )
     {
         $identifier = $categoryAndSerieSection? 'data-category-serie-id': 'data-category-id';
         $classIdentifier = $categoryAndSerieSection? 'admin-section': '';
 
         $print = '';
-        $categories = $this->getAllSeries();
+        $categories = self::getAllSeries();
         foreach ($categories as $category){
             $print.= "<li $identifier = {$category->category_id}><span class='category-item tree-branch $classIdentifier'>{$category->category_title}</span>";
             $ids = explode(',', $category->serie_ids);
@@ -90,12 +90,12 @@ class Serie extends DataBase
     }
 
 
-    public function printSerieDropDownList()
+    public static function printSerieDropDownList()
     {
         $constraint = @$_GET['category_and_serie'];
 
         $print = '';
-        $categories = $this->getAllSeries();
+        $categories = self::getAllSeries();
         foreach ($categories as $category) {
             $print .= "<option value='{$category->category_title}'";
             $selected = (@ $constraint  == $category->category_title)? 'selected':'';
@@ -119,12 +119,12 @@ class Serie extends DataBase
     }
 
 
-    public function getOneSerie()
+    public static function getOneSerie()
     {
         $id= $_POST['serieId']?? $_GET['id'];
 
         $sql = "SELECT `id`, `category_id`, `title`, `icon`, `upgrading_skill` FROM `series` WHERE `id`=? ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $serie = $stmt->fetch();
@@ -134,14 +134,14 @@ class Serie extends DataBase
 
 
 
-    public function updateSerie($title)
+    public static function updateSerie($title)
     {
         $id = $_POST['serieId'];
 
         $translitedInLatin= LangService::translite_in_Latin($title);
 
         $sql = "UPDATE `series` SET `title` = ?, `eng_translit_title`=?, `icon`= ?, `upgrading_skill` = ?  WHERE `id`= ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $title, \PDO::PARAM_STR);
         $stmt->bindValue(2, $translitedInLatin, \PDO::PARAM_STR);
         $stmt->bindValue(3, $_SESSION['serieIcon'], \PDO::PARAM_STR);
@@ -152,10 +152,10 @@ class Serie extends DataBase
         unset($_SESSION['serieIcon']);
     }
 
-    public function delete()
+    public static function delete()
     {
         $sql = "SELECT COUNT(`id`) FROM `lessons` WHERE `serie_id` = ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
         $stmt->execute();
         $foundedLessons = (int)$stmt->fetchColumn();
@@ -172,7 +172,7 @@ class Serie extends DataBase
 
           if($foundedLessons === 0 ){
               $sql = "DELETE FROM `series` WHERE `id`= ?";
-                $stmt = $this->conn->prepare($sql);
+                $stmt = self::conn()->prepare($sql);
                 $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
                 $stmt->execute();
               $response= ["message"=> serieDeleted() , "success"=> true, "serieId"=> (int)$_POST['id'] ];
@@ -185,14 +185,14 @@ class Serie extends DataBase
     }
 
 
-    public function saveSerie($title)
+    public static function saveSerie($title)
     {
         $id = $_POST['parentId'];
 
         $translitedInLatin= LangService::translite_in_Latin($title);
 
         $sql = "INSERT INTO `series` (`category_id`, `title`, `eng_translit_title`, `icon`, `upgrading_skill`) VALUES(?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1,$id, \PDO::PARAM_INT);
         $stmt->bindValue(2, $title, \PDO::PARAM_STR);
         $stmt->bindValue(3, $translitedInLatin, \PDO::PARAM_STR);

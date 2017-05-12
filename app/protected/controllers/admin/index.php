@@ -26,8 +26,7 @@ class Index  extends BaseController
     public function login()
     {
         TokenService::check('admin');
-        $adminModel = new AdminModel();
-        $adminModel->getAdminUser();
+        AdminModel::getAdminUser();
 
 
         if(!isset($_SESSION['admin'])){

@@ -15,18 +15,16 @@ class Testimonial  extends AdminController {
 
     public function index()
     {
-        $model = new TestimonialModel();
-
-        $testimonials = $model->getAll(true);
-        $pages = $model->countPages('true');
-        $tableCounter = (new AdminModel())->getTableCounter();
+        $testimonials = TestimonialModel::getAll(true);
+        $pages = TestimonialModel:: countPages('true');
+        $tableCounter = AdminModel::getTableCounter();
 
         return ['view'=>'views/admin/testimonial/index.php', 'testimonials' => $testimonials, 'pages' => $pages, 'counter' => $tableCounter ];
     }
 
     public function edit ($errors = null )
     {
-        $testimonial = (new TestimonialModel())->getOneTestimonial();
+        $testimonial = TestimonialModel::getOneTestimonial();
         $_SESSION['editTestimonial'] = true;
 
 
@@ -42,7 +40,7 @@ class Testimonial  extends AdminController {
 
         $cleanedUpInputs = self::escapeInputs('testimonial');
 
-        $errors = (new CheckForm())->checkTestimonialForm($cleanedUpInputs);
+        $errors = CheckForm::checkTestimonialForm($cleanedUpInputs);
 
 
         if(!empty($errors) ) {
@@ -50,7 +48,7 @@ class Testimonial  extends AdminController {
             return $this->edit($errors);
         }
 
-        (new TestimonialModel())->updateTestimonial($this->stripTags($_POST['testimonial']));
+        TestimonialModel::updateTestimonial($this->stripTags($_POST['testimonial']));
 
         unset ($_SESSION['editTestimonial']);
 
@@ -61,7 +59,7 @@ class Testimonial  extends AdminController {
     public function publish()
     {
         TokenService::check('admin');
-        $response = (new TestimonialModel())->publish();
+        $response = TestimonialModel::publish();
         echo json_encode($response);
         exit();
     }
@@ -69,7 +67,7 @@ class Testimonial  extends AdminController {
     public function unpublish()
     {
         TokenService::check('admin');
-        $response = (new TestimonialModel())->unpublish();
+        $response = TestimonialModel::unpublish();
         echo json_encode($response);
         exit();
     }

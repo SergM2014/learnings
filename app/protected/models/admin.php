@@ -12,11 +12,11 @@ class AdminModel extends DataBase
 
 
 
-    public function getAdminUser( )
+    public static function getAdminUser( )
     {
         if (@!$_POST['login'] OR @!$_POST['password']) return;
         $sql = "SELECT `login` , `password`, `upgrading_status`, `token` FROM `admins` WHERE `login`= ? ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $_POST['login'], \PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
@@ -29,7 +29,7 @@ class AdminModel extends DataBase
     }
 
 
-    public function getTableCounter()
+    public static function getTableCounter()
     {
         $p = $_GET['p']?? 1;
         $start = ($p-1)*AMOUNTONPAGEADMIN+1;

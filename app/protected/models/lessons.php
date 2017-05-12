@@ -12,7 +12,7 @@ class Lesson extends DataBase
     use CheckFieldsService;
 
 
-    private function getConsraint()
+    private static function getConsraint()
     {
         if(is_numeric(@$_GET['category_and_serie'])){
 
@@ -27,7 +27,7 @@ class Lesson extends DataBase
 
         } else
         {
-            $string = $this->conn->quote($_GET['category_and_serie']);
+            $string = self::conn()->quote($_GET['category_and_serie']);
             $constraint = " WHERE `cat`.`title` = $string";
 
         }
@@ -36,7 +36,7 @@ class Lesson extends DataBase
 
 
 
-    public function getAll($admin = false, $p = 1)
+    public static function getAll($admin = false, $p = 1)
     {
         switch(@$_GET['order']){
             case 'new_first':
@@ -63,7 +63,7 @@ class Lesson extends DataBase
         }
 
 
-        $constraint = $this->getConsraint();
+        $constraint = self::getConsraint();
 
 
 
@@ -77,7 +77,7 @@ class Lesson extends DataBase
                JOIN `categories` `cat` ON `l`.`category_id`= `cat`.`id`
                LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id`
                $constraint GROUP BY `l`.`id` ORDER BY $order  LIMIT ?, ?  ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $start, \PDO::PARAM_INT);
         $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
         $stmt->execute();
@@ -87,13 +87,13 @@ class Lesson extends DataBase
     }
 
 
-    public function countPages($admin = false)
+    public static function countPages($admin = false)
     {
-        $constraint = $this->getConsraint();
+        $constraint = self::getConsraint();
         $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
         $sql= "SELECT COUNT(`l`.`id`) FROM `lessons` `l` JOIN `categories` `cat` ON `l`.`category_id`= `cat`.`id`
                LEFT JOIN `series` `s` ON `l`.`serie_id` = `s`.`id` $constraint";
-        $stmt = $this->conn->query($sql);
+        $stmt = self::conn()->query($sql);
         $result = $stmt->fetchColumn();
         $pages = ceil($result/$amountOnPage);
 
@@ -101,33 +101,33 @@ class Lesson extends DataBase
     }
 
 
-    public function getRandomItems($number = 12)
+    public static function getRandomItems($number = 12)
     {
-        $items = $this->getAll();
+        $items = self::getAll();
 
-       return $this->getAccidentalItems($number, $items);
+       return self::getAccidentalItems($number, $items);
     }
 
-    public function getRelatedLessons()
+    public static function getRelatedLessons()
     {
         $id = $_GET['id'];
 
         $sql = "SELECT `category_id`, `serie_id` FROM `lessons` WHERE `id`=?";
-        $stmt = $this->conn -> prepare($sql);
+        $stmt = self::conn() -> prepare($sql);
         $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         extract($result);
 
             $sql= "SELECT `id`, `title`, `icon`, `category_id` , `file`, `free_status` FROM `lessons` WHERE `serie_id` =? AND `id`!= ? ORDER BY `id`";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $serie_id, \PDO::PARAM_INT);
             $stmt->bindValue(2, $id, \PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetchAll();
 
         $sql= "SELECT `id`, `title`, `icon`, `category_id` , `file`, `free_status` FROM `lessons` WHERE `category_id` =? AND `id`!= ? ORDER BY `id`";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $category_id, \PDO::PARAM_INT);
         $stmt->bindValue(2, $id, \PDO::PARAM_INT);
         $stmt->execute();
@@ -140,11 +140,11 @@ class Lesson extends DataBase
     }
 
 
-    public function getOneLesson()
+    public static function getOneLesson()
     {
         $id =  $_GET['id']?? $_POST['lessonId'];
         $sql= "SELECT `id`, `title`, `icon`, `category_id`, `serie_id`, `excerpt`, `file`, `free_status` FROM `lessons` WHERE `id`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -155,7 +155,7 @@ class Lesson extends DataBase
     {
         $id = $_POST['lessonId'];
         $sql= "SELECT `id`, `title`, `icon`,  `excerpt`  FROM `lessons` WHERE `id`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -164,10 +164,10 @@ class Lesson extends DataBase
     }
 
 
-    public function uploadFile()
+    public static function uploadFile()
     {
 
-        $error = $this->checkUploadsFileErrors();
+        $error = self::checkUploadsFileErrors();
 
         if($error) return $error;
 
@@ -193,7 +193,7 @@ class Lesson extends DataBase
         return $response;
     }
 
-    protected function checkUploadsFileErrors()
+    protected static function checkUploadsFileErrors()
     {
 
         if(empty($_FILES) OR $_FILES['downloadFile']['size']== 0  OR $_FILES['downloadFile']['size'] > LESSON_SIZE) return $response =["message"=>"<span class='image-upload--failed'>".  tooBigFile()."</span>", "error" => true];
@@ -206,7 +206,7 @@ class Lesson extends DataBase
     }
 
 
-    public function deleteFile ()
+    public static function deleteFile ()
     {
         if (@$_POST['deleteFile'] == true) {
 
@@ -224,14 +224,14 @@ class Lesson extends DataBase
     }
 
 
-    public function saveLesson($excerpt)
+    public static function saveLesson($excerpt)
     {
         $serieId = is_null($_POST['serie'])? null: (int)$_POST['serie'];
 
         if($serieId) {
-            $this->persistWithSerie($excerpt, $serieId);
+            self::persistWithSerie($excerpt, $serieId);
         } else {
-            $this->persistWithoutSerie($excerpt);
+            self::persistWithoutSerie($excerpt);
         }
 
         unset($_SESSION['lessonsIcon']);
@@ -239,13 +239,13 @@ class Lesson extends DataBase
     }
 
 
-    private function persistWithSerie($excerpt, $serieId)
+    private static function persistWithSerie($excerpt, $serieId)
     {
 
         $inputs = self::escapeInputs('title');
 
         $sql = "INSERT INTO `lessons`(`title`, `icon`, `category_id`, `serie_id`, `excerpt`, `file`, `free_status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
@@ -258,12 +258,12 @@ class Lesson extends DataBase
 
     }
 
-    private function persistWithoutSerie($excerpt)
+    private static function persistWithoutSerie($excerpt)
     {
         $inputs = self::escapeInputs('title');
 
         $sql = "INSERT INTO `lessons`(`title`, `icon`, `category_id`,  `excerpt`, `file`, `free_status`) VALUES (?, ?, ?, ?, ?, ? )";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
@@ -274,14 +274,14 @@ class Lesson extends DataBase
     }
 
 
-    public function updateLesson($excerpt)
+    public static function updateLesson($excerpt)
     {
         $serieId = is_null($_POST['serie'])? null: (int)$_POST['serie'];
 
         if($serieId) {
-            $this->updatetWithSerie($excerpt, $serieId);
+            self::updatetWithSerie($excerpt, $serieId);
         } else {
-            $this->updateWithoutSerie($excerpt);
+            self::updateWithoutSerie($excerpt);
         }
 
         unset($_SESSION['lessonsIcon']);
@@ -289,13 +289,13 @@ class Lesson extends DataBase
     }
 
 
-    private function updatetWithSerie($excerpt, $serieId)
+    private static function updatetWithSerie($excerpt, $serieId)
     {
 
         $inputs = self::escapeInputs('title');
 
         $sql = "UPDATE `lessons` SET `title`=?, `icon`=?, `category_id`=?, `serie_id`=?, `excerpt`=?, `file`=?, `free_status`=? WHERE `id`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
@@ -309,13 +309,13 @@ class Lesson extends DataBase
     }
 
 
-    private function updateWithoutSerie($excerpt)
+    private static function updateWithoutSerie($excerpt)
     {
 
         $inputs = self::escapeInputs('title');
 
         $sql = "UPDATE `lessons` SET `title`=?, `icon`=?, `category_id`=?,  `excerpt`=?, `file`=?, `free_status`=? WHERE `id`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $inputs['title'], \PDO::PARAM_STR);
         $stmt->bindValue(2, $_SESSION['lessonsIcon'], \PDO::PARAM_STR);
         $stmt->bindValue(3, $_POST['category'], \PDO::PARAM_INT);
@@ -328,13 +328,13 @@ class Lesson extends DataBase
 
     }
 
-    public function getFullOneLesson()
+    public static function getFullOneLesson()
     {
         $id =  $_GET['id']?? $_POST['lessonId'];
         $sql= "SELECT `l`.`id`, `l`.`title`, `l`.`icon`, `l`.`category_id`, `l`.`serie_id`, `l`.`excerpt`, `l`.`file`,
               `l`.`free_status`, `c`.`title` AS `category_title` FROM `lessons` `l` JOIN `categories` `c` ON 
               `l`.`category_id`= `c`.`id`   WHERE `l`.`id`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt ->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -342,7 +342,7 @@ class Lesson extends DataBase
 
         if($result->serie_id){
             $sql = "SELECT `title` AS `serie_title` FROM `series` WHERE `id`= $result->serie_id";
-            $stmt= $this->conn->query($sql);
+            $stmt= self::conn()->query($sql);
             $stmt->execute();
             $serieTitle = $stmt->fetchColumn();
             $result->serie_title= $serieTitle;
@@ -353,11 +353,11 @@ class Lesson extends DataBase
     }
 
 
-    public function deleteLesson()
+    public static function deleteLesson()
     {
         if(!DEBUG_MODE) {
             $sql = "DELETE FROM `lessons` WHERE `id`=?";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
             $stmt->execute();
         }

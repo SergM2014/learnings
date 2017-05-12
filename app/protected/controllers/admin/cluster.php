@@ -17,14 +17,14 @@ class Cluster  extends AdminController
 
     public function index()
 	{
-        $treeMenu = (new Serie())->printOutSerieTreeMenu(true);
+        $treeMenu = Serie::printOutSerieTreeMenu(true);
 
         return ['view'=>'/views/admin/cluster/index.php', 'treeMenu'=>$treeMenu ];
     }
 
     public function editSerie($errors = null )
     {
-        $serie = (new Serie)->getOneSerie();
+        $serie = Serie::getOneSerie();
 
         $_SESSION['editSerie'] = true;
 
@@ -40,13 +40,13 @@ class Cluster  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title');
 
-        $errors = (new CheckForm())->checkSerieForm($cleanedUpInputs);
+        $errors = CheckForm::checkSerieForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
            return $this->editSerie($errors);
         }
 
-        (new Serie())->updateSerie($cleanedUpInputs['title']);
+        Serie::updateSerie($cleanedUpInputs['title']);
 
         unset ($_SESSION['editSerie']);
 
@@ -57,7 +57,7 @@ class Cluster  extends AdminController
     public function deleteSerie()
     {
         TokenService::check('admin');
-        $response = (new Serie())->delete();
+        $response = Serie::delete();
         echo json_encode($response);
         exit();
     }
@@ -79,13 +79,13 @@ class Cluster  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title');
 
-        $errors = (new CheckForm())->checkSerieForm($cleanedUpInputs);
+        $errors = CheckForm::checkSerieForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
             return $this->createSerie($errors);
         }
 
-        (new Serie())->saveSerie($cleanedUpInputs['title']);
+        Serie::saveSerie($cleanedUpInputs['title']);
 
         unset ($_SESSION['createSerie']);
 
@@ -109,13 +109,13 @@ class Cluster  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title');
 
-        $errors = (new CheckForm())->checkCategoryForm($cleanedUpInputs);
+        $errors = CheckForm::checkCategoryForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
             return $this->createCategory($errors);
         }
 
-        (new Category())->saveCategory($cleanedUpInputs['title']);
+       Category::saveCategory($cleanedUpInputs['title']);
 
         unset ($_SESSION['createCategory']);
 
@@ -126,7 +126,7 @@ class Cluster  extends AdminController
 
     public function editCategory($errors = null )
     {
-        $category = (new Category)->getOneSimplifiedCategory();
+        $category = Category::getOneSimplifiedCategory();
         $_SESSION['editCategory'] = true;
 
         return ['view'=>'/views/admin/cluster/editCategory.php',  'errors' => $errors, 'category' => $category ];
@@ -140,13 +140,13 @@ class Cluster  extends AdminController
 
         $cleanedUpInputs = self::escapeInputs('title');
 
-        $errors = (new CheckForm())->checkCategoryForm($cleanedUpInputs);
+        $errors = CheckForm::checkCategoryForm($cleanedUpInputs);
         if(!empty($errors) ) {
 
             return $this->editCategory($errors);
         }
 
-        (new Category())->updateCategory($cleanedUpInputs['title']);
+        Category::updateCategory($cleanedUpInputs['title']);
 
         unset ($_SESSION['ediCategory']);
 

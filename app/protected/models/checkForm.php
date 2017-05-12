@@ -21,7 +21,7 @@ class CheckForm extends DataBase
     use CheckFieldsService;
 
 
-    protected function checkIfNotEmpty(array $fields, $errors)
+    protected static function checkIfNotEmpty(array $fields, $errors)
     {
 
         foreach ($fields as $key => $field ){
@@ -31,7 +31,7 @@ class CheckForm extends DataBase
         }
     }
 
-    protected function comparePasswordFields($field1, $field2, $errors)
+    protected static function comparePasswordFields($field1, $field2, $errors)
     {
         if($field1 != $field2) {
             $errors->password2 = $errors->password2 ?? notEqualRepeatedPassword();
@@ -39,7 +39,7 @@ class CheckForm extends DataBase
     }
 
 
-    protected function checkFieldsLength(array $fields, $length, $errors)
+    protected static function checkFieldsLength(array $fields, $length, $errors)
     {
         foreach ($fields as $key => $field){
             if($key == 'email') continue;
@@ -47,21 +47,21 @@ class CheckForm extends DataBase
         }
     }
 
-    protected function checkIfEmail($errors)
+    protected static function checkIfEmail($errors)
     {
         if(!filter_var(@$_POST['email'], FILTER_VALIDATE_EMAIL)) { $errors->email = $errors->email ?? wrongEmail();}
 
     }
 
-    protected  function checkCaptcha($inputs, $errors)
+    protected static function checkCaptcha($inputs, $errors)
     {
         if($_SESSION['phrase']!= $inputs['captcha']) { $errors->captcha = $errors->captcha ?? wrongCaptcha(); }
     }
 
-    protected function ifUniqueLogin(array $income, $errors)
+    protected static function ifUniqueLogin(array $income, $errors)
     {
         $sql = "SELECT `id` FROM `users` WHERE `login`=?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::conn()->prepare($sql);
         $stmt->bindValue(1, $income['login']);
         $stmt->execute();
         $id = $stmt->fetchColumn();
@@ -70,56 +70,56 @@ class CheckForm extends DataBase
 
 
 
-    public function checkSignUpErrors($inputs)
+    public static function checkSignUpErrors($inputs)
     {
         $errors = new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
-        $this->ifUniqueLogin($inputs, $errors);
-        $this->comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
-        $this->checkFieldsLength($inputs, 6, $errors);
-        $this->checkIfEmail($errors);
+        self::checkIfNotEmpty($inputs, $errors);
+        self::ifUniqueLogin($inputs, $errors);
+        self::comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
+        self::checkFieldsLength($inputs, 6, $errors);
+        self::checkIfEmail($errors);
 
         return (array)$errors;
    }
 
 
 
-   public function checkUpdateUserErrors($inputs)
+   public static function checkUpdateUserErrors($inputs)
    {
        $errors = new \stdClass();
 
-       $this->checkIfNotEmpty(['login' => $inputs['login'], 'email' => $inputs['email']], $errors);
+       self::checkIfNotEmpty(['login' => $inputs['login'], 'email' => $inputs['email']], $errors);
 
-       $this->comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
+       self::comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
 
        if($inputs['password'] == '') $inputs = [ 'login' => $inputs['login'], 'email' => $inputs['email'] ];
 
-       $this->checkFieldsLength($inputs, 6, $errors);
-       $this->checkIfEmail($errors);
+       self::checkFieldsLength($inputs, 6, $errors);
+       self::checkIfEmail($errors);
 
        return (array)$errors;
    }
 
-   public function checkAddCommentForm($inputs)
+   public static function checkAddCommentForm($inputs)
    {
         $errors =  new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
+       self::checkIfNotEmpty($inputs, $errors);
 
-        $this->checkCaptcha($inputs, $errors);
+       self::checkCaptcha($inputs, $errors);
 
       return (array)$errors;
 
    }
 
-   public function checkAddTestimonialForm($inputs)
+   public static function checkAddTestimonialForm($inputs)
    {
        $errors =  new \stdClass();
 
-       $this->checkIfNotEmpty($inputs, $errors);
+       self::checkIfNotEmpty($inputs, $errors);
 
-       $this->checkCaptcha($inputs, $errors);
+       self::checkCaptcha($inputs, $errors);
 
 
        return (array)$errors;
@@ -127,21 +127,21 @@ class CheckForm extends DataBase
    }
 
 
-    protected function checkCategory($errors)
+    protected static function checkCategory($errors)
     {
         if(!$_POST['category']) { $errors->category = $errors->category ?? noCategoryAndSerie();}
 
     }
 
 
-    protected function checkDownloadedFile($errors)
+    protected static function checkDownloadedFile($errors)
     {
         if (@!$_SESSION['downloadFile']) {
             $errors->downloadFile = $errors->downloadFile ?? noFile();
         }
 
     }
-    protected function checkLessonsIcon($errors)
+    protected static function checkLessonsIcon($errors)
     {
         if (@!$_SESSION['lessonsIcon']) {
             $errors->lessonsIcon = $errors->lessonsIcon ?? noFile();
@@ -150,20 +150,20 @@ class CheckForm extends DataBase
     }
 
 
-    public function checkLessonForm($inputs)
+    public static function checkLessonForm($inputs)
     {
         $errors =  new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
-        $this->checkCategory($errors);
-        $this->checkDownloadedFile($errors);
-        $this->checkLessonsIcon($errors);
+        self::checkIfNotEmpty($inputs, $errors);
+        self::checkCategory($errors);
+        self::checkDownloadedFile($errors);
+        self::checkLessonsIcon($errors);
 
         return (array)$errors;
     }
 
 
-    protected function checkSerieIcon($errors)
+    protected static function checkSerieIcon($errors)
     {
         if (@!$_SESSION['serieIcon'] OR $_SESSION['serieIcon'] == 'delete') {
             $errors->serieIcon = $errors->serieIcon ?? noFile();
@@ -172,32 +172,32 @@ class CheckForm extends DataBase
     }
 
 
-    public function checkSerieForm($inputs)
+    public static function checkSerieForm($inputs)
     {
         $errors =  new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
-        $this->checkSerieIcon($errors);
+        self::checkIfNotEmpty($inputs, $errors);
+        self::checkSerieIcon($errors);
 
         return (array)$errors;
     }
 
 
-    public function checkCategoryForm($inputs)
+    public static function checkCategoryForm($inputs)
     {
         $errors =  new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
+        self::checkIfNotEmpty($inputs, $errors);
 
         return (array)$errors;
     }
 
 
-    public function checkTestimonialForm($inputs)
+    public static function checkTestimonialForm($inputs)
     {
         $errors =  new \stdClass();
 
-        $this->checkIfNotEmpty($inputs, $errors);
+        self::checkIfNotEmpty($inputs, $errors);
 
         return (array)$errors;
     }
