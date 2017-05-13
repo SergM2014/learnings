@@ -97,6 +97,7 @@ class Serie extends DataBase
         $print = '';
         $categories = self::getAllSeries();
         foreach ($categories as $category) {
+
             $print .= "<option value='{$category->category_title}'";
             $selected = (@ $constraint  == $category->category_title)? 'selected':'';
             $print .= " $selected >{$category->category_title}</option>";
@@ -106,6 +107,7 @@ class Serie extends DataBase
 
             if ($ids) {
                 for ($i = 0; $i < $length; $i++) {
+                    if(@!$titles[$i]) break;
                     $print .= "<option value='{$ids[$i]}'";
                     $selected = (@ $constraint  == $ids[$i])? 'selected' : '';
                     $print .= " $selected >--{$titles[$i]}</option>";
