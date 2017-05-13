@@ -90,7 +90,7 @@ class Subscription extends BaseController
 
         @extract(SubscriptionModel::getSubscribedUser($cleanedUpInputs));
 
-         if(@$token AND isset($_POST['rememberMe'])) {
+         if((@$token AND isset($_POST['rememberMe'])) OR @$token) {
              CookieService::addUserCookies($cleanedUpInputs['login'], $userId, $token, $activeSubscription);
 
 

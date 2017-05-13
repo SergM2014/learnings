@@ -19,7 +19,6 @@ return array(
     'App\\Controllers\\Lesson' => $baseDir . '/app/protected/controllers/common/lesson.php',
     'App\\Controllers\\Subscription' => $baseDir . '/app/protected/controllers/common/subsription.php',
     'App\\Core\\AdminController' => $baseDir . '/app/core/admincontroller.php',
-    'App\\Core\\AdminDataBase' => $baseDir . '/app/core/admindatabase.php',
     'App\\Core\\Application' => $baseDir . '/app/core/application.php',
     'App\\Core\\BaseController' => $baseDir . '/app/core/basecontroller.php',
     'App\\Core\\DataBase' => $baseDir . '/app/core/database.php',

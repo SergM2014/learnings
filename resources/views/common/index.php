@@ -53,11 +53,14 @@
 
     <?php endforeach; ?>
 
-    <div id="testimonialsblockFurther" class="testimonials-block__further">
-        <a href="<?= \Lib\HelperService::currentLang() ?>/index/testimonials">
-             <span id="" class="testimonials-block__furher-title"><?= $lookThroughTestimonialsL ?></span>
-        </a>
+    <div class="testimonials-block__further-container">
+        <div id="testimonialsblockFurther" class="testimonials-block__further">
+            <a href="<?= \Lib\HelperService::currentLang() ?>/index/testimonials">
+                <span id="" class="testimonials-block__furher-title"><?= $lookThroughTestimonialsL ?></span>
+            </a>
+        </div>
     </div>
+
 
 </section>
 

@@ -271,12 +271,19 @@ html, body {
     max-height:100px;
     margin-right:10px;
 }
+.testimonials-block__further-container{
+    width:100%;
+    margin-top:20px;
+}
   .testimonials-block__further{
       background-color: #c58383;
       margin-top: 20px;
       color: #2c50be;
       padding: 5px;
-      border-radius: 5px
+      border-radius: 5px;
+      margin: 0 auto;
+      width: 300px;
+      text-align: center;
   }
   .lessons-block__item-icon{
       width:100%;
