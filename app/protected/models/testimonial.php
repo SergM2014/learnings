@@ -12,12 +12,42 @@ use function \no;
 class Testimonial extends DataBase
 {
 
+    protected static function getOrder()
+    {
+        $order = '';
+
+        switch(@$_GET['order']){
+            case 'new_first':
+                    $order = ' ORDER BY `t`.`added_at` DESC ';
+                break;
+
+            case 'old_first':
+                $order = ' ORDER BY `t`.`added_at` ASC ';
+                break;
+
+            case 'AZ':
+                $order = ' ORDER BY `u`.`login` DESC ';
+                break;
+
+            case 'ZA':
+                $order = ' ORDER BY `u`.`login` ASC ';
+                break;
+
+            default :
+                $order = ' ORDER BY `t`.`added_at` DESC ';
+        }
+
+        return $order;
+    }
+
     public static function getAll($admin= false)
     {
+        $order = self::getOrder();
+
         if($admin) {$constraint = ''; } else {$constraint = " WHERE `t`.`published`= '1' "; }
 
         $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`published`, `t`.`changed`, `added_at`  FROM `testimonials` `t`
-                LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` $constraint ";
+                LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` $constraint $order ";
         $stmt = self::conn()->query($sql);
         $result = $stmt->fetchAll();
 

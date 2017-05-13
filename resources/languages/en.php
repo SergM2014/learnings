@@ -149,6 +149,8 @@ $editTestimonialL = "Edit Testimonial";
 $testimonialUpdatedL = "Testimonial is updated!";
 $unpublishedL = "Unpublished";
 $notChangedL = "Not changed";
+$userAZL = "user A-Z";
+$userZAL = "user Z-A";
 
 
 //these functionare for translation in controllers and models

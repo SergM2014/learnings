@@ -147,6 +147,8 @@ $editTestimonialL = "Редагувати рекомендацію";
 $testimonialUpdatedL = "Рекомендацію оновленно!";
 $unpublishedL = "Не публікованно";
 $notChangedL = "Не змінено";
+$userAZL = "користувач по алфавіту";
+$userZAL = "користувач проти алфавиту";
 
 
 //these functionare for translation in controllers and models

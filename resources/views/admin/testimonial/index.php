@@ -1,4 +1,26 @@
 <h2 class="header-h2"><?= $testimonialsL ?></h2>
+
+
+<form method="get" action="<?= \Lib\HelperService::currentLang() ?>/admin/testimonial">
+
+    <label for="orderList"><?= $orderByL ?></label>
+    <select name="order" id="orderList">
+
+        <option value="new_first" <?= @$_GET['order' ]== 'new_first' ? 'selected': '' ?> ><?= $newFirstL ?></option>
+        <option value="old_first" <?= @$_GET['order'] == 'old_first' ? 'selected': '' ?> ><?= $oldFirstL ?></option>
+        <option value="AZ" <?= @$_GET['order'] == 'AZ' ? 'selected': '' ?>><?= $userAZL ?></option>
+        <option value="ZA" <?= @$_GET['order']=='ZA' ? 'selected': '' ?> ><?= $userZAL ?></option>
+
+    </select>
+
+
+
+    <button type="submit">ok</button>
+
+</form>
+
+
+
 <div class="table-container">
 
     <table class="table">
