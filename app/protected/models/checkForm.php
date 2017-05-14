@@ -202,6 +202,15 @@ class CheckForm extends DataBase
         return (array)$errors;
     }
 
+    public static function checkCommentForm($inputs)
+    {
+        $errors =  new \stdClass();
+
+        self::checkIfNotEmpty($inputs, $errors);
+
+        return (array)$errors;
+    }
+
 
 
 

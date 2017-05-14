@@ -77,6 +77,7 @@ class ComposerStaticInit14fc953014b49481d3c9d0477a55e3f8
 
     public static $classMap = array (
         'App\\Controllers\\Admin\\Cluster' => __DIR__ . '/../..' . '/app/protected/controllers/admin/cluster.php',
+        'App\\Controllers\\Admin\\Comment' => __DIR__ . '/../..' . '/app/protected/controllers/admin/comment.php',
         'App\\Controllers\\Admin\\Index' => __DIR__ . '/../..' . '/app/protected/controllers/admin/index.php',
         'App\\Controllers\\Admin\\Lesson' => __DIR__ . '/../..' . '/app/protected/controllers/admin/lesson.php',
         'App\\Controllers\\Admin\\PopUp' => __DIR__ . '/../..' . '/app/protected/controllers/admin/popUp.php',

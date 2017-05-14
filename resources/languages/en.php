@@ -151,6 +151,13 @@ $unpublishedL = "Unpublished";
 $notChangedL = "Not changed";
 $userAZL = "user A-Z";
 $userZAL = "user Z-A";
+$mostCommentedL = "Most commented";
+$responsesL = "Responses";
+$moreResponsesFirstL = "More responses first";
+$lessResponsesFirstL = "Less responses less";
+$updateCommentL = "Update Comment";
+$commentL = "Comment";
+$commentUpdatedL = "Comment is updated";
 
 
 //these functionare for translation in controllers and models
@@ -290,4 +297,14 @@ function yes()
 function no()
 {
     return "No";
+}
+
+function commentIsPublished()
+{
+    return "Comment is published!";
+}
+
+function commentIsUnpublished()
+{
+    return "Comment is unpublished!";
 }

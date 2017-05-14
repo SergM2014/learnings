@@ -177,6 +177,7 @@ document.getElementById('closeAlert').addEventListener('click', function(){
 document.body.addEventListener('click', function (e) {
 
 
+
     if(e.target.closest('.lesson-row')){
         let lessonId = e.target.closest('.table__row').dataset.lessonId;
 
@@ -190,6 +191,16 @@ document.body.addEventListener('click', function (e) {
               new PopUpMenu(e).fillUpMenuContent(testimonialId, '/admin/popUp/testimonial', 'admin/testimonial');
 
           }
+
+    if(e.target.closest('.comment-row')) {
+        let commentId = e.target.closest('.table__row').dataset.commentId;
+
+        new PopUpMenu(e).fillUpMenuContent(commentId, '/admin/popUp/comment', 'admin/comment');
+
+    }
+
+
+
 
 
 
@@ -281,6 +292,52 @@ document.body.addEventListener('click', function (e) {
 
                     document.getElementById('popupMenu').remove();
                     let selector = document.querySelector(`[data-testimonial-id="${j.testimonialId}"]`).querySelector('.publish-status');
+                    selector.classList.remove('green');
+                    selector.classList.add('red');
+                    selector.innerText= j.response;
+
+                    showAlert(j.message)
+                }
+
+
+            })
+    }
+
+
+    if(e.target.id === "popUpAdminPublishComment"){
+
+        let formData = new FormData(document.getElementById('publishComment'));
+
+        postAjax('/admin/comment/publish', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+
+                    document.getElementById('popupMenu').remove();
+                    let selector = document.querySelector(`[data-comment-id="${j.commentId}"]`).querySelector('.publish-status');
+                    selector.classList.remove('red');
+                    selector.classList.add('green');
+                    selector.innerText= j.response;
+
+                    showAlert(j.message)
+                }
+
+
+            })
+    }
+
+
+    if(e.target.id === "popUpAdminUnpublishComment"){
+
+        let formData = new FormData(document.getElementById('unpublishComment'));
+
+        postAjax('/admin/comment/unpublish', formData)
+            .then(response => response.json() )
+            .then(j => {
+                if(j.success) {
+
+                    document.getElementById('popupMenu').remove();
+                    let selector = document.querySelector(`[data-comment-id="${j.commentId}"]`).querySelector('.publish-status');
                     selector.classList.remove('green');
                     selector.classList.add('red');
                     selector.innerText= j.response;

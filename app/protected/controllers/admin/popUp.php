@@ -53,4 +53,9 @@ class PopUp  extends BaseController
         return ['view' => 'views/admin/popUp/showTestimonialMenu.php', 'ajax' => true ];
     }
 
+    public function comment()
+    {
+        return ['view' => 'views/admin/popUp/showCommentMenu.php', 'ajax' => true ];
+    }
+
 }

@@ -46,7 +46,7 @@ class Testimonial extends DataBase
 
         if($admin) {$constraint = ''; } else {$constraint = " WHERE `t`.`published`= '1' "; }
 
-        $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`published`, `t`.`changed`, `added_at`  FROM `testimonials` `t`
+        $sql= "SELECT `t`.`id`, `u`.`login`, `u`.`avatar`, `t`.`testimonial`, `t`.`published`, `t`.`changed`, `t`.`added_at`  FROM `testimonials` `t`
                 LEFT JOIN `users` `u` ON `t`.`user_id`= `u`.`id` $constraint $order ";
         $stmt = self::conn()->query($sql);
         $result = $stmt->fetchAll();

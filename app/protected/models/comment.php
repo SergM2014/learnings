@@ -6,6 +6,10 @@ namespace App\Models;
 
 use App\Core\DataBase;
 use function \responsegivvenComment;
+use function \commentIsPublished;
+use function \commentIsUnpublished;
+use function \yes;
+use function \no;
 
 class Comment extends DataBase
 {
@@ -60,10 +64,12 @@ class Comment extends DataBase
 
     public static function getOneComment()
     {
+        $id= $_POST['commentId']?? @$_GET['id'];
+
         $sql= "SELECT `c`.`id`, `c`.`comment`, `c`.`user_id`, `c`.`added_at`, `u`.`avatar`, `u`.`login` FROM 
           `comments` `c` JOIN `users` `u` ON `u`.`id` = `c`.`user_id` WHERE `c`.`id`= ?";
         $stmt = self::conn()->prepare($sql);
-        $stmt->bindValue(1, $_POST['commentId'], \PDO::PARAM_INT);
+        $stmt->bindValue(1, $id, \PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
         return $result;
@@ -115,6 +121,102 @@ class Comment extends DataBase
             }
         }
         return $print;
+    }
+
+
+    public static function getAll($admin = null, $p=1 )
+    {
+        switch(@$_GET['order']) {
+            case 'new_first':
+                $order = ' `parent_c`.`added_at` DESC ';
+                break;
+            case 'old_first':
+                $order = ' `parent_c`.`added_at` ASC ';
+                break;
+            case 'AZ':
+                $order = ' `u`.`login` DESC ';
+                break;
+            case 'ZA':
+                $order = ' `u`.`login` DESC ';
+                break;
+            case 'more_responses':
+                $order = ' `most_commented` DESC ';
+                break;
+            case 'less_responses':
+                $order = ' `most_commented` ASC ';
+                break;
+
+            default:
+                $order = ' `parent_c`.`added_at` DESC ';
+        }
+
+
+        $amountOnPage= @$admin? AMOUNTONPAGEADMIN: AMOUNTONPAGE;
+        $page = $_GET['p']?? $p;
+        $start = ($page-1)*$amountOnPage;
+
+        $sql= "SELECT `parent_c`.`id`, `u`.`login`, `u`.`avatar`, COUNT(`c`.`id`) AS `most_commented`, `parent_c`.`comment`, 
+                `parent_c`.`published`, `parent_c`.`changed`, `parent_c`.`added_at`, `l`.`title`  FROM `comments` `parent_c`
+                LEFT JOIN `users` `u` ON `parent_c`.`user_id`= `u`.`id` LEFT JOIN `lessons` `l` ON `l`.`id` = 
+                `parent_c`.`lesson_id` LEFT JOIN `comments` `c` ON `c`.`parent_id`= `parent_c`.`id`
+                 GROUP BY `parent_c`.`id` ORDER BY $order LIMIT ?, ? ";
+
+        $stmt = self::conn()->prepare($sql);
+        $stmt->bindValue(1, $start, \PDO::PARAM_INT);
+        $stmt->bindValue(2, $amountOnPage, \PDO::PARAM_INT);
+        $stmt->execute();
+        $comments = $stmt->fetchAll();
+
+        return $comments;
+
+    }
+
+    public static function countPages($admin = false)
+    {
+        $amountOnPage = @$admin ? AMOUNTONPAGEADMIN : AMOUNTONPAGE;
+        $sql = "SELECT COUNT(`id`) FROM `comments`";
+        $stmt = self::conn()->query($sql);
+        $result = $stmt->fetchColumn();
+        $pages = ceil($result / $amountOnPage);
+
+        return $pages;
+    }
+
+    public static function updateComment($comment)
+    {
+        $sql = "UPDATE `comments` SET `comment`= ? , `changed`='1' WHERE `id`= ? ";
+
+        $stmt = self::conn()->prepare($sql);
+        $stmt->bindValue(1, $comment, \PDO::PARAM_STR );
+        $stmt->bindValue(2, $_POST['commentId'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+    }
+
+
+    public static function publish()
+    {
+        $sql = "UPDATE `comments` SET `published`= '1'  WHERE `id`=?";
+        $stmt = self::conn()->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $response= ["message"=> commentIsPublished() , "success"=> true, "commentId"=> (int)$_POST['id'], "response"=>yes() ];
+
+        return $response;
+    }
+
+
+    public static function unpublish()
+    {
+        $sql = "UPDATE `comments` SET `published`= '0'  WHERE `id`= ?";
+        $stmt = self::conn()->prepare($sql);
+        $stmt->bindValue(1, $_POST['id'], \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $response= ["message"=> commentIsUnpublished() , "success"=> true, "commentId"=> (int)$_POST['id'], "response" =>no() ];
+
+        return $response;
     }
 
 

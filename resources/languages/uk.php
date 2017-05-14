@@ -149,6 +149,13 @@ $unpublishedL = "Не публікованно";
 $notChangedL = "Не змінено";
 $userAZL = "користувач по алфавіту";
 $userZAL = "користувач проти алфавиту";
+$mostCommentedL = "Найбільш коментовані";
+$responsesL = "Відгуки";
+$moreResponsesFirstL = "Найбільше відгуків спочатку";
+$lessResponsesFirstL = "Менше відгуків спочатку";
+$updateCommentL = "Оновити коментар";
+$commentL = "Коментар";
+$commentUpdatedL = "Коментар оновлено!";
 
 
 //these functionare for translation in controllers and models
@@ -291,4 +298,13 @@ function no()
     return "Ні";
 }
 
+function commentIsPublished()
+{
+    return "Коментар опубліковано!";
+}
 
+function commentIsUnpublished()
+{
+    return "Комментар знято з публікації!";
+
+}
