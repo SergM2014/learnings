@@ -312,7 +312,6 @@ document.body.addEventListener('click', function (e) {
             .then(response => response.json() )
             .then(j => {
                 if(j.success) {
-
                     document.getElementById('popupMenu').remove();
                     let selector = document.querySelector(`[data-comment-id="${j.commentId}"]`).querySelector('.publish-status');
                     selector.classList.remove('red');
@@ -321,8 +320,6 @@ document.body.addEventListener('click', function (e) {
 
                     showAlert(j.message)
                 }
-
-
             })
     }
 

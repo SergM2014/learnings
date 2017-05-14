@@ -45,7 +45,10 @@
 
 <section id="testimonials-block" class="testimonials-block">
 
-    <h3><?= $testimonialsL ?></h3>
+    <div class="testimonial-header">
+        <h3><?= $testimonialsL ?></h3>
+    </div>
+
 
     <?php foreach ($randomTestimonials as $testimonial): ?>
 
