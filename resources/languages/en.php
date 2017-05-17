@@ -158,6 +158,11 @@ $lessResponsesFirstL = "Less responses less";
 $updateCommentL = "Update Comment";
 $commentL = "Comment";
 $commentUpdatedL = "Comment is updated";
+$subscriptionPlanL = "Subscription Plan";
+$subscribtionPlanDescriptionL = "Description of subscription Plan";
+$subscriptionUpdatedL = "Description of subsription plan is updated!";
+$ukrainianL = "Ukrainian";
+$englishL = "English";
 
 
 //these functionare for translation in controllers and models

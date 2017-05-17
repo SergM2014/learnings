@@ -156,6 +156,11 @@ $lessResponsesFirstL = "Менше відгуків спочатку";
 $updateCommentL = "Оновити коментар";
 $commentL = "Коментар";
 $commentUpdatedL = "Коментар оновлено!";
+$subscriptionPlanL = "План підписки";
+$subscribtionPlanDescriptionL = "Опис плану підписки";
+$subscriptionUpdatedL = "Опис плану підписки оновленно!";
+$ukrainianL = "Українська";
+$englishL = "Англійська";
 
 
 //these functionare for translation in controllers and models

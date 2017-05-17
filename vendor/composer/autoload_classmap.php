@@ -11,6 +11,7 @@ return array(
     'App\\Controllers\\Admin\\Index' => $baseDir . '/app/protected/controllers/admin/index.php',
     'App\\Controllers\\Admin\\Lesson' => $baseDir . '/app/protected/controllers/admin/lesson.php',
     'App\\Controllers\\Admin\\PopUp' => $baseDir . '/app/protected/controllers/admin/popUp.php',
+    'App\\Controllers\\Admin\\Subscription' => $baseDir . '/app/protected/controllers/admin/subsription.php',
     'App\\Controllers\\Admin\\Testimonial' => $baseDir . '/app/protected/controllers/admin/testimonial.php',
     'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/common/category.php',
     'App\\Controllers\\Comment' => $baseDir . '/app/protected/controllers/common/comment.php',

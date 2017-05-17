@@ -205,4 +205,24 @@ class Subscription extends DataBase
     }
 
 
+    public static function getSubscriptionInfo()
+    {
+        $sql = "SELECT `plan_description_uk`, `plan_description_en` FROM `background`";
+        $stmt = self::conn()->query($sql);
+        $planDescription = $stmt->fetch();
+        return $planDescription;
+    }
+
+    public static function updateSubscriptionPlan($uk, $en)
+    {
+        $sql = "UPDATE  `background` SET `plan_description_uk`= ?, `plan_description_en`= ? ";
+        $stmt = self::conn()->prepare($sql);
+        $stmt -> bindValue(1, $uk, \PDO::PARAM_STR);
+        $stmt -> bindValue(2, $en, \PDO::PARAM_STR);
+
+        $stmt -> execute();
+
+    }
+
+
 }
