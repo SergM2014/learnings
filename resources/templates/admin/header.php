@@ -54,7 +54,7 @@
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/testimonial" class="main-header__menu-item-link"><?= $testimonialsL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/comment" class="main-header__menu-item-link"><?= $commentsL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/subscription" class="main-header__menu-item-link"><?= $subscriptionPlanL ?></a></li>
-
+                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/user" class="main-header__menu-item-link"><?= $usersL ?></a></li>
                         <div class="main-header__right-side">
 
                              <li class="main-header__admin">

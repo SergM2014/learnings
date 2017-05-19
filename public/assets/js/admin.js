@@ -199,6 +199,13 @@ document.body.addEventListener('click', function (e) {
 
     }
 
+    if(e.target.classList.contains('admin-item')) {
+        let userId = e.target.dataset.userId;
+//alert(userId)
+       new PopUpMenu(e).fillUpMenuContent(userId, '/admin/popUp/user', 'admin/user');
+
+    }
+
 
 
 

@@ -13,6 +13,7 @@ return array(
     'App\\Controllers\\Admin\\PopUp' => $baseDir . '/app/protected/controllers/admin/popUp.php',
     'App\\Controllers\\Admin\\Subscription' => $baseDir . '/app/protected/controllers/admin/subsription.php',
     'App\\Controllers\\Admin\\Testimonial' => $baseDir . '/app/protected/controllers/admin/testimonial.php',
+    'App\\Controllers\\Admin\\User' => $baseDir . '/app/protected/controllers/admin/user.php',
     'App\\Controllers\\Category' => $baseDir . '/app/protected/controllers/common/category.php',
     'App\\Controllers\\Comment' => $baseDir . '/app/protected/controllers/common/comment.php',
     'App\\Controllers\\Error_404' => $baseDir . '/app/protected/controllers/common/404.php',

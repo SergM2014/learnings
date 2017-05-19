@@ -195,11 +195,11 @@ class Subscription extends DataBase
             if( $stmt->execute()) unset($_SESSION['avatar']);
         }
 
-        self::saveInSession($login);
+        self::saveInSession($login, $_POST['id']);
 
         unset ($_SESSION['updateUser']);
 
-        //$this->saveInSession($login);
+
 
         //return $id;
     }

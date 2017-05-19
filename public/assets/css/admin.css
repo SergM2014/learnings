@@ -304,4 +304,40 @@ th{
 .red-text{
   color:red;
 }
+.admin-list{
+  list-style-type: none;
+}
+.admin-item{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 200px;
+  margin: 5px auto;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+.superadmin{
+  background-color: #aa1111;
+}
+.admin{
+  background-color: #2c50be;
+}
+.user{
+  background-color: #6bff4f;
+}
 
+.profile-header__h1{
+  color: #88251e;
+  margin-bottom:20px;
+}
+.image-download__delete-sign{
+  position:absolute;
+  top:0;
+  right:0;
+  cursor:pointer;
+}
+.profile-block{
+  width: 360px;
+  margin: 30px auto;
+}

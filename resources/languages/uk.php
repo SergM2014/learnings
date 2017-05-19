@@ -161,6 +161,9 @@ $subscribtionPlanDescriptionL = "Опис плану підписки";
 $subscriptionUpdatedL = "Опис плану підписки оновленно!";
 $ukrainianL = "Українська";
 $englishL = "Англійська";
+$usersL = "Користувачі";
+$changeRoleL = "Змінити роль";
+$userUpdatedL = "Користувача оновленно!";
 
 
 //these functionare for translation in controllers and models

@@ -163,6 +163,9 @@ $subscribtionPlanDescriptionL = "Description of subscription Plan";
 $subscriptionUpdatedL = "Description of subsription plan is updated!";
 $ukrainianL = "Ukrainian";
 $englishL = "English";
+$usersL = "Users";
+$changeRoleL = "Change role";
+$userUpdatedL = "User is updated!";
 
 
 //these functionare for translation in controllers and models

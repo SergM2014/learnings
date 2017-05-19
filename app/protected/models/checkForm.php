@@ -31,12 +31,7 @@ class CheckForm extends DataBase
         }
     }
 
-    protected static function comparePasswordFields($field1, $field2, $errors)
-    {
-        if($field1 != $field2) {
-            $errors->password2 = $errors->password2 ?? notEqualRepeatedPassword();
-        }
-    }
+
 
 
     protected static function checkFieldsLength(array $fields, $length, $errors)
@@ -84,6 +79,13 @@ class CheckForm extends DataBase
    }
 
 
+    protected static function comparePasswordFields($field1, $field2, $errors)
+    {
+        if($field1 != $field2) {
+            $errors->password2 = $errors->password2 ?? notEqualRepeatedPassword();
+        }
+    }
+
 
    public static function checkUpdateUserErrors($inputs)
    {
@@ -91,9 +93,9 @@ class CheckForm extends DataBase
 
        self::checkIfNotEmpty(['login' => $inputs['login'], 'email' => $inputs['email']], $errors);
 
-       self::comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
+       @self::comparePasswordFields($inputs['password'], $inputs['password2'], $errors);
 
-       if($inputs['password'] == '') $inputs = [ 'login' => $inputs['login'], 'email' => $inputs['email'] ];
+       if(@$inputs['password'] == '') $inputs = [ 'login' => $inputs['login'], 'email' => $inputs['email'] ];
 
        self::checkFieldsLength($inputs, 6, $errors);
        self::checkIfEmail($errors);
@@ -216,6 +218,16 @@ class CheckForm extends DataBase
         $errors =  new \stdClass();
 
         self::checkIfNotEmpty($inputs, $errors);
+
+        return (array)$errors;
+    }
+
+    public static function checkUpdateFormUser($inputs)
+    {
+        $errors =  new \stdClass();
+
+        self::checkIfNotEmpty($inputs, $errors);
+        self::checkIfEmail($errors);
 
         return (array)$errors;
     }
