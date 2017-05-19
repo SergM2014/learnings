@@ -64,4 +64,9 @@ class PopUp  extends BaseController
         return ['view' => 'views/admin/popUp/showUserMenu.php', 'ajax' => true ];
     }
 
+    public function drawDeleteUserModal()
+    {
+        return ['view'=> '/views/admin/modalWindow/deleteUser.php', 'ajax'=> true ];
+    }
+
 }

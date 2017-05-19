@@ -51,6 +51,14 @@ class User  extends AdminController {
         return  ['view' => '/views/admin/user/updateSuccess.php'];
     }
 
+    public function delete()
+    {
+        TokenService::check('admin');
+        $response = AdminModel::delete();
+        echo json_encode($response);
+        exit();
+    }
+
 
 
 

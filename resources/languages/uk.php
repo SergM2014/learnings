@@ -164,6 +164,7 @@ $englishL = "Англійська";
 $usersL = "Користувачі";
 $changeRoleL = "Змінити роль";
 $userUpdatedL = "Користувача оновленно!";
+$shureDeleteUserL = "Ви впевнені що хочите видалити користувача?";
 
 
 //these functionare for translation in controllers and models
@@ -315,4 +316,8 @@ function commentIsUnpublished()
 {
     return "Комментар знято з публікації!";
 
+}
+function userDeleted()
+{
+    return "користувача видаленно!";
 }

@@ -353,6 +353,11 @@ document.body.addEventListener('click', function (e) {
             })
     }
 
+    if(e.target.id === "popUpAdminDeleteUser"){
+
+        Modal.createModalWindow('/admin/popUp/drawDeleteUserModal')
+    }
+
 
 
     //close deleteLesson modal window
@@ -430,9 +435,34 @@ document.body.addEventListener('click', function (e) {
     }
 
 
+    if(e.target.id === "confirmDeleteUserBtn") {
 
 
-});
+        let formData = new FormData(document.getElementById('deleteUser'));
+
+        postAjax('/admin/user/delete', formData)
+            .then(response => response.json())
+            .then(j => {
+                if (j.success) {
+                    document.getElementById('modalBackground').remove();
+                    document.getElementById('popupMenu').remove();
+                    document.querySelector(`[data-user-id="${j.userId}"]`).remove();
+
+                    showAlert(j.message)
+                }
+
+                if (j.fail) {
+                    //here we print if something went wrong
+                    document.getElementById('modalWindowText').classList.remove('hidden');
+                    document.getElementById('modalWindowText').innerText = j.message;
+                }
+            })
+
+
+       }
+
+
+    })
 
 
 document.getElementsByClassName('container')[0].addEventListener('click', function (e) {

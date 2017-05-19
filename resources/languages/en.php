@@ -166,6 +166,7 @@ $englishL = "English";
 $usersL = "Users";
 $changeRoleL = "Change role";
 $userUpdatedL = "User is updated!";
+$shureDeleteUserL ="Are You shure to delete User?";
 
 
 //these functionare for translation in controllers and models
@@ -315,4 +316,9 @@ function commentIsPublished()
 function commentIsUnpublished()
 {
     return "Comment is unpublished!";
+}
+
+function userDeleted()
+{
+    return "User is deleted!";
 }
