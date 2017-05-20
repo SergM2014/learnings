@@ -1,3 +1,6 @@
+<a href="<?= \Lib\HelperService::currentLang() ?>/"><?= $backToSiteL ?></a>
+
+
 
     <fieldset class="subscribtion-form">
         <h1 class="subscribtion-form__titel"><?= $registerL ?></h1>
