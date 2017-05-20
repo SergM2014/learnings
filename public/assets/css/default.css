@@ -204,6 +204,7 @@ html, body {
       padding: 5px;
       border-radius: 5px;
       text-align:center;
+      margin-top:5px;
   }
 
   .lessons-block{
@@ -391,10 +392,12 @@ html, body {
 }
 
 .related-lessons__item{
-    height: 80px;
+    height: 110px;
     border-bottom: 1px solid black;
     padding: 10px;
-    position:relative;
+    position: relative;
+    margin-top: 15px;
+    background-color: #9cda6f;
 }
 .related-lessons__item:last-of-type{
     border-bottom:none;
@@ -797,6 +800,7 @@ html, body {
     }
     .under-video__container{
         display:table;
+        width:100%;
     }
     .lesson-comments{
 
@@ -811,6 +815,18 @@ html, body {
     .modal-body{
         padding:5px;
         width:100%;
+    }
+    .add-comment__block{
+        padding:0;
+        border-top:2px solid red;
+    }
+    .related-lessons__item{
+        display:flex;
+    }
+    .related-lessons__item-link{
+        width:100px;
+        position:relative;
+        margin:auto;
     }
 
 
