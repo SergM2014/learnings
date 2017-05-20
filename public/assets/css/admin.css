@@ -341,3 +341,19 @@ th{
   width: 360px;
   margin: 30px auto;
 }
+
+
+@media screen and (max-width: 750px) {
+
+  .table-container{
+    display:block;
+    overflow:scroll;
+  }
+  .table{
+    min-width:800px;
+  }
+  .main-header__right-side{
+    margin-bottom:30px;
+     }
+
+}

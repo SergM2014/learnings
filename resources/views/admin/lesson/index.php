@@ -2,23 +2,26 @@
 
 <form method="get" action="<?= \Lib\HelperService::currentLang() ?>/admin/lesson">
 
+    <div class="form-field">
     <label for="orderList"><?= $orderByL ?></label>
-    <select name="order" id="orderList">
+        <select name="order" id="orderList">
 
-        <option value="new_first" <?= @$_GET['order' ]== 'new_first' ? 'selected': '' ?> ><?= $newFirstL ?></option>
-        <option value="old_first" <?= @$_GET['order'] == 'old_first' ? 'selected': '' ?> ><?= $oldFirstL ?></option>
-        <option value="abc" <?= @$_GET['order'] == 'abc' ? 'selected': '' ?>><?= $abcL ?></option>
-        <option value="abc_backwards" <?= @$_GET['order']=='abc_backwards' ? 'selected': '' ?> ><?= $abcBackwardsL ?></option>
-        <option value="more_comments_first" <?=  @$_GET['order'] == 'more_comments_first' ? 'selected': '' ?> ><?= $moreCommentsFirstL ?></option>
-        <option value="less_comments_first" <?=  @$_GET['order'] == 'less_comments_first' ? 'selected': '' ?> ><?= $lessCommentsFirstL ?></option>
-    </select>
+            <option value="new_first" <?= @$_GET['order' ]== 'new_first' ? 'selected': '' ?> ><?= $newFirstL ?></option>
+            <option value="old_first" <?= @$_GET['order'] == 'old_first' ? 'selected': '' ?> ><?= $oldFirstL ?></option>
+            <option value="abc" <?= @$_GET['order'] == 'abc' ? 'selected': '' ?>><?= $abcL ?></option>
+            <option value="abc_backwards" <?= @$_GET['order']=='abc_backwards' ? 'selected': '' ?> ><?= $abcBackwardsL ?></option>
+            <option value="more_comments_first" <?=  @$_GET['order'] == 'more_comments_first' ? 'selected': '' ?> ><?= $moreCommentsFirstL ?></option>
+            <option value="less_comments_first" <?=  @$_GET['order'] == 'less_comments_first' ? 'selected': '' ?> ><?= $lessCommentsFirstL ?></option>
+        </select>
+    </div>
 
-    <label for="categoryAndSerie"><?= $category_serieTitleL ?></label>
-    <select name="category_and_serie" id="categoryAndSerie">
-        <option value="all"><?= $selectAllL ?></option>
-        <?= $serieDropDownList ?>
-    </select>
-
+    <div class="form-field">
+        <label for="categoryAndSerie"><?= $category_serieTitleL ?></label>
+        <select name="category_and_serie" id="categoryAndSerie">
+            <option value="all"><?= $selectAllL ?></option>
+            <?= $serieDropDownList ?>
+        </select>
+    <div>
 
     <button type="submit">ok</button>
 
