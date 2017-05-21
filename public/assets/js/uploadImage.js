@@ -200,8 +200,8 @@ if(reset_btn) {
 
 
 if(delete_img_sign){
+
     document.getElementById('deleteImagePreview').addEventListener('click', function(){
-//console.log(111);
 
         let _token = document.getElementById('prozessImageToken').value;
         let imageCustomType = document.getElementById('imageCustomType').value;
@@ -224,6 +224,8 @@ if(delete_img_sign){
                 credentials: "same-origin",
                 body:formData
             })
+
+        imageField.value = '';
 
 
     })

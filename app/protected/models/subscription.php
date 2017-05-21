@@ -186,14 +186,14 @@ class Subscription extends DataBase
         }
 
 
-        if(@$_SESSION['avatar']){
-            if($_SESSION['avatar'] == 'delete') $_SESSION['avatar'] = null;
+//        if(@$_SESSION['avatar']){
+           if(!@$_SESSION['avatar']) $_SESSION['avatar'] = null;
             $sql = "UPDATE `users` SET `avatar` = ? WHERE `id`=?";
             $stmt = self::conn()->prepare($sql);
             $stmt->bindValue(1, $_SESSION['avatar'], \PDO::PARAM_STR);
             $stmt->bindValue(2, $_POST['id'], \PDO::PARAM_INT);
             if( $stmt->execute()) unset($_SESSION['avatar']);
-        }
+//        }
 
         self::saveInSession($login, $_POST['id']);
 

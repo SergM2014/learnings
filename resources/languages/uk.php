@@ -165,6 +165,7 @@ $usersL = "Користувачі";
 $changeRoleL = "Змінити роль";
 $userUpdatedL = "Користувача оновленно!";
 $shureDeleteUserL = "Ви впевнені що хочите видалити користувача?";
+$subscriperUpdatedL = "Підписанта оновленно!";
 
 
 //these functionare for translation in controllers and models

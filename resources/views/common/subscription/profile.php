@@ -13,7 +13,7 @@
         $givenImage = $profileData->avatar;
         $imageCustomType = 'avatar';
         $path = '/uploads/avatars/';
-        include   PATH_SITE.'/resources/views/partials/addImage.php';
+        include   PATH_SITE.'/resources/views/common/partials/addImage.php';
 
         ?>
 

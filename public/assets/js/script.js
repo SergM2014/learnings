@@ -113,7 +113,7 @@ console.log(commentParentId)
             .then(() =>  document.getElementById('commentParentId').value = commentParentId )
     }
 
-//shoose  comment  to be answered
+//choose  comment  to be answered
     if(e.target.closest('.lesson-comments__response-link-btn')){
 
         let commentId = e.target.dataset.commentId;

@@ -1,5 +1,5 @@
 <input type="hidden" name="_token" value="<?= \Lib\TokenService::printTocken('admin') ?>">
-<input type = "hidden" name="action" value="handleLessonIcon">
+<input type = "hidden" name="action" value="createLesson">
 
 <div class="form-field">
     <label for="title" class="form-field__label"><?= $titleL ?></label><br>

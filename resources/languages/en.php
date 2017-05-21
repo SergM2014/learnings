@@ -167,6 +167,7 @@ $usersL = "Users";
 $changeRoleL = "Change role";
 $userUpdatedL = "User is updated!";
 $shureDeleteUserL ="Are You shure to delete User?";
+$subscriperUpdatedL = "Subcriper is updated!";
 
 
 //these functionare for translation in controllers and models

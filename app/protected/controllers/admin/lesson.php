@@ -35,6 +35,11 @@ class Lesson  extends AdminController
 
         $_SESSION['createLesson'] = true;
 
+        if(@$_POST['action']!= "createLesson"){
+            unset($_SESSION['lessonsIcon']);
+            unset($_SESSION['downloadFile']);
+        }
+
         return ['view'=>'/views/admin/lesson/create.php', 'treeMenu'=>$treeMenu, 'errors'=>$errors ];
     }
 

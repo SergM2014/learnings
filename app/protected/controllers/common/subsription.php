@@ -143,6 +143,7 @@ class Subscription extends BaseController
     {
 
         TokenService::check('user');
+if(!@$_SESSION['updateUser']) return $this->profile();
 
         $cleanedUpInputs = CheckFieldsService::escapeInputs('login', 'password', 'password2', 'email');
 
@@ -150,8 +151,9 @@ class Subscription extends BaseController
 
         if(!empty($errors) ){ return $this->profile($errors); }
 
-        if(!isset($_SESSION['updateUser']))  header('Location:/subscription/profile');
+      //  if(!isset($_SESSION['updateUser']))  header('Location:/subscription/profile');
 
+        unset($_SESSION['updateUser']);
         SubscriptionModel::updateUser($cleanedUpInputs);
 
         HelperService::sendMail($cleanedUpInputs);
