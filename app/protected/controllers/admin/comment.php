@@ -13,6 +13,11 @@ use App\Models\CheckForm;
 
 class Comment  extends AdminController {
 
+    public function __construct()
+    {
+        if(@$_SESSION['admin']['upgrading_status']<2 ) exit('Unathoriraised access!');
+    }
+
     public function index()
     {
         $comments = CommentModel::getAll(true);

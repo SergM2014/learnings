@@ -11,6 +11,11 @@ use App\Models\CheckForm;
 
 class User  extends AdminController {
 
+    public function __construct()
+    {
+        if(@$_SESSION['admin']['upgrading_status']!= 3) exit('Unathoriraised access!');
+    }
+
     public function index()
     {
         $users = AdminModel::all();

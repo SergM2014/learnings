@@ -51,10 +51,16 @@
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/" class="main-header__menu-item-link"><?= $backToSiteL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/lesson" class="main-header__menu-item-link"><?= $lessonsTitlesL ?></a></li>
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/cluster" class="main-header__menu-item-link"><?= $category_serieTitleL ?></a></li>
-                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/testimonial" class="main-header__menu-item-link"><?= $testimonialsL ?></a></li>
-                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/comment" class="main-header__menu-item-link"><?= $commentsL ?></a></li>
+
+                     <?php if($_SESSION['admin']['upgrading_status']>1): ?>
+                         <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/testimonial" class="main-header__menu-item-link"><?= $testimonialsL ?></a></li>
+                         <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/comment" class="main-header__menu-item-link"><?= $commentsL ?></a></li>
+                     <?php endif; ?>
+
                      <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/subscription" class="main-header__menu-item-link"><?= $subscriptionPlanL ?></a></li>
-                     <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/user" class="main-header__menu-item-link"><?= $usersL ?></a></li>
+                     <?php if($_SESSION['admin']['upgrading_status']>2): ?>
+                        <li class="main-header__menu-item"><a href="<?= \Lib\HelperService::currentLang() ?>/admin/user" class="main-header__menu-item-link"><?= $usersL ?></a></li>
+                     <?php endif; ?>
                         <div class="main-header__right-side">
 
                              <li class="main-header__admin">

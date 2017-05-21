@@ -11,6 +11,11 @@ use App\Models\CheckForm;
 
 class Subscription extends AdminController {
 
+    public function __construct()
+    {
+        if(@$_SESSION['admin']['upgrading_status']< 2) exit('Unathoriraised access!');
+    }
+
     public function index($errors = null )
     {
         $subscriptionPlan = SubscriptionModel::getSubscriptionInfo();
