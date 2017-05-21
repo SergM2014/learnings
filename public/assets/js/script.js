@@ -98,17 +98,22 @@ document.body.addEventListener('click', function(e){
 //click add comment button
     if(e.target.id == "addCommentSubmitBtn"){
 
-        let formData = new FormData(document.getElementById('addCommentForm'));
+        let commentParentId = document.getElementById('commentParentId').value;
+console.log(commentParentId)
 
+        let formData = new FormData(document.getElementById('addCommentForm'));
+//console.dir(formData);
         postAjax("/comment/store", formData)
 
             .then(response =>response.text())
             .then(html => {
                 document.querySelector('#commentFormContainer').innerHTML = html;
+               return true;
             })
+            .then(() =>  document.getElementById('commentParentId').value = commentParentId )
     }
 
-//shoose  comment  to answer
+//shoose  comment  to be answered
     if(e.target.closest('.lesson-comments__response-link-btn')){
 
         let commentId = e.target.dataset.commentId;

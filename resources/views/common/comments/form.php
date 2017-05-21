@@ -1,8 +1,4 @@
-<div id="addCommentHead" class="add-comment__head">
 
-    <?php include PATH_SITE.'/resources/views/common/comments/addCommentHead.php'; ?>
-
-</div>
 
 
 <form method="post" class="add-comment__form" id="addCommentForm">

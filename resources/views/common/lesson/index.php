@@ -101,14 +101,22 @@
 
     <section class="add-comment__block">
 
-        <a name="addComment"></a>
+        <div class="">
 
-        <div id="commentFormContainer">
+            <a name="addComment"></a>
 
-            <?php include PATH_SITE.'/resources/views/common/comments/form.php'; ?>
+            <div id="addCommentHead" class="add-comment__head">
+
+                <?php include PATH_SITE.'/resources/views/common/comments/addCommentHead.php'; ?>
+
+            </div>
+
+            <div id="commentFormContainer">
+
+                <?php include PATH_SITE.'/resources/views/common/comments/form.php'; ?>
+            </div>
+
         </div>
-
-
     </section>
 
 <?php else: ?>
